@@ -1,33 +1,15 @@
-jdk: oraclejdk8
 language: android
-android: 
-  components: 
-    - tools
+android:
+  components:
     - platform-tools
-    - build-tools-24.0.3
+    - tools
+    - build-tools-25.0.2
     - android-25
     - extra-android-m2repository
-    - extra-android-support
-    - sys-img-armeabi-v7a-android-25
-    - extra-google-google_play_services
-  licenses: 
-    - "android-sdk-preview-license-52d11cd2"
-    - "android-sdk-preview-license-.+"
-    - "android-sdk-license-.+"
-    - "google-gdk-license-.+"
-before_cache: 
-  - "rm -f $HOME/.gradle/caches/modules-2/modules-2.lock"
-# Emulator Management: Create, Start and Wait
-before_script:
-  - echo no | android create avd --force -n test -t android-25 --abi armeabi-v7a
-  - emulator -avd test -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
-before_install: 
-  - "chmod +x gradlew"
-cache: 
-  directories: 
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-script: 
-  - "./gradlew build connectedCheck --stacktrace"
+    - extra-google-m2repository
+
+jdk:
+  - oraclejdk8
+
+script:
+   - ./gradlew assembleDebug testDebugUnitTest connectedDebugAndroidTest

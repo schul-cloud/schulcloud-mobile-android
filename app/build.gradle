@@ -175,7 +175,7 @@ dependencies {
     compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
     testCompile 'org.powermock:powermock-core:1.6.4'
     testCompile 'org.robolectric:robolectric:3.1'
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'org.glassfish:javax.annotation:10.0-b28'
 }
 
 // Log out test results to console

@@ -12,4 +12,27 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="fa_icon_big">32sp</dimen>
 
+    <dimen name="md_baseline">16dp</dimen>
+    <dimen name="md_baseline_content">72dp</dimen>
+
+    <dimen name="md_app_bar_elevation">4dp</dimen>
+
+    <dimen name="md_drawer_max_width">400dp</dimen>
+
+    <dimen name="md_drawer_list_margin_vertical">8dp</dimen>
+
+    <dimen name="md_icon_size">24dp</dimen>
+    <dimen name="md_avatar_size">40dp</dimen>
+    <dimen name="md_big_avatar_size">64dp</dimen>
+
+    <dimen name="md_divider_height">1dp</dimen>
+    <dimen name="md_divider_margin">8dp</dimen>
+
+    <dimen name="md_list_item_height">48dp</dimen>
+    <dimen name="md_list_item_height_two_line">72dp</dimen>
+    <dimen name="md_list_item_margin">16dp</dimen>
+    <dimen name="md_list_item_text_secondary_margin">0dp</dimen>
+
+    <dimen name="md_fixed_list_shadow_height">4dp</dimen>
+
 </resources>

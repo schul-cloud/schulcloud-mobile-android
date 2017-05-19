@@ -88,6 +88,7 @@ public class DataManager {
         return mRestService.getUser(getAccessToken(), userId).concatMap(new Func1<CurrentUser, Observable<CurrentUser>>() {
             @Override
             public Observable<CurrentUser> call(CurrentUser currentUser) {
+                mPreferencesHelper.saveCurrentUsername(currentUser.displayName);
                 return mDatabaseHelper.setCurrentUser(currentUser);
             }
         });

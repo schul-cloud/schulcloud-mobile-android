@@ -1,23 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mdRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground">
 
-    <com.beardedhen.androidbootstrap.AwesomeTextView
-        android:id="@+id/drawer_item_icon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:textSize="@dimen/fa_icon_big"/>
-
-    <TextView
-        android:id="@+id/drawer_item_textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/drawer_item_icon"
-        android:layout_alignTop="@id/drawer_item_icon"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="12dp"
-        android:layout_toRightOf="@id/drawer_item_icon"
-        android:text="New Text"
-        android:textSize="@dimen/text_title"/>
-</RelativeLayout>
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/md_list_item_height"
+        android:paddingBottom="@dimen/md_list_item_margin"
+        android:paddingEnd="@dimen/md_baseline"
+        android:paddingLeft="@dimen/md_baseline"
+        android:paddingRight="@dimen/md_baseline"
+        android:paddingStart="@dimen/md_baseline"
+        android:paddingTop="@dimen/md_list_item_margin">
+
+        <com.beardedhen.androidbootstrap.AwesomeTextView
+            android:id="@+id/mdImage"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:textSize="@dimen/fa_icon_big"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mdTextPrimary"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:ellipsize="marquee"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="start"
+                android:textAlignment="textStart"
+                tools:ignore="UnusedAttribute"
+                android:maxLines="1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

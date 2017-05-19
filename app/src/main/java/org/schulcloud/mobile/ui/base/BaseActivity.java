@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.beardedhen.androidbootstrap.font.FontAwesome;
@@ -80,6 +81,8 @@ public class BaseActivity extends AppCompatActivity {
         // Init and data filling of the navigation drawer
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        View header = getLayoutInflater().inflate(R.layout.drawer_user, null);
+        mDrawerList.addHeaderView(header);
         mDrawerList.setAdapter(new NavItemAdapter(this, layers, resources));
         mDrawerList.setOnItemClickListener((arg0, arg1, pos, arg3) -> openActivityForPos(pos));
 
@@ -98,6 +101,9 @@ public class BaseActivity extends AppCompatActivity {
         mDrawer.setDrawerListener(mDrawerToggle);
 
         mDrawer.post(() -> mDrawerToggle.syncState());
+
+        TextView username = (TextView) findViewById(R.id.mdHeaderTitle);
+        username.setText(mPreferencesHelper.getCurrentUsername());
 
         // Create the ActivityComponent and reuses cached ConfigPersistentComponent if this is
         // being called after a configuration change.
@@ -122,21 +128,21 @@ public class BaseActivity extends AppCompatActivity {
     private void openActivityForPos(int pos) {
         Class c;
         switch (pos) {
-            case 0: // files
+            case 1: // files
                 c = FileActivity.class;
                 break;
-            case 1:  // users
+            case 2:  // users
                 c = MainActivity.class;
                 break;
-            case 2: // contact
+            case 3: // contact
                 c = BaseActivity.class;
-            case 3: // impressum
+            case 4: // impressum
                 c = BaseActivity.class;
                 break;
-            case 4: // settings
+            case 5: // settings
                 c = SettingsActivity.class;
                 break;
-            case 5: // logout
+            case 6: // logout
                 // delete accessToken and currentUser
                 mPreferencesHelper.clear("jwt");
                 mPreferencesHelper.clear("currentUser");

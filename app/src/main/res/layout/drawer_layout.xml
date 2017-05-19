@@ -25,5 +25,6 @@
         android:background="@color/gray"
         android:choiceMode="singleChoice"
         android:divider="@null"
-        android:scrollingCache="false"/>
+        android:scrollingCache="false"
+        android:choiceMode="singleChoice"/>
 </android.support.v4.widget.DrawerLayout>

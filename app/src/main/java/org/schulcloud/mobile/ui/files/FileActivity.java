@@ -74,7 +74,6 @@ public class FileActivity extends BaseActivity implements FileMvpView {
         directoriesRecyclerView.setAdapter(mDirectoriesAdapter);
         directoriesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
         mFilePresenter.attachView(this);
         mFilePresenter.checkSignedIn();
 

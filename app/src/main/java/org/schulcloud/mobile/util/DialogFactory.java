@@ -3,13 +3,10 @@ package org.schulcloud.mobile.util;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 
 import org.schulcloud.mobile.R;
-
-import java.util.Set;
 
 public final class DialogFactory {
 

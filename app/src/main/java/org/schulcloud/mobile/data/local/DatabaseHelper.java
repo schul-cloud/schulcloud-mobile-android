@@ -113,7 +113,6 @@ public class DatabaseHelper {
     }
 
 
-
     /**** FileStorage ****/
 
     public Observable<File> setFiles(final Collection<File> files) {

@@ -4,7 +4,8 @@ final class PathResolver {
 
     private static final String MODULE_NAME = "app";
 
-    private PathResolver() { }
+    private PathResolver() {
+    }
 
     static String resolveAndroidManifestPath() {
         final String projectDirectory = System.getProperty("user.dir");

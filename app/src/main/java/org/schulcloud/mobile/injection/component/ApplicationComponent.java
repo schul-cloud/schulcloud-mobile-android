@@ -28,18 +28,31 @@ import io.realm.Realm;
 public interface ApplicationComponent {
 
     void inject(UserSyncService userSyncService);
+
     void inject(FileSyncService fileSyncService);
+
     void inject(DirectorySyncService directorySyncService);
+
     void inject(EventSyncService eventSyncService);
+
     void inject(DeviceSyncService deviceSyncService);
+
     void inject(MessagingService messagingService);
 
-    @ApplicationContext Context context();
+    @ApplicationContext
+    Context context();
+
     Application application();
+
     RestService restService();
+
     PreferencesHelper preferencesHelper();
+
     DatabaseHelper databaseHelper();
+
     Realm realm();
+
     DataManager dataManager();
+
     RxEventBus eventBus();
 }

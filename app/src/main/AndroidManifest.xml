@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.schulcloud.mobile">
+          package="org.schulcloud.mobile">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_CALENDAR" />
-    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
 
     <application
         android:name=".SchulCloudApplication"
@@ -15,58 +15,58 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.main.MainActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"/>
         <activity
             android:name=".ui.base.BaseActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"/>
 
-        <service android:name=".data.sync.UserSyncService" />
+        <service android:name=".data.sync.UserSyncService"/>
 
         <receiver
             android:name=".data.sync.UserSyncService$SyncOnConnectionAvailable"
             android:enabled="false">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
 
-        <service android:name=".data.sync.FileSyncService" />
+        <service android:name=".data.sync.FileSyncService"/>
 
         <receiver
             android:name=".data.sync.FileSyncService$SyncOnConnectionAvailable"
             android:enabled="false">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
 
-        <service android:name=".data.sync.DirectorySyncService" />
+        <service android:name=".data.sync.DirectorySyncService"/>
 
         <receiver
             android:name=".data.sync.DirectorySyncService$SyncOnConnectionAvailable"
             android:enabled="false">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
 
-        <service android:name=".data.sync.EventSyncService" />
+        <service android:name=".data.sync.EventSyncService"/>
 
         <receiver
             android:name=".data.sync.EventSyncService$SyncOnConnectionAvailable"
             android:enabled="false">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
 
-        <service android:name=".data.sync.DeviceSyncService" />
+        <service android:name=".data.sync.DeviceSyncService"/>
 
         <receiver
             android:name=".data.sync.DeviceSyncService$SyncOnConnectionAvailable"
             android:enabled="false">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
 
@@ -77,9 +77,9 @@
             android:name=".ui.files.FileActivity"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
@@ -88,7 +88,7 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
 

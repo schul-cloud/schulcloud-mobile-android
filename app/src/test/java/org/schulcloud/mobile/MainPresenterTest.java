@@ -7,16 +7,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import java.util.Collections;
-import java.util.List;
-
 import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.model.User;
 import org.schulcloud.mobile.test.common.TestDataFactory;
 import org.schulcloud.mobile.ui.main.MainMvpView;
 import org.schulcloud.mobile.ui.main.MainPresenter;
 import org.schulcloud.mobile.util.RxSchedulersOverrideRule;
+
+import java.util.Collections;
+import java.util.List;
+
 import rx.Observable;
 
 import static org.mockito.Matchers.anyListOf;
@@ -27,12 +27,13 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class MainPresenterTest {
 
-    @Mock MainMvpView mMockMainMvpView;
-    @Mock DataManager mMockDataManager;
-    private MainPresenter mMainPresenter;
-
     @Rule
     public final RxSchedulersOverrideRule mOverrideSchedulersRule = new RxSchedulersOverrideRule();
+    @Mock
+    MainMvpView mMockMainMvpView;
+    @Mock
+    DataManager mMockDataManager;
+    private MainPresenter mMainPresenter;
 
     @Before
     public void setUp() {

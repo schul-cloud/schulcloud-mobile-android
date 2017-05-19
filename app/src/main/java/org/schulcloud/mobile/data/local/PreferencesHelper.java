@@ -23,6 +23,7 @@ public class PreferencesHelper {
 
     /**
      * saves a accessToken to the shared prefs
+     *
      * @param accessToken {AccessToken} - the accessToken which will be saved
      * @return the saved accessToken
      */
@@ -39,6 +40,7 @@ public class PreferencesHelper {
 
     /**
      * saves a userId to the shared prefs
+     *
      * @param userId {String} - the userId which will be saved
      * @return the saved userId
      */
@@ -56,7 +58,7 @@ public class PreferencesHelper {
     public String saveMessagingToken(String tokenId) {
         SharedPreferences.Editor editor = mPref.edit();
 
-        editor.putString("messagingToken" , tokenId);
+        editor.putString("messagingToken", tokenId);
         if (editor.commit()) {
             return tokenId;
         }
@@ -67,10 +69,14 @@ public class PreferencesHelper {
     public String getAccessToken() {
         return mPref.getString("jwt", "null");
     }
+
     public String getCurrentUserId() {
         return mPref.getString("currentUser", "null");
     }
-    public String getMessagingToken() { return mPref.getString("messagingToken", "null"); }
+
+    public String getMessagingToken() {
+        return mPref.getString("messagingToken", "null");
+    }
 
     public void clear() {
         mPref.edit().clear().apply();
@@ -78,6 +84,7 @@ public class PreferencesHelper {
 
     /**
      * clears a pref for a given key
+     *
      * @param key {String} - the key of the param which will be deleted
      */
     public void clear(String key) {

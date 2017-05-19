@@ -13,10 +13,9 @@ import timber.log.Timber;
  */
 public class BasePresenter<T extends MvpView> implements Presenter<T> {
 
-    private T mMvpView;
     public DataManager mDataManager;
     public Subscription mSubscription;
-
+    private T mMvpView;
 
     @Override
     public void attachView(T mvpView) {
@@ -40,13 +39,6 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
         if (!isViewAttached()) throw new MvpViewNotAttachedException();
     }
 
-    public static class MvpViewNotAttachedException extends RuntimeException {
-        public MvpViewNotAttachedException() {
-            super("Please call Presenter.attachView(MvpView) before" +
-                    " requesting data to the Presenter");
-        }
-    }
-
     /**
      * Checks whether there is already a logged-in user, if not so go to sign-in screen
      */
@@ -64,16 +56,25 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
         mSubscription = dataManager.syncCurrentUser(currentUserId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe
-                    (// onNext
-                    currentUser -> {},
-                    // onError, check failed
-                    error -> {
-                        Timber.e(error, "There was an error while fetching currentUser.");
-                        getMvpView().goToSignIn();
-                    },
-                    // onCompleted, check success -> stay in current activity
-                    () -> {});
+                        (// onNext
+                                currentUser -> {
+                                },
+                                // onError, check failed
+                                error -> {
+                                    Timber.e(error, "There was an error while fetching currentUser.");
+                                    getMvpView().goToSignIn();
+                                },
+                                // onCompleted, check success -> stay in current activity
+                                () -> {
+                                });
 
+    }
+
+    public static class MvpViewNotAttachedException extends RuntimeException {
+        public MvpViewNotAttachedException() {
+            super("Please call Presenter.attachView(MvpView) before" +
+                    " requesting data to the Presenter");
+        }
     }
 }
 

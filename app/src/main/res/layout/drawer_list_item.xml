@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
     <com.beardedhen.androidbootstrap.AwesomeTextView
+        android:id="@+id/drawer_item_icon"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:textSize="@dimen/fa_icon_big"
-        android:id="@+id/drawer_item_icon" />
+        android:textSize="@dimen/fa_icon_big"/>
 
     <TextView
+        android:id="@+id/drawer_item_textView"
         android:layout_width="wrap_content"
-        android:layout_alignTop="@id/drawer_item_icon"
-        android:layout_alignBottom="@id/drawer_item_icon"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/drawer_item_icon"
-        android:layout_marginTop="12dp"
+        android:layout_alignBottom="@id/drawer_item_icon"
+        android:layout_alignTop="@id/drawer_item_icon"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_toRightOf="@id/drawer_item_icon"
         android:text="New Text"
-        android:textSize="@dimen/text_title"
-        android:id="@+id/drawer_item_textView"/>
+        android:textSize="@dimen/text_title"/>
 </RelativeLayout>

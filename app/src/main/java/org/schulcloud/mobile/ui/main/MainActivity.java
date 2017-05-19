@@ -29,10 +29,13 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     private static final String EXTRA_TRIGGER_SYNC_FLAG =
             "org.schulcloud.mobile.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
 
-    @Inject MainPresenter mMainPresenter;
-    @Inject UsersAdapter mUsersAdapter;
+    @Inject
+    MainPresenter mMainPresenter;
+    @Inject
+    UsersAdapter mUsersAdapter;
 
-    @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
+    @BindView(R.id.recycler_view)
+    RecyclerView mRecyclerView;
 
     /**
      * Return an Intent to start this Activity.
@@ -93,7 +96,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void showUsersEmpty() {
-        mUsersAdapter.setUsers(Collections.<User>emptyList());
+        mUsersAdapter.setUsers(Collections.emptyList());
         mUsersAdapter.notifyDataSetChanged();
         Toast.makeText(this, R.string.empty_ribots, Toast.LENGTH_LONG).show();
     }

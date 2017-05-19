@@ -20,12 +20,11 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DevicesViewHolder>{
-    private List<Device> mDevices;
-    private DataManager mDataManager;
-
+public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DevicesViewHolder> {
     @Inject
     SettingsPresenter mSettingsPresenter;
+    private List<Device> mDevices;
+    private DataManager mDataManager;
 
     @Inject
     public DevicesAdapter(DataManager dataManager) {
@@ -63,9 +62,12 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.DevicesV
 
     class DevicesViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.device_item_icon) AwesomeTextView awesomeTextView;
-        @BindView(R.id.text_name) TextView nameTextView;
-        @BindView(R.id.token) TextView tokenText;
+        @BindView(R.id.device_item_icon)
+        AwesomeTextView awesomeTextView;
+        @BindView(R.id.text_name)
+        TextView nameTextView;
+        @BindView(R.id.token)
+        TextView tokenText;
 
         public DevicesViewHolder(View itemView) {
             super(itemView);

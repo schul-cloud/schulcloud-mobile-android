@@ -36,12 +36,13 @@ public class MessagingService extends FirebaseMessagingService {
 
     /**
      * Handles the FCM Message here
+     *
      * @param remoteMessage push messaged received through firebase
      */
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         JsonParser parser = new JsonParser();
-        JsonObject message =  parser.parse(remoteMessage.getData().get("news")).getAsJsonObject();
+        JsonObject message = parser.parse(remoteMessage.getData().get("news")).getAsJsonObject();
         sendNotification(message.get("title").getAsString(), message.get("body").getAsString());
         String notificationId = parser.parse((remoteMessage.getData()).get("notificationId")).getAsString();
         sendCallback(notificationId);
@@ -52,6 +53,7 @@ public class MessagingService extends FirebaseMessagingService {
 
     /**
      * Method to send a callback for a received message.
+     *
      * @param notificationId id which identifies the notification.
      */
     private void sendCallback(String notificationId) {
@@ -65,8 +67,9 @@ public class MessagingService extends FirebaseMessagingService {
 
     /**
      * Method to send a notification to the application
+     *
      * @param messageTitle is the title as it is set in the push messaged received through firebase
-     * @param messageBody is the body as it is set in the push messaged received through firebase
+     * @param messageBody  is the body as it is set in the push messaged received through firebase
      */
     private void sendNotification(String messageTitle, String messageBody) {
         Intent intent = new Intent(this, FileActivity.class);

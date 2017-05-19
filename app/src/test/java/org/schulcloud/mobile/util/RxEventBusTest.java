@@ -8,11 +8,10 @@ import rx.observers.TestSubscriber;
 
 public class RxEventBusTest {
 
-    private RxEventBus mEventBus;
-
     @Rule
     // Must be added to every test class that targets app code that uses RxJava
     public final RxSchedulersOverrideRule mOverrideSchedulersRule = new RxSchedulersOverrideRule();
+    private RxEventBus mEventBus;
 
     @Before
     public void setUp() {

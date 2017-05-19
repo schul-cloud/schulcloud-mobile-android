@@ -52,8 +52,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
 
     class UserViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.text_name) TextView nameTextView;
-        @BindView(R.id.text_email) TextView emailTextView;
+        @BindView(R.id.text_name)
+        TextView nameTextView;
+        @BindView(R.id.text_email)
+        TextView emailTextView;
 
         public UserViewHolder(View itemView) {
             super(itemView);

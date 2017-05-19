@@ -9,7 +9,6 @@ import android.os.IBinder;
 
 import org.schulcloud.mobile.SchulCloudApplication;
 import org.schulcloud.mobile.data.DataManager;
-import org.schulcloud.mobile.data.model.Directory;
 import org.schulcloud.mobile.data.model.Event;
 import org.schulcloud.mobile.util.AndroidComponentUtil;
 import org.schulcloud.mobile.util.NetworkUtil;

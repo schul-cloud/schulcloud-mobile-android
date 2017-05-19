@@ -39,20 +39,20 @@ public class SignInPresenter extends BasePresenter<SignInMvpView> {
         mSubscription = mDataManager.signIn(username, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    // onNext
-                    accessToken -> {
-                        if (accessToken == null) {
+                        // onNext
+                        accessToken -> {
+                            if (accessToken == null) {
+                                getMvpView().showSignInFailed();
+                            } else {
+                                getMvpView().showSignInSuccessful();
+                            }
+                        },
+                        // onError
+                        error -> {
+                            Timber.e(error, "There was an error signing in.");
                             getMvpView().showSignInFailed();
-                        } else {
-                            getMvpView().showSignInSuccessful();
-                        }
-                    },
-                    // onError
-                    error -> {
-                        Timber.e(error, "There was an error signing in.");
-                        getMvpView().showSignInFailed();
-                    },
-                    // onCompleted
-                    () -> getMvpView().showSignInSuccessful());
+                        },
+                        // onCompleted
+                        () -> getMvpView().showSignInSuccessful());
     }
 }

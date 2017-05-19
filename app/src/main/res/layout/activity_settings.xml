@@ -1,13 +1,13 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:clipToPadding="false"
-    android:fillViewport="false"
-    android:background="@color/gray"
-    android:fitsSystemWindows="true"
-    tools:context="org.schulcloud.mobile.ui.settings.SettingsActivity">
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/gray"
+            android:clipToPadding="false"
+            android:fillViewport="false"
+            android:fitsSystemWindows="true"
+            tools:context="org.schulcloud.mobile.ui.settings.SettingsActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,34 +20,36 @@
             android:layout_marginTop="70dp"
             android:paddingLeft="@dimen/bootstrap_alert_paddings"
             android:paddingRight="@dimen/bootstrap_alert_paddings">
+
             <TextView
+                android:id="@+id/settings_calendar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_title"
+                android:paddingBottom="@dimen/bootstrap_alert_paddings"
                 android:text="@string/setting_section_calendar"
                 android:textColor="@color/hpiRed"
-                android:id="@+id/settings_calendar"
-                android:paddingBottom="@dimen/bootstrap_alert_paddings"/>
+                android:textSize="@dimen/text_title"/>
+
             <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/btn_add_calendar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/settings_calendar"
+                android:layout_centerHorizontal="true"
                 android:text="@string/add_to_calendar"
                 app:bootstrapSize="lg"
                 app:buttonMode="regular"
-                app:showOutline="false"
                 app:roundedCorners="true"
-                android:layout_below="@+id/settings_calendar"
-                android:layout_centerHorizontal="true" />
+                app:showOutline="false"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/section_calendar"
-            android:paddingTop="@dimen/bootstrap_alert_paddings"
             android:paddingLeft="@dimen/bootstrap_alert_paddings"
-            android:paddingRight="@dimen/bootstrap_alert_paddings">
+            android:paddingRight="@dimen/bootstrap_alert_paddings"
+            android:paddingTop="@dimen/bootstrap_alert_paddings">
 
             <TextView
                 android:id="@+id/settings_notifications"
@@ -56,7 +58,7 @@
                 android:paddingBottom="@dimen/bootstrap_alert_paddings"
                 android:text="@string/setting_section_notifications"
                 android:textColor="@color/hpiRed"
-                android:textSize="@dimen/text_title" />
+                android:textSize="@dimen/text_title"/>
 
             <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/btn_create_device"
@@ -68,7 +70,7 @@
                 app:bootstrapSize="lg"
                 app:buttonMode="regular"
                 app:roundedCorners="true"
-                app:showOutline="false" />
+                app:showOutline="false"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/devices_recycler_view"
@@ -84,7 +86,7 @@
                 android:nestedScrollingEnabled="false"
                 android:paddingBottom="6dp"
                 android:paddingTop="6dp"
-                android:scrollbars="vertical" />
+                android:scrollbars="vertical"/>
 
         </RelativeLayout>
 

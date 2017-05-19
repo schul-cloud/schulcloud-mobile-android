@@ -5,6 +5,7 @@ import android.support.test.espresso.Espresso;
 
 import org.schulcloud.mobile.util.RxIdlingExecutionHook;
 import org.schulcloud.mobile.util.RxIdlingResource;
+
 import rx.plugins.RxJavaPlugins;
 
 /**

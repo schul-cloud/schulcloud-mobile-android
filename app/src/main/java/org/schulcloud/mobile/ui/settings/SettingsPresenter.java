@@ -77,8 +77,9 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
 
     /**
      * Syncs given Events to local calendar
-     * @param calendarId {Integer} - the calendar in which the events will be inserted
-     * @param events {List<Event>} - the events which will be inserted into the calendar
+     *
+     * @param calendarId          {Integer} - the calendar in which the events will be inserted
+     * @param events              {List<Event>} - the events which will be inserted into the calendar
      * @param calendarContentUtil {CalendarContentUtil} - an instance of the CalendarContentUtil for handling the local calendar storage
      */
     public void writeEventsToLocalCalendar(Integer calendarId, List<Event> events, CalendarContentUtil calendarContentUtil) {
@@ -99,10 +100,15 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date untilDate = dateFormat.parse(includedInformation.getAttributes().getUntil());
                     Integer betweenDates = 0;
-                    switch(includedInformation.getAttributes().getFreq()) {
-                        case "WEEKLY": betweenDates = DaysBetweenUtil.weeksBetween(startDate, untilDate); break;
-                        case "DAILY": betweenDates = DaysBetweenUtil.daysBetween(startDate, untilDate); break;
-                        default: break;
+                    switch (includedInformation.getAttributes().getFreq()) {
+                        case "WEEKLY":
+                            betweenDates = DaysBetweenUtil.weeksBetween(startDate, untilDate);
+                            break;
+                        case "DAILY":
+                            betweenDates = DaysBetweenUtil.daysBetween(startDate, untilDate);
+                            break;
+                        default:
+                            break;
                     }
 
                     builder
@@ -117,7 +123,7 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
 
                     recurringRule = builder.toString();
                 }
-            } catch (Exception e ) {
+            } catch (Exception e) {
                 // do nothing when its not a recurrent event
             }
 
@@ -197,23 +203,23 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
             mSubscription.unsubscribe();
         mSubscription = mDataManager.deleteDevice(device.token)
                 .subscribe(
-                        new Subscriber<Response<Void>> () {
-            @Override
-            public void onCompleted () {
-                getMvpView().reload();
-                mDataManager.getPreferencesHelper().clear("messagingToken");
-            }
+                        new Subscriber<Response<Void>>() {
+                            @Override
+                            public void onCompleted() {
+                                getMvpView().reload();
+                                mDataManager.getPreferencesHelper().clear("messagingToken");
+                            }
 
-            @Override
-            public void onError (Throwable e) {
+                            @Override
+                            public void onError(Throwable e) {
 
-            }
+                            }
 
-            @Override
-            public void onNext (Response<Void> empty) {
+                            @Override
+                            public void onNext(Response<Void> empty) {
 
-            }
-        });
+                            }
+                        });
     }
 
 }

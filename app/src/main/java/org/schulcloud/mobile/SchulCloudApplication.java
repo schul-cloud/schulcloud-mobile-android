@@ -12,9 +12,13 @@ import org.schulcloud.mobile.injection.module.ApplicationModule;
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
-public class SchulCloudApplication extends Application  {
+public class SchulCloudApplication extends Application {
 
     ApplicationComponent mApplicationComponent;
+
+    public static SchulCloudApplication get(Context context) {
+        return (SchulCloudApplication) context.getApplicationContext();
+    }
 
     @Override
     public void onCreate() {
@@ -24,10 +28,6 @@ public class SchulCloudApplication extends Application  {
             Timber.plant(new Timber.DebugTree());
             Fabric.with(this, new Crashlytics());
         }
-    }
-
-    public static SchulCloudApplication get(Context context) {
-        return (SchulCloudApplication) context.getApplicationContext();
     }
 
     public ApplicationComponent getComponent() {

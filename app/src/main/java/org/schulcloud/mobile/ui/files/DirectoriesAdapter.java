@@ -50,7 +50,8 @@ public class DirectoriesAdapter extends RecyclerView.Adapter<DirectoriesAdapter.
 
     class DirectoriesViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.text_name) TextView nameTextView;
+        @BindView(R.id.text_name)
+        TextView nameTextView;
 
 
         public DirectoriesViewHolder(View itemView) {

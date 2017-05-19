@@ -18,11 +18,15 @@ import butterknife.ButterKnife;
 
 public class SignInActivity extends BaseActivity implements SignInMvpView {
 
-    @Inject SignInPresenter mSignInPresenter;
+    @Inject
+    SignInPresenter mSignInPresenter;
 
-    @BindView(R.id.btn_login) Button btn_login;
-    @BindView(R.id.input_username) EditText username;
-    @BindView(R.id.input_password) EditText password;
+    @BindView(R.id.btn_login)
+    Button btn_login;
+    @BindView(R.id.input_username)
+    EditText username;
+    @BindView(R.id.input_password)
+    EditText password;
 
     /**
      * Return an Intent to start this Activity.

@@ -1,10 +1,7 @@
 package org.schulcloud.mobile.data.model;
 
 
-import org.parceler.Parcel;
-
 import io.realm.RealmModel;
-import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 

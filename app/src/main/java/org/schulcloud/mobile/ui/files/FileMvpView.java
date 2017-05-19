@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface FileMvpView extends MvpView {
     void showFiles(List<File> files);
+
     void showDirectories(List<Directory> directories);
+
     void showError();
 }

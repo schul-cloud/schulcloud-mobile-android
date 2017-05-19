@@ -49,7 +49,8 @@ public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.FilesViewHol
 
     class FilesViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.text_name) TextView nameTextView;
+        @BindView(R.id.text_name)
+        TextView nameTextView;
 
         public FilesViewHolder(View itemView) {
             super(itemView);

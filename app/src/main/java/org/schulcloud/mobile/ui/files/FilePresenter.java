@@ -48,7 +48,8 @@ public class FilePresenter extends BasePresenter<FileMvpView> {
                             Timber.e(error, "There was an error loading the files.");
                             getMvpView().showError();
                         },
-                        () -> {});
+                        () -> {
+                        });
     }
 
     public void loadDirectories() {
@@ -66,7 +67,8 @@ public class FilePresenter extends BasePresenter<FileMvpView> {
                             Timber.e(error, "There was an error loading the files.");
                             getMvpView().showError();
                         },
-                        () -> {});
+                        () -> {
+                        });
     }
 
     public void checkSignedIn() {

@@ -35,11 +35,9 @@ import butterknife.ButterKnife;
 
 public class SettingsActivity extends BaseActivity implements SettingsMvpView {
 
+    public static final Integer CALENDAR_PERMISSION_CALLBACK_ID = 42;
     private static final String EXTRA_TRIGGER_SYNC_FLAG =
             "org.schulcloud.mobile.ui.files.EventActivity.EXTRA_TRIGGER_SYNC_FLAG";
-
-    public static final Integer CALENDAR_PERMISSION_CALLBACK_ID = 42;
-
     @Inject
     SettingsPresenter mSettingsPresenter;
 

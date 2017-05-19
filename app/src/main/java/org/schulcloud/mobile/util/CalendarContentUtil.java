@@ -4,7 +4,6 @@ package org.schulcloud.mobile.util;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -43,6 +42,7 @@ public class CalendarContentUtil {
 
     /**
      * fetching all calendars from local android calendar db
+     *
      * @return a set of all calendars
      */
     public Set<String> getCalendars() {
@@ -66,9 +66,8 @@ public class CalendarContentUtil {
     }
 
     /**
-     *
-     * @param calendarId {Integer} - the id of the calendar in which the event will be inserted
-     * @param event {Event} - a new event
+     * @param calendarId    {Integer} - the id of the calendar in which the event will be inserted
+     * @param event         {Event} - a new event
      * @param recurringRule {String} - a rule for recurring events, e.g. "FREQ=DAILY;COUNT=20;BYDAY=MO,TU,WE,TH,FR;WKST=MO"
      * @return {long} - the created event it
      */
@@ -100,6 +99,7 @@ public class CalendarContentUtil {
 
     /**
      * deletes a event in the local android event db for a given uid (the _id property of the event-model)
+     *
      * @param uid {String} - a uid of a event which will be deleted
      * @return {Integer} - the id of the deleted event
      */

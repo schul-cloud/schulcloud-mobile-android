@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="6dp"
-    android:layout_marginLeft="12dp"
-    android:layout_marginRight="12dp"
-    android:layout_marginTop="6dp"
-    card_view:cardCornerRadius="2dp">
+                                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                    xmlns:tools="http://schemas.android.com/tools"
+                                    android:id="@+id/card_view"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="6dp"
+                                    android:layout_marginLeft="12dp"
+                                    android:layout_marginRight="12dp"
+                                    android:layout_marginTop="6dp"
+                                    card_view:cardCornerRadius="2dp">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -18,31 +17,31 @@
         android:padding="10dp">
 
         <com.beardedhen.androidbootstrap.AwesomeTextView
+            android:id="@+id/device_item_icon"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:id="@+id/device_item_icon"
             android:textSize="@dimen/fa_icon_big"/>
 
 
         <TextView
             android:id="@+id/text_name"
-            android:layout_alignTop="@id/device_item_icon"
-            android:layout_alignBottom="@id/device_item_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/device_item_icon"
+            android:layout_alignTop="@id/device_item_icon"
             android:layout_toRightOf="@id/device_item_icon"
             android:textSize="@dimen/text_body"
-            tools:text="Device" />
+            tools:text="Device"/>
 
         <TextView
             android:id="@+id/token"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_body"
-            android:visibility="gone"
             android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/text_name"
             android:layout_toRightOf="@+id/text_name"
-            android:layout_toEndOf="@+id/text_name" />
+            android:textSize="@dimen/text_body"
+            android:visibility="gone"/>
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

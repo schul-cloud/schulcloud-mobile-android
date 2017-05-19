@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:clipToPadding="false"
-    android:fillViewport="false"
-    android:background="@color/gray"
-    android:fitsSystemWindows="true">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/gray"
+            android:clipToPadding="false"
+            android:fillViewport="false"
+            android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,10 +21,10 @@
             android:id="@+id/text_logo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/hpiRed"
-            android:textSize="48dp"
             android:gravity="center"
-            android:text="Schul-Cloud" />
+            android:text="Schul-Cloud"
+            android:textColor="@color/hpiRed"
+            android:textSize="48dp"/>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Benutzername"
-                android:inputType="text" />
+                android:inputType="text"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Passwort"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
@@ -61,9 +61,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:layout_marginTop="24dp"
-            android:padding="12dp"
             android:background="@color/hpiRed"
-            android:textColor="@color/accent"
-            android:text="Login" />
+            android:padding="12dp"
+            android:text="Login"
+            android:textColor="@color/accent"/>
     </LinearLayout>
 </ScrollView>

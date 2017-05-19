@@ -10,9 +10,10 @@
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <include
             android:id="@+id/action_bar"
-            layout="@layout/action_bar" />
+            layout="@layout/action_bar"/>
     </LinearLayout>
 
     <!-- The navigation drawer -->
@@ -21,8 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="left"
-        android:scrollingCache="false"
         android:background="@color/gray"
+        android:choiceMode="singleChoice"
         android:divider="@null"
-        android:choiceMode="singleChoice"/>
+        android:scrollingCache="false"/>
 </android.support.v4.widget.DrawerLayout>

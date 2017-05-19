@@ -32,13 +32,15 @@ import timber.log.Timber;
 
 public class BaseActivity extends AppCompatActivity {
 
+    private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
+    private static final AtomicLong NEXT_ID = new AtomicLong(0);
+    private static final LongSparseArray<ConfigPersistentComponent> sComponentsMap = new LongSparseArray<>();
     protected DrawerLayout mDrawer;
     protected ListView mDrawerList;
     protected ActionBarDrawerToggle mDrawerToggle;
     private Toolbar mToolbar;
     // todo: maybe move this to DataManager
     private PreferencesHelper mPreferencesHelper;
-
     // Curently just nonsense Data and Logos, change here for the actual list
     private String[] layers = {
             "Meine Dateien",
@@ -48,7 +50,6 @@ public class BaseActivity extends AppCompatActivity {
             "Einstellungen",
             "Ausloggen",
     };
-
     private String[] resources = {
             FontAwesome.FA_FILE,
             FontAwesome.FA_COMPASS,
@@ -57,11 +58,6 @@ public class BaseActivity extends AppCompatActivity {
             FontAwesome.FA_COGS,
             FontAwesome.FA_SIGN_OUT
     };
-
-    private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
-    private static final AtomicLong NEXT_ID = new AtomicLong(0);
-    private static final LongSparseArray<ConfigPersistentComponent> sComponentsMap = new LongSparseArray<>();
-
     private ActivityComponent mActivityComponent;
     private long mActivityId;
 
@@ -146,7 +142,8 @@ public class BaseActivity extends AppCompatActivity {
                 mPreferencesHelper.clear("currentUser");
                 c = SignInActivity.class;
                 break;
-            default: return;
+            default:
+                return;
         }
 
         Intent intent = new Intent(this, c);

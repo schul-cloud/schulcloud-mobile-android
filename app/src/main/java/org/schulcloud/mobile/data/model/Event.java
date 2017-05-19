@@ -3,14 +3,10 @@ package org.schulcloud.mobile.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.parceler.Parcel;
 import org.schulcloud.mobile.data.model.jsonApi.Included;
-
-import java.util.List;
 
 import io.realm.RealmList;
 import io.realm.RealmModel;
-import io.realm.RealmObject;
 import io.realm.annotations.RealmClass;
 
 @RealmClass

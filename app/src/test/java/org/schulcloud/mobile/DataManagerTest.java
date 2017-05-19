@@ -1,4 +1,4 @@
-package org.schulcloud.mobile;
+/**package org.schulcloud.mobile;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +21,7 @@ import rx.observers.TestSubscriber;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.when;**/
 
 /**
  * This test class performs local unit tests without dependencies on the Android framework
@@ -31,7 +31,7 @@ import static org.mockito.Mockito.when;
  * 3. Optionally write a SEPARATE test that verifies that your method is calling the right helper
  * using Mockito.verify()
  */
-@RunWith(MockitoJUnitRunner.class)
+/**@RunWith(MockitoJUnitRunner.class)
 public class DataManagerTest {
 
     @Mock DatabaseHelper mMockDatabaseHelper;
@@ -88,4 +88,4 @@ public class DataManagerTest {
                 .thenReturn(Observable.from(users));
     }
 
-}
+}**/

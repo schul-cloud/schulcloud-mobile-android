@@ -1,5 +1,7 @@
 package org.schulcloud.mobile;
 
+import android.os.Build;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -8,7 +10,6 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.rule.PowerMockRule;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import org.schulcloud.mobile.data.model.User;
@@ -23,8 +24,8 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
  * Unit tests integration with Realm using Robolectric
  */
 
-@RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 19)
+@RunWith(ApplicationRobolectricTestRunner.class)
+@Config(sdk = Build.VERSION_CODES.JELLY_BEAN, manifest = Config.NONE)
 @PowerMockIgnore({"org.mockito.*"})
 @PrepareForTest({Realm.class})
 public class DatabaseHelperTest {

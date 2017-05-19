@@ -8,15 +8,13 @@ import org.schulcloud.mobile.data.model.jsonApi.Included;
 
 import java.util.List;
 
-import io.realm.DirectoryRealmProxy;
-import io.realm.EventRealmProxy;
 import io.realm.RealmList;
+import io.realm.RealmModel;
 import io.realm.RealmObject;
+import io.realm.annotations.RealmClass;
 
-@Parcel(implementations = { EventRealmProxy.class },
-        value = Parcel.Serialization.BEAN,
-        analyze = { Event.class })
-public class Event extends RealmObject {
+@RealmClass
+public class Event implements RealmModel {
     public String _id;
     public String type;
     public String title;

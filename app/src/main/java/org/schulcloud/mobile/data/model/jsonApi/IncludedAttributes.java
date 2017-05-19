@@ -3,13 +3,12 @@ package org.schulcloud.mobile.data.model.jsonApi;
 
 import org.parceler.Parcel;
 
-import io.realm.IncludedAttributesRealmProxy;
+import io.realm.RealmModel;
 import io.realm.RealmObject;
+import io.realm.annotations.RealmClass;
 
-@Parcel(implementations = { IncludedAttributesRealmProxy.class },
-        value = Parcel.Serialization.BEAN,
-        analyze = { IncludedAttributes.class })
-public class IncludedAttributes extends RealmObject {
+@RealmClass
+public class IncludedAttributes implements RealmModel {
     private String freq;
     private String until;
     private String wkst;

@@ -3,15 +3,13 @@ package org.schulcloud.mobile.data.model;
 
 import org.parceler.Parcel;
 
-import io.realm.CurrentUserRealmProxy;
+import io.realm.RealmModel;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
-
-@Parcel(implementations = { CurrentUserRealmProxy.class },
-        value = Parcel.Serialization.BEAN,
-        analyze = { CurrentUser.class })
-public class CurrentUser extends RealmObject {
+@RealmClass
+public class CurrentUser implements RealmModel {
     @PrimaryKey
     public String _id;
     public String firstName;

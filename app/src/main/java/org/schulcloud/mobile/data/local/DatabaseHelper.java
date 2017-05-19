@@ -84,7 +84,7 @@ public class DatabaseHelper {
 
     public Observable<AccessToken> getAccessToken() {
         final Realm realm = mRealmProvider.get();
-        return realm.where(AccessToken.class).findFirstAsync().asObservable();
+        return Observable.just(realm.where(AccessToken.class).findFirstAsync());
     }
 
     public Observable<CurrentUser> setCurrentUser(final CurrentUser currentUser) {
@@ -109,7 +109,7 @@ public class DatabaseHelper {
 
     public Observable<CurrentUser> getCurrentUser() {
         final Realm realm = mRealmProvider.get();
-        return realm.where(CurrentUser.class).findFirstAsync().asObservable();
+        return Observable.just(realm.where(CurrentUser.class).findFirstAsync());
     }
 
 

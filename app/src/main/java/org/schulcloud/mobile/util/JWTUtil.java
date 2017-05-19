@@ -1,19 +1,12 @@
 package org.schulcloud.mobile.util;
 
 import android.util.Base64;
-import android.util.Log;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.schulcloud.mobile.data.model.CurrentUser;
-
 import java.io.UnsupportedEncodingException;
 
-/**
- * Created by niklaskiefer on 28.04.17.
- */
 
 public class JWTUtil {
     public static String decodeToCurrentUser(String JWTEncoded) {

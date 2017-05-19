@@ -3,10 +3,13 @@ package org.schulcloud.mobile.util;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 
 import org.schulcloud.mobile.R;
+
+import java.util.Set;
 
 public final class DialogFactory {
 
@@ -37,6 +40,15 @@ public final class DialogFactory {
 
     public static Dialog createGenericErrorDialog(Context context, @StringRes int messageResource) {
         return createGenericErrorDialog(context, context.getString(messageResource));
+    }
+
+    public static AlertDialog.Builder createSingleSelectDialog(Context context, CharSequence[] singleChoiceItems, @StringRes int messageResource) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        alertDialog.setSingleChoiceItems(singleChoiceItems, 0, null);
+        alertDialog.setNegativeButton(R.string.dialog_action_cancel, null);
+        alertDialog.setPositiveButton(R.string.dialog_action_ok, null);
+        alertDialog.setTitle(context.getString(messageResource));
+        return alertDialog;
     }
 
     public static ProgressDialog createProgressDialog(Context context, String message) {

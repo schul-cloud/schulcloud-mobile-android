@@ -1,24 +1,21 @@
 package org.schulcloud.mobile.ui.main;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
 import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.model.User;
 import org.schulcloud.mobile.injection.ConfigPersistent;
 import org.schulcloud.mobile.ui.base.BasePresenter;
 import org.schulcloud.mobile.util.RxUtil;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
 import rx.Subscriber;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import timber.log.Timber;
 
 @ConfigPersistent
 public class MainPresenter extends BasePresenter<MainMvpView> {
-
-    private final DataManager mDataManager;
-    private Subscription mSubscription;
 
     @Inject
     public MainPresenter(DataManager dataManager) {
@@ -61,6 +58,10 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
                         }
                     }
                 });
+    }
+
+    public void checkSignedIn() {
+        super.isAlreadySignedIn(mDataManager);
     }
 
 }

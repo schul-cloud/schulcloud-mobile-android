@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.data.model.File;
-import org.schulcloud.mobile.data.model.User;
-import org.schulcloud.mobile.ui.main.UsersAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +16,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-/**
- * Created by niklaskiefer on 21.04.17.
- */
 
 public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.FilesViewHolder> {
     private List<File> mFiles;
@@ -56,7 +50,6 @@ public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.FilesViewHol
     class FilesViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.text_name) TextView nameTextView;
-
 
         public FilesViewHolder(View itemView) {
             super(itemView);

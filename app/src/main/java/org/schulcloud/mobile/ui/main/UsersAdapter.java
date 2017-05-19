@@ -6,13 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.schulcloud.mobile.R;
+import org.schulcloud.mobile.data.model.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import org.schulcloud.mobile.R;
-import org.schulcloud.mobile.data.model.User;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

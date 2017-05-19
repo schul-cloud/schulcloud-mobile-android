@@ -8,6 +8,7 @@ import com.crashlytics.android.Crashlytics;
 import org.schulcloud.mobile.injection.component.ApplicationComponent;
 import org.schulcloud.mobile.injection.component.DaggerApplicationComponent;
 import org.schulcloud.mobile.injection.module.ApplicationModule;
+
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 

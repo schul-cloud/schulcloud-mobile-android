@@ -7,13 +7,14 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 
-import javax.inject.Inject;
-
 import org.schulcloud.mobile.SchulCloudApplication;
 import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.model.User;
 import org.schulcloud.mobile.util.AndroidComponentUtil;
 import org.schulcloud.mobile.util.NetworkUtil;
+
+import javax.inject.Inject;
+
 import rx.Observer;
 import rx.Subscription;
 import rx.schedulers.Schedulers;
@@ -41,7 +42,7 @@ public class UserSyncService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, final int startId) {
-        Timber.i("Starting sync...");
+        Timber.i("Starting user sync...");
 
         if (!NetworkUtil.isNetworkConnected(this)) {
             Timber.i("Sync canceled, connection not available");

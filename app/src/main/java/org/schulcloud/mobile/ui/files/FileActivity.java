@@ -14,7 +14,7 @@ import org.schulcloud.mobile.data.model.File;
 import org.schulcloud.mobile.data.sync.DirectorySyncService;
 import org.schulcloud.mobile.data.sync.FileSyncService;
 import org.schulcloud.mobile.ui.base.BaseActivity;
-import org.schulcloud.mobile.ui.main.MainActivity;
+import org.schulcloud.mobile.ui.signin.SignInActivity;
 import org.schulcloud.mobile.util.DialogFactory;
 
 import java.util.List;
@@ -23,11 +23,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Optional;
 
-/**
- * Created by niklaskiefer on 21.04.17.
- */
 
 public class FileActivity extends BaseActivity implements FileMvpView {
 
@@ -80,6 +76,8 @@ public class FileActivity extends BaseActivity implements FileMvpView {
 
 
         mFilePresenter.attachView(this);
+        mFilePresenter.checkSignedIn();
+
         mFilePresenter.loadFiles();
         mFilePresenter.loadDirectories();
 
@@ -113,5 +111,11 @@ public class FileActivity extends BaseActivity implements FileMvpView {
     public void showError() {
         DialogFactory.createGenericErrorDialog(this, getString(R.string.error_files_fetch))
                 .show();
+    }
+
+    @Override
+    public void goToSignIn() {
+        Intent intent = new Intent(this, SignInActivity.class);
+        this.startActivity(intent);
     }
 }

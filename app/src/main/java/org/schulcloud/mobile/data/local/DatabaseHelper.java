@@ -1,5 +1,13 @@
 package org.schulcloud.mobile.data.local;
 
+import org.schulcloud.mobile.data.model.AccessToken;
+import org.schulcloud.mobile.data.model.CurrentUser;
+import org.schulcloud.mobile.data.model.Device;
+import org.schulcloud.mobile.data.model.Directory;
+import org.schulcloud.mobile.data.model.Event;
+import org.schulcloud.mobile.data.model.File;
+import org.schulcloud.mobile.data.model.User;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -7,17 +15,8 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 
-import org.schulcloud.mobile.data.model.AccessToken;
-import org.schulcloud.mobile.data.model.CurrentUser;
-import org.schulcloud.mobile.data.model.Directory;
-import org.schulcloud.mobile.data.model.File;
-import org.schulcloud.mobile.data.model.User;
 import io.realm.Realm;
-import io.realm.RealmObject;
-import io.realm.RealmResults;
 import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Func1;
 import timber.log.Timber;
 
 @Singleton
@@ -169,5 +168,61 @@ public class DatabaseHelper {
         return realm.where(Directory.class).findAllAsync().asObservable()
                 .filter(directories -> directories.isLoaded())
                 .map(directories -> realm.copyFromRealm(directories));
+    }
+
+    /**** Events ****/
+    public Observable<Event> setEvents(final Collection<Event> events) {
+        return Observable.create(subscriber -> {
+            if (subscriber.isUnsubscribed()) return;
+            Realm realm = null;
+
+            try {
+                realm = mRealmProvider.get();
+                realm.executeTransaction(realm1 -> realm1.copyToRealmOrUpdate(events));
+            } catch (Exception e) {
+                Timber.e(e, "There was an error while adding in Realm.");
+                subscriber.onError(e);
+            } finally {
+                if (realm != null) {
+                    subscriber.onCompleted();
+                    realm.close();
+                }
+            }
+        });
+    }
+
+    public Observable<List<Event>> getEvents() {
+        final Realm realm = mRealmProvider.get();
+        return realm.where(Event.class).findAllAsync().asObservable()
+                .filter(events -> events.isLoaded())
+                .map(events -> realm.copyFromRealm(events));
+    }
+
+    /**** NotificationService ****/
+
+    public Observable<Device> setDevices(final Collection<Device> newDevices) {
+        return Observable.create(subscriber -> {
+            if (subscriber.isUnsubscribed()) return;
+            Realm realm = null;
+
+            try {
+                realm = mRealmProvider.get();
+                realm.executeTransaction(realm1 -> realm1.copyToRealmOrUpdate(newDevices));
+            } catch (Exception e) {
+                Timber.e(e, "There was an error while adding in Realm.");
+                subscriber.onError(e);
+            } finally {
+                if (realm != null) {
+                    realm.close();
+                }
+            }
+        });
+    }
+
+    public Observable<List<Device>> getDevices() {
+        final Realm realm = mRealmProvider.get();
+        return realm.where(Device.class).findAllAsync().asObservable()
+                .filter(devices -> devices.isLoaded())
+                .map(devices -> realm.copyFromRealm(devices));
     }
 }

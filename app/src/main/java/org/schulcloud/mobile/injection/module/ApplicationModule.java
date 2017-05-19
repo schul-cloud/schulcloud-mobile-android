@@ -3,9 +3,10 @@ package org.schulcloud.mobile.injection.module;
 import android.app.Application;
 import android.content.Context;
 
+import org.schulcloud.mobile.injection.ApplicationContext;
+
 import javax.inject.Singleton;
 
-import org.schulcloud.mobile.injection.ApplicationContext;
 import dagger.Module;
 import dagger.Provides;
 import io.realm.Realm;

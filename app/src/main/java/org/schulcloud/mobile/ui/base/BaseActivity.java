@@ -16,12 +16,14 @@ import com.beardedhen.androidbootstrap.font.FontAwesome;
 
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.SchulCloudApplication;
+import org.schulcloud.mobile.data.local.PreferencesHelper;
 import org.schulcloud.mobile.injection.component.ActivityComponent;
 import org.schulcloud.mobile.injection.component.ConfigPersistentComponent;
 import org.schulcloud.mobile.injection.component.DaggerConfigPersistentComponent;
 import org.schulcloud.mobile.injection.module.ActivityModule;
 import org.schulcloud.mobile.ui.files.FileActivity;
 import org.schulcloud.mobile.ui.main.MainActivity;
+import org.schulcloud.mobile.ui.settings.SettingsActivity;
 import org.schulcloud.mobile.ui.signin.SignInActivity;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -34,21 +36,26 @@ public class BaseActivity extends AppCompatActivity {
     protected ListView mDrawerList;
     protected ActionBarDrawerToggle mDrawerToggle;
     private Toolbar mToolbar;
+    // todo: maybe move this to DataManager
+    private PreferencesHelper mPreferencesHelper;
 
     // Curently just nonsense Data and Logos, change here for the actual list
     private String[] layers = {
-            "Menu",
-            "About",
             "Meine Dateien",
+            "About",
             "Impressum",
-            "Kontakt"
+            "Kontakt",
+            "Einstellungen",
+            "Ausloggen",
     };
+
     private String[] resources = {
-            FontAwesome.FA_BEER,
-            FontAwesome.FA_COMPASS,
             FontAwesome.FA_FILE,
-            FontAwesome.FA_UMBRELLA,
-            FontAwesome.FA_OPTIN_MONSTER
+            FontAwesome.FA_COMPASS,
+            FontAwesome.FA_INFO,
+            FontAwesome.FA_CONTAO,
+            FontAwesome.FA_COGS,
+            FontAwesome.FA_SIGN_OUT
     };
 
     private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
@@ -64,6 +71,7 @@ public class BaseActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.drawer_layout);
         TypefaceProvider.registerDefaultIconSets();
+        mPreferencesHelper = new PreferencesHelper(this.getBaseContext());
 
         // Setup Actionbar / Toolbar
         mToolbar = (Toolbar) findViewById(R.id.action_bar);
@@ -118,20 +126,25 @@ public class BaseActivity extends AppCompatActivity {
     private void openActivityForPos(int pos) {
         Class c;
         switch (pos) {
-            case 0:
-                c = MainActivity.class;
-                break;
-            case 1:
-                c = BaseActivity.class;
-                break;
-            case 2:
+            case 0: // files
                 c = FileActivity.class;
                 break;
-            case 3:
-                c = SignInActivity.class;
-                break;
-            case 4:
+            case 1:  // users
                 c = MainActivity.class;
+                break;
+            case 2: // contact
+                c = BaseActivity.class;
+            case 3: // impressum
+                c = BaseActivity.class;
+                break;
+            case 4: // settings
+                c = SettingsActivity.class;
+                break;
+            case 5: // logout
+                // delete accessToken and currentUser
+                mPreferencesHelper.clear("jwt");
+                mPreferencesHelper.clear("currentUser");
+                c = SignInActivity.class;
                 break;
             default: return;
         }

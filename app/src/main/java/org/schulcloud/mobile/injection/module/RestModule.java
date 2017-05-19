@@ -3,10 +3,11 @@ package org.schulcloud.mobile.injection.module;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import javax.inject.Singleton;
-
 import org.schulcloud.mobile.BuildConfig;
 import org.schulcloud.mobile.data.remote.RestService;
+
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
@@ -24,6 +25,7 @@ public class RestModule {
     Gson provideGson() {
         return new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                .setLenient()
                 .create();
     }
 

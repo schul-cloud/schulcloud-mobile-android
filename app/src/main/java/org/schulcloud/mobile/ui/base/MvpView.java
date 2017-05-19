@@ -8,4 +8,6 @@ package org.schulcloud.mobile.ui.base;
  */
 public interface MvpView {
 
+    void goToSignIn();
+
 }

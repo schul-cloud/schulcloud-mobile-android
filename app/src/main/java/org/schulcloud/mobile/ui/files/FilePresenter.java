@@ -10,9 +10,6 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import timber.log.Timber;
 
-/**
- * Created by niklaskiefer on 21.04.17.
- */
 
 public class FilePresenter extends BasePresenter<FileMvpView> {
     private final DataManager mDataManager;
@@ -70,6 +67,10 @@ public class FilePresenter extends BasePresenter<FileMvpView> {
                             getMvpView().showError();
                         },
                         () -> {});
+    }
+
+    public void checkSignedIn() {
+        super.isAlreadySignedIn(mDataManager);
     }
 }
 

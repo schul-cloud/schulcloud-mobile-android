@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import org.schulcloud.mobile.injection.ActivityContext;
+
 import dagger.Module;
 import dagger.Provides;
 

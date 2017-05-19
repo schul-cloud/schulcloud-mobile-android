@@ -65,24 +65,24 @@ public class DataManagerTest {
 
         mDataManager.syncUsers().subscribe();
         // Verify right calls to helper methods
-        verify(mMockRestService).getUsers();
+        verify(mMockRestService).getUsers("test");
         verify(mMockDatabaseHelper).setUsers(users);
     }
 
     @Test
     public void syncUsersDoesNotCallDatabaseWhenApiFails() {
-        when(mMockRestService.getUsers())
+        when(mMockRestService.getUsers("test"))
                 .thenReturn(Observable.<List<User>>error(new RuntimeException()));
 
         mDataManager.syncUsers().subscribe(new TestSubscriber<User>());
         // Verify right calls to helper methods
-        verify(mMockRestService).getUsers();
+        verify(mMockRestService).getUsers("test");
         verify(mMockDatabaseHelper, never()).setUsers(anyListOf(User.class));
     }
 
     private void stubSyncUsersHelperCalls(List<User> users) {
         // Stub calls to the rest service and database helper.
-        when(mMockRestService.getUsers())
+        when(mMockRestService.getUsers("test"))
                 .thenReturn(Observable.just(users));
         when(mMockDatabaseHelper.setUsers(users))
                 .thenReturn(Observable.from(users));

@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.data.model.Directory;
-import org.schulcloud.mobile.data.model.File;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +17,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by niklaskiefer on 21.04.17.
- */
 
 public class DirectoriesAdapter extends RecyclerView.Adapter<DirectoriesAdapter.DirectoriesViewHolder> {
     private List<Directory> mDirectories;

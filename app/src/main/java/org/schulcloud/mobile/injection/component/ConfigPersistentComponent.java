@@ -3,6 +3,7 @@ package org.schulcloud.mobile.injection.component;
 import org.schulcloud.mobile.injection.ConfigPersistent;
 import org.schulcloud.mobile.injection.module.ActivityModule;
 import org.schulcloud.mobile.ui.base.BaseActivity;
+
 import dagger.Component;
 
 /**

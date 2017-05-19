@@ -1,24 +1,15 @@
 package org.schulcloud.mobile.ui.signin;
 
 import org.schulcloud.mobile.data.DataManager;
-import org.schulcloud.mobile.data.model.AccessToken;
-import org.schulcloud.mobile.data.model.User;
 import org.schulcloud.mobile.ui.base.BasePresenter;
-import org.schulcloud.mobile.ui.main.MainMvpView;
 import org.schulcloud.mobile.util.RxUtil;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
-import rx.Subscriber;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import timber.log.Timber;
 
 public class SignInPresenter extends BasePresenter<SignInMvpView> {
-    private final DataManager mDataManager;
-    private Subscription mSubscription;
 
     @Inject
     public SignInPresenter(DataManager dataManager) {
@@ -35,6 +26,7 @@ public class SignInPresenter extends BasePresenter<SignInMvpView> {
         super.detachView();
         if (mSubscription != null) mSubscription.unsubscribe();
     }
+
 
     public void signIn(String username, String password) {
         checkViewAttached();

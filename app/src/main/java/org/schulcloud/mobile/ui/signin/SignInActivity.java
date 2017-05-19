@@ -3,15 +3,12 @@ package org.schulcloud.mobile.ui.signin;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.ui.base.BaseActivity;
 import org.schulcloud.mobile.ui.files.FileActivity;
-import org.schulcloud.mobile.ui.main.MainActivity;
 import org.schulcloud.mobile.util.DialogFactory;
 
 import javax.inject.Inject;
@@ -70,5 +67,10 @@ public class SignInActivity extends BaseActivity implements SignInMvpView {
     public void showSignInFailed() {
         DialogFactory.createGenericErrorDialog(this, getString(R.string.error_sign_in))
                 .show();
+    }
+
+    @Override
+    public void goToSignIn() {
+        // obsolete in SignInActivity
     }
 }

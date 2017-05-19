@@ -11,5 +11,7 @@ make
 sudo install git-crypt /usr/local/bin
 cd $TRAVIS_BUILD_DIR
 openssl aes-256-cbc -K $encrypted_4587be2b7c5e_key -iv $encrypted_4587be2b7c5e_iv -in .travis/schulcloudMobile.key.enc -out .travis/schulcloudMobile.key -d
+#clean
+git checkout -f
 git-crypt unlock .travis/schulcloudMobile.key
 rm .travis/schulcloudMobile.key

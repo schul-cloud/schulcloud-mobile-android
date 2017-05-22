@@ -35,4 +35,23 @@
 
     <dimen name="md_fixed_list_shadow_height">4dp</dimen>
 
+    <!-- General margins for the drawer account header -->
+    <dimen name="material_drawer_account_header_height">148dp</dimen>
+    <dimen name="material_drawer_account_header_height_compact">72dp</dimen>
+    <dimen name="material_drawer_account_header_horizontal_top">16dp</dimen>
+    <dimen name="material_drawer_account_header_horizontal_bottom">4dp</dimen>
+    <dimen name="material_drawer_account_header_selected">64dp</dimen>
+    <dimen name="material_drawer_account_header_secondary">40dp</dimen>
+    <dimen name="material_drawer_account_header_compact">56dp</dimen>
+    <dimen name="material_drawer_account_header_text">14sp</dimen>
+    <dimen name="material_drawer_account_header_dropdown">22dp</dimen>
+    <dimen name="material_drawer_account_header_dropdown_padding">5dp</dimen>
+    <dimen name="material_drawer_account_header_dropdown_margin_bottom">14dp</dimen>
+
+    <!-- General vertical padding values / 24dp for tablets -->
+    <dimen name="material_drawer_vertical_padding">16dp</dimen>
+
+    <!-- General padding value -->
+    <dimen name="material_drawer_padding">8dp</dimen>
+
 </resources>

@@ -90,8 +90,8 @@ public class PreferencesHelper {
         return mPref.getString("messagingToken", "null");
     }
 
-    public String getCurrentUsername() { 
-        return mPref.getString("username", "null"); 
+    public String getCurrentUsername() {
+        return mPref.getString("username", "null");
     }
 
     public void clear() {

@@ -3,8 +3,7 @@ apply from: '../config/quality/quality.gradle'
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'realm-android'
-//TODO uncomment line below after adding fabric api secret and key to fabric.properties
-//apply plugin: 'io.fabric'
+apply plugin: 'io.fabric'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
@@ -119,7 +118,7 @@ dependencies {
     compile "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
     compile "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
 
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.7@aar') {
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
     }
 

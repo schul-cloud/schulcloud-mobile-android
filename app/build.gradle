@@ -5,6 +5,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'realm-android'
 apply plugin: 'io.fabric'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'jacoco-android'
 
 android {
     compileSdkVersion 25
@@ -57,6 +58,7 @@ android {
             debuggable true
 
             buildConfigField "String", "URL_ENDPOINT", "\"https://schulcloud.org:8080\""
+            testCoverageEnabled true
         }
     }
 

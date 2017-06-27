@@ -23,9 +23,9 @@ import butterknife.ButterKnife;
 public class StartActivity extends BaseActivity implements StartMvpView {
 
     private static final int PARTICLE_NUM = 100;
-    private static final int PARTICLE_DURATION = 1000;
+    private static final int PARTICLE_DURATION = 600;
     private static final float PARTICLE_RANGE_BEGIN = 0.1f;
-    private static final float PARTICLE_RANGE_END = 0.35f;
+    private static final float PARTICLE_RANGE_END = 1.0f;
     private static final Integer[] PARTICLE_DRAWABLES = new Integer[]{
             R.mipmap.graycloud,
             R.mipmap.redcloud,

@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.AwesomeTextView;
+import com.plattysoft.leonids.ParticleSystem;
 
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.ui.base.BaseActivity;
@@ -21,10 +22,21 @@ import butterknife.ButterKnife;
 
 public class StartActivity extends BaseActivity implements StartMvpView {
 
+    private static final int PARTICLE_NUM = 100;
+    private static final int PARTICLE_DURATION = 1000;
+    private static final float PARTICLE_RANGE_BEGIN = 0.1f;
+    private static final float PARTICLE_RANGE_END = 0.35f;
+    private static final Integer[] PARTICLE_DRAWABLES = new Integer[]{
+            R.mipmap.graycloud,
+            R.mipmap.redcloud,
+            R.mipmap.yellowcloud,
+            R.mipmap.orangecloud
+    };
+
     @BindView(R.id.cloudy_icon)
     AwesomeTextView cloudIcon;
     @BindView(R.id.start_layout)
-    RelativeLayout relativeLayout;
+    RelativeLayout startLayout;
     @BindView(R.id.text_logo)
     TextView logoText;
 
@@ -46,8 +58,6 @@ public class StartActivity extends BaseActivity implements StartMvpView {
         ButterKnife.bind(this);
 
         this.showDisplayAnimation();
-
-        //this.goToMain();
     }
 
     /***** MVP View methods implementation *****/
@@ -67,8 +77,8 @@ public class StartActivity extends BaseActivity implements StartMvpView {
     public void showDisplayAnimation() {
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
         anim.reset();
-        relativeLayout.clearAnimation();
-        relativeLayout.startAnimation(anim);
+        startLayout.clearAnimation();
+        startLayout.startAnimation(anim);
 
         anim = AnimationUtils.loadAnimation(this, R.anim.translate);
         anim.reset();
@@ -80,6 +90,10 @@ public class StartActivity extends BaseActivity implements StartMvpView {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                // particle effect
+                showParticleAnimation();
+
+                // pulse effect
                 Animation cloudAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.pulse);
                 cloudAnim.reset();
                 cloudIcon.clearAnimation();
@@ -96,6 +110,15 @@ public class StartActivity extends BaseActivity implements StartMvpView {
         cloudIcon.setTextColor(ContextCompat.getColor(this, R.color.hpiRed));
         cloudIcon.clearAnimation();
         cloudIcon.startAnimation(anim);
+    }
+
+    @Override
+    public void showParticleAnimation() {
+        for (Integer particleDrawable : PARTICLE_DRAWABLES) {
+            new ParticleSystem(this, PARTICLE_NUM, particleDrawable, PARTICLE_DURATION)
+                    .setSpeedRange(PARTICLE_RANGE_BEGIN, PARTICLE_RANGE_END)
+                    .oneShot(cloudIcon, PARTICLE_NUM);
+        }
     }
 
     @Override

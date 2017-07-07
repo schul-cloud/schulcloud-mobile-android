@@ -1,4 +1,4 @@
-package org.schulcloud.mobile.util;
+package org.schulcloud.mobile.util.crypt;
 
 import android.util.Base64;
 

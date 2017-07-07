@@ -13,7 +13,7 @@ public class HomeworkTest {
         private static final String DESCRIPTION = "description";
         private static final String AVAILABLEDATE = "availabledate";
         private static final String DUEDATE = "dueDate";
-        private static final Course COURSEID = new Course();
+        private static final CourseHomework COURSEID = new CourseHomework();
         private static final Boolean RESTRICTED = true;
 
         private Homework homework;

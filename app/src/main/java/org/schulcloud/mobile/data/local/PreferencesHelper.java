@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import org.schulcloud.mobile.data.model.AccessToken;
 import org.schulcloud.mobile.injection.ApplicationContext;
+import org.schulcloud.mobile.util.crypt.ObscuredSharedPreferences;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -14,11 +15,11 @@ public class PreferencesHelper {
 
     public static final String PREF_FILE_NAME = "schulcloud_pref_file";
 
-    private final SharedPreferences mPref;
+    private final ObscuredSharedPreferences mPref;
 
     @Inject
     public PreferencesHelper(@ApplicationContext Context context) {
-        mPref = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
+        mPref = ObscuredSharedPreferences.getPrefs(context, PREF_FILE_NAME, Context.MODE_PRIVATE);
     }
 
     // ##### Setter

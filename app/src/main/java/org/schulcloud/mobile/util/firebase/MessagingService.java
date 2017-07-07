@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat.WearableExtender;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -15,7 +16,7 @@ import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.SchulCloudApplication;
 import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.model.requestBodies.CallbackRequest;
-import org.schulcloud.mobile.ui.files.FileActivity;
+import org.schulcloud.mobile.ui.dashboard.DashboardActivity;
 
 import javax.inject.Inject;
 
@@ -72,7 +73,7 @@ public class MessagingService extends FirebaseMessagingService {
      * @param messageBody  is the body as it is set in the push messaged received through firebase
      */
     private void sendNotification(String messageTitle, String messageBody) {
-        Intent intent = new Intent(this, FileActivity.class);
+        Intent intent = new Intent(this, DashboardActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
@@ -83,6 +84,13 @@ public class MessagingService extends FirebaseMessagingService {
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
+
+        // Improve Android Wear
+        NotificationCompat.WearableExtender wearableExtender =
+                new NotificationCompat.WearableExtender()
+                .setHintHideIcon(true)
+                .setContentIcon(R.mipmap.ic_launcher);
+        notificationBuilder.extend(wearableExtender);
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

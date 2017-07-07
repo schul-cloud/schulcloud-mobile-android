@@ -19,13 +19,16 @@ import org.schulcloud.mobile.data.model.User;
 import org.schulcloud.mobile.data.model.requestBodies.CallbackRequest;
 import org.schulcloud.mobile.data.model.requestBodies.Credentials;
 import org.schulcloud.mobile.data.model.requestBodies.DeviceRequest;
+import org.schulcloud.mobile.data.model.requestBodies.FeedbackRequest;
 import org.schulcloud.mobile.data.model.requestBodies.SignedUrlRequest;
 import org.schulcloud.mobile.data.model.responseBodies.DeviceResponse;
 import org.schulcloud.mobile.data.model.responseBodies.FeathersResponse;
+import org.schulcloud.mobile.data.model.responseBodies.FeedbackResponse;
 import org.schulcloud.mobile.data.model.responseBodies.FilesResponse;
 import org.schulcloud.mobile.data.model.responseBodies.SignedUrlResponse;
 import org.schulcloud.mobile.data.remote.RestService;
-import org.schulcloud.mobile.util.JWTUtil;
+import org.schulcloud.mobile.util.crypt.JWTUtil;
+import org.schulcloud.mobile.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -280,6 +283,10 @@ public class DataManager {
         return mDatabaseHelper.getEvents().distinct();
     }
 
+    public List<Event> getEventsForDay() {
+        return mDatabaseHelper.getEventsForDay();
+    }
+
     /**** Homework ****/
 
     public Observable<Homework> syncHomework() {
@@ -300,6 +307,10 @@ public class DataManager {
 
     public Homework getHomeworkForId(String homeworkId) {
         return mDatabaseHelper.getHomeworkForId(homeworkId);
+    }
+
+    public Pair<String, String> getOpenHomeworks() {
+        return mDatabaseHelper.getOpenHomeworks();
     }
 
     /**** Submissions ****/
@@ -367,4 +378,19 @@ public class DataManager {
     public List<Contents> getContents(String topicId) {
         return mDatabaseHelper.getContents(topicId).contents;
     }
+
+    /**** Feedback ****/
+
+    public Observable<FeedbackResponse> sendFeedback(FeedbackRequest feedbackRequest) {
+        return mRestService.sendFeedback(
+                getAccessToken(),
+                feedbackRequest)
+                .concatMap(new Func1<FeedbackResponse, Observable<FeedbackResponse>>() {
+                    @Override
+                    public Observable<FeedbackResponse> call(FeedbackResponse feedbackResponse) {
+                        return Observable.just(feedbackResponse);
+                    }
+                });
+    }
+
 }

@@ -1,4 +1,4 @@
-package org.schulcloud.mobile.ui.courses;
+package org.schulcloud.mobile.ui.dashboard;
 
 import android.app.FragmentManager;
 import android.content.Context;
@@ -6,20 +6,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import org.schulcloud.mobile.R;
-import org.schulcloud.mobile.data.model.Course;
+import org.schulcloud.mobile.data.model.Event;
 import org.schulcloud.mobile.data.sync.CourseSyncService;
+import org.schulcloud.mobile.data.sync.EventSyncService;
+import org.schulcloud.mobile.data.sync.HomeworkSyncService;
 import org.schulcloud.mobile.ui.base.BaseActivity;
 import org.schulcloud.mobile.ui.courses.detailed.DetailedCourseFragment;
+import org.schulcloud.mobile.ui.homework.HomeworkActivity;
 import org.schulcloud.mobile.ui.signin.SignInActivity;
-import org.schulcloud.mobile.util.DialogFactory;
+import org.schulcloud.mobile.util.Pair;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,29 +31,30 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CourseActivity extends BaseActivity implements CourseMvpView {
+public class DashboardActivity extends BaseActivity implements DashboardMvpView {
 
     private static final String EXTRA_TRIGGER_SYNC_FLAG =
             "org.schulcloud.mobile.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
 
     @Inject
-    CoursePresenter mCoursePresenter;
+    DashboardPresenter mDashboardPresenter;
     @Inject
-    CourseAdapter mCourseAdapter;
+    EventsAdapter mEventsAdapter;
 
-    @BindView(R.id.recycler_view)
+    @BindView(R.id.events)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.openTasks)
+    TextView openTasks;
+    @BindView(R.id.dueTill)
+    TextView dueTillDate;
+    @BindView(R.id.cardViewHomework)
+    CardView cardViewHomework;
     @BindView(R.id.swiperefresh)
     SwipeRefreshLayout swipeRefresh;
 
-    /**
-     * Return an Intent to start this Activity.
-     * triggerDataSyncOnCreate allows disabling the background sync service onCreate. Should
-     * only be set to false during testing.
-     */
     public static Intent getStartIntent(Context context, boolean triggerDataSyncOnCreate) {
-        Intent intent = new Intent(context, CourseActivity.class);
+        Intent intent = new Intent(context, DashboardActivity.class);
         intent.putExtra(EXTRA_TRIGGER_SYNC_FLAG, triggerDataSyncOnCreate);
         return intent;
     }
@@ -58,27 +63,27 @@ public class CourseActivity extends BaseActivity implements CourseMvpView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityComponent().inject(this);
-        //setContentView(R.layout.activity_main);
 
         LayoutInflater inflater =
                 (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        //inflate your activity layout here!
-        View contentView = inflater.inflate(R.layout.activity_course, null, false);
+        View contentView = inflater.inflate(R.layout.activity_dashboard, null, false);
         mDrawer.addView(contentView, 0);
-        getSupportActionBar().setTitle(R.string.title_courses);
         ButterKnife.bind(this);
 
 
-        mRecyclerView.setAdapter(mCourseAdapter);
+        mRecyclerView.setAdapter(mEventsAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mCoursePresenter.attachView(this);
-        mCoursePresenter.checkSignedIn(this);
+        mDashboardPresenter.attachView(this);
+        mDashboardPresenter.checkSignedIn(this);
 
-        mCoursePresenter.loadCourses();
+        mDashboardPresenter.showHomeworks();
+        mDashboardPresenter.showEvents();
 
         if (getIntent().getBooleanExtra(EXTRA_TRIGGER_SYNC_FLAG, true)) {
             startService(CourseSyncService.getStartIntent(this));
+            startService(HomeworkSyncService.getStartIntent(this));
+            startService(EventSyncService.getStartIntent(this));
         }
 
         swipeRefresh.setColorSchemeColors(getResources().getColor(R.color.hpiRed), getResources().getColor(R.color.hpiOrange), getResources().getColor(R.color.hpiYellow));
@@ -86,45 +91,57 @@ public class CourseActivity extends BaseActivity implements CourseMvpView {
         swipeRefresh.setOnRefreshListener(
                 () -> {
                     startService(CourseSyncService.getStartIntent(this));
+                    startService(HomeworkSyncService.getStartIntent(this));
+                    startService(EventSyncService.getStartIntent(this));
 
                     Handler handler = new Handler();
                     handler.postDelayed(() -> {
-                        mCoursePresenter.loadCourses();
+                        mDashboardPresenter.showHomeworks();
+                        mDashboardPresenter.showEvents();
 
                         swipeRefresh.setRefreshing(false);
                     }, 3000);
                 }
         );
+
     }
 
     @Override
     protected void onDestroy() {
-        mCoursePresenter.detachView();
+        mDashboardPresenter.detachView();
         super.onDestroy();
     }
 
     /***** MVP View methods implementation *****/
 
     @Override
-    public void showCourses(List<Course> courses) {
-        mCourseAdapter.setCourses(courses);
-        mCourseAdapter.notifyDataSetChanged();
+    public void goToSignIn() {
+        Intent intent = new Intent(this, SignInActivity.class);
+        this.startActivity(intent);
     }
 
     @Override
-    public void showError() {
-        DialogFactory.createGenericErrorDialog(this, "Leider gab es ein Problem beim fetchen der Kurse")
-                .show();
+    public void showOpenHomeworks(Pair<String, String> openHomeworks) {
+        openTasks.setText(openHomeworks.getFirst());
+        if (openHomeworks.getSecond().equals("10000-01-31T23:59"))
+            dueTillDate.setText("...");
+        else
+            dueTillDate.setText(openHomeworks.getSecond());
+        cardViewHomework.setOnClickListener(v -> {
+            Intent intent = new Intent(this, HomeworkActivity.class);
+            this.startActivity(intent);
+            this.finish();
+        });
     }
 
     @Override
-    public void showCoursesEmpty() {
-        mCourseAdapter.setCourses(Collections.emptyList());
-        mCourseAdapter.notifyDataSetChanged();
+    public void showEvents(List<Event> eventsForDay) {
+        mEventsAdapter.setEvents(eventsForDay);
+        mEventsAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void showCourseDialog(String courseId) {
+    public void showCourse(String courseId) {
         DetailedCourseFragment frag = new DetailedCourseFragment();
         Bundle args = new Bundle();
         args.putString("courseId", courseId);
@@ -134,11 +151,5 @@ public class CourseActivity extends BaseActivity implements CourseMvpView {
                 .replace(R.id.overlay_fragment_container, frag)
                 .addToBackStack(null)
                 .commit();
-    }
-
-    @Override
-    public void goToSignIn() {
-        Intent intent = new Intent(this, SignInActivity.class);
-        this.startActivity(intent);
     }
 }

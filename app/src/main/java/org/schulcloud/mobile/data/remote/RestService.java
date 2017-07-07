@@ -12,9 +12,11 @@ import org.schulcloud.mobile.data.model.User;
 import org.schulcloud.mobile.data.model.requestBodies.CallbackRequest;
 import org.schulcloud.mobile.data.model.requestBodies.Credentials;
 import org.schulcloud.mobile.data.model.requestBodies.DeviceRequest;
+import org.schulcloud.mobile.data.model.requestBodies.FeedbackRequest;
 import org.schulcloud.mobile.data.model.requestBodies.SignedUrlRequest;
 import org.schulcloud.mobile.data.model.responseBodies.DeviceResponse;
 import org.schulcloud.mobile.data.model.responseBodies.FeathersResponse;
+import org.schulcloud.mobile.data.model.responseBodies.FeedbackResponse;
 import org.schulcloud.mobile.data.model.responseBodies.FilesResponse;
 import org.schulcloud.mobile.data.model.responseBodies.SignedUrlResponse;
 
@@ -97,4 +99,7 @@ public interface RestService {
 
     @GET("lessons")
     Observable<FeathersResponse<Topic>> getTopics(@Header("Authorization") String accessToken, @Query("courseId") String courseId);
+
+    @POST("mails")
+    Observable<FeedbackResponse> sendFeedback(@Header("Authorization") String accessToken, @Body FeedbackRequest feedbackRequest);
 }

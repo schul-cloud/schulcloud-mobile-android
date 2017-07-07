@@ -1,55 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/gray"
+    android:paddingTop="?attr/actionBarSize">
+
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:background="@color/gray"
-            android:paddingTop="?attr/actionBarSize">
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:fillViewport="true"
-        android:layout_height="fill_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="25dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/directories_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingBottom="6dp"
+                    android:paddingTop="6dp"
+                    android:scrollbars="vertical" />
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/files_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingBottom="6dp"
+                    android:paddingTop="6dp"
+                    android:scrollbars="vertical" />
+            </LinearLayout>
+        </ScrollView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/files_upload"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="25dp"
-            android:orientation="vertical">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/directories_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
-                android:paddingBottom="6dp"
-                android:paddingTop="6dp"
-                android:scrollbars="vertical"/>
-
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/files_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="6dp"
-                android:paddingTop="6dp"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
-                android:scrollbars="vertical"/>
-        </LinearLayout>
-    </ScrollView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/files_upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="21dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:foregroundTint="@android:color/white"
-        android:src="@android:drawable/ic_menu_upload"
-        android:tint="@android:color/white"
-        app:rippleColor="@android:color/white"/>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="21dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:foregroundTint="@android:color/white"
+            android:src="@android:drawable/ic_menu_upload"
+            android:tint="@android:color/white"
+            app:rippleColor="@android:color/white" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+    
+    <FrameLayout
+        android:id="@+id/overlay_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>

@@ -16,7 +16,7 @@ if [ "$TRAVIS_BRANCH" = "$BRANCH" ]; then
       git remote set-url origin https://langleu:$GITHUB_API_KEY@github.com/schul-cloud/schulcloud-mobile-android.git
 
       # Add tag and push to master.
-      git tag -a v${TRAVIS_BUILD_NUMBER} -m "Travis build $TRAVIS_BUILD_NUMBER pushed a tag."
+      git tag -a buildV${TRAVIS_BUILD_NUMBER} -m "Travis build $TRAVIS_BUILD_NUMBER pushed a tag."
       git push origin --tags
       git fetch origin
 

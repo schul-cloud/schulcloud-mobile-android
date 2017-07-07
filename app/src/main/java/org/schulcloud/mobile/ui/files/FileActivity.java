@@ -7,15 +7,14 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
 
@@ -66,6 +65,9 @@ public class FileActivity extends BaseActivity implements FileMvpView {
 
     @BindView(R.id.files_upload)
     FloatingActionButton fileUploadButton;
+
+    @BindView(R.id.swiperefresh)
+    SwipeRefreshLayout swipeRefresh;
 
     private InternalFilesUtil filesUtil;
     private ProgressDialog uploadProgressDialog;
@@ -119,6 +121,23 @@ public class FileActivity extends BaseActivity implements FileMvpView {
         }
 
         filesUtil = new InternalFilesUtil(this);
+
+        swipeRefresh.setColorSchemeColors(getResources().getColor(R.color.hpiRed), getResources().getColor(R.color.hpiOrange), getResources().getColor(R.color.hpiYellow));
+
+        swipeRefresh.setOnRefreshListener(
+                () -> {
+                    startService(FileSyncService.getStartIntent(this));
+                    startService(DirectorySyncService.getStartIntent(this));
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(() -> {
+                        mFilePresenter.loadFiles();
+                        mFilePresenter.loadDirectories();
+
+                        swipeRefresh.setRefreshing(false);
+                    }, 3000);
+                }
+        );
     }
 
     @Override

@@ -51,7 +51,7 @@ android {
             ext.betaDistributionReleaseNotesFilePath =
                     file('../crashlytics_release_notes.txt').absolutePath
 
-            buildConfigField "String", "URL_ENDPOINT", "\"https://schul.tech:3030\""
+            buildConfigField "String", "URL_ENDPOINT", "\"https://schul-cloud.org:8080\""
         }
 
         debug {
@@ -74,6 +74,8 @@ android {
             res.srcDirs =
                     [
                             'src/main/res/layouts/courses',
+                            'src/main/res/layouts/feedback',
+                            'src/main/res/layouts/dashboard',
                             'src/main/res/layouts/homework',
                             'src/main/res/layouts/files',
                             'src/main/res/layouts/main',

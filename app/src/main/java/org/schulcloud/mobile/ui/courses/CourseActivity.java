@@ -66,7 +66,7 @@ public class CourseActivity extends BaseActivity implements CourseMvpView {
         //inflate your activity layout here!
         View contentView = inflater.inflate(R.layout.activity_course, null, false);
         mDrawer.addView(contentView, 0);
-        getSupportActionBar().setTitle(R.string.title_courses);
+        getSupportActionBar().setTitle(R.string.courses_title);
         ButterKnife.bind(this);
 
 
@@ -113,7 +113,7 @@ public class CourseActivity extends BaseActivity implements CourseMvpView {
 
     @Override
     public void showError() {
-        DialogFactory.createGenericErrorDialog(this, "Leider gab es ein Problem beim fetchen der Kurse")
+        DialogFactory.createGenericErrorDialog(this, R.string.courses_loading_error)
                 .show();
     }
 

@@ -1,39 +1,97 @@
 <resources>
     <string name="app_name">Schul-Cloud</string>
 
-    <string name="action_settings">Settings</string>
+    <!--Base-->
+    <string name="base_drawer_open">Öffnen</string>
+    <string name="base_drawer_close">Schließen</string>
+    <string name="base_offline">(offline)</string>
 
-    <string name="title_files">Dateien</string>
-    <string name="title_homework">Hausaufgaben</string>
-    <string name="title_courses">Fächer / Kurse</string>
-    <string name="title_settings">Einstellungen</string>
-
+    <!--Generic dialogs-->
     <string name="dialog_action_ok">OK</string>
     <string name="dialog_action_cancel">Abbrechen</string>
     <string name="dialog_error_title">Sorry</string>
 
-    <string name="empty_ribots">Momentan gibt es keine User.</string>
-    <string name="empty_events">Keine Events gefunden.</string>
-    <string name="error_sign_in">Falscher Nutzername oder Passwort</string>
-    <string name="error_files_fetch">Oops! Irgendwas ist beim Laden der Dateien schief gelaufen!</string>
-    <string name="error_file_load">Für dieses Dateiformat befindet sich keine App auf deinem Gerät.</string>
-    <string name="delete_dialog_title">Löschen</string>
-    <string name="error_file_upload">Beim Hochladen der Datei ist etwas schiefgelaufen.</string>
-    <string name="file_delete_success">Datei wurde erfolgreich gelöscht.</string>
-    <string name="directory_delete_success">Ordner wurde erfolgreich gelöscht.</string>
-    <string name="file_delete_request">Bist du dir sicher, dass du \'%1$s\' löschen möchtest?</string>
-    <string name="drawer_open">Öffnen</string>
-    <string name="drawer_close">Schließen</string>
-    <string name="add_to_calendar">Termine synchronisieren</string>
-    <string name="choose_calendar">Kalender auf dem Gerät auswählen</string>
-    <string name="sync_calendar_successful">Synchronisieren des Kalenders war erfolgreich!</string>
-    <string name="setting_section_calendar">Kalender</string>
-    <string name="setting_section_notifications">Benachrichtigungen</string>
-    <string name="file_save_success">Datei %1$s wurde erfolgreich in Downloads gespeichert!</string>
-    <string name="file_save_failed">Download fehlgeschlagen</string>
-    <string name="file_upload_progress">Datei wird zum Server hochgeladen...</string>
-    <string name="file_download_progress">Datei wird vom Server heruntergeladen...</string>
-    <string name="mail_to_subject">Schul-Cloud Anfrage</string>
-    <string name="mail_to_mail">schul-cloud@hpi.de</string>
-    <string name="error_file_delete">Beim Löschen der Datei ist etwas schiefgelaufen.</string>
+    <!--Login-->
+    <string name="login_login">Login</string>
+    <string name="login_title">Login</string>
+    <string name="login_username">Benutzername</string>
+    <string name="login_password">Benutzername</string>
+    <string name="login_successful">Erfolgreich angemeldet!</string>
+    <string name="login_error">Falscher Nutzername oder Passwort</string>
+
+    <!--Dashboard-->
+    <string name="dashboard_title">Dashboard</string>
+    <string name="dashboard_hoursToday">Heutige Stunden</string>
+    <string name="dashboard_hours_none">Derzeit keine Stunden</string>
+    <string name="dashboard_homework">Aufgaben</string>
+    <string name="dashboard_homework_open">offene Aufgaben</string>
+    <string name="dashboard_homework_nextDue">Nächste fällig:</string>
+
+    <!--Files-->
+    <string name="files_title">Dateien</string>
+    <string name="files_delete_request">Bist du dir sicher, dass du \'%1$s\' löschen möchtest?</string>
+    <string name="files_delete_error">Beim Löschen der Datei ist etwas schiefgelaufen.</string>
+    <string name="files_delete_success_directory">Ordner wurde erfolgreich gelöscht.</string>
+    <string name="files_delete_success_file">Datei wurde erfolgreich gelöscht.</string>
+    <string name="files_download_progress">Datei wird vom Server heruntergeladen&#8230;</string>
+    <string name="files_fetch_error">Oops! Irgendwas ist beim Laden der Dateien schief gelaufen!</string>
+    <string name="files_load_error">Die Datei konnte nicht geladen werden</string>
+    <string name="files_upload_progress">Datei wird zum Server hochgeladen&#8230;</string>
+    <string name="files_upload_error">Beim Hochladen der Datei ist etwas schiefgelaufen.</string>
+    <string name="files_save_error">Die Datei konnte nicht gespeichert werden</string>
+    <string name="files_save_success">Datei %1$s wurde erfolgreich in Downloads gespeichert!</string>
+    <string name="files_dialog_delete_title">Löschen</string>
+
+    <!--Courses-->
+    <string name="courses_title">Fächer / Kurse</string>
+    <string name="courses_content_error_notSupported">%s wird zurzeit nicht unterstüzt.</string>
+    <string name="courses_loading_error">Leider gab es ein Problem beim Laden der Kurse</string>
+
+    <!--Homework-->
+    <string name="homework_title">Hausaufgaben</string>
+    <string name="homework_loading_error">Leider gab es ein Problem beim Laden der Hausaufgaben</string>
+    <string name="homework_name_format">[%1$s] %2$s</string>
+    <string name="homework_due">Abgabe bis: </string>
+    <string name="homework_grading">Benotung</string>
+    <string name="homework_grade">Note:</string>
+    <string name="homework_comments">Kommentare</string>
+    <string name="homework_noComments">Derzeit keine Kommentare</string>
+    <string name="homework_notSubmitted">Hausaufgabe noch nicht eingereicht</string>
+
+    <!--Contact-->
+    <string name="contact_title">Kontakt</string>
+    <string name="contact_mail_to">schul-cloud@hpi.de</string>
+    <string name="contact_mail_subject">Schul-Cloud Anfrage</string>
+
+    <!--Imprint-->
+    <string name="imprint_title">Impressum</string>
+    <string name="imprint_website">https://hpi.de/impressum.html</string>
+
+    <!--Settings-->
+    <string name="settings_title">Einstellungen</string>
+    <string name="settings_calendar_title">Kalender</string>
+    <string name="settings_calendar_sync">Termine synchronisieren</string>
+    <string name="settings_calendar_sync_successful">Synchronisieren des Kalenders war erfolgreich!</string>
+    <string name="settings_calendar_choose">Kalender auf dem Gerät auswählen</string>
+    <string name="settings_notifications_title">Benachrichtigungen</string>
+    <string name="settings_notifications_registerDevice">Gerät registrieren</string>
+
+    <!--Feedback-->
+    <string name="feedback_title">Feedback</string>
+    <string name="feedback_email">Ihre E-Mail-Adresse (optional)</string>
+    <string name="feedback_opinion">Ihre Meinung</string>
+    <string name="feedback_send">Senden</string>
+    <string name="feedback_hint_fillIn">Bitte ausfüllen</string>
+    <string name="feedback_format">User: %1$s\nE-Mail: %2$s\nFeedback geschickt von: %3$s\nUser schrieb folgendes: \n%4$s</string>
+    <string name="feedback_sent">Feedback erfolgreich gesendet</string>
+    <string name="feedback_subject">Feedback Android</string>
+    <string name="feedback_to">schul-cloud-support@hpi.de</string>
+
+    <!--Logout-->
+    <string name="logout_title">Logout</string>
+
+    <!--Web-->
+    <string name="web_protocol_http" translatable="false">http://</string>
+    <string name="web_protocol_https" translatable="false">https://</string>
+    <string name="website">https://schul-cloud.org</string>
 </resources>

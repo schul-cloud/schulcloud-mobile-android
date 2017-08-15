@@ -61,7 +61,7 @@ public class SignInActivity extends BaseActivity implements SignInMvpView {
 
     @Override
     public void showSignInSuccessful() {
-        DialogFactory.createSimpleOkErrorDialog(this, "Login", "Successfully logged in!").
+        DialogFactory.createSimpleOkErrorDialog(this, R.string.login_title, R.string.login_successful).
                 show();
         Intent intent = new Intent(this, DashboardActivity.class);
         this.startActivity(intent);
@@ -69,7 +69,7 @@ public class SignInActivity extends BaseActivity implements SignInMvpView {
 
     @Override
     public void showSignInFailed() {
-        DialogFactory.createGenericErrorDialog(this, getString(R.string.error_sign_in))
+        DialogFactory.createGenericErrorDialog(this, getString(R.string.login_error))
                 .show();
     }
 

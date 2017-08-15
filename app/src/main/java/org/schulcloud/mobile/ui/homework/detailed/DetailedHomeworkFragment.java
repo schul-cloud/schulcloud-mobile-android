@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.schulcloud.mobile.R;
+import org.schulcloud.mobile.data.model.Comment;
 import org.schulcloud.mobile.data.model.Homework;
 import org.schulcloud.mobile.data.model.Submission;
 import org.schulcloud.mobile.ui.base.BaseFragment;
@@ -24,6 +25,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.RealmList;
 
 public class DetailedHomeworkFragment extends BaseFragment implements DetailedHomeworkMvpView {
 
@@ -90,8 +92,8 @@ public class DetailedHomeworkFragment extends BaseFragment implements DetailedHo
         }
 
         if (homework.courseId != null && homework.courseId.name != null)
-            homeworkName.setText(String.format("%s %s",
-                    "[" + homework.courseId.name + "]", homework.name));
+            homeworkName.setText(getString(R.string.homework_name_format,
+                    homework.courseId.name, homework.name));
         else
             homeworkName.setText(homework.name);
         homeworkDescription.setText(Html.fromHtml(homework.description));
@@ -114,6 +116,15 @@ public class DetailedHomeworkFragment extends BaseFragment implements DetailedHo
 
     @Override
     public void showSubmission(Submission submission, String userId) {
+        if (submission == null) {
+            submission = new Submission();
+            submission.comment = getString(R.string.homework_notSubmitted);
+            submission.comments = new RealmList<>();
+            Comment comment = new Comment();
+            comment.comment = getString(R.string.homework_noComments);
+            submission.comments.add(comment);
+        }
+
         if (submission.grade != null)
             grade.setText(Integer.toString(submission.grade));
         if (submission.gradeComment != null)

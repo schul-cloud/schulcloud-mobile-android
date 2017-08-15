@@ -66,7 +66,7 @@ public class HomeworkActivity extends BaseActivity implements HomeworkMvpView {
         //inflate your activity layout here!
         View contentView = inflater.inflate(R.layout.activity_homework, null, false);
         mDrawer.addView(contentView, 0);
-        getSupportActionBar().setTitle(R.string.title_homework);
+        getSupportActionBar().setTitle(R.string.homework_title);
         ButterKnife.bind(this);
 
 
@@ -110,12 +110,13 @@ public class HomeworkActivity extends BaseActivity implements HomeworkMvpView {
     @Override
     public void showHomework(List<Homework> homeworks) {
         mHomeworkAdapter.setHomework(homeworks);
+        mHomeworkAdapter.setContext(this);
         mHomeworkAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showError() {
-        DialogFactory.createGenericErrorDialog(this, "Leider gab es ein Problem beim fetchen der Hausaufgaben")
+        DialogFactory.createGenericErrorDialog(this, R.string.homework_loading_error)
                 .show();
     }
 

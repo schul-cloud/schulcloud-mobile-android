@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
@@ -83,7 +82,7 @@ public class SettingsActivity extends BaseActivity implements SettingsMvpView {
         //inflate your activity layout here!
         View contentView = inflater.inflate(R.layout.activity_settings, null, false);
         mDrawer.addView(contentView, 0);
-        getSupportActionBar().setTitle(R.string.title_settings);
+        getSupportActionBar().setTitle(R.string.settings_title);
         ButterKnife.bind(this);
 
 
@@ -172,7 +171,7 @@ public class SettingsActivity extends BaseActivity implements SettingsMvpView {
             DialogFactory.createSingleSelectDialog(
                     this,
                     calendarValues,
-                    R.string.choose_calendar)
+                    R.string.settings_calendar_choose)
                     .setItems(calendarValues, (dialogInterface, i) -> chosenValueIndex[0] = i) // update choice
                     .setPositiveButton(R.string.dialog_action_ok, (dialogInterface, i) -> { // handle choice
                         if (chosenValueIndex[0] != null && chosenValueIndex[0] > 0) {
@@ -204,7 +203,7 @@ public class SettingsActivity extends BaseActivity implements SettingsMvpView {
     public void showSyncToCalendarSuccessful() {
         DialogFactory.createSuperToast(
                 this,
-                getResources().getString(R.string.sync_calendar_successful),
+                getResources().getString(R.string.settings_calendar_sync_successful),
                 PaletteUtils.getSolidColor(PaletteUtils.MATERIAL_GREEN))
                 .show();
     }

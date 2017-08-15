@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/bootstrap_alert_paddings"
-                android:text="@string/setting_section_calendar"
+                android:text="@string/settings_calendar_title"
                 android:textColor="@color/hpiRed"
                 android:textSize="@dimen/text_title"/>
 
@@ -37,7 +37,7 @@
                 android:layout_below="@+id/settings_calendar"
                 android:id="@+id/switch_calendar"
                 android:textColorLink="@color/hpiRed"
-                android:text="@string/add_to_calendar"
+                android:text="@string/settings_calendar_sync"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -46,11 +46,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="@dimen/bootstrap_alert_paddings"
-                android:text="Calendar-Name"
                 android:layout_alignBaseline="@+id/switch_calendar"
                 android:layout_alignBottom="@+id/switch_calendar"
                 android:layout_toRightOf="@+id/switch_calendar"
-                android:layout_toEndOf="@+id/switch_calendar"/>
+                android:layout_toEndOf="@+id/switch_calendar"
+                tools:text="Calendar-Name"/>
 
         </RelativeLayout>
 
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/bootstrap_alert_paddings"
-                android:text="@string/setting_section_notifications"
+                android:text="@string/settings_notifications_title"
                 android:textColor="@color/hpiRed"
                 android:textSize="@dimen/text_title"/>
 
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings_notifications"
                 android:layout_centerHorizontal="true"
-                android:text="Gerät registrieren"
+                android:text="@string/settings_notifications_registerDevice"
                 app:bootstrapSize="lg"
                 app:buttonMode="regular"
                 app:roundedCorners="true"

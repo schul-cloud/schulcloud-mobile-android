@@ -21,7 +21,7 @@
         android:layout_marginBottom="@dimen/bootstrap_alert_paddings"
         android:textColor="@color/hpiRed"
         android:textSize="@dimen/text_title"
-        android:text="Ihre E-Mail-Adresse (optional)" />
+        android:text="@string/feedback_email" />
 
     <EditText
         android:id="@+id/email"
@@ -44,7 +44,7 @@
         android:layout_marginBottom="@dimen/bootstrap_alert_paddings"
         android:textColor="@color/hpiRed"
         android:textSize="@dimen/text_title"
-        android:text="Ihre Meinung" />
+        android:text="@string/feedback_opinion" />
 
     <EditText
         android:id="@+id/opinion"
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/opinion"
         android:layout_centerHorizontal="true"
-        android:text="Senden"
+        android:text="@string/feedback_send"
         android:layout_marginTop="@dimen/bootstrap_alert_paddings"
         app:bootstrapSize="lg"
         app:buttonMode="regular"

@@ -136,7 +136,7 @@ public class DashboardActivity extends BaseActivity implements DashboardMvpView 
 
     @Override
     public void showEvents(List<Event> eventsForDay) {
-        mEventsAdapter.setEvents(eventsForDay);
+        mEventsAdapter.setEvents(this, eventsForDay);
         mEventsAdapter.notifyDataSetChanged();
     }
 

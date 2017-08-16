@@ -1,15 +1,16 @@
 package org.schulcloud.mobile.ui.base;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.v4.util.LongSparseArray;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
@@ -28,7 +29,7 @@ import org.schulcloud.mobile.injection.component.DaggerConfigPersistentComponent
 import org.schulcloud.mobile.injection.module.ActivityModule;
 import org.schulcloud.mobile.ui.courses.CourseActivity;
 import org.schulcloud.mobile.ui.dashboard.DashboardActivity;
-import org.schulcloud.mobile.ui.feedback.FeedbackFragment;
+import org.schulcloud.mobile.ui.feedback.FeedbackDialog;
 import org.schulcloud.mobile.ui.files.FileActivity;
 import org.schulcloud.mobile.ui.homework.HomeworkActivity;
 import org.schulcloud.mobile.ui.settings.SettingsActivity;
@@ -56,26 +57,24 @@ public class BaseActivity extends AppCompatActivity {
     DataManager mDataManager;
     // Curently just nonsense Data and Logos, change here for the actual list
     private String[] layers = {
-            "Dashboard",
-            "Meine Dateien",
-            "Meine Fächer",
-            "Hausaufgaben",
-            "Kontakt",
-            "Einstellungen",
-            "Impressum",
-            "Feedback",
-            "Ausloggen",
+        "Dashboard",
+        "Meine Dateien",
+        "Meine Fächer",
+        "Hausaufgaben",
+        "Kontakt",
+        "Einstellungen",
+        "Impressum",
+        "Ausloggen",
     };
     private String[] resources = {
-            FontAwesome.FA_TH_LARGE,
-            FontAwesome.FA_FILE,
-            FontAwesome.FA_GRADUATION_CAP,
-            FontAwesome.FA_TASKS,
-            FontAwesome.FA_CONTAO,
-            FontAwesome.FA_COGS,
-            FontAwesome.FA_INFO,
-            FontAwesome.FA_PENCIL,
-            FontAwesome.FA_SIGN_OUT
+        FontAwesome.FA_TH_LARGE,
+        FontAwesome.FA_FILE,
+        FontAwesome.FA_GRADUATION_CAP,
+        FontAwesome.FA_TASKS,
+        FontAwesome.FA_CONTAO,
+        FontAwesome.FA_COGS,
+        FontAwesome.FA_INFO,
+        FontAwesome.FA_SIGN_OUT
     };
     private ActivityComponent mActivityComponent;
     private long mActivityId;
@@ -131,13 +130,13 @@ public class BaseActivity extends AppCompatActivity {
         // Create the ActivityComponent and reuses cached ConfigPersistentComponent if this is
         // being called after a configuration change.
         mActivityId = savedInstanceState != null ?
-                savedInstanceState.getLong(KEY_ACTIVITY_ID) : NEXT_ID.getAndIncrement();
+            savedInstanceState.getLong(KEY_ACTIVITY_ID) : NEXT_ID.getAndIncrement();
         ConfigPersistentComponent configPersistentComponent;
         if (null == sComponentsMap.get(mActivityId)) {
             Timber.i("Creating new ConfigPersistentComponent id=%d", mActivityId);
             configPersistentComponent = DaggerConfigPersistentComponent.builder()
-                    .applicationComponent(SchulCloudApplication.get(this).getComponent())
-                    .build();
+                .applicationComponent(SchulCloudApplication.get(this).getComponent())
+                .build();
             sComponentsMap.put(mActivityId, configPersistentComponent);
         } else {
             Timber.i("Reusing ConfigPersistentComponent id=%d", mActivityId);
@@ -145,8 +144,12 @@ public class BaseActivity extends AppCompatActivity {
         }
         mActivityComponent = configPersistentComponent.activityComponent(new ActivityModule(this));
     }
-
-
+    @Override
+    @CallSuper
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_base, menu);
+        return true;
+    }
     // Magic happens here for choosing according to the position in the array
     private void openActivityForPos(int pos) {
         Class c;
@@ -167,9 +170,9 @@ public class BaseActivity extends AppCompatActivity {
             case 5: // contact
                 Intent mailIntent = new Intent(Intent.ACTION_VIEW);
                 Uri data = Uri.parse("mailto:" +
-                        getResources().getString(R.string.mail_to_mail) +
-                        "?subject=" +
-                        getResources().getString(R.string.mail_to_subject));
+                    getResources().getString(R.string.mail_to_mail) +
+                    "?subject=" +
+                    getResources().getString(R.string.mail_to_subject));
                 mailIntent.setData(data);
                 startActivity(mailIntent);
                 return;
@@ -181,20 +184,7 @@ public class BaseActivity extends AppCompatActivity {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://hpi.de/impressum.html"));
                 startActivity(browserIntent);
                 return;
-            case 8: // feedback
-                FeedbackFragment frag = new FeedbackFragment();
-                Bundle args = new Bundle();
-                args.putString("contextName", this.getClass().getSimpleName());
-                args.putString("currentUser", mPreferencesHelper.getCurrentUsername());
-                frag.setArguments(args);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.overlay_fragment_container, frag)
-                        .addToBackStack(null)
-                        .commit();
-                mDrawer.closeDrawer(Gravity.LEFT);
-                return;
-            case 9: // logout
+            case 8: // logout
                 // clear all local user data
                 mDataManager.signOut();
                 c = SignInActivity.class;
@@ -207,7 +197,17 @@ public class BaseActivity extends AppCompatActivity {
         this.startActivity(intent);
         this.finish();
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.base_action_feedback:
+                FeedbackDialog.newInstance(getClass().getSimpleName(),
+                    mPreferencesHelper.getCurrentUsername())
+                    .show(getSupportFragmentManager(), null);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

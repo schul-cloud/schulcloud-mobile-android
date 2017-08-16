@@ -1,4 +1,12 @@
 <resources>
+    <string name="feedback_title">Feedback</string>
+    <string name="feedback_send">Senden</string>
+    <string name="feedback_sent">Feedback erfolgreich gesendet</string>
+    <string name="feedback_hint_email">Ihre E-Mail-Adresse (optional)</string>
+    <string name="feedback_hint_opinion">Ihre Meinung</string>
+    <string name="feedback_error_opinionEmpty">Bitte ausfüllen</string>
+    <string name="base_action_feedback">Feedback geben</string>
+
     <string name="app_name">Schul-Cloud</string>
 
     <string name="action_settings">Settings</string>

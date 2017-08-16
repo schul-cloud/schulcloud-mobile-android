@@ -25,6 +25,11 @@ import rx.Subscription;
 public class MessagingService extends FirebaseMessagingService {
     private static final String TAG = "FCM Service";
 
+    private static final String KEY_TITLE = "title";
+    private static final String KEY_BODY = "body";
+    private static final String KEY_NEWS = "news";
+    private static final String KEY_NOTIFICATION_ID = "notificationId";
+
     @Inject
     DataManager mDataManager;
     private Subscription mSubscription;
@@ -43,9 +48,12 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         JsonParser parser = new JsonParser();
-        JsonObject message = parser.parse(remoteMessage.getData().get("news")).getAsJsonObject();
-        sendNotification(message.get("title").getAsString(), message.get("body").getAsString());
-        String notificationId = parser.parse((remoteMessage.getData()).get("notificationId")).getAsString();
+        JsonObject message = parser.parse(remoteMessage.getData().get(KEY_NEWS))
+                .getAsJsonObject();
+        sendNotification(message.get(KEY_TITLE).getAsString(),
+                message.get(KEY_BODY).getAsString());
+        String notificationId = parser.parse(
+                remoteMessage.getData().get(KEY_NOTIFICATION_ID)).getAsString();
         sendCallback(notificationId);
 
         // TODO: Implement Callback.
@@ -58,7 +66,7 @@ public class MessagingService extends FirebaseMessagingService {
      * @param notificationId id which identifies the notification.
      */
     private void sendCallback(String notificationId) {
-        CallbackRequest callbackRequest = new CallbackRequest(notificationId, "received");
+        CallbackRequest callbackRequest = new CallbackRequest(notificationId, CallbackRequest.TYPE_RECEIVED);
 
         if (mSubscription != null && !mSubscription.isUnsubscribed())
             mSubscription.unsubscribe();

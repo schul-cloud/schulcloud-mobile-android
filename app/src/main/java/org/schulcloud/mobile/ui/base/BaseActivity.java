@@ -151,7 +151,7 @@ public class BaseActivity extends AppCompatActivity {
                 c = DashboardActivity.class;
                 break;
             case 2: // files
-                mPreferencesHelper.clear("storageContext");
+                mPreferencesHelper.clear(PreferencesHelper.PREFERENCE_STORAGE_CONTEXT);
                 c = FileActivity.class;
                 break;
             case 3: // Course
@@ -180,8 +180,10 @@ public class BaseActivity extends AppCompatActivity {
             case 8: // feedback
                 FeedbackFragment frag = new FeedbackFragment();
                 Bundle args = new Bundle();
-                args.putString("contextName", this.getClass().getSimpleName());
-                args.putString("currentUser", mPreferencesHelper.getCurrentUsername());
+                args.putString(FeedbackFragment.ARGUMENT_CONTEXT_NAME,
+                        this.getClass().getSimpleName());
+                args.putString(FeedbackFragment.ARGUMENT_CURRENT_USER,
+                        mPreferencesHelper.getCurrentUsername());
                 frag.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
@@ -192,8 +194,8 @@ public class BaseActivity extends AppCompatActivity {
                 return;
             case 9: // logout
                 // delete accessToken and currentUser
-                mPreferencesHelper.clear("jwt");
-                mPreferencesHelper.clear("currentUser");
+                mPreferencesHelper.clear(PreferencesHelper.PREFERENCE_ACCESS_TOKEN);
+                mPreferencesHelper.clear(PreferencesHelper.PREFERENCE_USER_ID);
                 c = SignInActivity.class;
                 break;
             default:

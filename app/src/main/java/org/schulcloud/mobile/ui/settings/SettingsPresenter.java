@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.local.PreferencesHelper;
 import org.schulcloud.mobile.data.model.Device;
 import org.schulcloud.mobile.data.model.Event;
 import org.schulcloud.mobile.data.model.jsonApi.Included;
@@ -215,7 +216,7 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
                             @Override
                             public void onCompleted() {
                                 getMvpView().reload();
-                                mDataManager.getPreferencesHelper().clear("messagingToken");
+                                mDataManager.getPreferencesHelper().clear(PreferencesHelper.PREFERENCE_MESSAGING_TOKEN);
                             }
 
                             @Override

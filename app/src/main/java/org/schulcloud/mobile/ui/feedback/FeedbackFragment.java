@@ -20,6 +20,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FeedbackFragment extends BaseFragment implements FeedbackMvpView {
+    public static final String ARGUMENT_CONTEXT_NAME = "contextName";
+    public static final String ARGUMENT_CURRENT_USER = "currentUser";
 
     String mContextName;
     String mCurrentUser;
@@ -42,8 +44,8 @@ public class FeedbackFragment extends BaseFragment implements FeedbackMvpView {
         ButterKnife.bind(this, view);
         Bundle args = getArguments();
 
-        mContextName = args.getString("contextName");
-        mCurrentUser = args.getString("currentUser");
+        mContextName = args.getString(ARGUMENT_CONTEXT_NAME);
+        mCurrentUser = args.getString(ARGUMENT_CURRENT_USER);
 
         mFeedbackPresenter.attachView(this);
         mSendFeedback.setOnClickListener(v -> mFeedbackPresenter.sendFeedback(

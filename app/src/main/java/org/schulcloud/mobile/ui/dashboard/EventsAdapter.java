@@ -43,7 +43,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
             e.summary = context.getString(R.string.dashboard_hours_none);
             e.start = "1514674800000";
             e.end = "1514678400000";
-            e.type = "template";
+            e.type = Event.TYPE_TEMPLATE;
             mEvent.add(e);
         }
         else
@@ -97,7 +97,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
             holder.summary.setText(event.summary);
 
         holder.title.setText(event.title);
-        if (event.type != null && !event.type.equals("template"))
+        if (event.type != null && !event.type.equals(Event.TYPE_TEMPLATE))
             holder.startDate.setText(millisToDate(Long.parseLong(event.start)) + "/" + millisToDate(Long.parseLong(event.end)));
 
         if (event.xScCourseId != null) {

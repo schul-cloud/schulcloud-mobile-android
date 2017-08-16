@@ -127,7 +127,7 @@ public class CourseActivity extends BaseActivity implements CourseMvpView {
     public void showCourseDialog(String courseId) {
         DetailedCourseFragment frag = new DetailedCourseFragment();
         Bundle args = new Bundle();
-        args.putString("courseId", courseId);
+        args.putString(DetailedCourseFragment.ARGUMENT_COURSE_ID, courseId);
         frag.setArguments(args);
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()

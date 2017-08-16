@@ -28,9 +28,9 @@ import butterknife.ButterKnife;
 import io.realm.RealmList;
 
 public class DetailedHomeworkFragment extends BaseFragment implements DetailedHomeworkMvpView {
-
     private static final String EXTRA_TRIGGER_SYNC_FLAG =
             "org.schulcloud.mobile.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
+    public static final String ARGUMENT_HOMEWORK_ID = "homeworkId";
 
     private String homeworkId = null;
 
@@ -62,7 +62,7 @@ public class DetailedHomeworkFragment extends BaseFragment implements DetailedHo
         View view = inflater.inflate(R.layout.fragment_detailed_homework, container, false);
         ButterKnife.bind(this, view);
         Bundle args = getArguments();
-        homeworkId = args.getString("homeworkId");
+        homeworkId = args.getString(ARGUMENT_HOMEWORK_ID);
 
         mRecyclerView.setAdapter(mCommentsAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

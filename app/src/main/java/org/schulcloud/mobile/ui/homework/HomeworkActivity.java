@@ -130,7 +130,7 @@ public class HomeworkActivity extends BaseActivity implements HomeworkMvpView {
     public void showHomeworkDialog(String homeworkId) {
         DetailedHomeworkFragment frag = new DetailedHomeworkFragment();
         Bundle args = new Bundle();
-        args.putString("homeworkId", homeworkId);
+        args.putString(DetailedHomeworkFragment.ARGUMENT_HOMEWORK_ID, homeworkId);
         frag.setArguments(args);
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()

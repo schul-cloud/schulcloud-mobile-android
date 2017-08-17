@@ -24,9 +24,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DetailedCourseFragment extends BaseFragment implements DetailedCourseMvpView {
-
     private static final String EXTRA_TRIGGER_SYNC_FLAG =
             "org.schulcloud.mobile.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
+    public static final String ARGUMENT_COURSE_ID = "courseId";
 
     private String courseId = null;
 
@@ -48,7 +48,7 @@ public class DetailedCourseFragment extends BaseFragment implements DetailedCour
         View view = inflater.inflate(R.layout.fragment_detailed_course, container, false);
         ButterKnife.bind(this, view);
         Bundle args = getArguments();
-        courseId = args.getString("courseId");
+        courseId = args.getString(ARGUMENT_COURSE_ID);
 
         mRecyclerView.setAdapter(mTopicsAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -57,8 +57,8 @@ public class DetailedCourseFragment extends BaseFragment implements DetailedCour
         mDetailedCoursePresenter.loadCourse(courseId);
         mDetailedCoursePresenter.loadTopics();
 
-        Intent intent = new Intent(getActivity(),TopicSyncService.class);
-        intent.putExtra("courseId", courseId);
+        Intent intent = new Intent(getActivity(), TopicSyncService.class);
+        intent.putExtra(TopicSyncService.ARGUMENT_COURSE_ID, courseId);
         getActivity().startService(intent);
 
         return view;
@@ -81,8 +81,8 @@ public class DetailedCourseFragment extends BaseFragment implements DetailedCour
     public void showTopicFragment(String topicId, String topicName) {
         TopicFragment frag = new TopicFragment();
         Bundle args = new Bundle();
-        args.putString("topicId", topicId);
-        args.putString("topicName", topicName);
+        args.putString(TopicFragment.ARGUMENT_TOPIC_ID, topicId);
+        args.putString(TopicFragment.ARGUMENT_TOPIC_NAME, topicName);
         frag.setArguments(args);
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()

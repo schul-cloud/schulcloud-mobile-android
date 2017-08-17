@@ -9,6 +9,8 @@ import java.io.UnsupportedEncodingException;
 
 
 public class JWTUtil {
+    private static final String KEY_USER_ID = "userId";
+
     public static String decodeToCurrentUser(String JWTEncoded) {
         try {
             String[] split = JWTEncoded.split("\\.");
@@ -18,7 +20,7 @@ public class JWTUtil {
             String bodyJson = getJson(split[1]);
             JsonObject jsonObject = jsonParser.parse(bodyJson).getAsJsonObject();
 
-            return jsonObject.get("userId").getAsString();
+            return jsonObject.get(KEY_USER_ID).getAsString();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return null;

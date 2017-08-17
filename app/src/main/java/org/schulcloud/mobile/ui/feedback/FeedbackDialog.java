@@ -95,9 +95,12 @@ public class FeedbackDialog extends BaseDialog implements FeedbackMvpView {
             dialog.getButton(DialogInterface.BUTTON_POSITIVE)
                 .setOnClickListener(v ->
                     mFeedbackPresenter.sendFeedback(
+                        getString(R.string.feedback_transmit_format),
                         mEmailInput.getText().toString().trim(),
                         mOpinionInput.getText().toString().trim(),
-                        mContextName, mCurrentUser)));
+                        mContextName, mCurrentUser,
+                        getString(R.string.feedback_transmit_subject),
+                        getString(R.string.feedback_transmit_to))));
 
         mEmailInput.setText(mEmail);
         mOpinionInput.setText(mOpinion);
@@ -120,7 +123,7 @@ public class FeedbackDialog extends BaseDialog implements FeedbackMvpView {
     }
     @Override
     public void showFeedbackSent() {
-        Toast.makeText(getContext(), R.string.feedback_sent, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.feedback_transmit_sent, Toast.LENGTH_SHORT).show();
         dismiss();
     }
     @Override

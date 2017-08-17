@@ -94,7 +94,7 @@ public class FileActivity extends BaseActivity implements FileMvpView {
         //inflate your activity layout here!
         View contentView = inflater.inflate(R.layout.activity_files, null, false);
         mDrawer.addView(contentView, 0);
-        getSupportActionBar().setTitle(R.string.title_files);
+        getSupportActionBar().setTitle(R.string.files_title);
         ButterKnife.bind(this);
 
         fileRecyclerView.setAdapter(mFilesAdapter);
@@ -189,13 +189,13 @@ public class FileActivity extends BaseActivity implements FileMvpView {
 
     @Override
     public void showError() {
-        DialogFactory.createGenericErrorDialog(this, getString(R.string.error_files_fetch))
+        DialogFactory.createGenericErrorDialog(this, getString(R.string.files_fetch_error))
                 .show();
     }
 
     @Override
     public void showLoadingFileFromServerError() {
-        DialogFactory.createGenericErrorDialog(this, R.string.error_file_load)
+        DialogFactory.createGenericErrorDialog(this, R.string.files_load_error)
                 .show();
     }
 
@@ -210,7 +210,7 @@ public class FileActivity extends BaseActivity implements FileMvpView {
 
     @Override
     public void showUploadFileError() {
-        DialogFactory.createGenericErrorDialog(this, R.string.error_file_upload)
+        DialogFactory.createGenericErrorDialog(this, R.string.files_upload_error)
                 .show();
     }
 
@@ -248,7 +248,7 @@ public class FileActivity extends BaseActivity implements FileMvpView {
                 Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
 
-            uploadProgressDialog = DialogFactory.createProgressDialog(this, R.string.file_upload_progress);
+            uploadProgressDialog = DialogFactory.createProgressDialog(this, R.string.files_upload_progress);
             uploadProgressDialog.show();
 
             // show file chooser
@@ -258,7 +258,7 @@ public class FileActivity extends BaseActivity implements FileMvpView {
 
     @Override
     public void startDownloading(File file, Boolean download) {
-        downloadProgressDialog = DialogFactory.createProgressDialog(this, R.string.file_download_progress);
+        downloadProgressDialog = DialogFactory.createProgressDialog(this, R.string.files_download_progress);
         downloadProgressDialog.show();
         mFilePresenter.loadFileFromServer(file, download);
     }
@@ -267,8 +267,8 @@ public class FileActivity extends BaseActivity implements FileMvpView {
     public void startFileDeleting(String path, String fileName) {
         DialogFactory.createSimpleOkCancelDialog(
                 this,
-                this.getResources().getString(R.string.delete_dialog_title),
-                this.getResources().getString(R.string.file_delete_request, fileName))
+                this.getResources().getString(R.string.files_dialog_delete_title),
+                this.getResources().getString(R.string.files_delete_request, fileName))
                 .setPositiveButton(R.string.dialog_action_ok, (dialogInterface, i) -> {
                     mFilePresenter.deleteFile(path);
                 })
@@ -277,7 +277,7 @@ public class FileActivity extends BaseActivity implements FileMvpView {
 
     @Override
     public void showFileDeleteError() {
-        DialogFactory.createGenericErrorDialog(this, R.string.error_file_delete)
+        DialogFactory.createGenericErrorDialog(this, R.string.files_delete_error)
                 .show();
     }
 
@@ -285,8 +285,8 @@ public class FileActivity extends BaseActivity implements FileMvpView {
     public void startDirectoryDeleting(String path, String dirName) {
         DialogFactory.createSimpleOkCancelDialog(
                 this,
-                this.getResources().getString(R.string.delete_dialog_title),
-                this.getResources().getString(R.string.file_delete_request, dirName))
+                this.getResources().getString(R.string.files_dialog_delete_title),
+                this.getResources().getString(R.string.files_delete_request, dirName))
                 .setPositiveButton(R.string.dialog_action_ok, (dialogInterface, i) -> {
                     mFilePresenter.deleteDirectory(path);
                 })
@@ -295,7 +295,7 @@ public class FileActivity extends BaseActivity implements FileMvpView {
 
     public void showFileDeleteSuccess() {
         DialogFactory.createSuperToast(this,
-                getResources().getString(R.string.file_delete_success),
+                getResources().getString(R.string.files_delete_success_file),
                 PaletteUtils.getSolidColor(PaletteUtils.MATERIAL_GREEN)).show();
         this.reloadFiles();
     }
@@ -303,7 +303,7 @@ public class FileActivity extends BaseActivity implements FileMvpView {
     @Override
     public void showDirectoryDeleteSuccess() {
         DialogFactory.createSuperToast(this,
-                getResources().getString(R.string.directory_delete_success),
+                getResources().getString(R.string.files_delete_success_directory),
                 PaletteUtils.getSolidColor(PaletteUtils.MATERIAL_GREEN)).show();
         this.reloadFiles();
     }

@@ -12,8 +12,15 @@ import javax.inject.Singleton;
 
 @Singleton
 public class PreferencesHelper {
+    private static final String PREF_FILE_NAME = "schulcloud_pref_file";
 
-    public static final String PREF_FILE_NAME = "schulcloud_pref_file";
+    public static final String PREFERENCE_ACCESS_TOKEN = "jwt";
+    public static final String PREFERENCE_USER_ID = "currentUser";
+    public static final String PREFERENCE_USERNAME = "username";
+    public static final String PREFERENCE_MESSAGING_TOKEN = "messagingToken";
+    public static final String PREFERENCE_STORAGE_CONTEXT = "storageContext";
+    public static final String PREFERENCE_CALENDAR_SYNC_ENABLED = "calendarSyncEnabled";
+    public static final String PREFERENCE_CALENDAR_SYNC_NAME = "calendarSyncName";
 
     private final ObscuredSharedPreferences mPref;
 
@@ -32,8 +39,7 @@ public class PreferencesHelper {
      */
     public String saveAccessToken(AccessToken accessToken) {
         SharedPreferences.Editor editor = mPref.edit();
-        // todo: save pref-keys in strings.xml or constant
-        editor.putString("jwt", accessToken.accessToken);
+        editor.putString(PREFERENCE_ACCESS_TOKEN, accessToken.accessToken);
         if (editor.commit()) {
             return accessToken.getAccessToken();
         }
@@ -49,8 +55,7 @@ public class PreferencesHelper {
      */
     public String saveCurrentUserId(String userId) {
         SharedPreferences.Editor editor = mPref.edit();
-        // todo: save pref-keys in strings.xml or constant
-        editor.putString("currentUser", userId);
+        editor.putString(PREFERENCE_USER_ID, userId);
         if (editor.commit()) {
             return userId;
         }
@@ -60,9 +65,7 @@ public class PreferencesHelper {
 
     public String saveCurrentUsername(String username) {
         SharedPreferences.Editor editor = mPref.edit();
-
-        editor.putString("username", username);
-
+        editor.putString(PREFERENCE_USERNAME, username);
         if (editor.commit()) {
             return username;
         }
@@ -81,8 +84,7 @@ public class PreferencesHelper {
 
     public String saveMessagingToken(String tokenId) {
         SharedPreferences.Editor editor = mPref.edit();
-
-        editor.putString("messagingToken", tokenId);
+        editor.putString(PREFERENCE_MESSAGING_TOKEN, tokenId);
         if (editor.commit()) {
             return tokenId;
         }
@@ -92,8 +94,7 @@ public class PreferencesHelper {
 
     public String saveCurrentStorageContext(String path) {
         SharedPreferences.Editor editor = mPref.edit();
-
-        editor.putString("storageContext", path);
+        editor.putString(PREFERENCE_STORAGE_CONTEXT, path);
         if (editor.commit()) {
             return path;
         }
@@ -103,8 +104,7 @@ public class PreferencesHelper {
 
     public Boolean saveCalendarSyncEnabled(Boolean isEnabled) {
         SharedPreferences.Editor editor = mPref.edit();
-
-        editor.putBoolean("calendarSyncEnabled", isEnabled);
+        editor.putBoolean(PREFERENCE_CALENDAR_SYNC_ENABLED, isEnabled);
         if (editor.commit()) {
             return isEnabled;
         }
@@ -114,8 +114,7 @@ public class PreferencesHelper {
 
     public String saveCalendarSyncName(String calendarName) {
         SharedPreferences.Editor editor = mPref.edit();
-
-        editor.putString("calendarSyncName", calendarName);
+        editor.putString(PREFERENCE_CALENDAR_SYNC_NAME, calendarName);
         if (editor.commit()) {
             return calendarName;
         }
@@ -126,19 +125,19 @@ public class PreferencesHelper {
     // ##### Getter
 
     public String getAccessToken() {
-        return mPref.getString("jwt", "null");
+        return mPref.getString(PREFERENCE_ACCESS_TOKEN, "null");
     }
 
     public String getCurrentUserId() {
-        return mPref.getString("currentUser", "null");
-    }
-
-    public String getMessagingToken() {
-        return mPref.getString("messagingToken", "null");
+        return mPref.getString(PREFERENCE_USER_ID, "null");
     }
 
     public String getCurrentUsername() {
-        return mPref.getString("username", "null");
+        return mPref.getString(PREFERENCE_USERNAME, "null");
+    }
+
+    public String getMessagingToken() {
+        return mPref.getString(PREFERENCE_MESSAGING_TOKEN, "null");
     }
 
     public String getCurrentSchoolId() {
@@ -146,15 +145,15 @@ public class PreferencesHelper {
     }
 
     public String getCurrentStorageContext() {
-        return mPref.getString("storageContext", "null");
+        return mPref.getString(PREFERENCE_STORAGE_CONTEXT, "null");
     }
 
     public Boolean getCalendarSyncEnabled() {
-        return mPref.getBoolean("calendarSyncEnabled", false);
+        return mPref.getBoolean(PREFERENCE_CALENDAR_SYNC_ENABLED, false);
     }
 
     public String getCalendarSyncName() {
-        return mPref.getString("calendarSyncName", "null");
+        return mPref.getString(PREFERENCE_CALENDAR_SYNC_NAME, "null");
     }
 
     // ##### Clearing

@@ -10,4 +10,6 @@
     <color name="hpiOrange">#E2661D</color>
     <color name="hpiYellow">#F8A41B</color>
     <color name="backgroundStart">#f9e5e5</color>
+    
+    <color name="homework_over">#c3c1c1</color>
 </resources>

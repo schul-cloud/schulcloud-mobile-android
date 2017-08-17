@@ -20,9 +20,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class TopicFragment extends BaseFragment implements TopicMvpView {
-
     private static final String EXTRA_TRIGGER_SYNC_FLAG =
             "org.schulcloud.mobile.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
+    public static final String ARGUMENT_TOPIC_ID = "topicId";
+    public static final String ARGUMENT_TOPIC_NAME = "topicName";
 
     private String topicId = null;
 
@@ -44,9 +45,9 @@ public class TopicFragment extends BaseFragment implements TopicMvpView {
         View view = inflater.inflate(R.layout.fragment_topic, container, false);
         ButterKnife.bind(this, view);
         Bundle args = getArguments();
-        topicId = args.getString("topicId");
+        topicId = args.getString(ARGUMENT_TOPIC_ID);
 
-        topicName.setText(args.getString("topicName"));
+        topicName.setText(args.getString(ARGUMENT_TOPIC_NAME));
 
         mRecyclerView.setAdapter(mContentAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

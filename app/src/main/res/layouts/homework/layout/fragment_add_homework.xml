@@ -18,7 +18,7 @@
             android:id="@+id/nameWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/homework_name">
+            android:hint="@string/homework_homework_name">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/name"
@@ -43,7 +43,7 @@
             android:layout_below="@+id/nameWrapper"
             android:layout_marginBottom="@dimen/bootstrap_alert_paddings"
             android:layout_marginTop="@dimen/form_elementSpacing"
-            android:text="@string/homework_course"
+            android:text="@string/homework_homework_course"
             android:textColor="@color/hpiRed"
             android:textSize="@dimen/text_title"/>
 
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/courseText"
             android:layout_marginTop="@dimen/form_elementSpacing"
-            android:text="@string/homework_private"/>
+            android:text="@string/homework_homework_private"/>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/descriptionWrapper"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/isPrivate"
             android:layout_marginTop="@dimen/form_elementSpacing"
-            android:hint="@string/homework_description">
+            android:hint="@string/homework_homework_description">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/description"
@@ -93,7 +93,7 @@
             android:layout_below="@+id/descriptionWrapper"
             android:layout_marginBottom="@dimen/bootstrap_alert_paddings"
             android:layout_marginTop="@dimen/form_elementSpacing"
-            android:text="@string/homework_processingTime"
+            android:text="@string/homework_homework_processingTime"
             android:textColor="@color/hpiRed"
             android:textSize="@dimen/text_title"/>
 
@@ -116,7 +116,7 @@
             android:layout_marginRight="@dimen/form_elementSpacing"
             android:layout_toEndOf="@+id/availableDate"
             android:layout_toRightOf="@+id/availableDate"
-            android:text="@string/homework_dateDash"
+            android:text="@string/homework_homework_dateDash"
             android:textSize="@dimen/text_title"/>
 
         <TextView
@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/availableDate"
             android:layout_marginTop="@dimen/form_elementSpacing"
-            android:text="@string/homework_publicSubmissions"/>
+            android:text="@string/homework_homework_publicSubmissions"/>
 
         <com.beardedhen.androidbootstrap.BootstrapButton
             android:id="@+id/add"

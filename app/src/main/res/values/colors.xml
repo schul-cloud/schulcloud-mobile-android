@@ -3,6 +3,8 @@
     <color name="primary">#222222</color>
     <color name="primary_dark">#000000</color>
     <color name="accent">#FFFFFF</color>
+
+    <color name="white">#FFFFFFFF</color>
     <color name="gray">#E6E2E2</color>
     <color name="hpiRed">#B10438</color>
     <color name="hpiOrange">#E2661D</color>

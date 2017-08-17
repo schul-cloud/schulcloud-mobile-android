@@ -5,17 +5,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.beardedhen.androidbootstrap.AwesomeTextView;
+
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.data.model.Homework;
 import org.schulcloud.mobile.data.sync.HomeworkSyncService;
 import org.schulcloud.mobile.data.sync.SubmissionSyncService;
 import org.schulcloud.mobile.ui.base.BaseActivity;
+import org.schulcloud.mobile.ui.homework.add.AddHomeworkFragment;
 import org.schulcloud.mobile.ui.homework.detailed.DetailedHomeworkFragment;
 import org.schulcloud.mobile.ui.signin.SignInActivity;
 import org.schulcloud.mobile.util.DialogFactory;
@@ -34,7 +39,7 @@ public class HomeworkActivity extends BaseActivity implements HomeworkMvpView {
             "org.schulcloud.mobile.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
 
     @Inject
-    HomeworkPresenter mHomeworkPresenter;
+    public HomeworkPresenter mHomeworkPresenter;
     @Inject
     HomeworkAdapter mHomeworkAdapter;
 
@@ -42,6 +47,10 @@ public class HomeworkActivity extends BaseActivity implements HomeworkMvpView {
     RecyclerView mRecyclerView;
     @BindView(R.id.swiperefresh)
     SwipeRefreshLayout swipeRefresh;
+    @BindView(R.id.fab_add_homework)
+    FloatingActionButton mFabAddHomework;
+    @BindView(R.id.fab_add_homework_icon)
+    AwesomeTextView mFabAddHomeworkIcon;
 
     /**
      * Return an Intent to start this Activity.
@@ -97,8 +106,20 @@ public class HomeworkActivity extends BaseActivity implements HomeworkMvpView {
                     }, 3000);
                 }
         );
-    }
 
+        mFabAddHomework.setOnClickListener((view) -> {
+            AddHomeworkFragment frag = new AddHomeworkFragment();
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.overlay_fragment_container, frag)
+                    .addToBackStack(null)
+                    .commit();
+        });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mFabAddHomeworkIcon.setTextColor(ContextCompat.getColor(this, R.color.white));
+    }
     @Override
     protected void onDestroy() {
         mHomeworkPresenter.detachView();

@@ -48,6 +48,9 @@ public class DatabaseHelper {
         final Realm realm = mRealmProvider.get();
         realm.executeTransaction(realm1 -> realm1.delete(table));
     }
+    public void clearAll() {
+        mRealmProvider.get().executeTransaction(realm -> realm.deleteAll());
+    }
 
     /**** Users ****/
 
@@ -124,7 +127,7 @@ public class DatabaseHelper {
 
     public Observable<CurrentUser> getCurrentUser() {
         final Realm realm = mRealmProvider.get();
-        return Observable.just(realm.where(CurrentUser.class).findFirstAsync());
+        return Observable.just(realm.where(CurrentUser.class).findFirst());
     }
 
 

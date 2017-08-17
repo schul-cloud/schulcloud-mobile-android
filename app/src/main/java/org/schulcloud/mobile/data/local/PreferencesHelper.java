@@ -73,6 +73,15 @@ public class PreferencesHelper {
         return null;
     }
 
+    public String saveCurrentSchoolId(String schoolId) {
+        SharedPreferences.Editor editor = mPref.edit();
+        editor.putString("currentSchool", schoolId);
+
+        if (editor.commit())
+            return schoolId;
+        return null;
+    }
+
     public String saveMessagingToken(String tokenId) {
         SharedPreferences.Editor editor = mPref.edit();
         editor.putString(PREFERENCE_MESSAGING_TOKEN, tokenId);
@@ -129,6 +138,10 @@ public class PreferencesHelper {
 
     public String getMessagingToken() {
         return mPref.getString(PREFERENCE_MESSAGING_TOKEN, "null");
+    }
+
+    public String getCurrentSchoolId() {
+        return mPref.getString("currentSchool", "null");
     }
 
     public String getCurrentStorageContext() {

@@ -70,7 +70,7 @@
             android:layout_marginRight="@dimen/text_colon_space"
             android:layout_toLeftOf="@id/text_dueDate"
             android:layout_toStartOf="@id/text_dueDate"
-            android:text="@string/homework_due"/>
+            android:text="@string/homework_homework_due"/>
 
         <com.beardedhen.androidbootstrap.AwesomeTextView
             android:id="@+id/private_homework"

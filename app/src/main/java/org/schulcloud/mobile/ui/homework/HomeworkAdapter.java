@@ -78,7 +78,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.Homewo
         }
 
         if (homework.courseId != null && homework.courseId.name != null)
-            holder.nameTextView.setText(mContext.getString(R.string.homework_name_format,
+            holder.nameTextView.setText(mContext.getString(R.string.homework_homework_name_format,
                     homework.courseId.name, homework.name));
         else
             holder.nameTextView.setText(homework.name);

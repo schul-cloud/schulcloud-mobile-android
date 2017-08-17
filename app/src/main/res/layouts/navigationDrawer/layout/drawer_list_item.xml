@@ -12,10 +12,11 @@
 
     <com.beardedhen.androidbootstrap.AwesomeTextView
         android:id="@+id/mdImage"
-        android:layout_width="24dp"
+        android:layout_width="32dp"
         android:layout_height="24dp"
         android:layout_gravity="center_vertical"
-        android:textSize="@dimen/fa_icon_big"
+        android:clickable="false"
+        android:textSize="24dp"
         tools:ignore="ContentDescription"/>
 
     <TextView
@@ -24,8 +25,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="56dp"
-        android:layout_marginStart="56dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginStart="48dp"
+        android:clickable="false"
         android:ellipsize="marquee"
         android:fontFamily="sans-serif-medium"
         android:maxLines="1"

@@ -62,7 +62,7 @@
         android:layout_below="@+id/homeworkDescription"
         android:layout_marginEnd="@dimen/text_colon_space"
         android:layout_marginRight="@dimen/text_colon_space"
-        android:text="@string/homework_due"/>
+        android:text="@string/homework_homework_due"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/bootstrap_alert_paddings"
         android:paddingTop="@dimen/bootstrap_alert_paddings"
-        android:text="@string/homework_comments"
+        android:text="@string/homework_homework_comments"
         android:textColor="@color/hpiRed"
         android:textSize="@dimen/text_title"
         android:layout_below="@+id/gradeComment"/>
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/bootstrap_alert_paddings"
         android:paddingTop="@dimen/bootstrap_alert_paddings"
-        android:text="@string/homework_grading"
+        android:text="@string/homework_homework_grading"
         android:textColor="@color/hpiRed"
         android:textSize="@dimen/text_title" />
 
@@ -98,7 +98,7 @@
         android:layout_below="@+id/gradeSector"
         android:layout_marginEnd="@dimen/text_colon_space"
         android:layout_marginRight="@dimen/text_colon_space"
-        android:text="@string/homework_grade"/>
+        android:text="@string/homework_homework_grade"/>
 
     <TextView
         android:id="@+id/grade"

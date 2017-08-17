@@ -92,7 +92,7 @@ public class DetailedHomeworkFragment extends BaseFragment implements DetailedHo
         }
 
         if (homework.courseId != null && homework.courseId.name != null)
-            homeworkName.setText(getString(R.string.homework_name_format,
+            homeworkName.setText(getString(R.string.homework_homework_name_format,
                     homework.courseId.name, homework.name));
         else
             homeworkName.setText(homework.name);
@@ -118,10 +118,10 @@ public class DetailedHomeworkFragment extends BaseFragment implements DetailedHo
     public void showSubmission(Submission submission, String userId) {
         if (submission == null) {
             submission = new Submission();
-            submission.comment = getString(R.string.homework_notSubmitted);
+            submission.comment = getString(R.string.homework_homework_notSubmitted);
             submission.comments = new RealmList<>();
             Comment comment = new Comment();
-            comment.comment = getString(R.string.homework_noComments);
+            comment.comment = getString(R.string.homework_homework_comments_none);
             submission.comments.add(comment);
         }
 

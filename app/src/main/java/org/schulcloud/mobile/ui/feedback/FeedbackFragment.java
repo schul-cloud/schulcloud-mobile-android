@@ -61,7 +61,7 @@ public class FeedbackFragment extends BaseFragment implements FeedbackMvpView {
 
     @Override
     public void showContentHint() {
-        mOpinion.setHint(R.string.feedback_hint_fillIn);
+        mOpinion.setHint(getString(R.string.feedback_hint_fillIn));
         mOpinion.setError(getString(R.string.feedback_hint_fillIn));
     }
 

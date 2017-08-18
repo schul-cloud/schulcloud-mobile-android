@@ -25,8 +25,7 @@ install:
 - chmod a+x .travis/install-git-crypt
 - "./.travis/install-git-crypt"
 before_script:
-- echo no | android create avd --force -n test -t android-16 --abi armeabi-v7a --skin
-  480x800
+- echo no | android create avd --force -n test -t android-16 --abi $ANDROID_ABI --skin 480x800
 - emulator -avd test -no-audio -no-window &
 - android-wait-for-emulator
 - sleep 10

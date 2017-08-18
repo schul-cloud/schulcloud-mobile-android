@@ -2,14 +2,17 @@ sudo: required
 language: android
 android:
   components:
+  - tools
   - platform-tools
   - tools
   - build-tools-25.0.3
   - android-25
+  - android-16
   - extra-android-m2repository
   - extra-google-m2repository
   - extra-android-support
   - extra-google-google_play_services
+  - sys-img-armeabi-v7a-android-16
 jdk:
 - oraclejdk8
 before_install:
@@ -24,8 +27,7 @@ install:
 - chmod a+x .travis/install-git-crypt
 - "./.travis/install-git-crypt"
 before_script:
-- echo no | android create avd --force -n test -t android-16 --abi armeabi-v7a --skin
-  480x800
+- echo no | android create avd --force -n test -t android-16 --abi armeabi-v7a --skin 480x800
 - emulator -avd test -no-audio -no-window &
 - android-wait-for-emulator
 - sleep 10

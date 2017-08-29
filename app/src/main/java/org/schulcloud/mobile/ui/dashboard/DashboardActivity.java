@@ -136,7 +136,7 @@ public class DashboardActivity extends BaseActivity implements DashboardMvpView 
 
     @Override
     public void showEvents(List<Event> eventsForDay) {
-        mEventsAdapter.setEvents(eventsForDay);
+        mEventsAdapter.setEvents(this, eventsForDay);
         mEventsAdapter.notifyDataSetChanged();
     }
 
@@ -144,7 +144,7 @@ public class DashboardActivity extends BaseActivity implements DashboardMvpView 
     public void showCourse(String courseId) {
         DetailedCourseFragment frag = new DetailedCourseFragment();
         Bundle args = new Bundle();
-        args.putString("courseId", courseId);
+        args.putString(DetailedCourseFragment.ARGUMENT_COURSE_ID, courseId);
         frag.setArguments(args);
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()

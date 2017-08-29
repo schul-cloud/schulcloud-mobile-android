@@ -40,17 +40,6 @@ public class DashboardPresenter extends BasePresenter<DashboardMvpView> {
 
     public void showEvents() {
         List<Event> events = mDataManager.getEventsForDay();
-
-        if (events.size() == 0) {
-            Event e = new Event();
-            e.title = "Derzeit keine Stunden";
-            e.summary = "Derzeit keine Stunden";
-            e.start = "1514674800000";
-            e.end = "1514678400000";
-            e.type = "template";
-            events.add(e);
-        }
-
         getMvpView().showEvents(events);
     }
 

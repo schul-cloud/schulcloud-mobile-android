@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/offlineBadge"
-        android:text="(offline)"
+        android:text="@string/base_offline"
         android:textSize="@dimen/text_small_body"
         android:layout_centerVertical="true"
         android:visibility="invisible"

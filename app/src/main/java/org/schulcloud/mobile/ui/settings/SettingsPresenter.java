@@ -10,6 +10,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.local.PreferencesHelper;
 import org.schulcloud.mobile.data.model.Device;
 import org.schulcloud.mobile.data.model.Event;
 import org.schulcloud.mobile.data.model.jsonApi.Included;
@@ -147,16 +148,15 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
     }
 
     public void contact(String to, String subject) {
-        getMvpView().showExternalContent(
-                Uri.parse("mailto:" + to + "?subject=" + subject));
+        getMvpView().showExternalContent(Uri.parse("mailto:" + to + "?subject=" + subject));
     }
-    public void showImprint() {
+    public void showImprint(@NonNull Resources resources) {
         getMvpView().showExternalContent(
-                Uri.parse("https://hpi.de/impressum.html"));
+                Uri.parse(resources.getString(R.string.settings_about_imprint_website)));
     }
-    public void showGitHub() {
+    public void showGitHub(@NonNull Resources resources) {
         getMvpView().showExternalContent(
-                Uri.parse("https://github.com/schul-cloud/schulcloud-mobile-android"));
+                Uri.parse(resources.getString(R.string.settings_about_openSource_website)));
     }
 
     public void checkSignedIn(Context context) {
@@ -233,7 +233,7 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
                             @Override
                             public void onCompleted() {
                                 getMvpView().reload();
-                                mDataManager.getPreferencesHelper().clear("messagingToken");
+                                mDataManager.getPreferencesHelper().clear(PreferencesHelper.PREFERENCE_MESSAGING_TOKEN);
                             }
 
                             @Override

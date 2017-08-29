@@ -11,6 +11,8 @@ import io.realm.annotations.RealmClass;
 
 @RealmClass
 public class Event implements RealmModel {
+    public static final String TYPE_TEMPLATE = "template";
+
     public String _id;
     public String type;
     public String title;

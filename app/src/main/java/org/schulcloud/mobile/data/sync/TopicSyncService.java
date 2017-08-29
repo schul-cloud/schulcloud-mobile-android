@@ -22,6 +22,7 @@ import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class TopicSyncService extends Service {
+    public static final String ARGUMENT_COURSE_ID = "courseId";
 
     @Inject
     DataManager mDataManager;
@@ -56,7 +57,7 @@ public class TopicSyncService extends Service {
 
         Bundle extras = intent.getExtras();
         if (extras != null) {
-            courseId = extras.getString("courseId");
+            courseId = extras.getString(ARGUMENT_COURSE_ID);
             //The key argument here must match that used in the other activity
         }
 

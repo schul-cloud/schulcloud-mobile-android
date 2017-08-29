@@ -27,7 +27,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:paddingBottom="@dimen/bootstrap_alert_paddings"
-                    android:text="Heutige Stunden"
+                    android:text="@string/dashboard_hoursToday"
                     android:textColor="@color/hpiRed"
                     android:textSize="@dimen/text_title" />
 
@@ -48,7 +48,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/events"
                     android:paddingBottom="@dimen/bootstrap_alert_paddings"
-                    android:text="Aufgaben"
+                    android:text="@string/dashboard_homework"
                     android:textColor="@color/hpiRed"
                     android:textSize="@dimen/text_title" />
 
@@ -86,15 +86,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@id/openTasks"
-                            android:text="offene Aufgaben" />
+                            android:text="@string/dashboard_homework_open" />
 
                         <TextView
                             android:id="@+id/dueTillText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/openTasksText"
+                            android:layout_marginEnd="@dimen/text_colon_space"
+                            android:layout_marginRight="@dimen/text_colon_space"
                             android:layout_toRightOf="@id/openTasks"
-                            android:text="Nächste fällig " />
+                            android:text="@string/dashboard_homework_nextDue"/>
 
                         <TextView
                             android:id="@+id/dueTill"
@@ -102,7 +104,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/openTasksText"
                             android:layout_toRightOf="@id/dueTillText"
-                            android:text="..." />
+                            tools:text="..." />
 
                     </RelativeLayout>
 

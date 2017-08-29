@@ -35,17 +35,16 @@ public class FeedbackPresenter extends BasePresenter<FeedbackMvpView> {
     }
 
 
-    public void sendFeedback(String email, String content, String contextName, String currentUser) {
+    public void sendFeedback(String format, String email, String content,
+                             String contextName, String currentUser,
+                             String subject, String to) {
         if (content.equals("")) {
             getMvpView().showContentHint();
         } else {
 
-            String text = "User: " + currentUser + "\n"
-                    + "E-Mail: " + email + "\n"
-                    + "Feedback geschickt von: " + contextName + "\n"
-                    + "User schrieb folgendes: \n" + content;
+            String text = String.format(format, currentUser, email, contextName, content);
 
-            FeedbackRequest feedbackRequest = new FeedbackRequest(text, "Feedback Android", "schul-cloud-support@hpi.de");
+            FeedbackRequest feedbackRequest = new FeedbackRequest(text, subject, to);
 
             checkViewAttached();
             RxUtil.unsubscribe(feedbackSubscription);

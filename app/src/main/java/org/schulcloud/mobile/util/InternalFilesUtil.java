@@ -1,13 +1,11 @@
 package org.schulcloud.mobile.util;
 
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import android.widget.Toast;
 
 import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
 import com.ipaulpro.afilechooser.utils.FileUtils;
@@ -17,7 +15,6 @@ import org.schulcloud.mobile.R;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 
 import okhttp3.ResponseBody;
@@ -51,7 +48,7 @@ public class InternalFilesUtil {
             outputStream.close();
 
             DialogFactory.createSuperToast(context,
-                    context.getString(R.string.file_save_success, fileName),
+                    context.getString(R.string.files_save_success, fileName),
                     PaletteUtils.getSolidColor(PaletteUtils.MATERIAL_GREEN))
                     .show();
 
@@ -59,7 +56,7 @@ public class InternalFilesUtil {
         } catch (IOException e) {
             e.printStackTrace();
             DialogFactory.createSuperToast(context,
-                    context.getResources().getString(R.string.file_save_failed),
+                    context.getResources().getString(R.string.files_save_error),
                     PaletteUtils.getSolidColor(PaletteUtils.MATERIAL_RED))
                     .show();
 

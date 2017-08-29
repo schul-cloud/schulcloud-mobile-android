@@ -61,7 +61,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         if (contents.component.equals("text"))
             holder.descriptionTextView.setText(Html.fromHtml(contents.content.text, imageGetter, null));
         else
-            holder.descriptionTextView.setText(contents.component + " wird zurzeit nicht unterstüzt.");
+            holder.descriptionTextView.setText(mContext.getString(R.string.courses_content_error_notSupported, contents.component));
     }
 
     @Override

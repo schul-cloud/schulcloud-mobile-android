@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
@@ -90,7 +89,7 @@ public class SettingsActivity extends BaseActivity implements SettingsMvpView {
         //inflate your activity layout here!
         View contentView = inflater.inflate(R.layout.activity_settings, null, false);
         mDrawer.addView(contentView, 0);
-        getSupportActionBar().setTitle(R.string.title_settings);
+        getSupportActionBar().setTitle(R.string.settings_title);
         ButterKnife.bind(this);
 
 
@@ -125,19 +124,21 @@ public class SettingsActivity extends BaseActivity implements SettingsMvpView {
                 .setOnLongClickListener(v -> {
                     ClipboardManager clipboardManager =
                             (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                    ClipData clipData = ClipData.newPlainText("Schul-Cloud-Mitwirkende",
-                            TextUtils.join(", ", mSettingsPresenter.getContributors()));
+                    ClipData clipData = ClipData.newPlainText(
+                            getString(R.string.settings_about_contributors_clipBoardTitle),
+                            TextUtils.join(getString(R.string.general_list_separator),
+                                    mSettingsPresenter.getContributors()));
                     clipboardManager.setPrimaryClip(clipData);
                     return true;
                 });
         ButterKnife.findById(this, R.id.settings_about_github)
-                .setOnClickListener(v -> mSettingsPresenter.showGitHub());
+                .setOnClickListener(v -> mSettingsPresenter.showGitHub(getResources()));
         ButterKnife.findById(this, R.id.settings_about_contact)
                 .setOnClickListener(v -> mSettingsPresenter.contact(
-                        getString(R.string.mail_to_mail),
-                        getString(R.string.mail_to_subject)));
+                        getString(R.string.settings_about_contact_mail_to),
+                        getString(R.string.settings_about_contact_mail_subject)));
         ButterKnife.findById(this, R.id.settings_about_imprint)
-                .setOnClickListener(v -> mSettingsPresenter.showImprint());
+                .setOnClickListener(v -> mSettingsPresenter.showImprint(getResources()));
     }
 
     private void initializeCalendarSwitch(Boolean isChecked, String calendarName) {
@@ -199,7 +200,7 @@ public class SettingsActivity extends BaseActivity implements SettingsMvpView {
             DialogFactory.createSingleSelectDialog(
                     this,
                     calendarValues,
-                    R.string.choose_calendar)
+                    R.string.settings_calendar_choose)
                     .setItems(calendarValues, (dialogInterface, i) -> chosenValueIndex[0] = i) // update choice
                     .setPositiveButton(R.string.dialog_action_ok, (dialogInterface, i) -> { // handle choice
                         if (chosenValueIndex[0] != null && chosenValueIndex[0] > 0) {
@@ -231,7 +232,7 @@ public class SettingsActivity extends BaseActivity implements SettingsMvpView {
     public void showSyncToCalendarSuccessful() {
         DialogFactory.createSuperToast(
                 this,
-                getResources().getString(R.string.sync_calendar_successful),
+                getResources().getString(R.string.settings_calendar_sync_successful),
                 PaletteUtils.getSolidColor(PaletteUtils.MATERIAL_GREEN))
                 .show();
     }

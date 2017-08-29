@@ -32,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/bootstrap_alert_paddings"
-                    android:text="@string/setting_section_calendar"
+                    android:text="@string/settings_calendar_title"
                     android:textColor="@color/hpiRed"
                     android:textSize="@dimen/text_title" />
 
@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/settings_calendar"
-                    android:text="@string/add_to_calendar"
+                    android:text="@string/settings_calendar_sync"
                     android:textColorLink="@color/hpiRed" />
 
                 <TextView
@@ -53,7 +53,7 @@
                     android:layout_toEndOf="@+id/switch_calendar"
                     android:layout_toRightOf="@+id/switch_calendar"
                     android:paddingRight="@dimen/bootstrap_alert_paddings"
-                    android:text="Calendar-Name" />
+                    tools:text="Calendar-Name" />
 
             </RelativeLayout>
 
@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/bootstrap_alert_paddings"
-                    android:text="@string/setting_section_notifications"
+                    android:text="@string/settings_notifications_title"
                     android:textColor="@color/hpiRed"
                     android:textSize="@dimen/text_title" />
 
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/settings_notifications"
                     android:layout_centerHorizontal="true"
-                    android:text="Gerät registrieren"
+                    android:text="@string/settings_notifications_registerDevice"
                     app:bootstrapSize="lg"
                     app:buttonMode="regular"
                     app:roundedCorners="true"
@@ -118,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/bootstrap_alert_paddings"
                     android:paddingRight="@dimen/bootstrap_alert_paddings"
-                    android:text="Über"
+                    android:text="@string/settings_about_title"
                     android:textColor="@color/hpiRed"
                     android:textSize="@dimen/text_title" />
 
@@ -133,7 +133,7 @@
                         style="@style/Preference_Title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Mitwirkende:" />
+                        android:text="@string/settings_about_contributors" />
 
                 </LinearLayout>
 
@@ -147,7 +147,7 @@
                         style="@style/Material.ListItem_TextPrimary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Diese App ist Open Source" />
+                        android:text="@string/settings_about_openSource" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:layout_width="wrap_content"
@@ -167,7 +167,7 @@
                         style="@style/Material.ListItem_TextPrimary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kontakt" />
+                        android:text="@string/settings_about_contact" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:layout_width="wrap_content"
@@ -187,7 +187,7 @@
                         style="@style/Material.ListItem_TextPrimary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Impressum" />
+                        android:text="@string/settings_about_imprint" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:layout_width="wrap_content"

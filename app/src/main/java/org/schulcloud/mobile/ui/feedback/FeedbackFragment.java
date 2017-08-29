@@ -20,6 +20,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FeedbackFragment extends BaseFragment implements FeedbackMvpView {
+    public static final String ARGUMENT_CONTEXT_NAME = "contextName";
+    public static final String ARGUMENT_CURRENT_USER = "currentUser";
 
     String mContextName;
     String mCurrentUser;
@@ -42,19 +44,25 @@ public class FeedbackFragment extends BaseFragment implements FeedbackMvpView {
         ButterKnife.bind(this, view);
         Bundle args = getArguments();
 
-        mContextName = args.getString("contextName");
-        mCurrentUser = args.getString("currentUser");
+        mContextName = args.getString(ARGUMENT_CONTEXT_NAME);
+        mCurrentUser = args.getString(ARGUMENT_CURRENT_USER);
 
         mFeedbackPresenter.attachView(this);
-        mSendFeedback.setOnClickListener(v -> mFeedbackPresenter.sendFeedback(mEmail.getText().toString().trim(), mOpinion.getText().toString().trim(), mContextName, mCurrentUser));
+        mSendFeedback.setOnClickListener(v -> mFeedbackPresenter.sendFeedback(
+                getString(R.string.feedback_format),
+                mEmail.getText().toString().trim(),
+                mOpinion.getText().toString().trim(),
+                mContextName, mCurrentUser,
+                getString(R.string.feedback_subject),
+                getString(R.string.feedback_to)));
 
         return view;
     }
 
     @Override
     public void showContentHint() {
-        mOpinion.setHint("Bitte ausfüllen");
-        mOpinion.setError("Bitte ausfüllen");
+        mOpinion.setHint(getString(R.string.feedback_hint_fillIn));
+        mOpinion.setError(getString(R.string.feedback_hint_fillIn));
     }
 
     /**
@@ -65,7 +73,7 @@ public class FeedbackFragment extends BaseFragment implements FeedbackMvpView {
         InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
         inputManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
-        DialogFactory.createSuperToast(getActivity(), "Feedback erfolgreich gesendet", PaletteUtils.getSolidColor(PaletteUtils.MATERIAL_GREEN)).show();
+        DialogFactory.createSuperToast(getActivity(), getString(R.string.feedback_sent), PaletteUtils.getSolidColor(PaletteUtils.MATERIAL_GREEN)).show();
 
         getActivity().onBackPressed();
     }

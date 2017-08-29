@@ -55,15 +55,7 @@ public class BaseActivity extends AppCompatActivity {
     @Inject
     DataManager mDataManager;
     // Curently just nonsense Data and Logos, change here for the actual list
-    private String[] layers = {
-            "Dashboard",
-            "Meine Dateien",
-            "Meine Fächer",
-            "Hausaufgaben",
-            "Einstellungen",
-            "Feedback",
-            "Ausloggen",
-    };
+    private String[] layers;
     private String[] resources = {
             FontAwesome.FA_TH_LARGE,
             FontAwesome.FA_FILE,
@@ -95,6 +87,15 @@ public class BaseActivity extends AppCompatActivity {
             offline.setVisibility(View.VISIBLE);
         }
 
+        layers = new String[]{
+                getString(R.string.dashboard_title),
+                getString(R.string.files_title),
+                getString(R.string.courses_title),
+                getString(R.string.homework_title),
+                getString(R.string.settings_title),
+                getString(R.string.feedback_title),
+                getString(R.string.logout_title)
+        };
         // Idea found on StackOverflow
         // http://stackoverflow.com/questions/21405958/how-to-display-navigation-drawer-in-all-activities
         // Init and data filling of the navigation drawer
@@ -105,7 +106,7 @@ public class BaseActivity extends AppCompatActivity {
         mDrawerList.setAdapter(new NavItemAdapter(this, layers, resources));
         mDrawerList.setOnItemClickListener((arg0, arg1, pos, arg3) -> openActivityForPos(pos));
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, mToolbar, R.string.drawer_open, R.string.drawer_close) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, mToolbar, R.string.base_drawer_open, R.string.base_drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -151,7 +152,7 @@ public class BaseActivity extends AppCompatActivity {
                 c = DashboardActivity.class;
                 break;
             case 2: // files
-                mPreferencesHelper.clear("storageContext");
+                mPreferencesHelper.clear(PreferencesHelper.PREFERENCE_STORAGE_CONTEXT);
                 c = FileActivity.class;
                 break;
             case 3: // Course
@@ -166,8 +167,10 @@ public class BaseActivity extends AppCompatActivity {
             case 6: // feedback
                 FeedbackFragment frag = new FeedbackFragment();
                 Bundle args = new Bundle();
-                args.putString("contextName", this.getClass().getSimpleName());
-                args.putString("currentUser", mPreferencesHelper.getCurrentUsername());
+                args.putString(FeedbackFragment.ARGUMENT_CONTEXT_NAME,
+                        this.getClass().getSimpleName());
+                args.putString(FeedbackFragment.ARGUMENT_CURRENT_USER,
+                        mPreferencesHelper.getCurrentUsername());
                 frag.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()

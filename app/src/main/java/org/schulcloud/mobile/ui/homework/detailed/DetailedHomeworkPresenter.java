@@ -46,16 +46,7 @@ public class DetailedHomeworkPresenter extends BasePresenter<DetailedHomeworkMvp
     public void loadComments(String homeworkId) {
         checkViewAttached();
         RxUtil.unsubscribe(mSubscription);
-        Submission submission = null;
-        submission = mDataManager.getSubmissionForId(homeworkId);
-        if (submission == null) {
-            submission = new Submission();
-            submission.comment = "Hausaufgabe noch nicht eingereicht.";
-            submission.comments = new RealmList<>();
-            Comment comment = new Comment();
-            comment.comment = "Derzeit keine Kommentare";
-            submission.comments.add(comment);
-        }
-        getMvpView().showSubmission(submission, mDataManager.getCurrentUserId());
+        getMvpView().showSubmission(mDataManager.getSubmissionForId(homeworkId),
+                mDataManager.getCurrentUserId());
     }
 }

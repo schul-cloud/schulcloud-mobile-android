@@ -131,7 +131,7 @@ public class AddHomeworkFragment extends BaseFragment implements AddHomeworkMvpV
     public void setCourses(List<String> courses) {
         for (int i = 0; i < courses.size(); i++)
             if (courses.get(i) == null)
-                courses.set(i, getString(R.string.homework_course_none));
+                courses.set(i, getString(R.string.homework_homework_course_none));
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, courses);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCourse.setAdapter(adapter);

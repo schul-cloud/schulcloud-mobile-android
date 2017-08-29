@@ -57,17 +57,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="TextView"
-            android:layout_marginEnd="3dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="3dp" />
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
+            tools:text="01.01.2017 15:00"/>
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/text_colon_space"
+            android:layout_marginRight="@dimen/text_colon_space"
             android:layout_toLeftOf="@id/text_dueDate"
-            android:text="Abgabe bis: " />
+            android:layout_toStartOf="@id/text_dueDate"
+            android:text="@string/homework_homework_due"/>
 
         <com.beardedhen.androidbootstrap.AwesomeTextView
             android:id="@+id/private_homework"

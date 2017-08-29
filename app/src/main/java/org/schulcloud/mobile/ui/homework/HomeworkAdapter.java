@@ -1,7 +1,9 @@
 package org.schulcloud.mobile.ui.homework;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -30,6 +32,7 @@ import butterknife.ButterKnife;
 public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.HomeworkViewHolder> {
 
     private List<Homework> mHomework;
+    private Context mContext;
 
     @Inject
     HomeworkPresenter mHomeworkPresenter;
@@ -41,6 +44,11 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.Homewo
 
     public void setHomework(List<Homework> homework) {
         mHomework = homework;
+    }
+
+    public void setContext(Context context)
+    {
+        mContext = context;
     }
 
     @Override
@@ -66,12 +74,12 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.Homewo
 
         if (untilDate.before(new Date())) {
             holder.dueDate.setPaintFlags(holder.dueDate.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            holder.cardView.setCardBackgroundColor(Color.parseColor("#c3c1c1"));
+            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(mContext, R.color.homework_over));
         }
 
         if (homework.courseId != null && homework.courseId.name != null)
-            holder.nameTextView.setText(String.format("%s %s",
-                    "[" + homework.courseId.name + "]", homework.name));
+            holder.nameTextView.setText(mContext.getString(R.string.homework_homework_name_format,
+                    homework.courseId.name, homework.name));
         else
             holder.nameTextView.setText(homework.name);
         holder.descriptionTextView.setText(Html.fromHtml(homework.description));

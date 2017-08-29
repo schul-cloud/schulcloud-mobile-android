@@ -67,15 +67,6 @@
     <string name="homework_addHomework_error_titleEmpty">Der Titel darf nicht leer sein</string>
     <string name="homework_addHomework_error_datesInvalid">Die Datumsangaben sind ungültig</string>
 
-    <!--Contact-->
-    <string name="contact_title">Kontakt</string>
-    <string name="contact_mail_to">schul-cloud@hpi.de</string>
-    <string name="contact_mail_subject">Schul-Cloud Anfrage</string>
-
-    <!--Imprint-->
-    <string name="imprint_title">Impressum</string>
-    <string name="imprint_website">https://hpi.de/impressum.html</string>
-
     <!--Settings-->
     <string name="settings_title">Einstellungen</string>
     <string name="settings_calendar_title">Kalender</string>
@@ -84,6 +75,16 @@
     <string name="settings_calendar_choose">Kalender auf dem Gerät auswählen</string>
     <string name="settings_notifications_title">Benachrichtigungen</string>
     <string name="settings_notifications_registerDevice">Gerät registrieren</string>
+    <string name="settings_about_title">Über</string>
+    <string name="settings_about_contributors">Mitwirkende:</string>
+    <string name="settings_about_contributors_clipBoardTitle">Schul-Cloud-Mitwirkende</string>
+    <string name="settings_about_openSource">Diese App ist Open Source</string>
+    <string name="settings_about_openSource_website">https://github.com/schul-cloud/schulcloud-mobile-android</string>
+    <string name="settings_about_contact">Kontakt</string>
+    <string name="settings_about_contact_mail_to">schul-cloud@hpi.de</string>
+    <string name="settings_about_contact_mail_subject">Schul-Cloud Anfrage</string>
+    <string name="settings_about_imprint">Impressum</string>
+    <string name="settings_about_imprint_website">https://hpi.de/impressum.html</string>
 
     <!--Logout-->
     <string name="logout_title">Logout</string>
@@ -109,7 +110,8 @@
     <string name="dialog_action_cancel">Abbrechen</string>
     <string name="dialog_error_title">Sorry</string>
 
-    <!--Generic buttons-->
-    <string name="button_add">Hinzufügen</string>
+    <!--General-->
+    <string name="general_button_add">Hinzufügen</string>
+    <string name="general_list_separator">, </string>
 
 </resources>

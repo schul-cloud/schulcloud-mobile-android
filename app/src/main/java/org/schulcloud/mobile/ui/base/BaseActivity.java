@@ -58,14 +58,13 @@ public class BaseActivity extends AppCompatActivity {
     // Curently just nonsense Data and Logos, change here for the actual list
     private String[] layers;
     private String[] resources = {
-        FontAwesome.FA_TH_LARGE,
-        FontAwesome.FA_FILE,
-        FontAwesome.FA_GRADUATION_CAP,
-        FontAwesome.FA_TASKS,
-        FontAwesome.FA_CONTAO,
-        FontAwesome.FA_COGS,
-        FontAwesome.FA_INFO,
-        FontAwesome.FA_SIGN_OUT
+            FontAwesome.FA_TH_LARGE,
+            FontAwesome.FA_FILE,
+            FontAwesome.FA_GRADUATION_CAP,
+            FontAwesome.FA_TASKS,
+            FontAwesome.FA_COGS,
+            FontAwesome.FA_PENCIL,
+            FontAwesome.FA_SIGN_OUT
     };
     private ActivityComponent mActivityComponent;
     private long mActivityId;
@@ -94,9 +93,7 @@ public class BaseActivity extends AppCompatActivity {
                 getString(R.string.files_title),
                 getString(R.string.courses_title),
                 getString(R.string.homework_title),
-                getString(R.string.contact_title),
                 getString(R.string.settings_title),
-                getString(R.string.imprint_title),
                 getString(R.string.logout_title)
         };
         // Idea found on StackOverflow
@@ -168,24 +165,10 @@ public class BaseActivity extends AppCompatActivity {
             case 4: // homework
                 c = HomeworkActivity.class;
                 break;
-            case 5: // contact
-                Intent mailIntent = new Intent(Intent.ACTION_VIEW);
-                Uri data = Uri.parse("mailto:" +
-                        getResources().getString(R.string.contact_mail_to) +
-                        "?subject=" +
-                        getResources().getString(R.string.contact_mail_subject));
-                mailIntent.setData(data);
-                startActivity(mailIntent);
-                return;
-            case 6: // settings
+            case 5: // settings
                 c = SettingsActivity.class;
                 break;
-            case 7: // impressum
-                c = BaseActivity.class;
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.imprint_website)));
-                startActivity(browserIntent);
-                return;
-            case 8: // logout
+            case 6: // logout
                 // clear all local user data
                 mDataManager.signOut();
                 c = SignInActivity.class;

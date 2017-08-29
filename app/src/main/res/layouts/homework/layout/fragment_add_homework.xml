@@ -146,7 +146,7 @@
             android:layout_marginBottom="@dimen/form_elementSpacing"
             android:layout_marginTop="@dimen/form_elementSpacingBig"
             android:background="@color/hpiRed"
-            android:text="@string/button_add"
+            android:text="@string/general_button_add"
             app:bootstrapSize="lg"
             app:buttonMode="regular"
             app:roundedCorners="true"

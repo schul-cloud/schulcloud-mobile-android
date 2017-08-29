@@ -1,10 +1,14 @@
 package org.schulcloud.mobile.ui.settings;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.local.PreferencesHelper;
 import org.schulcloud.mobile.data.model.Device;
@@ -34,6 +38,8 @@ import timber.log.Timber;
 public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
 
     private Subscription eventSubscription;
+
+    private String[] mContributors;
 
     @Inject
     public SettingsPresenter(DataManager dataManager) {
@@ -141,6 +147,17 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
         if (showToast) getMvpView().showSyncToCalendarSuccessful();
     }
 
+    public void contact(String to, String subject) {
+        getMvpView().showExternalContent(Uri.parse("mailto:" + to + "?subject=" + subject));
+    }
+    public void showImprint(@NonNull Resources resources) {
+        getMvpView().showExternalContent(
+                Uri.parse(resources.getString(R.string.settings_about_imprint_website)));
+    }
+    public void showGitHub(@NonNull Resources resources) {
+        getMvpView().showExternalContent(
+                Uri.parse(resources.getString(R.string.settings_about_openSource_website)));
+    }
 
     public void checkSignedIn(Context context) {
         super.isAlreadySignedIn(mDataManager, context);
@@ -229,6 +246,14 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
 
                             }
                         });
+    }
+
+    public void loadContributors(@NonNull Resources resources) {
+        mContributors = resources.getStringArray(R.array.settings_about_contributors);
+        getMvpView().showContributors(mContributors);
+    }
+    public String[] getContributors() {
+        return mContributors;
     }
 
 }

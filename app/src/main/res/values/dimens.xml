@@ -24,6 +24,8 @@
     <dimen name="dialog_content_padding_top">20dp</dimen>
     <dimen name="dialog_content_padding_horizontal">24dp</dimen>
 
+    <dimen name="settings_preference_padding">16dp</dimen>
+
     <dimen name="md_baseline">16dp</dimen>
     <dimen name="md_baseline_content">72dp</dimen>
 
@@ -65,5 +67,39 @@
 
     <!-- General padding value -->
     <dimen name="material_drawer_padding">8dp</dimen>
+
+
+    <!--Material Design-->
+    <!--List-->
+    <dimen name="material_list_paddingTop">8dp</dimen>
+    <!--ListItemLayout-->
+    <dimen name="material_listItemLayout_height">48dp</dimen>
+    <dimen name="material_listItemLayout_height_singleLineWithAvatar">56dp</dimen>
+    <dimen name="material_listItemLayout_height_twoLine">72dp</dimen>
+    <dimen name="material_listItemLayout_height_threeLine">88dp</dimen>
+    <dimen name="material_listItemLayout_paddingHorizontal">16dp</dimen>
+    <dimen name="material_listItemLayout_avatar_size">48dp</dimen>
+    <dimen name="material_listItemLayout_startIcon_size">24dp</dimen>
+    <dimen name="material_listItemLayout_startDetail_marginTop_withSecondary2">
+        @dimen/material_listItemLayout_text_offsetTop_withSecondary2
+    </dimen>
+    <dimen name="material_listItemLayout_text_offsetStart_withStartDetail">56dp</dimen>
+    <dimen name="material_listItemLayout_text_offsetEnd_withEndIcon">40dp</dimen>
+    <dimen name="material_listItemLayout_text_offsetEnd_withEndText">56dp</dimen>
+    <dimen name="material_listItemLayout_text_offsetTop">20dp</dimen>
+    <dimen name="material_listItemLayout_text_offsetTop_withSecondary2">16dp</dimen>
+    <dimen name="material_listItemLayout_text_offsetBottom">20dp</dimen>
+    <dimen name="material_listItemLayout_textPrimary_textSize">16sp</dimen>
+    <dimen name="material_listItemLayout_textSecondary_textSize">14sp</dimen>
+    <dimen name="material_listItemLayout_textSecondary2_textSize">14sp</dimen>
+    <dimen name="material_listItemLayout_endIcon_size">24dp</dimen>
+    <dimen name="material_listItemLayout_endIcon_marginTop_withSecondary2">
+        @dimen/material_listItemLayout_text_offsetTop_withSecondary2
+    </dimen>
+    <dimen name="material_listItemLayout_endText_marginVertical">8dp</dimen>
+    <dimen name="material_listItemLayout_endText_marginVertical_withSecondary">12dp</dimen>
+    <dimen name="material_listItemLayout_endText_marginVertical_withSecondary2">16dp</dimen>
+    <dimen name="material_listItemLayout_endText_width">48dp</dimen>
+    <dimen name="material_listItemLayout_endText_textSize">14sp</dimen>
 
 </resources>

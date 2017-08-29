@@ -60,9 +60,7 @@ public class BaseActivity extends AppCompatActivity {
             "Meine Dateien",
             "Meine Fächer",
             "Hausaufgaben",
-            "Kontakt",
             "Einstellungen",
-            "Impressum",
             "Feedback",
             "Ausloggen",
     };
@@ -71,9 +69,7 @@ public class BaseActivity extends AppCompatActivity {
             FontAwesome.FA_FILE,
             FontAwesome.FA_GRADUATION_CAP,
             FontAwesome.FA_TASKS,
-            FontAwesome.FA_CONTAO,
             FontAwesome.FA_COGS,
-            FontAwesome.FA_INFO,
             FontAwesome.FA_PENCIL,
             FontAwesome.FA_SIGN_OUT
     };
@@ -164,24 +160,10 @@ public class BaseActivity extends AppCompatActivity {
             case 4: // homework
                 c = HomeworkActivity.class;
                 break;
-            case 5: // contact
-                Intent mailIntent = new Intent(Intent.ACTION_VIEW);
-                Uri data = Uri.parse("mailto:" +
-                        getResources().getString(R.string.mail_to_mail) +
-                        "?subject=" +
-                        getResources().getString(R.string.mail_to_subject));
-                mailIntent.setData(data);
-                startActivity(mailIntent);
-                return;
-            case 6: // settings
+            case 5: // settings
                 c = SettingsActivity.class;
                 break;
-            case 7: // impressum
-                c = BaseActivity.class;
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://hpi.de/impressum.html"));
-                startActivity(browserIntent);
-                return;
-            case 8: // feedback
+            case 6: // feedback
                 FeedbackFragment frag = new FeedbackFragment();
                 Bundle args = new Bundle();
                 args.putString("contextName", this.getClass().getSimpleName());
@@ -194,7 +176,7 @@ public class BaseActivity extends AppCompatActivity {
                         .commit();
                 mDrawer.closeDrawer(Gravity.LEFT);
                 return;
-            case 9: // logout
+            case 7: // logout
                 // clear all local user data
                 mDataManager.signOut();
                 c = SignInActivity.class;

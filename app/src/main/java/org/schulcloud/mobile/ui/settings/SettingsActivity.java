@@ -1,15 +1,22 @@
 package org.schulcloud.mobile.ui.settings;
 
 import android.Manifest;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -111,6 +118,26 @@ public class SettingsActivity extends BaseActivity implements SettingsMvpView {
             mPreferencesHelper.saveCalendarSyncEnabled(isChecked);
             initializeCalendarSwitch(isChecked, mPreferencesHelper.getCalendarSyncName());
         });
+
+        /* About */
+        mSettingsPresenter.loadContributors(getResources());
+        ButterKnife.findById(this, R.id.settings_about_contributors)
+                .setOnLongClickListener(v -> {
+                    ClipboardManager clipboardManager =
+                            (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                    ClipData clipData = ClipData.newPlainText("Schul-Cloud-Mitwirkende",
+                            TextUtils.join(", ", mSettingsPresenter.getContributors()));
+                    clipboardManager.setPrimaryClip(clipData);
+                    return true;
+                });
+        ButterKnife.findById(this, R.id.settings_about_github)
+                .setOnClickListener(v -> mSettingsPresenter.showGitHub());
+        ButterKnife.findById(this, R.id.settings_about_contact)
+                .setOnClickListener(v -> mSettingsPresenter.contact(
+                        getString(R.string.mail_to_mail),
+                        getString(R.string.mail_to_subject)));
+        ButterKnife.findById(this, R.id.settings_about_imprint)
+                .setOnClickListener(v -> mSettingsPresenter.showImprint());
     }
 
     private void initializeCalendarSwitch(Boolean isChecked, String calendarName) {
@@ -207,5 +234,31 @@ public class SettingsActivity extends BaseActivity implements SettingsMvpView {
                 getResources().getString(R.string.sync_calendar_successful),
                 PaletteUtils.getSolidColor(PaletteUtils.MATERIAL_GREEN))
                 .show();
+    }
+
+    @Override
+    public void showContributors(@NonNull String[] contributors) {
+        LinearLayout contributorsWrapper = ButterKnife.findById(this,
+                R.id.settings_about_contributors);
+
+        int[] attrs = new int[]{android.R.attr.textColor};
+        TypedArray a = obtainStyledAttributes(R.style.Preference_Description, attrs);
+        int textColor = a.getColor(0, 0);
+        a.recycle();
+
+        for (String contributor : contributors) {
+            TextView textView = new TextView(this, null, R.style.Preference_Description);
+            textView.setPadding(
+                    getResources().getDimensionPixelSize(R.dimen.bootstrap_alert_paddings),
+                    0, 0, 0);
+            textView.setTextColor(textColor);
+            textView.setText(contributor);
+            contributorsWrapper.addView(textView);
+        }
+    }
+    @Override
+    public void showExternalContent(Uri data) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, data);
+        startActivity(intent);
     }
 }

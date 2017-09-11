@@ -11,7 +11,7 @@
     <string name="login_login">Login</string>
     <string name="login_title">Login</string>
     <string name="login_username">Benutzername</string>
-    <string name="login_password">Benutzername</string>
+    <string name="login_password">Passwort</string>
     <string name="login_successful">Erfolgreich angemeldet!</string>
     <string name="login_error">Falscher Nutzername oder Passwort</string>
 

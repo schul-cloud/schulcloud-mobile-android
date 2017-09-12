@@ -2,14 +2,10 @@
     <string name="app_name">Schul-Cloud</string>
 
     <!--Base-->
+    <string name="base_action_feedback">Feedback geben</string>
     <string name="base_drawer_open">Öffnen</string>
     <string name="base_drawer_close">Schließen</string>
     <string name="base_offline">(offline)</string>
-
-    <!--Generic dialogs-->
-    <string name="dialog_action_ok">OK</string>
-    <string name="dialog_action_cancel">Abbrechen</string>
-    <string name="dialog_error_title">Sorry</string>
 
     <!--Login-->
     <string name="login_login">Login</string>
@@ -90,24 +86,29 @@
     <string name="settings_about_imprint">Impressum</string>
     <string name="settings_about_imprint_website">https://hpi.de/impressum.html</string>
 
-    <!--Feedback-->
-    <string name="feedback_title">Feedback</string>
-    <string name="feedback_email">Ihre E-Mail-Adresse (optional)</string>
-    <string name="feedback_opinion">Ihre Meinung</string>
-    <string name="feedback_send">Senden</string>
-    <string name="feedback_hint_fillIn">Bitte ausfüllen</string>
-    <string name="feedback_format">User: %1$s\nE-Mail: %2$s\nFeedback geschickt von: %3$s\nUser schrieb folgendes: \n%4$s</string>
-    <string name="feedback_sent">Feedback erfolgreich gesendet</string>
-    <string name="feedback_subject">Feedback Android</string>
-    <string name="feedback_to">schul-cloud-support@hpi.de</string>
-
     <!--Logout-->
     <string name="logout_title">Logout</string>
+
+    <!--Feedback-->
+    <string name="feedback_title">Feedback</string>
+    <string name="feedback_hint_email">Ihre E-Mail-Adresse (optional)</string>
+    <string name="feedback_hint_opinion">Ihre Meinung</string>
+    <string name="feedback_send">Senden</string>
+    <string name="feedback_error_opinionEmpty">Bitte ausfüllen</string>
+    <string name="feedback_transmit_to">schul-cloud-support@hpi.de</string>
+    <string name="feedback_transmit_subject">Feedback Android</string>
+    <string name="feedback_transmit_format">User: %1$s\nE-Mail: %2$s\nFeedback geschickt von: %3$s\nUser schrieb folgendes: \n%4$s</string>
+    <string name="feedback_transmit_sent">Feedback erfolgreich gesendet</string>
 
     <!--Web-->
     <string name="web_protocol_http" translatable="false">http://</string>
     <string name="web_protocol_https" translatable="false">https://</string>
     <string name="website">https://schul-cloud.org</string>
+
+    <!--Generic dialogs-->
+    <string name="dialog_action_ok">OK</string>
+    <string name="dialog_action_cancel">Abbrechen</string>
+    <string name="dialog_error_title">Sorry</string>
 
     <!--General-->
     <string name="general_button_add">Hinzufügen</string>

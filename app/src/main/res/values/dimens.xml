@@ -10,7 +10,9 @@
     <dimen name="text_body">16sp</dimen>
     <dimen name="text_small_body">14sp</dimen>
     <dimen name="text_very_small_body">10sp</dimen>
+    <dimen name="input_spacing">16dp</dimen>
     <dimen name="text_colon_space">4sp</dimen>
+
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="fa_icon_big">32sp</dimen>
     <dimen name="fa_icon_medium">24sp</dimen>
@@ -18,6 +20,9 @@
     <dimen name="toolbar_spacer">70dp</dimen>
     <dimen name="form_elementSpacing">8dp</dimen>
     <dimen name="form_elementSpacingBig">32dp</dimen>
+
+    <dimen name="dialog_content_padding_top">20dp</dimen>
+    <dimen name="dialog_content_padding_horizontal">24dp</dimen>
 
     <dimen name="settings_preference_padding">16dp</dimen>
 

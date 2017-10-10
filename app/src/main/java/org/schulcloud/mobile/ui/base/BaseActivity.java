@@ -32,6 +32,7 @@ import org.schulcloud.mobile.ui.dashboard.DashboardActivity;
 import org.schulcloud.mobile.ui.feedback.FeedbackDialog;
 import org.schulcloud.mobile.ui.files.FileActivity;
 import org.schulcloud.mobile.ui.homework.HomeworkActivity;
+import org.schulcloud.mobile.ui.news.NewsActivity;
 import org.schulcloud.mobile.ui.settings.SettingsActivity;
 import org.schulcloud.mobile.ui.signin.SignInActivity;
 import org.schulcloud.mobile.util.NetworkUtil;
@@ -171,7 +172,7 @@ public class BaseActivity extends AppCompatActivity {
                 c = SettingsActivity.class;
                 break;
             case 6: // news
-                c = SettingsActivity.class;
+                c = NewsActivity.class;
                 break;
             case 7: // logout
                 // clear all local user data

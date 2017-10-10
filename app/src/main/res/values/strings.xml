@@ -86,6 +86,9 @@
     <string name="settings_about_imprint">Impressum</string>
     <string name="settings_about_imprint_website">https://hpi.de/impressum.html</string>
 
+    <!--news-->
+    <string name = "news_title">News</string>
+
     <!--Logout-->
     <string name="logout_title">Logout</string>
 

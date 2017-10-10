@@ -24,7 +24,7 @@ Clone git repository:
 
 ```
 git clone --recursive https://github.com/schul-cloud/schulcloud-mobile-android
-```
+``` 
 
 ## Development
 
@@ -85,3 +85,4 @@ more to come ..
 **Solution**:
 
 You need to encrypt the gm-secret file with [git-crypt](https://github.com/AGWA/git-crypt). Ask the Schul-Cloud team for the key-file.
+Or you can use [this]() file and replace the original google-services.json with it. You should note though that some external libraries like firebase won't work.

@@ -64,7 +64,8 @@ public class BaseActivity extends AppCompatActivity {
             FontAwesome.FA_TASKS,
             FontAwesome.FA_COGS,
             FontAwesome.FA_PENCIL,
-            FontAwesome.FA_SIGN_OUT
+            FontAwesome.FA_SIGN_OUT,
+            FontAwesome.FA_NEWSPAPER_O
     };
     private ActivityComponent mActivityComponent;
     private long mActivityId;
@@ -94,7 +95,8 @@ public class BaseActivity extends AppCompatActivity {
                 getString(R.string.courses_title),
                 getString(R.string.homework_title),
                 getString(R.string.settings_title),
-                getString(R.string.logout_title)
+                getString(R.string.logout_title),
+                "News"
         };
         // Idea found on StackOverflow
         // http://stackoverflow.com/questions/21405958/how-to-display-navigation-drawer-in-all-activities
@@ -168,7 +170,10 @@ public class BaseActivity extends AppCompatActivity {
             case 5: // settings
                 c = SettingsActivity.class;
                 break;
-            case 6: // logout
+            case 6: // news
+                c = SettingsActivity.class;
+                break;
+            case 7: // logout
                 // clear all local user data
                 mDataManager.signOut();
                 c = SignInActivity.class;

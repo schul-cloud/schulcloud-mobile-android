@@ -13,6 +13,7 @@ import org.schulcloud.mobile.data.model.Directory;
 import org.schulcloud.mobile.data.model.Event;
 import org.schulcloud.mobile.data.model.File;
 import org.schulcloud.mobile.data.model.Homework;
+import org.schulcloud.mobile.data.model.News;
 import org.schulcloud.mobile.data.model.Submission;
 import org.schulcloud.mobile.data.model.Topic;
 import org.schulcloud.mobile.data.model.User;
@@ -404,4 +405,18 @@ public class DataManager {
                 });
     }
 
+    public Observable<List<News>> getNews() {
+        return mDatabaseHelper.getNews().distinct();
+    }
+
+    public Observable syncNews(String schoolId) {
+        return mRestService.getNews(getAccessToken(),schoolId)
+                .concatMap(new Func1<List<News>,Observable<News>> () {
+                    @Override
+                    public Observable<News> call(List<News> news) {
+                        mDatabaseHelper.clearTable(News.class);
+                        return mDatabaseHelper.setNews(news);
+                    }
+                }).doOnError(Throwable::printStackTrace);
+    }
 }

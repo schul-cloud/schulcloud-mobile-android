@@ -16,5 +16,4 @@ public interface NewsMvpView extends MvpView {
 
     void showError();
 
-    //TODO: add loadNews function
 }

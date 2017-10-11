@@ -8,7 +8,23 @@
         android:id="@id/swiperefresh"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_margin="70dp">
+        android:layout_marginTop="70dp">
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context="org.schulcloud.mobile.ui.main.MainActivity">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="6dp"
+                android:paddingTop="6dp"
+                android:scrollbars="vertical"/>
+
+        </RelativeLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
     </FrameLayout>

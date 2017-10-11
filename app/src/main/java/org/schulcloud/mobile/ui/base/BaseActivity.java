@@ -64,7 +64,6 @@ public class BaseActivity extends AppCompatActivity {
             FontAwesome.FA_GRADUATION_CAP,
             FontAwesome.FA_TASKS,
             FontAwesome.FA_COGS,
-            FontAwesome.FA_PENCIL,
             FontAwesome.FA_NEWSPAPER_O,
             FontAwesome.FA_SIGN_OUT
     };

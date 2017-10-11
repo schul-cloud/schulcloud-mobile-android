@@ -110,5 +110,5 @@ public interface RestService {
     Observable<FeedbackResponse> sendFeedback(@Header("Authorization") String accessToken, @Body FeedbackRequest feedbackRequest);
 
     @POST("news")
-    Observable<List<News>> getNews(@Header("Authorization") String accessToken,@Query("schoolId") String schoolId);
+    Observable<List<News>> getNews(@Header("Authorization") String accessToken, @Query("schoolId") String schoolId);
 }

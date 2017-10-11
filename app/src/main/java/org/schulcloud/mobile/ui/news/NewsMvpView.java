@@ -16,4 +16,6 @@ public interface NewsMvpView extends MvpView {
 
     void showError();
 
+    void showNewsDialog(String newsId);
+
 }

@@ -457,6 +457,7 @@ public class DatabaseHelper {
         return realm.where(Topic.class).equalTo("_id", topicId).findFirst();
     }
 
+    /**** News ****/
     public Observable<List<News>> getNews() {
         final Realm realm = mRealmProvider.get();
         return realm.where(News.class).findAllAsync().asObservable()

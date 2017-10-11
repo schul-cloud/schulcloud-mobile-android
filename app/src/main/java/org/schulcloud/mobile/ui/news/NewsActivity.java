@@ -82,10 +82,21 @@ public class NewsActivity extends BaseActivity implements NewsMvpView {
     }
 
     @Override
+    public void onDestroy(){
+        mNewsPresenter.detachView();
+        super.onDestroy();
+    }
+
+    @Override
     public void showNews(List<News> newses) {
         mNewsAdapter.setNews(newses);
         mNewsAdapter.setContext(this);
         mNewsAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showNewsDialog(String newsId){
+
     }
 
     @Override

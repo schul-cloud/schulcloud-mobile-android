@@ -9,7 +9,11 @@
         android:layout_height="match_parent"
         android:id="@+id/card_view"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        card_view:cardCornerRadius="2dp">
 
         <com.beardedhen.androidbootstrap.AwesomeTextView
             android:id="@+id/view_hex_color"
@@ -52,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="right"
-                android:id="@+id/text_newsDate"/>
+                android:id="@+id/text_Date"/>
 
         </RelativeLayout>
 

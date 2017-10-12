@@ -60,8 +60,7 @@ public interface RestService {
     @POST("fileStorage/signedUrl")
     Observable<SignedUrlResponse> generateSignedUrl(@Header("Authorization") String accessToken, @Body SignedUrlRequest signedUrlRequest);
 
-    @GET
-    Observable<ResponseBody> downloadFile(@Url String fileUrl);
+    @GET   Observable<ResponseBody> downloadFile(@Url String fileUrl);
 
     @DELETE("fileStorage/directories")
     Observable<ResponseBody> deleteDirectory(@Header("Authorization") String accessToken, @Query("path") String path);
@@ -109,6 +108,6 @@ public interface RestService {
     @POST("mails")
     Observable<FeedbackResponse> sendFeedback(@Header("Authorization") String accessToken, @Body FeedbackRequest feedbackRequest);
 
-    @POST("news")
-    Observable<List<News>> getNews(@Header("Authorization") String accessToken, @Query("schoolId") String schoolId);
+    @GET("news?$sort=createdAt:-1")
+    Observable<FeathersResponse<News>> getNews(@Header("Authorization") String accessToken);
 }

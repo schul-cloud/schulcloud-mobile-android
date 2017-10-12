@@ -1,8 +1,10 @@
 package org.schulcloud.mobile.data.sync;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -29,7 +31,9 @@ public class NewsSyncService extends Service {
     DataManager mDataManager;
     private Subscription mSubscription;
     private String schoolId;
+    private String userId;
     private String ARGUMENT_SCHOOL_ID = "schoolId";
+    private String ARGUMENT_USER_ID = "userId";
 
     public static Intent getStartIntent(Context context) {
         return new Intent(context, NewsSyncService.class);
@@ -50,7 +54,7 @@ public class NewsSyncService extends Service {
         Timber.i("starting news sync");
         if (!NetworkUtil.isNetworkConnected(this)) {
             Timber.i("Sync canceled, connection not available");
-            AndroidComponentUtil.toggleComponent(this, CourseSyncService.SyncOnConnectionAvailable.class, true);
+            AndroidComponentUtil.toggleComponent(this, NewsSyncService.SyncOnConnectionAviable.class, true);
             stopSelf(startId);
             return START_NOT_STICKY;
         }
@@ -58,10 +62,11 @@ public class NewsSyncService extends Service {
         Bundle extras = intent.getExtras();
         if(extras != null) {
             schoolId = extras.getString(ARGUMENT_SCHOOL_ID);
+            userId = extras.getString(ARGUMENT_USER_ID);
         }
 
         if (mSubscription != null && !mSubscription.isUnsubscribed()) mSubscription.unsubscribe();
-        mSubscription = mDataManager.syncNews(schoolId)
+        mSubscription = mDataManager.syncNews()
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<News>() {
                     @Override
@@ -82,9 +87,27 @@ public class NewsSyncService extends Service {
         return START_STICKY;
     }
 
-    @Nullable
+    @Override
+    public void onDestroy() {
+        if(mSubscription != null) mSubscription.unsubscribe();
+        super.onDestroy();
+    }
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    public static class SyncOnConnectionAviable extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)
+                    && NetworkUtil.isNetworkConnected(context)) {
+                Timber.i("Connection is avaible, now triggering news sync");
+                AndroidComponentUtil.toggleComponent(context,this.getClass(),false);
+                context.startService(getStartIntent(context));
+            }
+        }
     }
 }

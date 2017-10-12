@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @Override
     public NewsAdapter.NewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_course, parent, false);
+                .inflate(R.layout.item_news, parent, false);
         return new NewsAdapter.NewsViewHolder(itemView);
     }
 
@@ -55,8 +56,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         News news = mNews.get(position);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         if(news.title != null) holder.nameTextView.setText(news.title);
-        if(news.content != null) holder.descriptionTextView.setText(news.content);
-        if(news.color != null) holder.colorView.setBackgroundColor(Color.parseColor(news.color));
+        if(news.content != null) holder.descriptionTextView.setText(Html.fromHtml(news.content));
         if(news.date != null)  holder.dateText.setText(dateFormat.format(news.date));
         //holder.cardView.setOnClickListener(v -> mNewsPresenter.showNewsDialog);
     }
@@ -68,15 +68,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     class NewsViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.text_name)
+        @BindView(R.id.text_newsTitle)
         TextView nameTextView;
-        @BindView(R.id.text_description)
+        @BindView(R.id.text_newsDescription)
         TextView descriptionTextView;
         @BindView(R.id.view_hex_color)
         AwesomeTextView colorView;
         @BindView(R.id.card_view)
         CardView cardView;
-        @BindView(R.id.dateText)
+        @BindView(R.id.text_Date)
         TextView dateText;
 
         public NewsViewHolder(View itemView) {

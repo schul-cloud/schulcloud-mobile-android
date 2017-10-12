@@ -406,16 +406,16 @@ public class DataManager {
     }
 
     public Observable<List<News>> getNews() {
-        return mDatabaseHelper.getNews().distinct();
+        return mDatabaseHelper.getNews();
     }
 
-    public Observable syncNews(String schoolId) {
-        return mRestService.getNews(getAccessToken(),schoolId)
-                .concatMap(new Func1<List<News>,Observable<News>> () {
+    public Observable syncNews() {
+        return mRestService.getNews(getAccessToken())
+                .concatMap(new Func1<FeathersResponse<News>,Observable<News>> () {
                     @Override
-                    public Observable<News> call(List<News> news) {
+                    public Observable<News> call(FeathersResponse<News> newses) {
                         mDatabaseHelper.clearTable(News.class);
-                        return mDatabaseHelper.setNews(news);
+                        return mDatabaseHelper.setNews(newses.data);
                     }
                 }).doOnError(Throwable::printStackTrace);
     }

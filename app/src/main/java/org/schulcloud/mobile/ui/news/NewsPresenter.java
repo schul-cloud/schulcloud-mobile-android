@@ -64,4 +64,7 @@ public class NewsPresenter extends BasePresenter<NewsMvpView> {
                 });
     };
 
+    public void showNewsDialog(String newsId) {
+        getMvpView().showNewsDialog(newsId);
+    }
 }

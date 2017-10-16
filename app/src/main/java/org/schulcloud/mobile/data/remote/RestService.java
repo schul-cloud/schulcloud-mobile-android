@@ -108,6 +108,6 @@ public interface RestService {
     @POST("mails")
     Observable<FeedbackResponse> sendFeedback(@Header("Authorization") String accessToken, @Body FeedbackRequest feedbackRequest);
 
-    @GET("news?$sort=createdAt:-1")
+    @GET("news?$sort=createdAt:1")
     Observable<FeathersResponse<News>> getNews(@Header("Authorization") String accessToken);
 }

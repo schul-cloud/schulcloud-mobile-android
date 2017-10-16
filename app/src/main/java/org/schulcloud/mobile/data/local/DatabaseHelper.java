@@ -483,4 +483,9 @@ public class DatabaseHelper {
             }
         });
     }
+
+    public News getNewsForId(String newsId) {
+        final Realm realm = mRealmProvider.get();
+        return realm.where(News.class).equalTo("_id", newsId).findFirst();
+    }
 }

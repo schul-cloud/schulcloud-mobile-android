@@ -35,7 +35,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-    <TextView
+    <TextVieworg.schulcloud.mobile.ui.news.detailed
         android:id="@+id/homeworkDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

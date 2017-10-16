@@ -4,7 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.IdRes;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
@@ -17,10 +22,14 @@ import org.schulcloud.mobile.data.model.News;
 import org.schulcloud.mobile.data.sync.CourseSyncService;
 import org.schulcloud.mobile.data.sync.NewsSyncService;
 import org.schulcloud.mobile.ui.base.BaseActivity;
+import org.schulcloud.mobile.ui.base.MvpView;
 import org.schulcloud.mobile.ui.homework.HomeworkPresenter;
+import org.schulcloud.mobile.ui.news.detailed.DetailedNewsFragment;
 import org.schulcloud.mobile.ui.signin.SignInActivity;
 import org.schulcloud.mobile.util.DialogFactory;
 
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.List;
 
@@ -55,10 +64,11 @@ public class NewsActivity extends BaseActivity implements NewsMvpView {
         mDrawer.addView(contentView,0);
         getSupportActionBar().setTitle("News");
         ButterKnife.bind(this);
-
+        mNewsAdapter.setContext(this);
 
         mRecyclerView.setAdapter(mNewsAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(mNewsAdapter.mContext,DividerItemDecoration.VERTICAL));
         mNewsPresenter.attachView(this);
         mNewsPresenter.checkSignIn(this);
 
@@ -95,8 +105,16 @@ public class NewsActivity extends BaseActivity implements NewsMvpView {
     }
 
     @Override
-    public void showNewsDialog(String newsId){
-
+    public void showNewsDialog(String newsId) {
+        DetailedNewsFragment frag = new DetailedNewsFragment();
+        Bundle args = new Bundle();
+        args.putString(DetailedNewsFragment.ARGUMENT_NEWS_ID, newsId);
+        frag.setArguments(args);
+        android.app.FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.overlay_fragment_container, frag)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override

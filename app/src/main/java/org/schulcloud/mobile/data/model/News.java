@@ -15,6 +15,5 @@ public class News implements RealmModel {
     public String schoolId;
     public String title;
     public String content;
-    public String color;
-    public String date;
+    public String createdAt;
 }

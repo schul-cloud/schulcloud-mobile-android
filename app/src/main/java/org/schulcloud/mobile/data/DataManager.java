@@ -419,4 +419,8 @@ public class DataManager {
                     }
                 }).doOnError(Throwable::printStackTrace);
     }
+
+    public News getNewsForId(String newsId) {
+        return mDatabaseHelper.getNewsForId(newsId);
+    }
 }

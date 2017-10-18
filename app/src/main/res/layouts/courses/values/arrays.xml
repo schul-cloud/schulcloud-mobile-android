@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="settings_about_contributors">
+        <item>Lars Lange</item>
+        <item>Niklas Kiefer</item>
+        <item>Jonas Wanke</item>
+    </string-array>
+
+</resources>

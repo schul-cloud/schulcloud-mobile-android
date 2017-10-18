@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.AwesomeTextView;
@@ -40,10 +41,10 @@ public class NavItemAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        FrameLayout relativeLayout =
-                (FrameLayout) activity.getLayoutInflater().inflate(R.layout.drawer_list_item, null);
-        ((TextView) relativeLayout.findViewById(R.id.mdTextPrimary)).setText(titles[position]);
-        ((AwesomeTextView) relativeLayout.findViewById(R.id.mdImage)).setFontAwesomeIcon(icIds[position]);
-        return relativeLayout;
+        FrameLayout frameLayout =
+                (FrameLayout) activity.getLayoutInflater().inflate(R.layout.drawer_list_item, parent, false);
+        ((TextView) frameLayout.findViewById(R.id.mdTextPrimary)).setText(titles[position]);
+        ((AwesomeTextView) frameLayout.findViewById(R.id.mdImage)).setFontAwesomeIcon(icIds[position]);
+        return frameLayout;
     }
 }

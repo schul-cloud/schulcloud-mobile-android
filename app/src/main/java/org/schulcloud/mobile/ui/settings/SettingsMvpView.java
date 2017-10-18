@@ -1,5 +1,7 @@
 package org.schulcloud.mobile.ui.settings;
 
+import android.net.Uri;
+
 import org.schulcloud.mobile.data.model.Device;
 import org.schulcloud.mobile.data.model.Event;
 import org.schulcloud.mobile.ui.base.MvpView;
@@ -16,4 +18,8 @@ public interface SettingsMvpView extends MvpView {
     void connectToCalendar(List<Event> events, Boolean promptForCalendar);
 
     void showSyncToCalendarSuccessful();
+
+    void showContributors(String[] contributors);
+
+    void showExternalContent(Uri uri);
 }

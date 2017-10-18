@@ -22,9 +22,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:paddingBottom="@dimen/bootstrap_alert_paddings"
-        android:text="CourseName"
         android:textColor="@color/hpiRed"
-        android:textSize="@dimen/text_title" />
+        android:textSize="@dimen/text_title"
+        tools:text="CourseName"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

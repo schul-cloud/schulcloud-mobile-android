@@ -23,4 +23,71 @@
         <item name="actionMenuTextColor">@android:color/white</item>
     </style>
 
+    <style name="Preference.Simple" parent="@style/TextAppearance.AppCompat.Subhead">
+        <item name="android:padding">@dimen/settings_preference_padding</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="ListItemPreference" parent="Preference.Simple">
+        <item name="android:padding">0dp</item>
+    </style>
+    <style name="Preference_Wrapper" parent="Preference.Simple">
+    </style>
+
+    <style name="Preference_Title" parent="@style/TextAppearance.AppCompat.Subhead">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:clickable">false</item>
+    </style>
+    <style name="Preference_Description" parent="@style/TextAppearance.AppCompat.Subhead">
+        <item name="android:clickable">false</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <!--Material Design-->
+    <style name="Material" />
+
+    <!-- List -->
+    <style name="Material.List">
+        <item name="android:paddingTop">@dimen/material_list_paddingTop</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <!--ListItemLayout-->
+    <style name="Material.ListItem.Simple" parent="@style/Material.ListItem_TextPrimary">
+        <item name="android:height">@dimen/material_listItemLayout_height</item>
+        <item name="android:paddingLeft">@dimen/material_listItemLayout_paddingHorizontal</item>
+        <item name="android:paddingRight">@dimen/material_listItemLayout_paddingHorizontal</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <style name="Material.ListItem_TextPrimary" parent="@style/TextAppearance.AppCompat.Subhead">
+        <item name="layout_position">textPrimary</item>
+        <item name="android:textSize">@dimen/material_listItemLayout_textPrimary_textSize</item>
+        <item name="android:gravity">top</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="Material.ListItem_TextSecondary" parent="@style/TextAppearance.AppCompat.Body1">
+        <item name="layout_position">textSecondary</item>
+        <item name="android:textSize">@dimen/material_listItemLayout_textSecondary_textSize</item>
+        <item name="android:gravity">top</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+    <style name="Material.ListItem_TextSecondary2" parent="@style/Material.ListItem_TextSecondary">
+        <item name="layout_position">textSecondary2</item>
+    </style>
+    <style name="Material.ListItem_EndTextTop" parent="@style/Material.ListItem_TextSecondary">
+        <item name="layout_position">endTextTop</item>
+        <item name="android:textSize">@dimen/material_listItemLayout_endText_textSize</item>
+        <item name="android:gravity">top|end</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+    <style name="Material.ListItem_EndTextBottom" parent="@style/Material.ListItem_EndTextTop">
+        <item name="layout_position">endTextBottom</item>
+    </style>
+
 </resources>

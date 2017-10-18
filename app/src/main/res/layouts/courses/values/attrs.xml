@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--ListItemLayout-->
+    <declare-styleable name="ListItemLayout_Layout">
+        <attr name="layout_position" format="enum">
+            <enum name="avatar" value="0" />
+            <enum name="startIcon" value="1" />
+            <enum name="textPrimary" value="2" />
+            <enum name="textSecondary" value="3" />
+            <enum name="textSecondary2" value="4" />
+            <enum name="endIcon" value="5" />
+            <enum name="endTextTop" value="6" />
+            <enum name="endTextBottom" value="7" />
+        </attr>
+    </declare-styleable>
+
+</resources>

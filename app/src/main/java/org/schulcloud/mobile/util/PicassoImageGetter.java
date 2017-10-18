@@ -13,6 +13,8 @@ import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import org.schulcloud.mobile.R;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -40,8 +42,9 @@ public class PicassoImageGetter implements Html.ImageGetter {
     public Drawable getDrawable(String source) {
         BitmapDrawablePlaceHolder drawable = new BitmapDrawablePlaceHolder();
 
-        if (!source.contains("http://") && !source.contains("https://"))
-            source = "https://schul-cloud.org" + source;
+        if (!source.contains(context.getString(R.string.web_protocol_http))
+                && !source.contains(context.getString(R.string.web_protocol_https)))
+            source = context.getString(R.string.website) + source;
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .addInterceptor(new Interceptor() {

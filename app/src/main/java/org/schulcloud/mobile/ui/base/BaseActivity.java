@@ -1,15 +1,16 @@
 package org.schulcloud.mobile.ui.base;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.v4.util.LongSparseArray;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
@@ -20,6 +21,7 @@ import com.beardedhen.androidbootstrap.font.FontAwesome;
 
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.SchulCloudApplication;
+import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.local.PreferencesHelper;
 import org.schulcloud.mobile.injection.component.ActivityComponent;
 import org.schulcloud.mobile.injection.component.ConfigPersistentComponent;
@@ -27,7 +29,7 @@ import org.schulcloud.mobile.injection.component.DaggerConfigPersistentComponent
 import org.schulcloud.mobile.injection.module.ActivityModule;
 import org.schulcloud.mobile.ui.courses.CourseActivity;
 import org.schulcloud.mobile.ui.dashboard.DashboardActivity;
-import org.schulcloud.mobile.ui.feedback.FeedbackFragment;
+import org.schulcloud.mobile.ui.feedback.FeedbackDialog;
 import org.schulcloud.mobile.ui.files.FileActivity;
 import org.schulcloud.mobile.ui.homework.HomeworkActivity;
 import org.schulcloud.mobile.ui.settings.SettingsActivity;
@@ -35,6 +37,8 @@ import org.schulcloud.mobile.ui.signin.SignInActivity;
 import org.schulcloud.mobile.util.NetworkUtil;
 
 import java.util.concurrent.atomic.AtomicLong;
+
+import javax.inject.Inject;
 
 import timber.log.Timber;
 
@@ -49,26 +53,16 @@ public class BaseActivity extends AppCompatActivity {
     public Toolbar mToolbar;
     // todo: maybe move this to DataManager
     private PreferencesHelper mPreferencesHelper;
+    @Inject
+    DataManager mDataManager;
     // Curently just nonsense Data and Logos, change here for the actual list
-    private String[] layers = {
-            "Dashboard",
-            "Meine Dateien",
-            "Meine Fächer",
-            "Hausaufgaben",
-            "Kontakt",
-            "Einstellungen",
-            "Impressum",
-            "Feedback",
-            "Ausloggen",
-    };
+    private String[] layers;
     private String[] resources = {
             FontAwesome.FA_TH_LARGE,
             FontAwesome.FA_FILE,
             FontAwesome.FA_GRADUATION_CAP,
             FontAwesome.FA_TASKS,
-            FontAwesome.FA_CONTAO,
             FontAwesome.FA_COGS,
-            FontAwesome.FA_INFO,
             FontAwesome.FA_PENCIL,
             FontAwesome.FA_SIGN_OUT
     };
@@ -94,6 +88,14 @@ public class BaseActivity extends AppCompatActivity {
             offline.setVisibility(View.VISIBLE);
         }
 
+        layers = new String[]{
+                getString(R.string.dashboard_title),
+                getString(R.string.files_title),
+                getString(R.string.courses_title),
+                getString(R.string.homework_title),
+                getString(R.string.settings_title),
+                getString(R.string.logout_title)
+        };
         // Idea found on StackOverflow
         // http://stackoverflow.com/questions/21405958/how-to-display-navigation-drawer-in-all-activities
         // Init and data filling of the navigation drawer
@@ -104,7 +106,7 @@ public class BaseActivity extends AppCompatActivity {
         mDrawerList.setAdapter(new NavItemAdapter(this, layers, resources));
         mDrawerList.setOnItemClickListener((arg0, arg1, pos, arg3) -> openActivityForPos(pos));
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, mToolbar, R.string.drawer_open, R.string.drawer_close) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, mToolbar, R.string.base_drawer_open, R.string.base_drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -126,13 +128,13 @@ public class BaseActivity extends AppCompatActivity {
         // Create the ActivityComponent and reuses cached ConfigPersistentComponent if this is
         // being called after a configuration change.
         mActivityId = savedInstanceState != null ?
-                savedInstanceState.getLong(KEY_ACTIVITY_ID) : NEXT_ID.getAndIncrement();
+            savedInstanceState.getLong(KEY_ACTIVITY_ID) : NEXT_ID.getAndIncrement();
         ConfigPersistentComponent configPersistentComponent;
         if (null == sComponentsMap.get(mActivityId)) {
             Timber.i("Creating new ConfigPersistentComponent id=%d", mActivityId);
             configPersistentComponent = DaggerConfigPersistentComponent.builder()
-                    .applicationComponent(SchulCloudApplication.get(this).getComponent())
-                    .build();
+                .applicationComponent(SchulCloudApplication.get(this).getComponent())
+                .build();
             sComponentsMap.put(mActivityId, configPersistentComponent);
         } else {
             Timber.i("Reusing ConfigPersistentComponent id=%d", mActivityId);
@@ -140,8 +142,12 @@ public class BaseActivity extends AppCompatActivity {
         }
         mActivityComponent = configPersistentComponent.activityComponent(new ActivityModule(this));
     }
-
-
+    @Override
+    @CallSuper
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_base, menu);
+        return true;
+    }
     // Magic happens here for choosing according to the position in the array
     private void openActivityForPos(int pos) {
         Class c;
@@ -150,7 +156,7 @@ public class BaseActivity extends AppCompatActivity {
                 c = DashboardActivity.class;
                 break;
             case 2: // files
-                mPreferencesHelper.clear("storageContext");
+                mPreferencesHelper.clear(PreferencesHelper.PREFERENCE_STORAGE_CONTEXT);
                 c = FileActivity.class;
                 break;
             case 3: // Course
@@ -159,40 +165,12 @@ public class BaseActivity extends AppCompatActivity {
             case 4: // homework
                 c = HomeworkActivity.class;
                 break;
-            case 5: // contact
-                Intent mailIntent = new Intent(Intent.ACTION_VIEW);
-                Uri data = Uri.parse("mailto:" +
-                        getResources().getString(R.string.mail_to_mail) +
-                        "?subject=" +
-                        getResources().getString(R.string.mail_to_subject));
-                mailIntent.setData(data);
-                startActivity(mailIntent);
-                return;
-            case 6: // settings
+            case 5: // settings
                 c = SettingsActivity.class;
                 break;
-            case 7: // impressum
-                c = BaseActivity.class;
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://hpi.de/impressum.html"));
-                startActivity(browserIntent);
-                return;
-            case 8: // feedback
-                FeedbackFragment frag = new FeedbackFragment();
-                Bundle args = new Bundle();
-                args.putString("contextName", this.getClass().getSimpleName());
-                args.putString("currentUser", mPreferencesHelper.getCurrentUsername());
-                frag.setArguments(args);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.overlay_fragment_container, frag)
-                        .addToBackStack(null)
-                        .commit();
-                mDrawer.closeDrawer(Gravity.LEFT);
-                return;
-            case 9: // logout
-                // delete accessToken and currentUser
-                mPreferencesHelper.clear("jwt");
-                mPreferencesHelper.clear("currentUser");
+            case 6: // logout
+                // clear all local user data
+                mDataManager.signOut();
                 c = SignInActivity.class;
                 break;
             default:
@@ -203,7 +181,17 @@ public class BaseActivity extends AppCompatActivity {
         this.startActivity(intent);
         this.finish();
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.base_action_feedback:
+                FeedbackDialog.newInstance(getClass().getSimpleName(),
+                    mPreferencesHelper.getCurrentUsername())
+                    .show(getSupportFragmentManager(), null);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

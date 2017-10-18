@@ -2,11 +2,13 @@ package org.schulcloud.mobile.ui.news.detailed;
 
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.data.model.News;
-import org.schulcloud.mobile.ui.base.BaseActivity;
 import org.schulcloud.mobile.ui.base.BaseFragment;
+import org.schulcloud.mobile.ui.news.NewsActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,14 +37,15 @@ public class DetailedNewsFragment extends BaseFragment implements DetailedNewsMv
 
     @BindView(R.id.text_newsTitle)
     TextView newsTitle;
-    @BindView(R.id.text_description)
+    @BindView(R.id.text_newsDescription)
     TextView newsDescription;
     @BindView(R.id.text_Date)
     TextView newsDateText;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         activityComponent().inject(this);
         View view = inflater.inflate(R.layout.fragment_detailed_news,container,false);
         ButterKnife.bind(this, view);
@@ -67,8 +70,8 @@ public class DetailedNewsFragment extends BaseFragment implements DetailedNewsMv
         }
 
         if(newsDateText != null) { newsDateText.setText(dateFormatDeux.format(newsDate)); }
-        if(newsTitle != null) {newsTitle.setText(news.title);}
-        if(newsDescription != null) {newsDescription.setText(news.content);}
+        if(newsTitle != null) {newsTitle.setText(Html.fromHtml(news.title));}
+        if(newsDescription != null) {newsDescription.setText(Html.fromHtml(news.content));}
 
     }
 

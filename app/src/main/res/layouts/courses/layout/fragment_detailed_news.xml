@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true">
+    android:clickable="true"
+    android:layout_marginTop="60dp">
 
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
@@ -35,7 +36,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -44,13 +46,14 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
                     tools:text="newsDescription"/>
-
                 <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="6dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_Date"
-                    android:gravity="bottom"
-                    android:layout_alignRight="@id/text_newsDescription"
+                    android:gravity="right"
+                    android:layout_below="@id/text_newsDescription"
                     android:text="01.01.2017 12:00"/>
             </RelativeLayout>
         </ScrollView>

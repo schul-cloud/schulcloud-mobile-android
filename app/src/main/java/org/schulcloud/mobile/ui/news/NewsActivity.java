@@ -12,24 +12,17 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.data.model.News;
-import org.schulcloud.mobile.data.sync.CourseSyncService;
 import org.schulcloud.mobile.data.sync.NewsSyncService;
 import org.schulcloud.mobile.ui.base.BaseActivity;
-import org.schulcloud.mobile.ui.base.MvpView;
-import org.schulcloud.mobile.ui.homework.HomeworkPresenter;
 import org.schulcloud.mobile.ui.news.detailed.DetailedNewsFragment;
 import org.schulcloud.mobile.ui.signin.SignInActivity;
 import org.schulcloud.mobile.util.DialogFactory;
 
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.List;
 
@@ -44,6 +37,9 @@ import butterknife.ButterKnife;
 
 public class NewsActivity extends BaseActivity implements NewsMvpView {
 
+    private static final String EXTRA_TRIGGER_SYNC_FLAG =
+            "org.schulcloud.mobile.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
+
     @Inject
     public NewsPresenter mNewsPresenter;
     @Inject
@@ -53,6 +49,12 @@ public class NewsActivity extends BaseActivity implements NewsMvpView {
     RecyclerView mRecyclerView;
     @BindView(R.id.swiperefresh)
     SwipeRefreshLayout swipeRefresh;
+
+    public static Intent getStartIntent(Context context, boolean triggerDataSyncOnCreate) {
+        Intent intent = new Intent(context, NewsActivity.class);
+        intent.putExtra(EXTRA_TRIGGER_SYNC_FLAG, triggerDataSyncOnCreate);
+        return intent;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,13 +70,21 @@ public class NewsActivity extends BaseActivity implements NewsMvpView {
 
         mRecyclerView.setAdapter(mNewsAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(mNewsAdapter.mContext,DividerItemDecoration.VERTICAL));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(
+                mNewsAdapter.mContext,DividerItemDecoration.VERTICAL));
         mNewsPresenter.attachView(this);
+        mNewsAdapter.mNewsPresenter.attachView(this);
         mNewsPresenter.checkSignIn(this);
 
         mNewsPresenter.loadNews();
 
-        swipeRefresh.setColorSchemeColors(getResources().getColor(R.color.hpiRed), getResources().getColor(R.color.hpiOrange), getResources().getColor(R.color.hpiYellow));
+        if (getIntent().getBooleanExtra(EXTRA_TRIGGER_SYNC_FLAG, true)) {
+            startService(NewsSyncService.getStartIntent(this));
+        }
+
+        swipeRefresh.setColorSchemeColors(getResources().getColor(R.color.hpiRed)
+                , getResources().getColor(R.color.hpiOrange)
+                , getResources().getColor(R.color.hpiYellow));
 
         swipeRefresh.setOnRefreshListener(
                 () -> {
@@ -125,7 +135,8 @@ public class NewsActivity extends BaseActivity implements NewsMvpView {
 
     @Override
     public void showError() {
-        DialogFactory.createGenericErrorDialog(this,"Leider konnten die News nicht geladen werden").show();
+        DialogFactory.createGenericErrorDialog(this,
+                "Leider konnten die News nicht geladen werden").show();
     }
 
     @Override

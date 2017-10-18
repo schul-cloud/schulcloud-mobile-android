@@ -36,6 +36,7 @@
         <RelativeLayout
             android:layout_marginTop="5dp"
             android:layout_height="20dp"
+            android:layout_marginRight="6dp"
             android:layout_width = "match_parent"
             android:layout_gravity = "bottom">
 

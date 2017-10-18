@@ -72,7 +72,6 @@ public class DetailedNewsFragment extends BaseFragment implements DetailedNewsMv
         if(newsDateText != null) { newsDateText.setText(dateFormatDeux.format(newsDate)); }
         if(newsTitle != null) {newsTitle.setText(Html.fromHtml(news.title));}
         if(newsDescription != null) {newsDescription.setText(Html.fromHtml(news.content));}
-
     }
 
     @Override

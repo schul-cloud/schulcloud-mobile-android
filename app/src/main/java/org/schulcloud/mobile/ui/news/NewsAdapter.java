@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         if(news.content != null) holder.descriptionTextView.setText(Html.fromHtml(news.content));
         if(news.createdAt != null)  holder.dateText.setText(dateFormatDeux.format(createdDate));
         holder.cardView.setOnClickListener(v -> mNewsPresenter.showNewsDialog(news._id));
+
+        int pos = holder.descriptionTextView.getText().toString().indexOf("\n\n");
+        holder.descriptionTextView.setText(holder.descriptionTextView.getText().toString()
+                    .substring(0,pos));
+        if(!Html.fromHtml(news.content).toString().substring(pos).trim().isEmpty()){
+            holder.descriptionTextView.append("\n...");
+        }
     }
 
     @Override

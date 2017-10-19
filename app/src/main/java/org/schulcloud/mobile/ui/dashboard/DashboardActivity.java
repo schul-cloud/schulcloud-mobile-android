@@ -24,6 +24,9 @@ import org.schulcloud.mobile.ui.homework.HomeworkActivity;
 import org.schulcloud.mobile.ui.signin.SignInActivity;
 import org.schulcloud.mobile.util.Pair;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -122,11 +125,19 @@ public class DashboardActivity extends BaseActivity implements DashboardMvpView 
 
     @Override
     public void showOpenHomeworks(Pair<String, String> openHomeworks) {
+        Date date = null;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        SimpleDateFormat simpleDateFormatDeux = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
+        try {
+            date = simpleDateFormat.parse(openHomeworks.getSecond());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         openTasks.setText(openHomeworks.getFirst());
         if (openHomeworks.getSecond().equals("10000-01-31T23:59"))
             dueTillDate.setText("...");
         else
-            dueTillDate.setText(openHomeworks.getSecond());
+            dueTillDate.setText(simpleDateFormatDeux.format(date));
         cardViewHomework.setOnClickListener(v -> {
             Intent intent = new Intent(this, HomeworkActivity.class);
             this.startActivity(intent);

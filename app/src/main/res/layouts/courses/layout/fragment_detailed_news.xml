@@ -9,7 +9,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="8dp"
+        android:paddingLeft="19dp"
         android:paddingRight="8dp"
         android:background="@color/white">
 
@@ -40,21 +40,23 @@
                 android:layout_gravity="bottom">
 
                 <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_Date"
+                    android:gravity="left"
+                    android:text="01.01.2017 12:00"/>
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_newsDescription"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
+                    android:layout_below="@id/text_Date"
                     tools:text="newsDescription"/>
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="6dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/text_Date"
-                    android:gravity="right"
-                    android:layout_below="@id/text_newsDescription"
-                    android:text="01.01.2017 12:00"/>
             </RelativeLayout>
         </ScrollView>
     </RelativeLayout>

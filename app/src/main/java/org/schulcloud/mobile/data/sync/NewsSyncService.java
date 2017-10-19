@@ -30,10 +30,6 @@ public class NewsSyncService extends Service {
     @Inject
     DataManager mDataManager;
     private Subscription mSubscription;
-    private String schoolId;
-    private String userId;
-    private String ARGUMENT_SCHOOL_ID = "schoolId";
-    private String ARGUMENT_USER_ID = "userId";
 
     public static Intent getStartIntent(Context context) {
         return new Intent(context, NewsSyncService.class);
@@ -57,12 +53,6 @@ public class NewsSyncService extends Service {
             AndroidComponentUtil.toggleComponent(this, NewsSyncService.SyncOnConnectionAviable.class, true);
             stopSelf(startId);
             return START_NOT_STICKY;
-        }
-
-        Bundle extras = intent.getExtras();
-        if(extras != null) {
-            schoolId = extras.getString(ARGUMENT_SCHOOL_ID);
-            userId = extras.getString(ARGUMENT_USER_ID);
         }
 
         if (mSubscription != null && !mSubscription.isUnsubscribed()) mSubscription.unsubscribe();

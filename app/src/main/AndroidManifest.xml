@@ -187,7 +187,7 @@
         <service android:name=".data.sync.NewsSyncService"/>
 
         <receiver
-            android:name=".data.sync.NewsSyncService$SyncOnConnectionAvialable"
+            android:name=".data.sync.NewsSyncService$SyncOnConnectionAviable"
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>

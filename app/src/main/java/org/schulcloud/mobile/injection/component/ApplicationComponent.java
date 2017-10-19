@@ -13,6 +13,7 @@ import org.schulcloud.mobile.data.sync.DirectorySyncService;
 import org.schulcloud.mobile.data.sync.EventSyncService;
 import org.schulcloud.mobile.data.sync.FileSyncService;
 import org.schulcloud.mobile.data.sync.HomeworkSyncService;
+import org.schulcloud.mobile.data.sync.NewsSyncService;
 import org.schulcloud.mobile.data.sync.SubmissionSyncService;
 import org.schulcloud.mobile.data.sync.TopicSyncService;
 import org.schulcloud.mobile.data.sync.UserSyncService;
@@ -50,6 +51,8 @@ public interface ApplicationComponent {
     void inject(CourseSyncService courseSyncService);
 
     void inject(TopicSyncService topicSyncService);
+
+    void inject(NewsSyncService newsSyncService);
 
     @ApplicationContext
     Context context();

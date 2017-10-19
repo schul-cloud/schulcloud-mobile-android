@@ -58,6 +58,25 @@ public class BaseFragment extends Fragment {
         mActivityComponent = configPersistentComponent.activityComponent(new ActivityModule((Activity) context));
     }
 
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        ConfigPersistentComponent configPersistentComponent;
+        if(null == sComponentsMap.get(mActivityId)) {
+            Timber.i("Creating new ConfigPersistentComponent id=%d", mActivityId);
+            configPersistentComponent = DaggerConfigPersistentComponent.builder()
+                    .applicationComponent(SchulCloudApplication.get(activity).getComponent())
+                    .build();
+            sComponentsMap.put(mActivityId,configPersistentComponent);
+        } else {
+            Timber.i("Reusing ConfigPersistentComponent id=%d", mActivityId);
+            configPersistentComponent = sComponentsMap.get(mActivityId);
+        }
+        mActivityComponent = configPersistentComponent.activityComponent(new ActivityModule((Activity) activity));
+    }
+
     public ActivityComponent activityComponent() {
         return mActivityComponent;
     }

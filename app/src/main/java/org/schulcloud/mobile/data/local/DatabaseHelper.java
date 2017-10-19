@@ -10,6 +10,7 @@ import org.schulcloud.mobile.data.model.Directory;
 import org.schulcloud.mobile.data.model.Event;
 import org.schulcloud.mobile.data.model.File;
 import org.schulcloud.mobile.data.model.Homework;
+import org.schulcloud.mobile.data.model.News;
 import org.schulcloud.mobile.data.model.Submission;
 import org.schulcloud.mobile.data.model.Topic;
 import org.schulcloud.mobile.data.model.User;
@@ -454,5 +455,37 @@ public class DatabaseHelper {
     public Topic getContents(String topicId) {
         final Realm realm = mRealmProvider.get();
         return realm.where(Topic.class).equalTo("_id", topicId).findFirst();
+    }
+
+    /**** News ****/
+    public Observable<List<News>> getNews() {
+        final Realm realm = mRealmProvider.get();
+        return realm.where(News.class).findAllAsync().asObservable()
+                .filter(news -> news.isLoaded())
+                .map(news -> realm.copyFromRealm(news));
+    }
+
+    public Observable<News> setNews(final Collection<News> newNews) {
+        return Observable.create( subscriber -> {
+            if(subscriber.isUnsubscribed()) return;
+            Realm realm = null;
+
+            try{
+                realm = mRealmProvider.get();
+                realm.executeTransaction(realm1 -> realm1.copyToRealmOrUpdate(newNews));
+            } catch (Exception e){
+                Timber.e(e, "There was an error while adding in Realm.");
+                subscriber.onError(e);
+            } finally {
+                if (realm != null) {
+                    realm.close();
+                }
+            }
+        });
+    }
+
+    public News getNewsForId(String newsId) {
+        final Realm realm = mRealmProvider.get();
+        return realm.where(News.class).equalTo("_id", newsId).findFirst();
     }
 }

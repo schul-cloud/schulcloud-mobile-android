@@ -32,6 +32,7 @@ import org.schulcloud.mobile.ui.dashboard.DashboardActivity;
 import org.schulcloud.mobile.ui.feedback.FeedbackDialog;
 import org.schulcloud.mobile.ui.files.FileActivity;
 import org.schulcloud.mobile.ui.homework.HomeworkActivity;
+import org.schulcloud.mobile.ui.news.NewsActivity;
 import org.schulcloud.mobile.ui.settings.SettingsActivity;
 import org.schulcloud.mobile.ui.signin.SignInActivity;
 import org.schulcloud.mobile.util.NetworkUtil;
@@ -63,7 +64,7 @@ public class BaseActivity extends AppCompatActivity {
             FontAwesome.FA_GRADUATION_CAP,
             FontAwesome.FA_TASKS,
             FontAwesome.FA_COGS,
-            FontAwesome.FA_PENCIL,
+            FontAwesome.FA_NEWSPAPER_O,
             FontAwesome.FA_SIGN_OUT
     };
     private ActivityComponent mActivityComponent;
@@ -94,6 +95,7 @@ public class BaseActivity extends AppCompatActivity {
                 getString(R.string.courses_title),
                 getString(R.string.homework_title),
                 getString(R.string.settings_title),
+                getString(R.string.news_title),
                 getString(R.string.logout_title)
         };
         // Idea found on StackOverflow
@@ -168,7 +170,10 @@ public class BaseActivity extends AppCompatActivity {
             case 5: // settings
                 c = SettingsActivity.class;
                 break;
-            case 6: // logout
+            case 6: // news
+                c = NewsActivity.class;
+                break;
+            case 7: // logout
                 // clear all local user data
                 mDataManager.signOut();
                 c = SignInActivity.class;

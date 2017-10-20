@@ -198,7 +198,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'com.jakewharton.timber:timber:4.1.2'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    //compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
     testCompile 'org.powermock:powermock-core:1.6.4'
     testCompile 'org.robolectric:robolectric:3.1'

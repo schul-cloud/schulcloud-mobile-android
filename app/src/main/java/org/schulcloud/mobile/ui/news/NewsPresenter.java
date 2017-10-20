@@ -54,9 +54,7 @@ public class NewsPresenter extends BasePresenter<NewsMvpView> {
                     @Override
                     public void onNext(List<News> newses) {
                         if(newses.isEmpty()){
-                            System.out.println(newses.size());
                             getMvpView().showNewsEmpty();
-                            Timber.i("No news...");
                         } else {
                             getMvpView().showNews(newses);
                         }

@@ -32,10 +32,6 @@ public class SignInPresenter extends BasePresenter<SignInMvpView> {
         checkViewAttached();
         RxUtil.unsubscribe(mSubscription);
 
-        // todo: remove credentials
-        username = username.equals("") ? "schueler@schul-cloud.org" : username;
-        password = password.equals("") ? "schulcloud" : password;
-
         mSubscription = mDataManager.signIn(username, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

@@ -6,7 +6,7 @@ import javax.inject.Singleton;
 
 import io.realm.Realm;
 
-x@Singleton
+@Singleton
 public class BaseDatabaseHelper {
     protected final Provider<Realm> mRealmProvider;
 

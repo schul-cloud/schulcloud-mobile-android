@@ -1,231 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="org.schulcloud.mobile">
+    package="org.schulcloud.mobile">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_CALENDAR"/>
-    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- TODO: Re-implement all supported links -->
 
     <application
         android:name=".SchulCloudApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:label="@string/app_name"/>
-        <activity
-            android:name=".ui.base.BaseActivity"
-            android:label="@string/app_name"/>
-
-        <activity android:name=".ui.start.StartActivity"
-                  android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
 
         <activity
-            android:name=".ui.homework.HomeworkActivity"
+            android:name=".ui.start.StartActivity"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https"
-                    android:host="schul-cloud.org"
-                    android:pathPrefix="/homework/" />
-                <data android:scheme="https"
-                    android:host="schulcloud.org"
-                    android:pathPrefix="/homework/" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".ui.dashboard.DashboardActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https"
-                    android:host="schul-cloud.org"
-                    android:pathPrefix="/dashboard/" />
-                <data android:scheme="https"
-                    android:host="schulcloud.org"
-                    android:pathPrefix="/dashboard/" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".ui.news.NewsActivity"
-            android:label="Schul-cloud">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name = "android.intent.category.DEFAULT"/>
-                <category android:name = "android.intent.category.BROWSABLE"/>
-                <data android:scheme="https"
-                    android:host="schul-cloud.org"
-                    android:pathPrefix="/news/" />
-                <data android:scheme="https"
-                    android:host="schulcloud.org"
-                    android:pathPrefix="/news/" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".ui.courses.CourseActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https"
-                    android:host="schul-cloud.org"
-                    android:pathPrefix="/courses/" />
-                <data android:scheme="https"
-                    android:host="schulcloud.org"
-                    android:pathPrefix="/courses/" />
-            </intent-filter>
-        </activity>
-
-        <service android:name=".data.sync.CourseSyncService"/>
-
-        <receiver
-            android:name=".data.sync.CourseSyncService$SyncOnConnectionAvailable"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
-
-        <service android:name=".data.sync.TopicSyncService"/>
-
-        <receiver
-            android:name=".data.sync.TopicSyncService$SyncOnConnectionAvailable"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
-
-        <service android:name=".data.sync.UserSyncService"/>
-
-        <receiver
-            android:name=".data.sync.UserSyncService$SyncOnConnectionAvailable"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
-
-        <service android:name=".data.sync.HomeworkSyncService"/>
-
-        <receiver
-            android:name=".data.sync.HomeworkSyncService$SyncOnConnectionAvailable"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
-
-        <service android:name=".data.sync.SubmissionSyncService"/>
-
-        <receiver
-            android:name=".data.sync.SubmissionSyncService$SyncOnConnectionAvailable"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
-
-        <service android:name=".data.sync.FileSyncService"/>
-
-        <receiver
-            android:name=".data.sync.FileSyncService$SyncOnConnectionAvailable"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
-
-        <service android:name=".data.sync.DirectorySyncService"/>
-
-        <receiver
-            android:name=".data.sync.DirectorySyncService$SyncOnConnectionAvailable"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
-
-        <service android:name=".data.sync.EventSyncService"/>
-
-        <receiver
-            android:name=".data.sync.EventSyncService$SyncOnConnectionAvailable"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
-
-        <service android:name=".data.sync.DeviceSyncService"/>
-
-        <receiver
-            android:name=".data.sync.DeviceSyncService$SyncOnConnectionAvailable"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
-
-        <service android:name=".data.sync.NewsSyncService"/>
-
-        <receiver
-            android:name=".data.sync.NewsSyncService$SyncOnConnectionAviable"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
 
         <activity
             android:name=".ui.signin.SignInActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name"
+            android:noHistory="true" />
 
         <activity
-            android:name=".ui.files.FileActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https"
-                    android:host="schul-cloud.org"
-                    android:pathPrefix="/files/" />
-                <data android:scheme="https"
-                    android:host="schulcloud.org"
-                    android:pathPrefix="/files/" />
-            </intent-filter>
-        </activity>
+            android:name=".ui.main.MainActivity"
+            android:label="@string/app_name" />
+
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:label="@string/settings_title" />
 
         <service
             android:name=".util.firebase.MessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name=".ui.settings.SettingsActivity"
-            android:label="@string/app_name">
-        </activity>
+        <service android:name=".data.sync.CourseSyncService" />
+
+        <receiver
+            android:name=".data.sync.CourseSyncService$SyncOnConnectionAvailable"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".data.sync.TopicSyncService" />
+
+        <receiver
+            android:name=".data.sync.TopicSyncService$SyncOnConnectionAvailable"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".data.sync.UserSyncService" />
+
+        <receiver
+            android:name=".data.sync.UserSyncService$SyncOnConnectionAvailable"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".data.sync.HomeworkSyncService" />
+
+        <receiver
+            android:name=".data.sync.HomeworkSyncService$SyncOnConnectionAvailable"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".data.sync.SubmissionSyncService" />
+
+        <receiver
+            android:name=".data.sync.SubmissionSyncService$SyncOnConnectionAvailable"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".data.sync.FileSyncService" />
+
+        <receiver
+            android:name=".data.sync.FileSyncService$SyncOnConnectionAvailable"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".data.sync.DirectorySyncService" />
+
+        <receiver
+            android:name=".data.sync.DirectorySyncService$SyncOnConnectionAvailable"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".data.sync.EventSyncService" />
+
+        <receiver
+            android:name=".data.sync.EventSyncService$SyncOnConnectionAvailable"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".data.sync.DeviceSyncService" />
+
+        <receiver
+            android:name=".data.sync.DeviceSyncService$SyncOnConnectionAvailable"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".data.sync.NewsSyncService" />
+
+        <receiver
+            android:name=".data.sync.NewsSyncService$SyncOnConnectionAviable"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

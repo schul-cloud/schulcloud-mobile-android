@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface HomeworkMvpView extends MvpView {
 
-    void showHomework(List<Homework> homeworks);
+    void showHomework(List<Homework> homework);
 
     void showHomeworkEmpty();
 
-    void showHomeworkDialog(String homeworkId);
+    void showHomeworkDetail(String homeworkId);
 
     void showError();
 

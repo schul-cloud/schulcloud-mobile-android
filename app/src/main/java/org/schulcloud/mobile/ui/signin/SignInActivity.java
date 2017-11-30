@@ -1,6 +1,5 @@
 package org.schulcloud.mobile.ui.signin;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,7 +7,7 @@ import android.widget.EditText;
 
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.ui.base.BaseActivity;
-import org.schulcloud.mobile.ui.dashboard.DashboardActivity;
+import org.schulcloud.mobile.ui.main.MainActivity;
 import org.schulcloud.mobile.util.DialogFactory;
 
 import javax.inject.Inject;
@@ -28,29 +27,18 @@ public class SignInActivity extends BaseActivity implements SignInMvpView {
     @BindView(R.id.input_password)
     EditText password;
 
-    /**
-     * Return an Intent to start this Activity.
-     * triggerDataSyncOnCreate allows disabling the background sync service onCreate. Should
-     * only be set to false during testing.
-     */
-    public static Intent getStartIntent(Context context) {
-        Intent intent = new Intent(context, SignInActivity.class);
-        return intent;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityComponent().inject(this);
+
         setContentView(R.layout.activity_signin);
         ButterKnife.bind(this);
 
         mSignInPresenter.attachView(this);
-        btn_login.setOnClickListener(v -> {
-            mSignInPresenter.signIn(username.getText().toString(), password.getText().toString());
-        });
+        btn_login.setOnClickListener(v -> mSignInPresenter
+                .signIn(username.getText().toString(), password.getText().toString()));
     }
-
 
     @Override
     protected void onDestroy() {
@@ -58,15 +46,13 @@ public class SignInActivity extends BaseActivity implements SignInMvpView {
         super.onDestroy();
     }
 
-
     @Override
     public void showSignInSuccessful() {
-        DialogFactory.createSimpleOkErrorDialog(this, R.string.login_title, R.string.login_successful).
-                show();
-        Intent intent = new Intent(this, DashboardActivity.class);
-        this.startActivity(intent);
+        DialogFactory
+                .createSimpleOkErrorDialog(this, R.string.login_title, R.string.login_successful)
+                .show();
+        startActivity(new Intent(this, MainActivity.class));
     }
-
     @Override
     public void showSignInFailed() {
         DialogFactory.createGenericErrorDialog(this, getString(R.string.login_error))

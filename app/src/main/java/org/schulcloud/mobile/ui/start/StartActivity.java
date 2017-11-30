@@ -1,6 +1,5 @@
 package org.schulcloud.mobile.ui.start;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,8 +13,7 @@ import com.beardedhen.androidbootstrap.AwesomeTextView;
 
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.ui.base.BaseActivity;
-import org.schulcloud.mobile.ui.dashboard.DashboardActivity;
-import org.schulcloud.mobile.ui.files.FileActivity;
+import org.schulcloud.mobile.ui.main.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,16 +27,6 @@ public class StartActivity extends BaseActivity implements StartMvpView {
     @BindView(R.id.text_logo)
     TextView logoText;
 
-    /**
-     * Return an Intent to start this Activity.
-     * triggerDataSyncOnCreate allows disabling the background sync service onCreate. Should
-     * only be set to false during testing.
-     */
-    public static Intent getStartIntent(Context context, boolean triggerDataSyncOnCreate) {
-        Intent intent = new Intent(context, FileActivity.class);
-        return intent;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,20 +34,15 @@ public class StartActivity extends BaseActivity implements StartMvpView {
         setContentView(R.layout.activity_start);
         ButterKnife.bind(this);
 
-        this.showDisplayAnimation();
-
-        //this.goToMain();
+        showDisplayAnimation();
     }
 
     /***** MVP View methods implementation *****/
-
     @Override
     public void goToMain() {
         Handler handler = new Handler();
-        Context context = this;
         handler.postDelayed(() -> {
-            Intent intent = new Intent(context, DashboardActivity.class);
-            context.startActivity(intent);
+            startActivity(new Intent(StartActivity.this, MainActivity.class));
             finish();
         }, 500);
     }
@@ -81,7 +64,8 @@ public class StartActivity extends BaseActivity implements StartMvpView {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                Animation cloudAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.pulse);
+                Animation cloudAnim = AnimationUtils
+                        .loadAnimation(getApplicationContext(), R.anim.pulse);
                 cloudAnim.reset();
                 cloudIcon.clearAnimation();
                 cloudIcon.startAnimation(cloudAnim);
@@ -98,11 +82,4 @@ public class StartActivity extends BaseActivity implements StartMvpView {
         cloudIcon.clearAnimation();
         cloudIcon.startAnimation(anim);
     }
-
-    @Override
-    public void goToSignIn() {
-
-    }
-
-
 }

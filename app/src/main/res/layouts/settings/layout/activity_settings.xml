@@ -1,211 +1,161 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="org.schulcloud.mobile.ui.settings.SettingsActivity">
+    android:orientation="vertical"
+    tools:context=".ui.settings.SettingsActivity">
+
+    <include layout="@layout/action_bar" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@color/gray"
-        android:clipToPadding="false"
-        android:fillViewport="false">
+        android:clipToPadding="false">
 
         <LinearLayout
+            style="@style/Content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <!-- Calendar -->
-            <RelativeLayout
-                android:id="@+id/section_calendar"
+            <TextView
+                android:id="@+id/settings_calendar"
+                style="@style/Content_Title.Margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_calendar_title" />
+
+            <Switch
+                android:id="@+id/switch_calendar"
+                style="@style/Material.ListItem.Simple"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:paddingLeft="@dimen/bootstrap_alert_paddings"
-                android:paddingRight="@dimen/bootstrap_alert_paddings">
-
-                <TextView
-                    android:id="@+id/settings_calendar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/bootstrap_alert_paddings"
-                    android:text="@string/settings_calendar_title"
-                    android:textColor="@color/hpiRed"
-                    android:textSize="@dimen/text_title" />
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/switch_calendar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/settings_calendar"
-                    android:text="@string/settings_calendar_sync"
-                    android:textColorLink="@color/hpiRed" />
-
-                <TextView
-                    android:id="@+id/name_local_calendar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/switch_calendar"
-                    android:layout_alignBottom="@+id/switch_calendar"
-                    android:layout_toEndOf="@+id/switch_calendar"
-                    android:layout_toRightOf="@+id/switch_calendar"
-                    android:paddingRight="@dimen/bootstrap_alert_paddings"
-                    tools:text="Calendar-Name" />
-
-            </RelativeLayout>
+                android:text="@string/settings_calendar_sync"
+                android:textColorLink="@color/hpiRed" />
 
             <!-- Notifications -->
-            <RelativeLayout
-                android:id="@+id/relativeLayout"
+            <TextView
+                android:id="@+id/settings_notifications"
+                style="@style/Content_Title.Margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_notifications_title" />
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/btn_create_device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/settings_notifications_registerDevice"
+                app:bootstrapSize="lg"
+                app:buttonMode="regular"
+                app:roundedCorners="true"
+                app:showOutline="false" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/devices_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/bootstrap_alert_paddings"
-                android:paddingRight="@dimen/bootstrap_alert_paddings"
-                android:paddingTop="@dimen/bootstrap_alert_paddings">
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:paddingBottom="6dp"
+                android:paddingTop="6dp"
+                android:scrollbars="vertical"
+                tools:listitem="@layout/item_device" />
 
-
-                <TextView
-                    android:id="@+id/settings_notifications"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/bootstrap_alert_paddings"
-                    android:text="@string/settings_notifications_title"
-                    android:textColor="@color/hpiRed"
-                    android:textSize="@dimen/text_title" />
-
-                <com.beardedhen.androidbootstrap.BootstrapButton
-                    android:id="@+id/btn_create_device"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/settings_notifications"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/settings_notifications_registerDevice"
-                    app:bootstrapSize="lg"
-                    app:buttonMode="regular"
-                    app:roundedCorners="true"
-                    app:showOutline="false" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/devices_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/btn_create_device"
-                    android:layout_marginTop="26dp"
-                    android:clipToPadding="false"
-                    android:nestedScrollingEnabled="false"
-                    android:paddingBottom="6dp"
-                    android:paddingTop="6dp"
-                    android:scrollbars="vertical" />
-
-            </RelativeLayout>
+            <!-- About -->
+            <TextView
+                android:id="@+id/settings_about"
+                style="@style/Content_Title.Margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_about_title" />
 
             <LinearLayout
+                android:id="@+id/settings_about_contributors"
+                style="@style/Preference_Wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="@dimen/bootstrap_alert_paddings">
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/settings_about"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/bootstrap_alert_paddings"
-                    android:paddingRight="@dimen/bootstrap_alert_paddings"
-                    android:text="@string/settings_about_title"
-                    android:textColor="@color/hpiRed"
-                    android:textSize="@dimen/text_title" />
-
-                <LinearLayout
-                    android:id="@+id/settings_about_contributors"
-                    style="@style/Preference_Wrapper"
+                    style="@style/Preference_Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/Preference_Title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/settings_about_contributors" />
-
-                </LinearLayout>
-
-                <org.schulcloud.mobile.ui.layouts.ListItemLayout
-                    android:id="@+id/settings_about_github"
-                    style="@style/ListItemPreference"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        style="@style/Material.ListItem_TextPrimary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/settings_about_openSource" />
-
-                    <android.support.v7.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_position="endIcon"
-                        app:srcCompat="@drawable/ic_open_in_new_dark_24dp" />
-
-                </org.schulcloud.mobile.ui.layouts.ListItemLayout>
-
-                <org.schulcloud.mobile.ui.layouts.ListItemLayout
-                    android:id="@+id/settings_about_contact"
-                    style="@style/ListItemPreference"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        style="@style/Material.ListItem_TextPrimary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/settings_about_contact" />
-
-                    <android.support.v7.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_position="endIcon"
-                        app:srcCompat="@drawable/ic_open_in_new_dark_24dp" />
-
-                </org.schulcloud.mobile.ui.layouts.ListItemLayout>
-
-                <org.schulcloud.mobile.ui.layouts.ListItemLayout
-                    android:id="@+id/settings_about_imprint"
-                    style="@style/ListItemPreference"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        style="@style/Material.ListItem_TextPrimary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/settings_about_imprint" />
-
-                    <android.support.v7.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_position="endIcon"
-                        app:srcCompat="@drawable/ic_open_in_new_dark_24dp" />
-
-                </org.schulcloud.mobile.ui.layouts.ListItemLayout>
+                    android:text="@string/settings_about_contributors" />
 
             </LinearLayout>
+
+            <org.schulcloud.mobile.ui.layouts.ListItemLayout
+                android:id="@+id/about_github"
+                style="@style/ListItemPreference"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/Material.ListItem_TextPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_about_openSource" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_position="endIcon"
+                    app:srcCompat="@drawable/ic_open_in_new_dark_24dp" />
+
+            </org.schulcloud.mobile.ui.layouts.ListItemLayout>
+
+            <org.schulcloud.mobile.ui.layouts.ListItemLayout
+                android:id="@+id/about_contact"
+                style="@style/ListItemPreference"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/Material.ListItem_TextPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_about_contact" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_position="endIcon"
+                    app:srcCompat="@drawable/ic_open_in_new_dark_24dp" />
+
+            </org.schulcloud.mobile.ui.layouts.ListItemLayout>
+
+            <org.schulcloud.mobile.ui.layouts.ListItemLayout
+                android:id="@+id/about_imprint"
+                style="@style/ListItemPreference"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/Material.ListItem_TextPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_about_imprint" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_position="endIcon"
+                    app:srcCompat="@drawable/ic_open_in_new_dark_24dp" />
+
+            </org.schulcloud.mobile.ui.layouts.ListItemLayout>
 
         </LinearLayout>
 
     </ScrollView>
 
-    <FrameLayout
-        android:id="@+id/overlay_fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-</RelativeLayout>
+</LinearLayout>

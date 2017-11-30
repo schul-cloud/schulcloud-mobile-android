@@ -4,10 +4,6 @@ import io.realm.RealmModel;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 
-/**
- * Created by araknor on 10.10.17.
- */
-
 @RealmClass
 public class News implements RealmModel {
     @PrimaryKey

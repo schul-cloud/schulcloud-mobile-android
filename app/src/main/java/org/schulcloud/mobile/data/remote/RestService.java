@@ -60,7 +60,8 @@ public interface RestService {
     @POST("fileStorage/signedUrl")
     Observable<SignedUrlResponse> generateSignedUrl(@Header("Authorization") String accessToken, @Body SignedUrlRequest signedUrlRequest);
 
-    @GET   Observable<ResponseBody> downloadFile(@Url String fileUrl);
+    @GET
+    Observable<ResponseBody> downloadFile(@Url String fileUrl);
 
     @DELETE("fileStorage/directories")
     Observable<ResponseBody> deleteDirectory(@Header("Authorization") String accessToken, @Query("path") String path);

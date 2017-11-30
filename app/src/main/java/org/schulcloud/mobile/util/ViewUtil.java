@@ -3,7 +3,12 @@ package org.schulcloud.mobile.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.inputmethod.InputMethodManager;
+
+import org.schulcloud.mobile.R;
 
 public final class ViewUtil {
 
@@ -23,4 +28,11 @@ public final class ViewUtil {
         imm.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(), 0);
     }
 
+    public static void initSwipeRefreshColors(@NonNull SwipeRefreshLayout swipeRefreshLayout) {
+        Context c = swipeRefreshLayout.getContext();
+        swipeRefreshLayout.setColorSchemeColors(
+                ResourcesCompat.getColor(c.getResources(), R.color.hpiRed, c.getTheme()),
+                ResourcesCompat.getColor(c.getResources(), R.color.hpiOrange, c.getTheme()),
+                ResourcesCompat.getColor(c.getResources(), R.color.hpiYellow, c.getTheme()));
+    }
 }

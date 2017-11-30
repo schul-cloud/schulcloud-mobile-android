@@ -1,4 +1,4 @@
-package org.schulcloud.mobile.ui.courses.detailed;
+package org.schulcloud.mobile.ui.courses.topic;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.model.Contents;
+import org.schulcloud.mobile.ui.courses.detailed.DetailedCoursePresenter;
 import org.schulcloud.mobile.util.PicassoImageGetter;
 
 import java.util.ArrayList;

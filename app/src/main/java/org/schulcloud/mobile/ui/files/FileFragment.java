@@ -2,13 +2,15 @@ package org.schulcloud.mobile.ui.files;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,10 +25,10 @@ import org.schulcloud.mobile.data.model.Directory;
 import org.schulcloud.mobile.data.model.File;
 import org.schulcloud.mobile.data.sync.DirectorySyncService;
 import org.schulcloud.mobile.data.sync.FileSyncService;
-import org.schulcloud.mobile.ui.base.BaseActivity;
-import org.schulcloud.mobile.ui.signin.SignInActivity;
+import org.schulcloud.mobile.ui.main.MainFragment;
 import org.schulcloud.mobile.util.DialogFactory;
 import org.schulcloud.mobile.util.InternalFilesUtil;
+import org.schulcloud.mobile.util.ViewUtil;
 
 import java.util.List;
 
@@ -36,13 +38,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
 
-import static org.schulcloud.mobile.util.PermissionsUtil.checkPermissions;
 
-
-public class FileActivity extends BaseActivity implements FileMvpView {
-
-    private static final String EXTRA_TRIGGER_SYNC_FLAG =
-            "org.schulcloud.mobile.ui.files.FileActivity.EXTRA_TRIGGER_SYNC_FLAG";
+public class FileFragment extends MainFragment implements FileMvpView {
+    private static final String ARGUMENT_TRIGGER_SYNC = "ARGUMENT_TRIGGER_SYNC";
 
     private static final int FILE_CHOOSE_RESULT_ACTION = 2017;
     private static final int FILE_READER_PERMISSION_CALLBACK_ID = 44;
@@ -53,84 +51,77 @@ public class FileActivity extends BaseActivity implements FileMvpView {
 
     @Inject
     FilesAdapter mFilesAdapter;
-
     @Inject
     DirectoriesAdapter mDirectoriesAdapter;
 
+    private InternalFilesUtil mFilesUtil;
+    private ProgressDialog mUploadProgressDialog;
+    private ProgressDialog mDownloadProgressDialog;
+
     @BindView(R.id.directories_recycler_view)
     RecyclerView directoriesRecyclerView;
-
     @BindView(R.id.files_recycler_view)
     RecyclerView fileRecyclerView;
-
     @BindView(R.id.files_upload)
     FloatingActionButton fileUploadButton;
-
     @BindView(R.id.swiperefresh)
     SwipeRefreshLayout swipeRefresh;
 
-    private InternalFilesUtil filesUtil;
-    private ProgressDialog uploadProgressDialog;
-    private ProgressDialog downloadProgressDialog;
-
-
+    public static FileFragment newInstance() {
+        return newInstance(true);
+    }
     /**
-     * Return an Intent to start this Activity.
-     * triggerDataSyncOnCreate allows disabling the background sync service onCreate. Should
-     * only be set to false during testing.
+     * Creates a new instance of this fragment.
+     *
+     * @param triggerDataSyncOnCreate Allows disabling the background sync service onCreate. Should
+     *                                only be set to false during testing.
+     * @return The new instance
      */
-    public static Intent getStartIntent(Context context, boolean triggerDataSyncOnCreate) {
-        Intent intent = new Intent(context, FileActivity.class);
-        intent.putExtra(EXTRA_TRIGGER_SYNC_FLAG, triggerDataSyncOnCreate);
-        return intent;
+    public static FileFragment newInstance(boolean triggerDataSyncOnCreate) {
+        FileFragment fileFragment = new FileFragment();
+
+        Bundle args = new Bundle();
+        args.putBoolean(ARGUMENT_TRIGGER_SYNC, triggerDataSyncOnCreate);
+        fileFragment.setArguments(args);
+
+        return fileFragment;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityComponent().inject(this);
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        //inflate your activity layout here!
-        View contentView = inflater.inflate(R.layout.activity_files, null, false);
-        mDrawer.addView(contentView, 0);
-        getSupportActionBar().setTitle(R.string.files_title);
-        ButterKnife.bind(this);
-
-        fileRecyclerView.setAdapter(mFilesAdapter);
-        fileRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        directoriesRecyclerView.setAdapter(mDirectoriesAdapter);
-        directoriesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        fileUploadButton.setBackgroundTintList(ColorStateList.valueOf(
-                getResources().getColor(R.color.hpiRed)));
-        fileUploadButton.setOnClickListener(v -> {
-            this.startFileChoosing();
-        });
-
-        mFilePresenter.attachView(this);
-        mFilePresenter.checkSignedIn(this);
-
-        mFilePresenter.loadFiles();
-        mFilePresenter.loadDirectories();
-
-        if (getIntent().getBooleanExtra(EXTRA_TRIGGER_SYNC_FLAG, true)) {
-            startService(FileSyncService.getStartIntent(this));
-            startService(DirectorySyncService.getStartIntent(this));
+        if (getArguments().getBoolean(ARGUMENT_TRIGGER_SYNC, true)) {
+            startService(FileSyncService.getStartIntent(getContext()));
+            startService(DirectorySyncService.getStartIntent(getContext()));
         }
 
-        filesUtil = new InternalFilesUtil(this);
+        mFilesUtil = new InternalFilesUtil(getContext());
+    }
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_files, container, false);
+        ButterKnife.bind(this, view);
+        setTitle(R.string.files_title);
 
-        swipeRefresh.setColorSchemeColors(getResources().getColor(R.color.hpiRed), getResources().getColor(R.color.hpiOrange), getResources().getColor(R.color.hpiYellow));
+        fileRecyclerView.setAdapter(mFilesAdapter);
+        fileRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        directoriesRecyclerView.setAdapter(mDirectoriesAdapter);
+        directoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        fileUploadButton.setOnClickListener(v -> startFileChoosing());
+
+        ViewUtil.initSwipeRefreshColors(swipeRefresh);
         swipeRefresh.setOnRefreshListener(
                 () -> {
-                    startService(FileSyncService.getStartIntent(this));
-                    startService(DirectorySyncService.getStartIntent(this));
+                    startService(FileSyncService.getStartIntent(getContext()));
+                    startService(DirectorySyncService.getStartIntent(getContext()));
 
-                    Handler handler = new Handler();
-                    handler.postDelayed(() -> {
+                    new Handler().postDelayed(() -> {
                         mFilePresenter.loadFiles();
                         mFilePresenter.loadDirectories();
 
@@ -138,37 +129,40 @@ public class FileActivity extends BaseActivity implements FileMvpView {
                     }, 3000);
                 }
         );
-    }
 
+        mFilePresenter.attachView(this);
+        mFilePresenter.loadFiles();
+        mFilePresenter.loadDirectories();
+
+        return view;
+    }
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         mFilePresenter.detachView();
         super.onDestroy();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case FILE_CHOOSE_RESULT_ACTION:
                 if (data != null) {
-                    java.io.File file = filesUtil.getFileFromContentPath(data.getData());
+                    java.io.File file = mFilesUtil.getFileFromContentPath(data.getData());
                     mFilePresenter.uploadFileToServer(file);
                 }
                 break;
 
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
         }
-
-        super.onActivityResult(requestCode, resultCode, data);
-
     }
 
     @Override
-    public void onBackPressed() {
-        mFilePresenter.stepOneDirectoryBack();
+    public boolean onBackPressed() {
+        return mFilePresenter.stepOneDirectoryBack();
     }
 
     /***** MVP View methods implementation *****/
-
     @Override
     public void showFiles(List<File> files) {
         mFilesAdapter.setFiles(files);
@@ -189,19 +183,20 @@ public class FileActivity extends BaseActivity implements FileMvpView {
 
     @Override
     public void showError() {
-        DialogFactory.createGenericErrorDialog(this, getString(R.string.files_fetch_error))
+        DialogFactory.createGenericErrorDialog(getContext(), getString(R.string.files_fetch_error))
                 .show();
     }
 
     @Override
     public void showLoadingFileFromServerError() {
-        DialogFactory.createGenericErrorDialog(this, R.string.files_load_error)
+        DialogFactory.createGenericErrorDialog(getContext(), R.string.files_load_error)
                 .show();
     }
 
     @Override
     public void showFile(String url, String mimeType) {
-        if (downloadProgressDialog != null && downloadProgressDialog.isShowing()) downloadProgressDialog.cancel();
+        if (mDownloadProgressDialog != null && mDownloadProgressDialog.isShowing())
+            mDownloadProgressDialog.cancel();
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.parse(url), mimeType);
@@ -210,19 +205,20 @@ public class FileActivity extends BaseActivity implements FileMvpView {
 
     @Override
     public void showUploadFileError() {
-        DialogFactory.createGenericErrorDialog(this, R.string.files_upload_error)
+        DialogFactory.createGenericErrorDialog(getContext(), R.string.files_upload_error)
                 .show();
     }
 
     @Override
     public void reloadFiles() {
-        if (uploadProgressDialog != null && uploadProgressDialog.isShowing()) uploadProgressDialog.cancel();
+        if (mUploadProgressDialog != null && mUploadProgressDialog.isShowing())
+            mUploadProgressDialog.cancel();
 
-        stopService(FileSyncService.getStartIntent(this));
-        stopService(DirectorySyncService.getStartIntent(this));
+        stopService(FileSyncService.getStartIntent(getContext()));
+        stopService(DirectorySyncService.getStartIntent(getContext()));
 
-        startService(FileSyncService.getStartIntent(this));
-        startService(DirectorySyncService.getStartIntent(this));
+        startService(FileSyncService.getStartIntent(getContext()));
+        startService(DirectorySyncService.getStartIntent(getContext()));
 
         mFilePresenter.loadFiles();
         mFilePresenter.loadDirectories();
@@ -230,87 +226,74 @@ public class FileActivity extends BaseActivity implements FileMvpView {
 
     @Override
     public void saveFile(ResponseBody body, String fileName) {
-        if (downloadProgressDialog != null && downloadProgressDialog.isShowing()) downloadProgressDialog.cancel();
+        if (mDownloadProgressDialog != null && mDownloadProgressDialog.isShowing())
+            mDownloadProgressDialog.cancel();
 
-        if (checkPermissions(
-                FILE_WRITER_PERMISSION_CALLBACK_ID,
-                this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            this.filesUtil.writeResponseBodyToDisk(body, fileName);
-        }
+        if (checkPermissions(FILE_WRITER_PERMISSION_CALLBACK_ID,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE))
+            mFilesUtil.writeResponseBodyToDisk(body, fileName);
     }
 
     @Override
     public void startFileChoosing() {
-        if (checkPermissions(
-                FILE_READER_PERMISSION_CALLBACK_ID,
-                this,
+        if (checkPermissions(FILE_READER_PERMISSION_CALLBACK_ID,
                 Manifest.permission.READ_EXTERNAL_STORAGE)) {
-
-
-            uploadProgressDialog = DialogFactory.createProgressDialog(this, R.string.files_upload_progress);
-            uploadProgressDialog.show();
+            mUploadProgressDialog = DialogFactory.createProgressDialog(getContext(),
+                    R.string.files_upload_progress);
+            mUploadProgressDialog.show();
 
             // show file chooser
-            this.filesUtil.openFileChooser(FILE_CHOOSE_RESULT_ACTION);
+            this.mFilesUtil.openFileChooser(FILE_CHOOSE_RESULT_ACTION);
         }
     }
 
     @Override
-    public void startDownloading(File file, Boolean download) {
-        downloadProgressDialog = DialogFactory.createProgressDialog(this, R.string.files_download_progress);
-        downloadProgressDialog.show();
+    public void startDownloading(File file, boolean download) {
+        mDownloadProgressDialog = DialogFactory.createProgressDialog(getContext(),
+                R.string.files_download_progress);
+        mDownloadProgressDialog.show();
         mFilePresenter.loadFileFromServer(file, download);
     }
 
     @Override
     public void startFileDeleting(String path, String fileName) {
         DialogFactory.createSimpleOkCancelDialog(
-                this,
+                getContext(),
                 this.getResources().getString(R.string.files_dialog_delete_title),
                 this.getResources().getString(R.string.files_delete_request, fileName))
-                .setPositiveButton(R.string.dialog_action_ok, (dialogInterface, i) -> {
-                    mFilePresenter.deleteFile(path);
-                })
+                .setPositiveButton(R.string.dialog_action_ok, (dialogInterface, i) ->
+                        mFilePresenter.deleteFile(path))
                 .show();
     }
-
     @Override
     public void showFileDeleteError() {
-        DialogFactory.createGenericErrorDialog(this, R.string.files_delete_error)
+        DialogFactory.createGenericErrorDialog(getContext(), R.string.files_delete_error)
                 .show();
     }
 
     @Override
     public void startDirectoryDeleting(String path, String dirName) {
         DialogFactory.createSimpleOkCancelDialog(
-                this,
+                getContext(),
                 this.getResources().getString(R.string.files_dialog_delete_title),
                 this.getResources().getString(R.string.files_delete_request, dirName))
-                .setPositiveButton(R.string.dialog_action_ok, (dialogInterface, i) -> {
-                    mFilePresenter.deleteDirectory(path);
-                })
+                .setPositiveButton(R.string.dialog_action_ok, (dialogInterface, i) ->
+                        mFilePresenter.deleteDirectory(path))
                 .show();
     }
 
     public void showFileDeleteSuccess() {
-        DialogFactory.createSuperToast(this,
+        DialogFactory.createSuperToast(getContext(),
                 getResources().getString(R.string.files_delete_success_file),
                 PaletteUtils.getSolidColor(PaletteUtils.MATERIAL_GREEN)).show();
-        this.reloadFiles();
+        reloadFiles();
     }
 
     @Override
     public void showDirectoryDeleteSuccess() {
-        DialogFactory.createSuperToast(this,
+        DialogFactory.createSuperToast(getContext(),
                 getResources().getString(R.string.files_delete_success_directory),
                 PaletteUtils.getSolidColor(PaletteUtils.MATERIAL_GREEN)).show();
-        this.reloadFiles();
-    }
-
-    @Override
-    public void goToSignIn() {
-        Intent intent = new Intent(this, SignInActivity.class);
-        this.startActivity(intent);
+        reloadFiles();
     }
 }

@@ -17,38 +17,22 @@ public class SignInPresenter extends BasePresenter<SignInMvpView> {
     }
 
     @Override
-    public void attachView(SignInMvpView mvpView) {
-        super.attachView(mvpView);
-    }
-
-    @Override
     public void detachView() {
         super.detachView();
-        if (mSubscription != null) mSubscription.unsubscribe();
+        RxUtil.unsubscribe(mSubscription);
     }
-
 
     public void signIn(String username, String password) {
         checkViewAttached();
         RxUtil.unsubscribe(mSubscription);
-
         mSubscription = mDataManager.signIn(username, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        // onNext
-                        accessToken -> {
-                            if (accessToken == null) {
-                                getMvpView().showSignInFailed();
-                            } else {
-                                getMvpView().showSignInSuccessful();
-                            }
-                        },
-                        // onError
-                        error -> {
-                            Timber.e(error, "There was an error signing in.");
+                        accessToken -> {},
+                        throwable -> {
+                            Timber.e(throwable, "There was an error signing in.");
                             getMvpView().showSignInFailed();
                         },
-                        // onCompleted
                         () -> getMvpView().showSignInSuccessful());
     }
 }

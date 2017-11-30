@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    style="@style/Material.Card.Margin"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="120dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                    xmlns:tools="http://schemas.android.com/tools"
-                                    android:id="@+id/card_view"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginBottom="6dp"
-                                    android:layout_marginLeft="12dp"
-                                    android:layout_marginRight="12dp"
-                                    android:layout_marginTop="6dp"
-                                    card_view:cardCornerRadius="2dp">
+    app:contentPadding="0dp">
 
     <com.beardedhen.androidbootstrap.AwesomeTextView
         android:id="@+id/view_hex_color"
@@ -22,9 +16,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="10dp">
 
         <TextView
@@ -33,53 +28,53 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textSize="@dimen/text_body"/>
+            android:textSize="@dimen/text_body"
+            tools:text="Name" />
 
         <TextView
             android:id="@+id/text_description"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/text_name"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textSize="@dimen/text_small_body"/>
+            android:textSize="@dimen/text_small_body"
+            tools:text="Description...\n..." />
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_marginTop="5dp"
-        android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="20dp">
-
-        <TextView
-            android:id="@+id/text_dueDate"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="3dp"
-            android:layout_marginRight="3dp"
-            tools:text="01.01.2017 15:00"/>
+            android:layout_gravity="end"
+            android:layout_marginTop="5dp">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/text_colon_space"
-            android:layout_marginRight="@dimen/text_colon_space"
-            android:layout_toLeftOf="@id/text_dueDate"
-            android:layout_toStartOf="@id/text_dueDate"
-            android:text="@string/homework_homework_due"/>
+            <com.beardedhen.androidbootstrap.AwesomeTextView
+                android:id="@+id/private_homework"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/text_colon_space"
+                android:layout_marginRight="@dimen/text_colon_space" />
 
-        <com.beardedhen.androidbootstrap.AwesomeTextView
-            android:id="@+id/private_homework"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/textView2"/>
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/text_colon_space"
+                android:layout_marginRight="@dimen/text_colon_space"
+                android:text="@string/homework_homework_due" />
+
+            <TextView
+                android:id="@+id/text_dueDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="3dp"
+                android:layout_marginRight="3dp"
+                tools:text="01.01.2017 15:00" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>
-
-</LinearLayout>

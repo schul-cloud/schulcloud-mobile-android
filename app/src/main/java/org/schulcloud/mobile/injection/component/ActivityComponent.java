@@ -4,19 +4,18 @@ import org.schulcloud.mobile.injection.module.ActivityModule;
 import org.schulcloud.mobile.injection.scope.PerActivity;
 import org.schulcloud.mobile.ui.base.BaseActivity;
 import org.schulcloud.mobile.ui.base.BaseFragment;
-import org.schulcloud.mobile.ui.courses.CourseActivity;
+import org.schulcloud.mobile.ui.courses.CourseFragment;
 import org.schulcloud.mobile.ui.courses.detailed.DetailedCourseFragment;
-import org.schulcloud.mobile.ui.courses.detailed.TopicFragment;
-import org.schulcloud.mobile.ui.dashboard.DashboardActivity;
+import org.schulcloud.mobile.ui.courses.topic.TopicFragment;
+import org.schulcloud.mobile.ui.dashboard.DashboardFragment;
 import org.schulcloud.mobile.ui.feedback.FeedbackDialog;
-import org.schulcloud.mobile.ui.homework.HomeworkActivity;
-import org.schulcloud.mobile.ui.files.FileActivity;
+import org.schulcloud.mobile.ui.homework.HomeworkFragment;
+import org.schulcloud.mobile.ui.files.FileFragment;
 import org.schulcloud.mobile.ui.homework.add.AddHomeworkFragment;
 import org.schulcloud.mobile.ui.homework.detailed.DetailedHomeworkFragment;
 import org.schulcloud.mobile.ui.main.MainActivity;
-import org.schulcloud.mobile.ui.news.NewsActivity;
+import org.schulcloud.mobile.ui.news.NewsFragment;
 import org.schulcloud.mobile.ui.news.detailed.DetailedNewsFragment;
-import org.schulcloud.mobile.ui.news.detailed.DetailedNewsPresenter;
 import org.schulcloud.mobile.ui.settings.SettingsActivity;
 import org.schulcloud.mobile.ui.signin.SignInActivity;
 
@@ -29,35 +28,46 @@ import dagger.Subcomponent;
 @Subcomponent(modules = ActivityModule.class)
 public interface ActivityComponent {
 
-    void inject(BaseActivity mainActivity);
+    //    Base
+    void inject(BaseActivity baseActivity);
 
     void inject(BaseFragment baseFragment);
 
+    //    Sign in
     void inject(SignInActivity signInActivity);
 
-    void inject(FileActivity fileActivity);
-
+    //    Main
     void inject(MainActivity mainActivity);
 
-    void inject(SettingsActivity settingsActivity);
+    //    Dashboard
+    void inject(DashboardFragment dashboardFragment);
 
-    void inject(HomeworkActivity homeworkActivity);
+    //    News
+    void inject(NewsFragment newsFragment);
+
+    void inject(DetailedNewsFragment detailedNewsFragment);
+
+    //    Course
+    void inject(CourseFragment courseFragment);
+
+    void inject(DetailedCourseFragment detailedCourseFragment);
+
+    void inject(TopicFragment topicFragment);
+
+    //    Homework
+    void inject(HomeworkFragment homeworkFragment);
 
     void inject(DetailedHomeworkFragment detailedHomeworkFragment);
 
     void inject(AddHomeworkFragment addHomeworkFragment);
 
-    void inject(CourseActivity courseActivity);
+    //    File
+    void inject(FileFragment fileFragment);
 
-    void inject (DetailedCourseFragment detailedCourseFragment);
+    //    Settings
+    void inject(SettingsActivity settingsActivity);
 
-    void inject(TopicFragment topicFragment);
-
-    void inject(DashboardActivity dashboardActivity);
-
+    //    Feedback
     void inject(FeedbackDialog feedbackDialog);
 
-    void inject(NewsActivity newsActivity);
-
-    void inject(DetailedNewsFragment detailedNewsFragment);
 }

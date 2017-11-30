@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                    xmlns:tools="http://schemas.android.com/tools"
-                                    android:id="@+id/card_view"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="6dp"
-                                    android:layout_marginLeft="12dp"
-                                    android:layout_marginRight="12dp"
-                                    android:layout_marginTop="6dp"
-                                    card_view:cardCornerRadius="2dp">
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginTop="6dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,41 +23,45 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:textSize="@dimen/fa_icon_big"
-            app:fontAwesomeIcon="fa_file"/>
-
+            app:fontAwesomeIcon="fa_file" />
 
         <TextView
             android:id="@+id/text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/file_item_icon"
-            android:layout_alignTop="@id/file_item_icon"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/file_item_icon"
             android:layout_toRightOf="@id/file_item_icon"
             android:textSize="@dimen/text_body"
-            tools:text="Datei"/>
+            tools:text="Datei" />
 
         <com.beardedhen.androidbootstrap.AwesomeTextView
             android:id="@+id/file_download_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:textSize="@dimen/fa_icon_medium"
-            app:fontAwesomeIcon="fa_download"
-            android:textColor="@color/gray"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="35dp"/>
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="35dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/fa_icon_medium"
+            app:fontAwesomeIcon="fa_download" />
 
         <com.beardedhen.androidbootstrap.AwesomeTextView
             android:id="@+id/file_delete_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:textSize="@dimen/fa_icon_medium"
-            app:fontAwesomeIcon="fa_trash_o"
-            android:textColor="@color/gray"
-            android:layout_toLeftOf="@id/file_download_icon"
+            android:layout_marginEnd="@dimen/bootstrap_alert_paddings"
             android:layout_marginRight="@dimen/bootstrap_alert_paddings"
-            android:layout_marginTop="35dp"/>
+            android:layout_marginTop="35dp"
+            android:layout_toLeftOf="@id/file_download_icon"
+            android:layout_toStartOf="@id/file_download_icon"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/fa_icon_medium"
+            app:fontAwesomeIcon="fa_trash_o" />
+
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

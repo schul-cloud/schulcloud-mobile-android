@@ -21,19 +21,19 @@ import butterknife.ButterKnife;
 
 public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.CommentViewHolder> {
 
-    private List<Comment> mComment;
-    private String mUserId;
-
     @Inject
     DetailedHomeworkPresenter mDetailedHomeworkPresenter;
 
+    private List<Comment> mComments;
+    private String mUserId;
+
     @Inject
     public CommentsAdapter() {
-        mComment = new ArrayList<>();
+        mComments = new ArrayList<>();
     }
 
-    public void setSubmissions(List<Comment> comment) {
-        mComment = comment;
+    public void setComments(List<Comment> comments) {
+        mComments = comments;
     }
 
     public void setUserId(String userId) { mUserId = userId; }
@@ -47,7 +47,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
 
     @Override
     public void onBindViewHolder(CommentViewHolder holder, int position) {
-        Comment comment = mComment.get(position);
+        Comment comment = mComments.get(position);
 
         holder.nameTextView.setText(comment.comment);
 
@@ -59,7 +59,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
 
     @Override
     public int getItemCount() {
-        return mComment.size();
+        return mComments.size();
     }
 
     class CommentViewHolder extends RecyclerView.ViewHolder {

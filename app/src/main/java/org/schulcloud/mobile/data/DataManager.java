@@ -90,7 +90,6 @@ public class DataManager {
                 .concatMap(new Func1<AccessToken, Observable<CurrentUser>>() {
                     @Override
                     public Observable<CurrentUser> call(AccessToken accessToken) {
-
                         // save current user data
                         String jwt = mPreferencesHelper.saveAccessToken(accessToken);
                         String currentUser = JWTUtil.decodeToCurrentUser(jwt);
@@ -275,8 +274,7 @@ public class DataManager {
     /**** Events ****/
 
     public Observable<Event> syncEvents() {
-        return mRestService.getEvents(
-                getAccessToken())
+        return mRestService.getEvents(getAccessToken())
                 .concatMap(new Func1<List<Event>, Observable<Event>>() {
                     @Override
                     public Observable<Event> call(List<Event> events) {
@@ -291,8 +289,8 @@ public class DataManager {
         return mDatabaseHelper.getEvents().distinct();
     }
 
-    public List<Event> getEventsForDay() {
-        return mDatabaseHelper.getEventsForDay();
+    public Observable<List<Event>> getEventsForToday() {
+        return mDatabaseHelper.getEventsForToday();
     }
 
     /**** Homework ****/
@@ -405,22 +403,19 @@ public class DataManager {
                 });
     }
 
+    /**** News ****/
+
     public Observable<List<News>> getNews() {
         return mDatabaseHelper.getNews();
     }
-
-    public Observable syncNews() {
-        return mRestService.getNews(getAccessToken())
-                .concatMap(new Func1<FeathersResponse<News>,Observable<News>> () {
-                    @Override
-                    public Observable<News> call(FeathersResponse<News> newses) {
-                        mDatabaseHelper.clearTable(News.class);
-                        return mDatabaseHelper.setNews(newses.data);
-                    }
-                }).doOnError(Throwable::printStackTrace);
-    }
-
     public News getNewsForId(String newsId) {
         return mDatabaseHelper.getNewsForId(newsId);
+    }
+    public Observable<News> syncNews() {
+        return mRestService.getNews(getAccessToken())
+                .concatMap(newsFeathersResponse -> {
+                    mDatabaseHelper.clearTable(News.class);
+                    return mDatabaseHelper.setNews(newsFeathersResponse.data);
+                }).doOnError(Throwable::printStackTrace);
     }
 }

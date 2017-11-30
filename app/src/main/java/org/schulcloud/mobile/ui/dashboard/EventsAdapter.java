@@ -1,6 +1,7 @@
 package org.schulcloud.mobile.ui.dashboard;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,12 +14,10 @@ import android.widget.TextView;
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.data.model.Event;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -27,26 +26,29 @@ import butterknife.ButterKnife;
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewHolder> {
 
-    private List<Event> mEvent;
-
     @Inject
     DashboardPresenter mDashboardPresenter;
+
+    private List<Event> mEvent;
+    private Context mContext;
 
     @Inject
     public EventsAdapter() { mEvent = new ArrayList<>(); }
 
-    public void setEvents(Context context, List<Event> events) {
-        if (events == null || events.isEmpty()) {
+    public void setContext(@NonNull Context context) {
+        mContext = context;
+    }
+    public void setEvents(@NonNull List<Event> events) {
+        if (events.isEmpty()) {
             mEvent = new ArrayList<>(1);
             Event e = new Event();
-            e.title = context.getString(R.string.dashboard_hours_none);
-            e.summary = context.getString(R.string.dashboard_hours_none);
+            e.title = mContext.getString(R.string.dashboard_hours_none);
+            e.summary = mContext.getString(R.string.dashboard_hours_none);
             e.start = "1514674800000";
             e.end = "1514678400000";
             e.type = Event.TYPE_TEMPLATE;
             mEvent.add(e);
-        }
-        else
+        } else
             mEvent = events;
     }
 
@@ -57,37 +59,16 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
         return new EventViewHolder(itemView);
     }
 
-    private String millisToDate(long millis){
-        Date date = new Date(millis);
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.getDefault());
-        return formatter.format(date);
+    private int determineProgress(long start, long end) {
+        Calendar c = Calendar.getInstance();
+        long now = c.get(Calendar.HOUR_OF_DAY) * 60 + c.get(Calendar.MINUTE);
+        c.setTimeInMillis(start);
+        long t1 = c.get(Calendar.HOUR_OF_DAY) * 60 + c.get(Calendar.MINUTE);
+        c.setTimeInMillis(end);
+        long t2 = c.get(Calendar.HOUR_OF_DAY) * 60 + c.get(Calendar.MINUTE);
 
-        //return DateFormat.getTimeInstance(DateFormat.SHORT, Locale.GERMAN).format(millis);
+        return now > t2 ? -1 : (int) (100 * (now - t1) / (t2 - t1));
     }
-
-    private int determineProgress(String start, String end) {
-        String startTime[] = start.split(":");
-        String endTime[] = end.split(":");
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-
-        String currentTime[] = millisToDate(calendar.getTimeInMillis()).split(":");
-
-        float startT  = Integer.parseInt(startTime[0]) * 60 + Integer.parseInt(startTime[1]);
-        float endT  = Integer.parseInt(endTime[0]) * 60 + Integer.parseInt(endTime[1]);
-        float currentT = Integer.parseInt(currentTime[0]) * 60 + Integer.parseInt(currentTime[1]);
-
-        if (currentT > endT) {
-            return -1;
-        } else {
-            try {
-                return Math.round(100 - 100 / ((endT - startT) / (endT - currentT)));
-            } catch (ArithmeticException e) {
-                return -1;
-            }
-        }
-        }
 
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position) {
@@ -96,22 +77,20 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
         if (!event.title.equals(event.summary))
             holder.summary.setText(event.summary);
 
+        long start = Long.parseLong(event.start);
+        long end = Long.parseLong(event.end);
         holder.title.setText(event.title);
         if (event.type != null && !event.type.equals(Event.TYPE_TEMPLATE))
-            holder.startDate.setText(millisToDate(Long.parseLong(event.start)) + "/" + millisToDate(Long.parseLong(event.end)));
+            holder.time.setText(mContext.getString(R.string.dashboard_event_time,
+                    new Date(start), new Date(Long.parseLong(event.end))));
 
-        if (event.xScCourseId != null) {
-            String courseId = event.xScCourseId;
-            holder.cardView.setOnClickListener(v -> {
-                mDashboardPresenter.showCourse(courseId);
-            });
-        }
+        if (event.xScCourseId != null)
+            holder.cardView.setOnClickListener(
+                    v -> mDashboardPresenter.showCourseDetails(event.xScCourseId));
 
-        int progress = determineProgress(millisToDate(Long.parseLong(event.start)), millisToDate(Long.parseLong(event.end)));
-
+        int progress = determineProgress(start, end);
         Log.d("Times", String.valueOf(progress));
-
-        if (progress != -1 && progress >= 0) {
+        if (progress >= 0) {
             holder.progressBar.setVisibility(View.VISIBLE);
             holder.progressBar.setProgress(progress);
         }
@@ -128,8 +107,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
         TextView title;
         @BindView(R.id.summary)
         TextView summary;
-        @BindView(R.id.startDate)
-        TextView startDate;
+        @BindView(R.id.time)
+        TextView time;
         @BindView(R.id.card_view)
         CardView cardView;
         @BindView(R.id.progressBar)

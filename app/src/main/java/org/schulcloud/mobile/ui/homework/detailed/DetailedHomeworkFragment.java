@@ -2,6 +2,8 @@ package org.schulcloud.mobile.ui.homework.detailed;
 
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -15,7 +17,7 @@ import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.data.model.Comment;
 import org.schulcloud.mobile.data.model.Homework;
 import org.schulcloud.mobile.data.model.Submission;
-import org.schulcloud.mobile.ui.base.BaseFragment;
+import org.schulcloud.mobile.ui.main.MainFragment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,18 +29,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmList;
 
-public class DetailedHomeworkFragment extends BaseFragment implements DetailedHomeworkMvpView {
-    private static final String EXTRA_TRIGGER_SYNC_FLAG =
-            "org.schulcloud.mobile.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
-    public static final String ARGUMENT_HOMEWORK_ID = "homeworkId";
-
-    private String homeworkId = null;
+public class DetailedHomeworkFragment extends MainFragment implements DetailedHomeworkMvpView {
+    private static final String ARGUMENT_HOMEWORK_ID = "ARGUMENT_HOMEWORK_ID";
 
     @Inject
     DetailedHomeworkPresenter mDetailedHomeworkPresenter;
 
     @Inject
     CommentsAdapter mCommentsAdapter;
+
+    private String mHomeworkId = null;
 
     @BindView(R.id.homeworkName)
     TextView homeworkName;
@@ -47,7 +47,7 @@ public class DetailedHomeworkFragment extends BaseFragment implements DetailedHo
     @BindView(R.id.homeworkDue)
     TextView homeworkDueDate;
     @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+    RecyclerView recyclerView;
     @BindView(R.id.grade)
     TextView grade;
     @BindView(R.id.gradeComment)
@@ -55,26 +55,46 @@ public class DetailedHomeworkFragment extends BaseFragment implements DetailedHo
     @BindView(R.id.nonPrivate)
     RelativeLayout nonPrivate;
 
+    /**
+     * Creates a new instance of this fragment.
+     *
+     * @param homeworkId The ID of the homework to be shown.
+     * @return The new instance
+     */
+    public static DetailedHomeworkFragment newInstance(@NonNull String homeworkId) {
+        DetailedHomeworkFragment detailedHomeworkFragment = new DetailedHomeworkFragment();
+
+        Bundle args = new Bundle();
+        args.putString(ARGUMENT_HOMEWORK_ID, homeworkId);
+        detailedHomeworkFragment.setArguments(args);
+
+        return detailedHomeworkFragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        activityComponent().inject(this);
+
+        mHomeworkId = getArguments().getString(ARGUMENT_HOMEWORK_ID);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        activityComponent().inject(this);
+            Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detailed_homework, container, false);
         ButterKnife.bind(this, view);
-        Bundle args = getArguments();
-        homeworkId = args.getString(ARGUMENT_HOMEWORK_ID);
+        setTitle(R.string.homework_homework_title);
 
-        mRecyclerView.setAdapter(mCommentsAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(mCommentsAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mDetailedHomeworkPresenter.attachView(this);
-        mDetailedHomeworkPresenter.loadHomework(homeworkId);
+        mDetailedHomeworkPresenter.loadHomework(mHomeworkId);
 
         return view;
     }
 
     /***** MVP View methods implementation *****/
-
     @Override
     public void showHomework(Homework homework) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
@@ -88,7 +108,8 @@ public class DetailedHomeworkFragment extends BaseFragment implements DetailedHo
         }
 
         if (untilDate.before(new Date())) {
-            homeworkDueDate.setPaintFlags(homeworkDueDate.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            homeworkDueDate.setPaintFlags(
+                    homeworkDueDate.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
         if (homework.courseId != null && homework.courseId.name != null)
@@ -99,7 +120,7 @@ public class DetailedHomeworkFragment extends BaseFragment implements DetailedHo
         homeworkDescription.setText(Html.fromHtml(homework.description));
 
         if (homework.restricted == null || !homework.restricted)
-            mDetailedHomeworkPresenter.loadComments(homeworkId);
+            mDetailedHomeworkPresenter.loadComments(mHomeworkId);
         else
             nonPrivate.setVisibility(View.GONE);
 
@@ -107,11 +128,6 @@ public class DetailedHomeworkFragment extends BaseFragment implements DetailedHo
             homeworkDueDate.setText(dateFormatDeux.format(untilDate));
 
         String course = homework.courseId != null ? homework.courseId.name : "";
-    }
-
-    @Override
-    public void showError() {
-
     }
 
     @Override
@@ -130,13 +146,8 @@ public class DetailedHomeworkFragment extends BaseFragment implements DetailedHo
         if (submission.gradeComment != null)
             gradeComment.setText(Html.fromHtml(submission.gradeComment));
 
-        mCommentsAdapter.setSubmissions(submission.comments);
+        mCommentsAdapter.setComments(submission.comments);
         mCommentsAdapter.setUserId(userId);
         mCommentsAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void goToSignIn() {
-        // Necessary in fragment?
     }
 }

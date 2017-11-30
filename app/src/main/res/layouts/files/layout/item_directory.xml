@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                                    xmlns:tools="http://schemas.android.com/tools"
-                                    android:id="@+id/card_view"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="6dp"
-                                    android:layout_marginLeft="12dp"
-                                    android:layout_marginRight="12dp"
-                                    android:layout_marginTop="6dp"
-                                    card_view:cardCornerRadius="2dp">
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginTop="6dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="2dp"
+    app:contentPadding="0dp"
+    app:contentPaddingBottom="4dp"
+    app:contentPaddingTop="4dp">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
+    <org.schulcloud.mobile.ui.layouts.ListItemLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <com.beardedhen.androidbootstrap.AwesomeTextView
             android:id="@+id/directory_item_icon"
@@ -24,31 +28,29 @@
             android:textColor="@color/hpiRed"
             android:textSize="@dimen/fa_icon_big"
             app:bootstrapBrand="danger"
-            app:fontAwesomeIcon="fa_folder"/>
+            app:fontAwesomeIcon="fa_folder"
+            app:layout_position="avatar" />
 
         <TextView
             android:id="@+id/text_name"
+            style="@style/Material.ListItem_TextPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/directory_item_icon"
-            android:layout_alignTop="@id/directory_item_icon"
-            android:layout_toRightOf="@id/directory_item_icon"
-            android:gravity="center"
             android:textColor="@color/hpiRed"
             android:textSize="@dimen/text_body"
-            tools:text="Directory"/>
+            tools:text="Directory" />
 
         <com.beardedhen.androidbootstrap.AwesomeTextView
             android:id="@+id/directory_delete_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:background="?android:attr/selectableItemBackground"
             android:textColor="@color/hpiRed"
-            app:bootstrapBrand="danger"
             android:textSize="@dimen/fa_icon_medium"
+            app:bootstrapBrand="danger"
             app:fontAwesomeIcon="fa_trash_o"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
-    </RelativeLayout>
+            app:layout_position="endIcon" />
+
+    </org.schulcloud.mobile.ui.layouts.ListItemLayout>
 
 </android.support.v7.widget.CardView>

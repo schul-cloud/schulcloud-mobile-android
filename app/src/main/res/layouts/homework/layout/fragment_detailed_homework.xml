@@ -1,132 +1,124 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
-    android:clickable="true">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="70dp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/bootstrap_alert_paddings"
-    android:paddingRight="@dimen/bootstrap_alert_paddings"
-    android:background="@color/gray">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/homeworkName"
+        style="@style/Content_Title.Margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:paddingBottom="@dimen/bootstrap_alert_paddings"
-        android:textColor="@color/hpiRed"
-        android:textSize="@dimen/text_title"
         tools:text="HomeworkName" />
 
     <ScrollView
-        android:layout_width="match_parent"
         android:id="@+id/homeworkScroll"
-        android:layout_below="@+id/homeworkName"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
         <RelativeLayout
+            style="@style/Content.Padding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/homeworkDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        tools:text="HomeworkDescription" />
+
+            <TextView
+                android:id="@+id/homeworkDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                tools:text="HomeworkDescription" />
 
 
-    <TextView
-        android:id="@+id/homeworkDue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/homeworkDuePlaceholder"
-        android:layout_alignBottom="@+id/homeworkDuePlaceholder"
-        android:layout_toRightOf="@+id/homeworkDuePlaceholder"
-        android:layout_toEndOf="@+id/homeworkDuePlaceholder"
-        tools:text="01.01.2017 15:00" />
+            <TextView
+                android:id="@+id/homeworkDue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/homeworkDuePlaceholder"
+                android:layout_alignBottom="@+id/homeworkDuePlaceholder"
+                android:layout_toEndOf="@+id/homeworkDuePlaceholder"
+                android:layout_toRightOf="@+id/homeworkDuePlaceholder"
+                tools:text="01.01.2017 15:00" />
 
-    <TextView
-        android:id="@+id/homeworkDuePlaceholder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/homeworkDescription"
-        android:layout_marginEnd="@dimen/text_colon_space"
-        android:layout_marginRight="@dimen/text_colon_space"
-        android:text="@string/homework_homework_due"/>
+            <TextView
+                android:id="@+id/homeworkDuePlaceholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/homeworkDescription"
+                android:layout_marginEnd="@dimen/text_colon_space"
+                android:layout_marginRight="@dimen/text_colon_space"
+                android:text="@string/homework_homework_due" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/nonPrivate"
-        android:layout_below="@+id/homeworkDue">
+            <RelativeLayout
+                android:id="@+id/nonPrivate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/homeworkDue">
 
-    <TextView
-        android:id="@+id/comments"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/bootstrap_alert_paddings"
-        android:paddingTop="@dimen/bootstrap_alert_paddings"
-        android:text="@string/homework_homework_comments"
-        android:textColor="@color/hpiRed"
-        android:textSize="@dimen/text_title"
-        android:layout_below="@+id/gradeComment"/>
+                <TextView
+                    android:id="@+id/gradeSector"
+                    style="@style/Content_Title.MarginTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/homework_homework_grading" />
 
-    <TextView
-        android:id="@+id/gradeSector"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/bootstrap_alert_paddings"
-        android:paddingTop="@dimen/bootstrap_alert_paddings"
-        android:text="@string/homework_homework_grading"
-        android:textColor="@color/hpiRed"
-        android:textSize="@dimen/text_title" />
+                <TextView
+                    android:id="@+id/gradePart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/gradeSector"
+                    android:layout_marginEnd="@dimen/text_colon_space"
+                    android:layout_marginRight="@dimen/text_colon_space"
+                    android:text="@string/homework_homework_grade" />
 
-    <TextView
-        android:id="@+id/gradePart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/gradeSector"
-        android:layout_marginEnd="@dimen/text_colon_space"
-        android:layout_marginRight="@dimen/text_colon_space"
-        android:text="@string/homework_homework_grade"/>
+                <TextView
+                    android:id="@+id/grade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/gradeSector"
+                    android:layout_toEndOf="@id/gradePart"
+                    android:layout_toRightOf="@id/gradePart"
+                    tools:text="1-" />
 
-    <TextView
-        android:id="@+id/grade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/gradeSector"
-        android:layout_toEndOf="@id/gradePart"
-        android:layout_toRightOf="@id/gradePart"
-        tools:text="1-"/>
+                <TextView
+                    android:id="@+id/gradeComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/gradePart"
+                    tools:text="Grade comment" />
 
-    <TextView
-        android:id="@+id/gradeComment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/gradePart" />
+                <TextView
+                    android:id="@+id/comments"
+                    style="@style/Content_Title.MarginTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/gradeComment"
+                    android:text="@string/homework_homework_comments" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingBottom="6dp"
-        android:paddingTop="6dp"
-        android:scrollbars="vertical"
-        android:layout_below="@+id/comments" />
-    </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/comments"
+                    android:clipToPadding="false"
+                    android:paddingBottom="6dp"
+                    android:paddingTop="6dp"
+                    android:scrollbars="vertical"
+                    tools:listitem="@layout/item_comment" />
+
+            </RelativeLayout>
+
         </RelativeLayout>
+
     </ScrollView>
-</RelativeLayout>
-</RelativeLayout>
+
+</LinearLayout>

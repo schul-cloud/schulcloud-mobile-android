@@ -4,6 +4,7 @@ import android.content.Context;
 
 import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.util.NetworkUtil;
+import org.schulcloud.mobile.util.RxUtil;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -39,7 +40,8 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
     }
 
     public void checkViewAttached() {
-        if (!isViewAttached()) throw new MvpViewNotAttachedException();
+        if (!isViewAttached())
+            throw new MvpViewNotAttachedException();
     }
 
     /**
@@ -57,22 +59,18 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
 
         // 2. if there is a valid jwt in the storage (just online)
         if (NetworkUtil.isNetworkConnected(context)) {
+            RxUtil.unsubscribe(mSubscription);
             mSubscription = dataManager.syncCurrentUser(currentUserId)
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe
-                            (       // onNext
-                                    currentUser -> {
-                                    },
-                                    // onError, check failed
-                                    error -> {
-                                        Timber.e(error, "There was an error while fetching currentUser.");
-                                        getMvpView().goToSignIn();
-                                    },
-                                    // onCompleted, check success -> stay in current activity
-                                    () -> {
-                                    });
+                    .subscribe(
+                            // onNext
+                            currentUser -> {},
+                            // onError, check failed
+                            error -> {
+                                Timber.e(error, "There was an error while fetching currentUser.");
+                                getMvpView().goToSignIn();
+                            });
         }
-
     }
 
     public static class MvpViewNotAttachedException extends RuntimeException {
@@ -81,6 +79,4 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
                     " requesting data to the Presenter");
         }
     }
-
 }
-

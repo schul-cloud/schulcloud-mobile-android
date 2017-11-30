@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swiperefresh"
+    style="@style/Content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            style="@style/Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/calendar"
+                style="@style/Content_Title.Margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dashboard_hoursToday" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/events"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="6dp"
+                tools:listitem="@layout/item_event" />
+
+            <TextView
+                style="@style/Content_Title.Margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dashboard_homework" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardViewHomework"
+                style="@style/Material.Card.Margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/openTasks"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="center"
+                        android:textColor="@color/hpiRed"
+                        android:textSize="36dp"
+                        tools:text="4" />
+
+                    <TextView
+                        android:id="@+id/openTasksText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:layout_toEndOf="@id/openTasks"
+                        android:layout_toRightOf="@id/openTasks"
+                        android:text="@string/dashboard_homework_open" />
+
+                    <TextView
+                        android:id="@+id/dueTillText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/openTasksText"
+                        android:layout_marginEnd="@dimen/text_colon_space"
+                        android:layout_marginRight="@dimen/text_colon_space"
+                        android:layout_toEndOf="@id/openTasks"
+                        android:layout_toRightOf="@id/openTasks"
+                        android:text="@string/dashboard_homework_nextDue" />
+
+                    <TextView
+                        android:id="@+id/dueTill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/openTasksText"
+                        android:layout_toEndOf="@id/dueTillText"
+                        android:layout_toRightOf="@id/dueTillText"
+                        tools:text="..." />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.v4.widget.SwipeRefreshLayout>

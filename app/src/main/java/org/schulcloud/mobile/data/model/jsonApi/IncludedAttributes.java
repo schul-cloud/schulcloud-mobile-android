@@ -1,11 +1,13 @@
 package org.schulcloud.mobile.data.model.jsonApi;
 
-
 import io.realm.RealmModel;
 import io.realm.annotations.RealmClass;
 
 @RealmClass
 public class IncludedAttributes implements RealmModel {
+    public static final String FREQ_WEEKLY = "WEEKLY";
+    public static final String FREQ_DAILY = "DAILY";
+
     private String freq;
     private String until;
     private String wkst;

@@ -83,7 +83,8 @@ public final class ListItemLayout extends ViewGroup {
     }
     public ListItemLayout(@NonNull Context context, @Nullable AttributeSet attrs,
             @AttrRes int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
+        super(context, attrs, defStyleAttr);
+        init(attrs, defStyleAttr, 0);
     }
     @TargetApi(21)
     public ListItemLayout(@NonNull Context context, @Nullable AttributeSet attrs,

@@ -7,12 +7,15 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import org.schulcloud.mobile.SchulCloudApplication;
 import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.model.Topic;
 import org.schulcloud.mobile.util.AndroidComponentUtil;
 import org.schulcloud.mobile.util.NetworkUtil;
+import org.schulcloud.mobile.util.RxUtil;
 
 import javax.inject.Inject;
 
@@ -22,7 +25,7 @@ import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class TopicSyncService extends Service {
-    public static final String ARGUMENT_COURSE_ID = "courseId";
+    private static final String EXTRA_COURSE_ID = "org.schulcloud.mobile.data.sync.TopicSyncService.EXTRA_COURSE_ID";
 
     @Inject
     DataManager mDataManager;
@@ -30,8 +33,12 @@ public class TopicSyncService extends Service {
 
     private String courseId = null;
 
-    public static Intent getStartIntent(Context context) {
-        return new Intent(context, TopicSyncService.class);
+    public static Intent getStartIntent(@NonNull Context context) {
+        return getStartIntent(context, null);
+    }
+    public static Intent getStartIntent(@NonNull Context context, @Nullable String courseId) {
+        return new Intent(context, TopicSyncService.class)
+                .putExtra(EXTRA_COURSE_ID, courseId);
     }
 
     public static boolean isRunning(Context context) {
@@ -57,11 +64,11 @@ public class TopicSyncService extends Service {
 
         Bundle extras = intent.getExtras();
         if (extras != null) {
-            courseId = extras.getString(ARGUMENT_COURSE_ID);
+            courseId = extras.getString(EXTRA_COURSE_ID);
             //The key argument here must match that used in the other activity
         }
 
-        if (mSubscription != null && !mSubscription.isUnsubscribed()) mSubscription.unsubscribe();
+        RxUtil.unsubscribe(mSubscription);
         mSubscription = mDataManager.syncTopics(courseId)
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Topic>() {
@@ -87,7 +94,7 @@ public class TopicSyncService extends Service {
 
     @Override
     public void onDestroy() {
-        if (mSubscription != null) mSubscription.unsubscribe();
+        RxUtil.unsubscribe(mSubscription);
         super.onDestroy();
     }
 

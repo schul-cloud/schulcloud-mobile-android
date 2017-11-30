@@ -1,15 +1,11 @@
 package org.schulcloud.mobile.ui.homework.detailed;
 
 import org.schulcloud.mobile.data.DataManager;
-import org.schulcloud.mobile.data.model.Comment;
-import org.schulcloud.mobile.data.model.Submission;
 import org.schulcloud.mobile.injection.ConfigPersistent;
 import org.schulcloud.mobile.ui.base.BasePresenter;
 import org.schulcloud.mobile.util.RxUtil;
 
 import javax.inject.Inject;
-
-import io.realm.RealmList;
 
 @ConfigPersistent
 public class DetailedHomeworkPresenter extends BasePresenter<DetailedHomeworkMvpView> {
@@ -20,19 +16,15 @@ public class DetailedHomeworkPresenter extends BasePresenter<DetailedHomeworkMvp
     }
 
     @Override
-    public void attachView(DetailedHomeworkMvpView mvpView) {
-        super.attachView(mvpView);
-    }
-
-    @Override
     public void detachView() {
         super.detachView();
-        if (mSubscription != null) mSubscription.unsubscribe();
+        RxUtil.unsubscribe(mSubscription);
     }
 
     /**
-     * loads a specific homework for a given id.
-     * @param homeworkId given id for referencing.
+     * Loads a specific homework for a given id.
+     *
+     * @param homeworkId The id of the homework to be shown.
      */
     public void loadHomework(String homeworkId) {
         checkViewAttached();
@@ -40,8 +32,9 @@ public class DetailedHomeworkPresenter extends BasePresenter<DetailedHomeworkMvp
     }
 
     /**
-     * loads a specific submission containing the comments.
-     * @param homeworkId needed to reference the submission.
+     * Loads a specific submission containing the comments.
+     *
+     * @param homeworkId The id of the displayed homework. Required to reference the submission.
      */
     public void loadComments(String homeworkId) {
         checkViewAttached();

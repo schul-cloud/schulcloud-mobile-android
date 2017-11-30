@@ -28,7 +28,7 @@ public interface FileMvpView extends MvpView {
 
     void startFileChoosing();
 
-    void startDownloading(File file, Boolean download);
+    void startDownloading(File file, boolean download);
 
     void startFileDeleting(String path, String fileName);
 

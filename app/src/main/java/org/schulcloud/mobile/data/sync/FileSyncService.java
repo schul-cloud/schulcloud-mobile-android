@@ -9,6 +9,7 @@ import android.os.IBinder;
 
 import org.schulcloud.mobile.SchulCloudApplication;
 import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.FileDataManager;
 import org.schulcloud.mobile.data.model.File;
 import org.schulcloud.mobile.util.AndroidComponentUtil;
 import org.schulcloud.mobile.util.NetworkUtil;
@@ -23,7 +24,7 @@ import timber.log.Timber;
 public class FileSyncService extends Service {
 
     @Inject
-    DataManager mDataManager;
+    FileDataManager mDataManager;
     private Subscription mSubscription;
 
     public static Intent getStartIntent(Context context) {

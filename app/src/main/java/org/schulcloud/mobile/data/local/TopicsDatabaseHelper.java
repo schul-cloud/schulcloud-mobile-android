@@ -20,7 +20,8 @@ public class TopicsDatabaseHelper extends  BaseDatabaseHelper {
 
     public Observable<Topic> setTopics(final Collection<Topic> newTopic) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {

@@ -12,6 +12,7 @@ import android.view.Window;
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.SchulCloudApplication;
 import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.UserDataManager;
 import org.schulcloud.mobile.data.local.PreferencesHelper;
 import org.schulcloud.mobile.injection.component.ActivityComponent;
 import org.schulcloud.mobile.injection.component.ConfigPersistentComponent;
@@ -34,7 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
     @Inject
     PreferencesHelper mPreferencesHelper;
     @Inject
-    DataManager mDataManager;
+    UserDataManager mUserDataManager;
 
     private ActivityComponent mActivityComponent;
     private long mActivityId;
@@ -102,7 +103,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
 
     @Override
     public void goToSignIn() {
-        mDataManager.signOut();
+        mUserDataManager.signOut();
         startActivity(new Intent(this, SignInActivity.class));
         finish();
     }

@@ -9,6 +9,9 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.EventDataManager;
+import org.schulcloud.mobile.data.datamanagers.NotificationDataManager;
+import org.schulcloud.mobile.data.datamanagers.UserDataManager;
 import org.schulcloud.mobile.data.local.PreferencesHelper;
 import org.schulcloud.mobile.data.model.Device;
 import org.schulcloud.mobile.data.model.Event;
@@ -39,8 +42,18 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
     private String[] mContributors;
 
     @Inject
-    public SettingsPresenter(DataManager dataManager) {
-        mDataManager = dataManager;
+    UserDataManager mUserDataManager;
+    @Inject
+    NotificationDataManager mNotificationDataManager;
+    @Inject
+    EventDataManager mEventDataManager;
+
+    @Inject
+    public SettingsPresenter(NotificationDataManager notificationDataManagerdataManager
+    , UserDataManager userDataManager, EventDataManager eventDataManager) {
+        mNotificationDataManager = notificationDataManagerdataManager;
+        mUserDataManager = userDataManager;
+        mEventDataManager = eventDataManager;
     }
 
     @Override
@@ -59,7 +72,7 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
     public void loadEvents(boolean promptForCalendar) {
         checkViewAttached();
         RxUtil.unsubscribe(eventSubscription);
-        eventSubscription = mDataManager.getEvents()
+        eventSubscription = mEventDataManager.getEvents()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         events -> {

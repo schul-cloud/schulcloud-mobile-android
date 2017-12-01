@@ -26,7 +26,8 @@ public class HomeworkDatabaseHelper extends BaseDatabaseHelper {
 
     public Observable<Homework> setHomework(final Collection<Homework> newHomework) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {

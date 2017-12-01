@@ -20,7 +20,8 @@ public class SubmissionDatabaseHelper extends BaseDatabaseHelper {
 
     public Observable<Submission> setSubmissions(final Collection<Submission> newSubmission) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -48,5 +49,4 @@ public class SubmissionDatabaseHelper extends BaseDatabaseHelper {
         final Realm realm = mRealmProvider.get();
         return realm.where(Submission.class).equalTo("homeworkId", homeworkId).findFirst();
     }
-
 }

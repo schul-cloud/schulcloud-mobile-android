@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 
 import org.schulcloud.mobile.SchulCloudApplication;
 import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.TopicDataManager;
 import org.schulcloud.mobile.data.model.Topic;
 import org.schulcloud.mobile.util.AndroidComponentUtil;
 import org.schulcloud.mobile.util.NetworkUtil;
@@ -28,7 +29,7 @@ public class TopicSyncService extends Service {
     private static final String EXTRA_COURSE_ID = "org.schulcloud.mobile.data.sync.TopicSyncService.EXTRA_COURSE_ID";
 
     @Inject
-    DataManager mDataManager;
+    TopicDataManager mDataManager;
     private Subscription mSubscription;
 
     private String courseId = null;

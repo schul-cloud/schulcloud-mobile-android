@@ -23,7 +23,8 @@ public class UserDatabaseHelper extends BaseDatabaseHelper {
 
     public Observable<User> setUsers(final Collection<User> newUsers) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -49,7 +50,8 @@ public class UserDatabaseHelper extends BaseDatabaseHelper {
 
     public Observable<AccessToken> setAccessToken(final AccessToken newAccessToken) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -74,7 +76,8 @@ public class UserDatabaseHelper extends BaseDatabaseHelper {
 
     public Observable<CurrentUser> setCurrentUser(final CurrentUser currentUser) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {

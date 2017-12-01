@@ -20,7 +20,8 @@ public class FileStorageDatabasehelper extends BaseDatabaseHelper{
 
     public Observable<File> setFiles(final Collection<File> files) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -47,7 +48,8 @@ public class FileStorageDatabasehelper extends BaseDatabaseHelper{
 
     public Observable<Directory> setDirectories(final Collection<Directory> directories) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {

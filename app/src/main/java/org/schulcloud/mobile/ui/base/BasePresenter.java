@@ -17,7 +17,6 @@ import timber.log.Timber;
  */
 public class BasePresenter<T extends MvpView> implements Presenter<T> {
 
-    public DataManager mDataManager;
     public Subscription mSubscription;
     private T mMvpView;
 

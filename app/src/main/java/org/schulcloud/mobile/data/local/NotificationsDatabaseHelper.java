@@ -19,7 +19,8 @@ public class NotificationsDatabaseHelper extends  BaseDatabaseHelper {
     NotificationsDatabaseHelper(Provider<Realm> realmProvider) {super(realmProvider);}
     public Observable<Device> setDevices(final Collection<Device> newDevices) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {

@@ -20,7 +20,8 @@ public class CourseDatabaseHelper extends BaseDatabaseHelper {
 
     public Observable<Course> setCourses(final Collection<Course> newCourse) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {

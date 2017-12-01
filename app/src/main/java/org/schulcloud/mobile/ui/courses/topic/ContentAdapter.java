@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.UserDataManager;
 import org.schulcloud.mobile.data.model.Contents;
 import org.schulcloud.mobile.ui.courses.detailed.DetailedCoursePresenter;
 import org.schulcloud.mobile.util.PicassoImageGetter;
@@ -32,7 +33,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
     DetailedCoursePresenter mDetailedCoursePresenter;
 
     @Inject
-    DataManager mDataManger;
+    UserDataManager mDataManger;
 
     @Inject
     public ContentAdapter() {

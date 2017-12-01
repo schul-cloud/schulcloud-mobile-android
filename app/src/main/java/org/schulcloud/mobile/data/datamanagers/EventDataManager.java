@@ -30,8 +30,7 @@ public class EventDataManager {
     }
 
     public Observable<Event> syncEvents() {
-        return mRestService.getEvents(
-                userDataManager.getAccessToken())
+        return mRestService.getEvents(userDataManager.getAccessToken())
                 .concatMap(new Func1<List<Event>, Observable<Event>>() {
                     @Override
                     public Observable<Event> call(List<Event> events) {
@@ -46,7 +45,7 @@ public class EventDataManager {
         return mDatabaseHelper.getEvents().distinct();
     }
 
-    public List<Event> getEventsForDay() {
-        return mDatabaseHelper.getEventsForDay();
+    public Observable<List<Event>> getEventsForToday() {
+        return mDatabaseHelper.getEventsForToday();
     }
 }

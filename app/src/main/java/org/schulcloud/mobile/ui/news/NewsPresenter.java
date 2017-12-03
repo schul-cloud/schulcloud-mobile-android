@@ -1,6 +1,7 @@
 package org.schulcloud.mobile.ui.news;
 
 import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.NewsDataManager;
 import org.schulcloud.mobile.injection.ConfigPersistent;
 import org.schulcloud.mobile.ui.base.BasePresenter;
 import org.schulcloud.mobile.util.RxUtil;
@@ -12,10 +13,12 @@ import timber.log.Timber;
 
 @ConfigPersistent
 public class NewsPresenter extends BasePresenter<NewsMvpView> {
+    @Inject
+    NewsDataManager mNewsDataManager;
 
     @Inject
-    public NewsPresenter(DataManager dataManager) {
-        mDataManager = dataManager;
+    public NewsPresenter(NewsDataManager newsDataManager) {
+        mNewsDataManager = newsDataManager;
     }
 
     @Override
@@ -27,7 +30,7 @@ public class NewsPresenter extends BasePresenter<NewsMvpView> {
     public void loadNews() {
         checkViewAttached();
         RxUtil.unsubscribe(mSubscription);
-        mSubscription = mDataManager.getNews()
+        mSubscription = mNewsDataManager.getNews()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         news -> {

@@ -18,7 +18,10 @@ import rx.functions.Func1;
 public class EventDataManager {
     private final RestService mRestService;
     private final EventsDatabaseHelper mDatabaseHelper;
-    private final PreferencesHelper mPreferencesHelper;
+
+    @Inject
+    PreferencesHelper mPreferencesHelper;
+    @Inject
     UserDataManager userDataManager;
 
     @Inject
@@ -27,6 +30,10 @@ public class EventDataManager {
         mRestService = restService;
         mPreferencesHelper = preferencesHelper;
         mDatabaseHelper = databaseHelper;
+    }
+
+    public PreferencesHelper getPreferencesHelper() {
+        return mPreferencesHelper;
     }
 
     public Observable<Event> syncEvents() {

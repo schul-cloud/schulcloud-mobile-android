@@ -147,17 +147,17 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
 
     // Notifications
     public void registerDevice() {
-        if (mDataManager.getPreferencesHelper().getMessagingToken().equals("null")) {
+        if (mUserDataManager.getPreferencesHelper().getMessagingToken().equals("null")) {
             String token = FirebaseInstanceId.getInstance().getToken();
             Log.d("FirebaseID", "Refreshed token: " + token);
 
             Log.d("FirebaseID", "sending registration to Server");
             DeviceRequest deviceRequest = new DeviceRequest("firebase", "mobile",
                     android.os.Build.MODEL + " (" + android.os.Build.PRODUCT + ")",
-                    mDataManager.getCurrentUserId(), token, android.os.Build.VERSION.INCREMENTAL);
+                    mUserDataManager.getCurrentUserId(), token, android.os.Build.VERSION.INCREMENTAL);
 
             RxUtil.unsubscribe(mSubscription);
-            mSubscription = mDataManager.createDevice(deviceRequest, token)
+            mSubscription = mNotificationDataManager.createDevice(deviceRequest, token)
                     .subscribe(
                             deviceResponse -> {},
                             throwable -> {},
@@ -167,7 +167,7 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
     public void loadDevices() {
         checkViewAttached();
         RxUtil.unsubscribe(mSubscription);
-        mSubscription = mDataManager.getDevices()
+        mSubscription = mNotificationDataManager.getDevices()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         devices -> {
@@ -182,14 +182,14 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
     }
     public void deleteDevice(Device device) {
         RxUtil.unsubscribe(mSubscription);
-        mSubscription = mDataManager.deleteDevice(device.token)
+        mSubscription = mNotificationDataManager.deleteDevice(device.token)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         voidResponse -> {},
                         throwable -> {},
                         () -> {
                             getMvpView().reloadDevices();
-                            mDataManager.getPreferencesHelper()
+                            mUserDataManager.getPreferencesHelper()
                                     .clear(PreferencesHelper.PREFERENCE_MESSAGING_TOKEN);
                         });
     }

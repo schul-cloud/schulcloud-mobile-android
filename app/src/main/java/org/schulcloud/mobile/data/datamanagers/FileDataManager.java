@@ -26,7 +26,10 @@ import rx.functions.Func1;
 public class FileDataManager {
     private final RestService mRestService;
     private final FileStorageDatabasehelper mDatabaseHelper;
-    private final PreferencesHelper mPreferencesHelper;
+
+    @Inject
+    PreferencesHelper mPreferencesHelper;
+    @Inject
     UserDataManager userDataManager;
 
     @Inject
@@ -35,6 +38,10 @@ public class FileDataManager {
         mRestService = restService;
         mPreferencesHelper = preferencesHelper;
         mDatabaseHelper = databaseHelper;
+    }
+
+    public PreferencesHelper getPreferencesHelper() {
+        return mPreferencesHelper;
     }
 
     public Observable<File> syncFiles(String path) {

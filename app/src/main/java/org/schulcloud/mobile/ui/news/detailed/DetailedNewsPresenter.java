@@ -1,6 +1,7 @@
 package org.schulcloud.mobile.ui.news.detailed;
 
 import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.NewsDataManager;
 import org.schulcloud.mobile.ui.base.BasePresenter;
 import org.schulcloud.mobile.util.RxUtil;
 
@@ -9,8 +10,11 @@ import javax.inject.Inject;
 public class DetailedNewsPresenter extends BasePresenter<DetailedNewsMvpView> {
 
     @Inject
-    public DetailedNewsPresenter(DataManager dataManager) {
-        mDataManager = dataManager;
+    NewsDataManager mNewsDataManager;
+
+    @Inject
+    public DetailedNewsPresenter(NewsDataManager newsDataManager) {
+        mNewsDataManager = newsDataManager;
     }
 
     @Override
@@ -21,6 +25,6 @@ public class DetailedNewsPresenter extends BasePresenter<DetailedNewsMvpView> {
 
     public void loadNews(String newsId) {
         checkViewAttached();
-        getMvpView().showNews(mDataManager.getNewsForId(newsId));
+        getMvpView().showNews(mNewsDataManager.getNewsForId(newsId));
     }
 }

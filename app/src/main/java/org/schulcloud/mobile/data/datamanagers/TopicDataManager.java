@@ -20,8 +20,10 @@ import rx.functions.Func1;
 public class TopicDataManager {
     private final RestService mRestService;
     private final TopicsDatabaseHelper mDatabaseHelper;
-    private final PreferencesHelper mPreferencesHelper;
 
+    @Inject
+    PreferencesHelper mPreferencesHelper;
+    @Inject
     UserDataManager userDataManager;
 
     @Inject
@@ -30,6 +32,10 @@ public class TopicDataManager {
         mRestService = restService;
         mPreferencesHelper = preferencesHelper;
         mDatabaseHelper = databaseHelper;
+    }
+
+    public PreferencesHelper getPreferencesHelper() {
+        return mPreferencesHelper;
     }
 
     public Observable<Topic> syncTopics(String courseId) {

@@ -21,7 +21,10 @@ import rx.functions.Func1;
 public class HomeworkDataManager {
     private final RestService mRestService;
     private final HomeworkDatabaseHelper mDatabaseHelper;
-    private final PreferencesHelper mPreferencesHelper;
+
+    @Inject
+    PreferencesHelper mPreferencesHelper;
+    @Inject
     UserDataManager userDataManager;
 
     @Inject
@@ -30,6 +33,10 @@ public class HomeworkDataManager {
         mRestService = restService;
         mPreferencesHelper = preferencesHelper;
         mDatabaseHelper = databaseHelper;
+    }
+
+    public PreferencesHelper getPreferencesHelper() {
+        return mPreferencesHelper;
     }
 
     public Observable<Homework> syncHomework() {

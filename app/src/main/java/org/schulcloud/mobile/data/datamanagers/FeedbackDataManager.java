@@ -17,7 +17,10 @@ import rx.functions.Func1;
 public class FeedbackDataManager {
     private final RestService mRestService;
     private final DatabaseHelper mDatabaseHelper;
-    private final PreferencesHelper mPreferencesHelper;
+
+    @Inject
+    PreferencesHelper mPreferencesHelper;
+    @Inject
     UserDataManager userDataManager;
 
     @Inject
@@ -27,6 +30,11 @@ public class FeedbackDataManager {
         mPreferencesHelper = preferencesHelper;
         mDatabaseHelper = databaseHelper;
     }
+
+    public PreferencesHelper getPreferencesHelper() {
+        return mPreferencesHelper;
+    }
+
     public Observable<FeedbackResponse> sendFeedback(FeedbackRequest feedbackRequest) {
         return mRestService.sendFeedback(
                 userDataManager.getAccessToken(),

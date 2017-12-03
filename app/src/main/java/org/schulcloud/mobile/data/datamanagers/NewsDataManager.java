@@ -21,7 +21,10 @@ public class NewsDataManager {
 
     private final RestService mRestService;
     private final DatabaseHelper mDatabaseHelper;
-    private final PreferencesHelper mPreferencesHelper;
+
+    @Inject
+    PreferencesHelper mPreferencesHelper;
+    @Inject
     UserDataManager userDataManager;
 
     @Inject
@@ -30,6 +33,10 @@ public class NewsDataManager {
         mRestService = restService;
         mPreferencesHelper = preferencesHelper;
         mDatabaseHelper = databaseHelper;
+    }
+
+    public PreferencesHelper getPreferencesHelper() {
+        return mPreferencesHelper;
     }
 
     public Observable<List<News>> getNews() {

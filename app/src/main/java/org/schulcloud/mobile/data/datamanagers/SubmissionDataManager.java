@@ -18,7 +18,10 @@ import rx.functions.Func1;
 public class SubmissionDataManager {
     private final RestService mRestService;
     private final SubmissionDatabaseHelper mDatabaseHelper;
-    private final PreferencesHelper mPreferencesHelper;
+
+    @Inject
+    PreferencesHelper mPreferencesHelper;
+    @Inject
     UserDataManager userDataManager;
 
     @Inject
@@ -27,6 +30,10 @@ public class SubmissionDataManager {
         mRestService = restService;
         mPreferencesHelper = preferencesHelper;
         mDatabaseHelper = databaseHelper;
+    }
+
+    public PreferencesHelper getPreferencesHelper() {
+        return mPreferencesHelper;
     }
 
     public Observable<Submission> syncSubmissions() {

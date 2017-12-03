@@ -24,7 +24,10 @@ public class NotificationDataManager {
 
     private final RestService mRestService;
     private final NotificationsDatabaseHelper mDatabaseHelper;
-    private final PreferencesHelper mPreferencesHelper;
+
+    @Inject
+    PreferencesHelper mPreferencesHelper;
+    @Inject
     UserDataManager userDataManager;
 
     @Inject
@@ -33,6 +36,10 @@ public class NotificationDataManager {
         mRestService = restService;
         mPreferencesHelper = preferencesHelper;
         mDatabaseHelper = databaseHelper;
+    }
+
+    public PreferencesHelper getPreferencesHelper() {
+        return mPreferencesHelper;
     }
 
     public Observable<DeviceResponse> createDevice(DeviceRequest deviceRequest, String token) {

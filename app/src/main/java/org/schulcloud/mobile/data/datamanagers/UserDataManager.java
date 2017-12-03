@@ -23,7 +23,9 @@ public class UserDataManager{
 
     private final RestService mRestService;
     private final UserDatabaseHelper mDatabaseHelper;
-    private final PreferencesHelper mPreferencesHelper;
+
+    @Inject
+    PreferencesHelper mPreferencesHelper;
 
     @Inject
     public UserDataManager(RestService restService, PreferencesHelper preferencesHelper,
@@ -31,6 +33,10 @@ public class UserDataManager{
         mRestService = restService;
         mPreferencesHelper = preferencesHelper;
         mDatabaseHelper = databaseHelper;
+    }
+
+    public PreferencesHelper getPreferencesHelper() {
+        return mPreferencesHelper;
     }
 
     public Observable<User> syncUsers() {

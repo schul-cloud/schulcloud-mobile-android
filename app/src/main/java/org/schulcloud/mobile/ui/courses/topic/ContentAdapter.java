@@ -33,7 +33,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
     DetailedCoursePresenter mDetailedCoursePresenter;
 
     @Inject
-    UserDataManager mDataManger;
+    UserDataManager mUserDataManger;
 
     @Inject
     public ContentAdapter() {
@@ -58,7 +58,8 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         Contents contents = mContent.get(position);
         holder.nameTextView.setText(contents.title);
 
-        PicassoImageGetter imageGetter = new PicassoImageGetter(holder.descriptionTextView, mContext, mDataManger.getAccessToken());
+        PicassoImageGetter imageGetter = new PicassoImageGetter(holder.descriptionTextView, mContext
+                , mUserDataManger.getAccessToken());
 
         if (contents.component.equals("text"))
             holder.descriptionTextView.setText(Html.fromHtml(contents.content.text, imageGetter, null));

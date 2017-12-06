@@ -1,6 +1,5 @@
 package org.schulcloud.mobile.data.datamanagers;
 
-import org.schulcloud.mobile.data.local.DatabaseHelper;
 import org.schulcloud.mobile.data.local.PreferencesHelper;
 import org.schulcloud.mobile.data.local.SubmissionDatabaseHelper;
 import org.schulcloud.mobile.data.model.requestBodies.FeedbackRequest;
@@ -16,7 +15,7 @@ import rx.functions.Func1;
 @Singleton
 public class FeedbackDataManager {
     private final RestService mRestService;
-    private final DatabaseHelper mDatabaseHelper;
+    private final SubmissionDatabaseHelper mDatabaseHelper;
 
     @Inject
     PreferencesHelper mPreferencesHelper;
@@ -25,7 +24,7 @@ public class FeedbackDataManager {
 
     @Inject
     public FeedbackDataManager(RestService restService, PreferencesHelper preferencesHelper,
-                             DatabaseHelper databaseHelper) {
+                             SubmissionDatabaseHelper databaseHelper) {
         mRestService = restService;
         mPreferencesHelper = preferencesHelper;
         mDatabaseHelper = databaseHelper;

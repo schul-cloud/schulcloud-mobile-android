@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import org.schulcloud.mobile.SchulCloudApplication;
-import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.datamanagers.TopicDataManager;
 import org.schulcloud.mobile.data.model.Topic;
 import org.schulcloud.mobile.util.AndroidComponentUtil;

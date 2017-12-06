@@ -1,6 +1,5 @@
 package org.schulcloud.mobile.ui.courses.detailed;
 
-import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.datamanagers.CourseDataManager;
 import org.schulcloud.mobile.data.datamanagers.TopicDataManager;
 import org.schulcloud.mobile.injection.ConfigPersistent;

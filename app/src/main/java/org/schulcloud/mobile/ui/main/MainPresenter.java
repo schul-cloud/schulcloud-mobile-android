@@ -3,7 +3,6 @@ package org.schulcloud.mobile.ui.main;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.datamanagers.UserDataManager;
 import org.schulcloud.mobile.injection.ConfigPersistent;
 import org.schulcloud.mobile.ui.base.BasePresenter;

@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.ipaulpro.afilechooser.utils.FileUtils;
 
-import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.datamanagers.FileDataManager;
 import org.schulcloud.mobile.data.model.File;
 import org.schulcloud.mobile.data.model.requestBodies.SignedUrlRequest;

@@ -1,7 +1,6 @@
 package org.schulcloud.mobile.data.datamanagers;
 
 import org.schulcloud.mobile.data.local.CourseDatabaseHelper;
-import org.schulcloud.mobile.data.local.DatabaseHelper;
 import org.schulcloud.mobile.data.local.PreferencesHelper;
 import org.schulcloud.mobile.data.model.Course;
 import org.schulcloud.mobile.data.model.responseBodies.FeathersResponse;

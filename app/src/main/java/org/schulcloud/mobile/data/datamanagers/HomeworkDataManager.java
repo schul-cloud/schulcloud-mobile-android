@@ -1,6 +1,5 @@
 package org.schulcloud.mobile.data.datamanagers;
 
-import org.schulcloud.mobile.data.local.DatabaseHelper;
 import org.schulcloud.mobile.data.local.HomeworkDatabaseHelper;
 import org.schulcloud.mobile.data.local.PreferencesHelper;
 import org.schulcloud.mobile.data.model.Homework;

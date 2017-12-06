@@ -8,7 +8,6 @@ import android.net.ConnectivityManager;
 import android.os.IBinder;
 
 import org.schulcloud.mobile.SchulCloudApplication;
-import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.datamanagers.SubmissionDataManager;
 import org.schulcloud.mobile.data.model.Submission;
 import org.schulcloud.mobile.util.AndroidComponentUtil;

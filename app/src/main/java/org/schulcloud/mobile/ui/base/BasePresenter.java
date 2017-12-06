@@ -2,7 +2,6 @@ package org.schulcloud.mobile.ui.base;
 
 import android.content.Context;
 
-import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.datamanagers.UserDataManager;
 import org.schulcloud.mobile.util.NetworkUtil;
 import org.schulcloud.mobile.util.RxUtil;

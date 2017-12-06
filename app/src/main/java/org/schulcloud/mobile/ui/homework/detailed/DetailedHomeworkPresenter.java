@@ -1,6 +1,5 @@
 package org.schulcloud.mobile.ui.homework.detailed;
 
-import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.datamanagers.HomeworkDataManager;
 import org.schulcloud.mobile.data.datamanagers.SubmissionDataManager;
 import org.schulcloud.mobile.data.datamanagers.UserDataManager;

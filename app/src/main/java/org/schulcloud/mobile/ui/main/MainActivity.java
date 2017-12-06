@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.schulcloud.mobile.R;
-import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.ui.base.BaseActivity;
 import org.schulcloud.mobile.ui.courses.CourseFragment;
 import org.schulcloud.mobile.ui.dashboard.DashboardFragment;
@@ -45,8 +44,6 @@ public final class MainActivity extends BaseActivity implements MainMvpView {
     @Inject
     MainPresenter mMainPresenter;
 
-    @Inject
-    DataManager mDataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

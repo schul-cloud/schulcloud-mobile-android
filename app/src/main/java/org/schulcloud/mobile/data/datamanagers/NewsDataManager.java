@@ -1,6 +1,6 @@
 package org.schulcloud.mobile.data.datamanagers;
 
-import org.schulcloud.mobile.data.local.DatabaseHelper;
+import org.schulcloud.mobile.data.local.NewsDatabaseHelper;
 import org.schulcloud.mobile.data.local.PreferencesHelper;
 import org.schulcloud.mobile.data.model.News;
 import org.schulcloud.mobile.data.remote.RestService;
@@ -20,7 +20,7 @@ import rx.Observable;
 public class NewsDataManager {
 
     private final RestService mRestService;
-    private final DatabaseHelper mDatabaseHelper;
+    private final NewsDatabaseHelper mDatabaseHelper;
 
     @Inject
     PreferencesHelper mPreferencesHelper;
@@ -29,7 +29,7 @@ public class NewsDataManager {
 
     @Inject
     public NewsDataManager(RestService restService, PreferencesHelper preferencesHelper,
-                               DatabaseHelper databaseHelper) {
+                               NewsDatabaseHelper databaseHelper) {
         mRestService = restService;
         mPreferencesHelper = preferencesHelper;
         mDatabaseHelper = databaseHelper;

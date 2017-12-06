@@ -2,7 +2,6 @@ package org.schulcloud.mobile.ui.feedback;
 
 import android.util.Log;
 
-import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.datamanagers.FeedbackDataManager;
 import org.schulcloud.mobile.data.model.requestBodies.FeedbackRequest;
 import org.schulcloud.mobile.data.model.responseBodies.FeedbackResponse;

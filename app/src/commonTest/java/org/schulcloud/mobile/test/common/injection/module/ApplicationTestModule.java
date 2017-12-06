@@ -5,7 +5,6 @@ import android.content.Context;
 
 import javax.inject.Singleton;
 
-import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.remote.RestService;
 import org.schulcloud.mobile.injection.ApplicationContext;
 import dagger.Module;

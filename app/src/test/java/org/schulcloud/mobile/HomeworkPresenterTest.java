@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.HomeworkDataManager;
 import org.schulcloud.mobile.data.model.Homework;
 import org.schulcloud.mobile.test.common.TestDataFactory;
 import org.schulcloud.mobile.ui.homework.HomeworkMvpView;
@@ -32,7 +32,7 @@ public class HomeworkPresenterTest {
     @Mock
     HomeworkMvpView mMockHomeworkMvpView;
     @Mock
-    DataManager mMockDataManager;
+    HomeworkDataManager mMockDataManager;
     private HomeworkPresenter mHomeworkPresenter;
 
     @Before

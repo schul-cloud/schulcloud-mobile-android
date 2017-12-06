@@ -13,7 +13,7 @@ import com.google.gson.JsonParser;
 
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.SchulCloudApplication;
-import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.NotificationDataManager;
 import org.schulcloud.mobile.data.model.requestBodies.CallbackRequest;
 import org.schulcloud.mobile.ui.dashboard.DashboardFragment;
 
@@ -30,7 +30,7 @@ public class MessagingService extends FirebaseMessagingService {
     private static final String KEY_NOTIFICATION_ID = "notificationId";
 
     @Inject
-    DataManager mDataManager;
+    NotificationDataManager mNotificationDataManager;
     private Subscription mSubscription;
 
     @Override
@@ -69,7 +69,7 @@ public class MessagingService extends FirebaseMessagingService {
 
         if (mSubscription != null && !mSubscription.isUnsubscribed())
             mSubscription.unsubscribe();
-        mSubscription = mDataManager.sendCallback(callbackRequest)
+        mSubscription = mNotificationDataManager.sendCallback(callbackRequest)
                 .subscribe();
     }
 

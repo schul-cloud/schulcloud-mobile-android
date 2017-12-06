@@ -3,7 +3,6 @@ package org.schulcloud.mobile.injection.component;
 import android.app.Application;
 import android.content.Context;
 
-import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.datamanagers.CourseDataManager;
 import org.schulcloud.mobile.data.datamanagers.EventDataManager;
 import org.schulcloud.mobile.data.datamanagers.FeedbackDataManager;
@@ -16,7 +15,6 @@ import org.schulcloud.mobile.data.datamanagers.TopicDataManager;
 import org.schulcloud.mobile.data.datamanagers.UserDataManager;
 import org.schulcloud.mobile.data.local.BaseDatabaseHelper;
 import org.schulcloud.mobile.data.local.CourseDatabaseHelper;
-import org.schulcloud.mobile.data.local.DatabaseHelper;
 import org.schulcloud.mobile.data.local.EventsDatabaseHelper;
 import org.schulcloud.mobile.data.local.FileStorageDatabasehelper;
 import org.schulcloud.mobile.data.local.HomeworkDatabaseHelper;
@@ -83,8 +81,6 @@ public interface ApplicationComponent {
 
     PreferencesHelper preferencesHelper();
 
-    DatabaseHelper databaseHelper();
-
     BaseDatabaseHelper baseDatabaseHelper();
 
     CourseDatabaseHelper courseDatabaseHelper();
@@ -106,8 +102,6 @@ public interface ApplicationComponent {
     UserDatabaseHelper userDataBaseHelper();
 
     Realm realm();
-
-    DataManager dataManager();
 
     CourseDataManager courseDataManager();
 

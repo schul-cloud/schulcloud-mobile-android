@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
+<org.schulcloud.mobile.ui.common.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swiperefresh"
@@ -15,4 +15,4 @@
         android:paddingTop="6dp"
         tools:listitem="@layout/item_course" />
 
-</android.support.v4.widget.SwipeRefreshLayout>
+</org.schulcloud.mobile.ui.common.SwipeRefreshLayout>

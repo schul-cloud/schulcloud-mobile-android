@@ -5,10 +5,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.inputmethod.InputMethodManager;
 
 import org.schulcloud.mobile.R;
+import org.schulcloud.mobile.ui.common.SwipeRefreshLayout;
 
 public final class ViewUtil {
 

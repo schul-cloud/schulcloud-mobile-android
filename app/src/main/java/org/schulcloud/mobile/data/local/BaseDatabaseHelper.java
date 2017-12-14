@@ -14,7 +14,7 @@ public class BaseDatabaseHelper {
     BaseDatabaseHelper(Provider<Realm> realmProvider) {
         mRealmProvider = realmProvider;
     }
-
+    
     public void clearTable(Class table) {
         final Realm realm = mRealmProvider.get();
         realm.executeTransaction(realm1 -> realm1.delete(table));

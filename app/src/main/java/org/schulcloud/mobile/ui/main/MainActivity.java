@@ -1,88 +1,142 @@
 package org.schulcloud.mobile.ui.main;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import org.schulcloud.mobile.R;
-import org.schulcloud.mobile.data.model.User;
-import org.schulcloud.mobile.data.sync.UserSyncService;
+import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.ui.base.BaseActivity;
-import org.schulcloud.mobile.ui.signin.SignInActivity;
-import org.schulcloud.mobile.util.DialogFactory;
-
-import java.util.Collections;
-import java.util.List;
+import org.schulcloud.mobile.ui.courses.CourseFragment;
+import org.schulcloud.mobile.ui.dashboard.DashboardFragment;
+import org.schulcloud.mobile.ui.files.FileFragment;
+import org.schulcloud.mobile.ui.homework.HomeworkFragment;
+import org.schulcloud.mobile.ui.news.NewsFragment;
+import org.schulcloud.mobile.ui.settings.SettingsActivity;
+import org.schulcloud.mobile.util.NetworkUtil;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/** @Deprecated, maybe use later for Dashboard **/
-@Deprecated
-public class MainActivity extends BaseActivity implements MainMvpView {
+/**
+ * MainActivity displays a BottomNavigationView and the Toolbar, the content is managed by fragments
+ * which inherit from {@link MainFragment}.
+ */
+public final class MainActivity extends BaseActivity implements MainMvpView {
+    private static final String TAG = MainActivity.class.getSimpleName();
 
-    private static final String EXTRA_TRIGGER_SYNC_FLAG =
-            "org.schulcloud.mobile.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
+    public static final int TAB_DASHBOARD = R.id.main_navigation_dashboard;
+    public static final int TAB_NEWS = R.id.main_navigation_news;
+    public static final int TAB_COURSES = R.id.main_navigation_courses;
+    public static final int TAB_HOMEWORK = R.id.main_navigation_homework;
+    public static final int TAB_FILES = R.id.main_navigation_files;
+    //    public static final int TAB_MATERIALS = R.id.main_navigation_materials;
+    //    public static final int TAB_ADMINISTRATION = R.id.main_navigation_administration;
 
     @Inject
     MainPresenter mMainPresenter;
 
-    @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
-
-    /**
-     * Return an Intent to start this Activity.
-     * triggerDataSyncOnCreate allows disabling the background sync service onCreate. Should
-     * only be set to false during testing.
-     */
-    public static Intent getStartIntent(Context context, boolean triggerDataSyncOnCreate) {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(EXTRA_TRIGGER_SYNC_FLAG, triggerDataSyncOnCreate);
-        return intent;
-    }
+    @Inject
+    DataManager mDataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityComponent().inject(this);
-        //setContentView(R.layout.activity_main);
-
-        LayoutInflater inflater =
-                (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        //inflate your activity layout here!
-        View contentView = inflater.inflate(R.layout.activity_main, null, false);
-        mDrawer.addView(contentView, 0);
-        ButterKnife.bind(this);
-
         mMainPresenter.attachView(this);
         mMainPresenter.checkSignedIn(this);
 
-        mMainPresenter.loadUsers();
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        if (getIntent().getBooleanExtra(EXTRA_TRIGGER_SYNC_FLAG, true)) {
-            startService(UserSyncService.getStartIntent(this));
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        if (!NetworkUtil.isNetworkConnected(this)) {
+            TextView offline = (TextView) findViewById(R.id.offlineBadge);
+            offline.setVisibility(View.VISIBLE);
+        }
+
+        ((BottomNavigationView) findViewById(R.id.navigation)).setOnNavigationItemSelectedListener(
+                item -> {
+                    mMainPresenter.onTabSelected(getTabIndexById(item.getItemId()));
+                    return true;
+                });
+    }
+    private int getTabIndexById(@IdRes int tabId) {
+        switch (tabId) {
+            case TAB_DASHBOARD:
+                return 0;
+            case TAB_NEWS:
+                return 1;
+            case TAB_COURSES:
+                return 2;
+            case TAB_HOMEWORK:
+                return 3;
+            case TAB_FILES:
+                return 4;
+            default:
+                return 0;
+        }
+    }
+    public void addFragment(@NonNull MainFragment parent, @NonNull MainFragment child) {
+        mMainPresenter.addFragment(parent, child);
+    }
+    public void removeFragment(@NonNull MainFragment fragment) {
+        mMainPresenter.removeFragment(fragment);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        super.onCreateOptionsMenu(menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.main_action_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+
+            case R.id.main_action_logout:
+                goToSignIn();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
     @Override
-    protected void onDestroy() {
-        mMainPresenter.detachView();
-        super.onDestroy();
+    public void onBackPressed() {
+        mMainPresenter.onBackPressed();
     }
 
-    /***** MVP View methods implementation *****/
-
     @Override
-    public void goToSignIn() {
-        Intent intent = new Intent(this, SignInActivity.class);
-        this.startActivity(intent);
+    public MainFragment[] getInitialFragments() {
+        return new MainFragment[]{
+                DashboardFragment.newInstance(),
+                NewsFragment.newInstance(),
+                CourseFragment.newInstance(),
+                HomeworkFragment.newInstance(),
+                FileFragment.newInstance()};
+    }
+    @Override
+    public void showFragment(@NonNull MainFragment fragment, int oldTabIndex, int newTabIndex) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if (newTabIndex > oldTabIndex)
+            transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+        else if (newTabIndex < oldTabIndex)
+            transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+        transaction.replace(R.id.content, fragment);
+        transaction.commit();
     }
 }

@@ -1,7 +1,5 @@
 package org.schulcloud.mobile.ui.homework;
 
-import android.content.Context;
-
 import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.model.Homework;
 import org.schulcloud.mobile.injection.ConfigPersistent;
@@ -25,14 +23,9 @@ public class HomeworkPresenter extends BasePresenter<HomeworkMvpView> {
     }
 
     @Override
-    public void attachView(HomeworkMvpView mvpView) {
-        super.attachView(mvpView);
-    }
-
-    @Override
     public void detachView() {
         super.detachView();
-        if (mSubscription != null) mSubscription.unsubscribe();
+        RxUtil.unsubscribe(mSubscription);
     }
 
     public void loadHomework() {
@@ -52,22 +45,17 @@ public class HomeworkPresenter extends BasePresenter<HomeworkMvpView> {
                     }
 
                     @Override
-                    public void onNext(List<Homework> homeworks) {
-                        if (homeworks.isEmpty()) {
+                    public void onNext(List<Homework> homework) {
+                        if (homework.isEmpty()) {
                             getMvpView().showHomeworkEmpty();
                         } else {
-                            getMvpView().showHomework(homeworks);
+                            getMvpView().showHomework(homework);
                         }
                     }
                 });
     }
 
-    public void checkSignedIn(Context context) {
-        super.isAlreadySignedIn(mDataManager, context);
-    }
-
     public void showHomeworkDetail(String homeworkId) {
-        getMvpView().showHomeworkDialog(homeworkId);
+        getMvpView().showHomeworkDetail(homeworkId);
     }
-
 }

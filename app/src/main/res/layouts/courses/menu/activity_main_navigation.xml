@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/main_navigation_dashboard"
+        android:icon="@drawable/ic_th_large_white_24dp"
+        android:title="@string/main_navigation_dashboard" />
+
+    <item
+        android:id="@+id/main_navigation_news"
+        android:icon="@drawable/ic_newspaper_white_24dp"
+        android:title="@string/main_navigation_news" />
+
+    <item
+        android:id="@+id/main_navigation_courses"
+        android:icon="@drawable/ic_student_white_24dp"
+        android:title="@string/main_navigation_courses" />
+
+    <item
+        android:id="@+id/main_navigation_homework"
+        android:icon="@drawable/ic_tasks_white_24dp"
+        android:title="@string/main_navigation_homework" />
+
+    <item
+        android:id="@+id/main_navigation_files"
+        android:icon="@drawable/ic_file_white_24dp"
+        android:title="@string/main_navigation_files" />
+
+    <!--<item-->
+        <!--android:id="@+id/main_navigation_materials"-->
+        <!--android:title="@string/main_navigation_materials"-->
+        <!--android:visible="false" />-->
+
+    <!--<item-->
+        <!--android:id="@+id/main_navigation_administration"-->
+        <!--android:title="@string/main_navigation_administration"-->
+        <!--android:visible="false" />-->
+
+</menu>

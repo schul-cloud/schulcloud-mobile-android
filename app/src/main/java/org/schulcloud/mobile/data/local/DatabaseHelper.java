@@ -10,9 +10,12 @@ import org.schulcloud.mobile.data.model.Directory;
 import org.schulcloud.mobile.data.model.Event;
 import org.schulcloud.mobile.data.model.File;
 import org.schulcloud.mobile.data.model.Homework;
+import org.schulcloud.mobile.data.model.News;
 import org.schulcloud.mobile.data.model.Submission;
 import org.schulcloud.mobile.data.model.Topic;
 import org.schulcloud.mobile.data.model.User;
+import org.schulcloud.mobile.data.model.jsonApi.Included;
+import org.schulcloud.mobile.data.model.jsonApi.IncludedAttributes;
 import org.schulcloud.mobile.util.Pair;
 
 import java.text.ParseException;
@@ -25,12 +28,14 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import rx.Observable;
 import timber.log.Timber;
 
@@ -56,7 +61,8 @@ public class DatabaseHelper {
 
     public Observable<User> setUsers(final Collection<User> newUsers) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -82,7 +88,8 @@ public class DatabaseHelper {
 
     public Observable<AccessToken> setAccessToken(final AccessToken newAccessToken) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -107,7 +114,8 @@ public class DatabaseHelper {
 
     public Observable<CurrentUser> setCurrentUser(final CurrentUser currentUser) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -135,7 +143,8 @@ public class DatabaseHelper {
 
     public Observable<File> setFiles(final Collection<File> files) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -162,7 +171,8 @@ public class DatabaseHelper {
 
     public Observable<Directory> setDirectories(final Collection<Directory> directories) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -190,7 +200,8 @@ public class DatabaseHelper {
     /**** Events ****/
     public Observable<Event> setEvents(final Collection<Event> events) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -201,48 +212,56 @@ public class DatabaseHelper {
                 subscriber.onError(e);
             } finally {
                 if (realm != null) {
-                    subscriber.onCompleted();
                     realm.close();
+                    subscriber.onCompleted();
                 }
             }
         });
     }
-
     public Observable<List<Event>> getEvents() {
         final Realm realm = mRealmProvider.get();
         return realm.where(Event.class).findAllAsync().asObservable()
-                .filter(events -> events.isLoaded())
-                .map(events -> realm.copyFromRealm(events));
+                .filter(RealmResults::isLoaded)
+                .map(realm::copyFromRealm);
     }
-
-    public List<Event> getEventsForDay() {
+    public Observable<List<Event>> getEventsForToday() {
         final Realm realm = mRealmProvider.get();
-        Collection<Event> events = realm.where(Event.class).findAll();
+        return realm.where(Event.class).findAllAsync().asObservable()
+                .map(events -> {
+                    List<Event> e = realm.copyFromRealm(events);
+                    int weekday = new GregorianCalendar().get(Calendar.DAY_OF_WEEK);
+                    Log.d("Weekday", Integer.toString(weekday));
 
-        int weekday = new GregorianCalendar().get(Calendar.DAY_OF_WEEK);
-        Log.d("Weekday", Integer.toString(weekday));
+                    List<Event> eventsForWeekday = new ArrayList<>();
+                    for (Event event : e)
+                        if (event.included.size() > 0)
+                            for (Included included : event.included) {
+                                String freq = included.getAttributes().getFreq();
+                                if (freq == null)
+                                    continue;
 
-        List<Event> eventsForWeekday = new ArrayList<>();
+                                String wkst = included.getAttributes().getWkst();
+                                if (freq.equals(IncludedAttributes.FREQ_DAILY)
+                                        || (freq.equals(IncludedAttributes.FREQ_WEEKLY)
+                                        && getNumberForWeekday(wkst) == weekday)) {
+                                    eventsForWeekday.add(event);
+                                    break;
+                                }
+                            }
 
-        for (Event event : events) {
-            if (event.included.size() > 0) {
-                if (getNumberForWeekday(event.included.first().getAttributes().getWkst()) == weekday) {
-                    eventsForWeekday.add(event);
-                }
-            }
-        }
-
-        Collections.sort(eventsForWeekday, new Comparator<Event>() {
-            @Override
-            public int compare(Event o1, Event o2) {
-                return o1.start.compareTo(o2.start);
-            }
-        });
-
-        return eventsForWeekday;
+                            Calendar c = Calendar.getInstance();
+                    Collections.sort(eventsForWeekday, (o1, o2) -> {
+                        c.setTimeInMillis(Long.parseLong(o1.start));
+                        Integer s1 = c.get(Calendar.HOUR_OF_DAY) * 60 + c.get(Calendar.MINUTE);
+                        c.setTimeInMillis(Long.parseLong(o2.start));
+                        Integer s2 = c.get(Calendar.HOUR_OF_DAY) * 60 + c.get(Calendar.MINUTE);
+                        return s1.compareTo(s2);
+                    });
+                    
+                    return eventsForWeekday;
+                }).debounce(100, TimeUnit.MILLISECONDS);
     }
-
-    public int getNumberForWeekday(String weekday) {
+    private int getNumberForWeekday(String weekday) {
         switch (weekday) {
             case "SU":
                 return 1;
@@ -267,7 +286,8 @@ public class DatabaseHelper {
 
     public Observable<Device> setDevices(final Collection<Device> newDevices) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -295,7 +315,8 @@ public class DatabaseHelper {
 
     public Observable<Homework> setHomework(final Collection<Homework> newHomework) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -361,7 +382,8 @@ public class DatabaseHelper {
     /**** Submissions ****/
     public Observable<Submission> setSubmissions(final Collection<Submission> newSubmission) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -394,7 +416,8 @@ public class DatabaseHelper {
 
     public Observable<Course> setCourses(final Collection<Course> newCourse) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -427,7 +450,8 @@ public class DatabaseHelper {
 
     public Observable<Topic> setTopics(final Collection<Topic> newTopic) {
         return Observable.create(subscriber -> {
-            if (subscriber.isUnsubscribed()) return;
+            if (subscriber.isUnsubscribed())
+                return;
             Realm realm = null;
 
             try {
@@ -454,5 +478,40 @@ public class DatabaseHelper {
     public Topic getContents(String topicId) {
         final Realm realm = mRealmProvider.get();
         return realm.where(Topic.class).equalTo("_id", topicId).findFirst();
+    }
+
+    /**** News ****/
+    public Observable<List<News>> getNews() {
+        final Realm realm = mRealmProvider.get();
+        return realm.where(News.class).findAllAsync().asObservable()
+                .filter(news -> news.isLoaded())
+                .map(news -> {
+                    List<News> newsList = realm.copyFromRealm(news);
+                    Collections.sort(newsList, (o1, o2) -> o2.createdAt.compareTo(o1.createdAt));
+                    return newsList;
+                });
+    }
+    public News getNewsForId(String newsId) {
+        final Realm realm = mRealmProvider.get();
+        return realm.where(News.class).equalTo("_id", newsId).findFirst();
+    }
+    public Observable<News> setNews(final Collection<News> newNews) {
+        return Observable.create(
+                subscriber -> {
+                    if (subscriber.isUnsubscribed())
+                        return;
+
+                    Realm realm = null;
+                    try {
+                        realm = mRealmProvider.get();
+                        realm.executeTransaction(realm1 -> realm1.copyToRealmOrUpdate(newNews));
+                    } catch (Exception e) {
+                        Timber.e(e, "There was an error while adding in Realm.");
+                        subscriber.onError(e);
+                    } finally {
+                        if (realm != null)
+                            realm.close();
+                    }
+                });
     }
 }

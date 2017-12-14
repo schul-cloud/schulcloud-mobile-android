@@ -2,7 +2,6 @@ package org.schulcloud.mobile.data.model.responseBodies;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.model.Course;
 import org.schulcloud.mobile.data.model.CourseHomework;
 import org.schulcloud.mobile.data.model.Homework;

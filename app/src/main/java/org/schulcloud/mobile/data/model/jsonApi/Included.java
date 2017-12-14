@@ -1,6 +1,5 @@
 package org.schulcloud.mobile.data.model.jsonApi;
 
-
 import io.realm.RealmModel;
 import io.realm.annotations.RealmClass;
 

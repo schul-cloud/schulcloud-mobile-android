@@ -46,8 +46,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.Homewo
         mHomework = homework;
     }
 
-    public void setContext(Context context)
-    {
+    public void setContext(Context context) {
         mContext = context;
     }
 
@@ -73,8 +72,10 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.Homewo
         }
 
         if (untilDate.before(new Date())) {
-            holder.dueDate.setPaintFlags(holder.dueDate.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(mContext, R.color.homework_over));
+            holder.dueDate
+                    .setPaintFlags(holder.dueDate.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.cardView.setCardBackgroundColor(
+                    ContextCompat.getColor(mContext, R.color.homework_over));
         }
 
         if (homework.courseId != null && homework.courseId.name != null)
@@ -95,7 +96,8 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.Homewo
 
         String course = homework.courseId != null ? homework.courseId.name : "";
 
-        holder.cardView.setOnClickListener(v -> mHomeworkPresenter.showHomeworkDetail(homework._id));
+        holder.cardView.setOnClickListener(v ->
+                mHomeworkPresenter.showHomeworkDetail(homework._id));
     }
 
     @Override

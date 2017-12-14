@@ -11,7 +11,7 @@ public interface CourseMvpView extends MvpView {
 
     void showCoursesEmpty();
 
-    void showCourseDialog(String courseId);
+    void showCourseDetail(String courseId);
 
     void showError();
 

@@ -1,18 +1,15 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Content.Padding"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray"
-    android:clickable="true"
-    android:paddingTop="@dimen/toolbar_spacer">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/gray"
-        android:paddingLeft="@dimen/bootstrap_alert_paddings"
-        android:paddingRight="@dimen/bootstrap_alert_paddings">
+        android:layout_height="wrap_content">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/nameWrapper"
@@ -30,12 +27,13 @@
                 android:ems="10"
                 android:inputType="text"
                 android:maxLines="1"
-                tools:text="Film gucken"/>
+                tools:text="Film gucken" />
 
         </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:id="@+id/courseText"
+            style="@style/Content_Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -43,9 +41,7 @@
             android:layout_below="@+id/nameWrapper"
             android:layout_marginBottom="@dimen/bootstrap_alert_paddings"
             android:layout_marginTop="@dimen/form_elementSpacing"
-            android:text="@string/homework_homework_course"
-            android:textColor="@color/hpiRed"
-            android:textSize="@dimen/text_title"/>
+            android:text="@string/homework_homework_course" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/course"
@@ -54,7 +50,7 @@
             android:layout_alignBaseline="@id/courseText"
             android:layout_toEndOf="@+id/courseText"
             android:layout_toRightOf="@+id/courseText"
-            tools:listitem="@android:layout/simple_spinner_item"/>
+            tools:listitem="@android:layout/simple_spinner_item" />
 
         <CheckBox
             android:id="@+id/isPrivate"
@@ -62,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/courseText"
             android:layout_marginTop="@dimen/form_elementSpacing"
-            android:text="@string/homework_homework_private"/>
+            android:text="@string/homework_homework_private" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/descriptionWrapper"
@@ -80,12 +76,13 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/descriptionText"
                 android:inputType="textMultiLine"
-                tools:text="Beschreibung...\n\n\nEnde der Beschreibung"/>
+                tools:text="Beschreibung...\n\n\nEnde der Beschreibung" />
 
         </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:id="@+id/dateText"
+            style="@style/Content_Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -93,9 +90,7 @@
             android:layout_below="@+id/descriptionWrapper"
             android:layout_marginBottom="@dimen/bootstrap_alert_paddings"
             android:layout_marginTop="@dimen/form_elementSpacing"
-            android:text="@string/homework_homework_processingTime"
-            android:textColor="@color/hpiRed"
-            android:textSize="@dimen/text_title"/>
+            android:text="@string/homework_homework_processingTime" />
 
         <TextView
             android:id="@+id/availableDate"
@@ -103,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/dateText"
-            tools:text="01.01.2017 15:00"/>
+            tools:text="01.01.2017 15:00" />
 
         <TextView
             android:id="@+id/dateDash"
@@ -117,7 +112,7 @@
             android:layout_toEndOf="@+id/availableDate"
             android:layout_toRightOf="@+id/availableDate"
             android:text="@string/homework_homework_dateDash"
-            android:textSize="@dimen/text_title"/>
+            android:textSize="@dimen/text_title" />
 
         <TextView
             android:id="@+id/dueDate"
@@ -127,7 +122,7 @@
             android:layout_alignBaseline="@id/availableDate"
             android:layout_toEndOf="@+id/dateDash"
             android:layout_toRightOf="@+id/dateDash"
-            tools:text="07.01.2017 15:00"/>
+            tools:text="07.01.2017 15:00" />
 
         <CheckBox
             android:id="@+id/publicSubmissions"
@@ -135,7 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/availableDate"
             android:layout_marginTop="@dimen/form_elementSpacing"
-            android:text="@string/homework_homework_publicSubmissions"/>
+            android:text="@string/homework_homework_publicSubmissions" />
 
         <com.beardedhen.androidbootstrap.BootstrapButton
             android:id="@+id/add"
@@ -150,7 +145,8 @@
             app:bootstrapSize="lg"
             app:buttonMode="regular"
             app:roundedCorners="true"
-            app:showOutline="false"/>
+            app:showOutline="false" />
 
     </RelativeLayout>
+
 </ScrollView>

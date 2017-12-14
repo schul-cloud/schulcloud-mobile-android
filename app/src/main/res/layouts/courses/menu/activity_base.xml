@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.base.BaseActivity">
 
-    <!--TODO-->
     <item
         android:id="@+id/base_action_feedback"
         android:title="@string/base_action_feedback"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
 </menu>

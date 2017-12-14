@@ -46,15 +46,10 @@ public class FilesAdapter extends RecyclerView.Adapter<FilesAdapter.FilesViewHol
     public void onBindViewHolder(FilesAdapter.FilesViewHolder holder, int position) {
         File file = mFiles.get(position);
         holder.nameTextView.setText(file.name);
-        holder.cardView.setOnClickListener(v -> {
-            mFilesPresenter.startDownloading(file, false);
-        });
-        holder.downloadIcon.setOnClickListener(v -> {
-            mFilesPresenter.startDownloading(file, true);
-        });
-        holder.deleteIcon.setOnClickListener(v -> {
-            mFilesPresenter.startFileDeleting(file.key, file.name);
-        });
+        holder.cardView.setOnClickListener(v -> mFilesPresenter.startDownloading(file, false));
+        holder.downloadIcon.setOnClickListener(v -> mFilesPresenter.startDownloading(file, true));
+        holder.deleteIcon.setOnClickListener(
+                v -> mFilesPresenter.startFileDeleting(file.key, file.name));
     }
 
     @Override

@@ -19,19 +19,15 @@ public class DetailedCoursePresenter extends BasePresenter<DetailedCourseMvpView
     }
 
     @Override
-    public void attachView(DetailedCourseMvpView mvpView) {
-        super.attachView(mvpView);
-    }
-
-    @Override
     public void detachView() {
         super.detachView();
-        if (mSubscription != null) mSubscription.unsubscribe();
+        RxUtil.unsubscribe(mSubscription);
     }
 
     /**
-     * loads a specific course for a given id.
-     * @param courseId given id for referencing.
+     * Loads a specific course for a given id.
+     *
+     * @param courseId The ID of the course to load.
      */
     public void loadCourse(String courseId) {
         checkViewAttached();
@@ -45,19 +41,15 @@ public class DetailedCoursePresenter extends BasePresenter<DetailedCourseMvpView
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         // onNext
-                        topics -> {
-                            getMvpView().showTopics(topics);
-                        },
+                        topics -> getMvpView().showTopics(topics),
                         // onError
                         error -> {
                             Timber.e(error, "There was an error loading the topics.");
                             getMvpView().showError();
-                        },
-                        () -> {
                         });
-    };
+    }
 
     public void showTopicDetail(String topicId, String topicName) {
-        getMvpView().showTopicFragment(topicId, topicName);
+        getMvpView().showTopicDetail(topicId, topicName);
     }
 }

@@ -1,15 +1,13 @@
 package org.schulcloud.mobile.ui.dashboard;
 
-import android.content.Context;
-
 import org.schulcloud.mobile.data.DataManager;
-import org.schulcloud.mobile.data.model.Event;
 import org.schulcloud.mobile.injection.ConfigPersistent;
 import org.schulcloud.mobile.ui.base.BasePresenter;
-
-import java.util.List;
+import org.schulcloud.mobile.util.RxUtil;
 
 import javax.inject.Inject;
+
+import rx.android.schedulers.AndroidSchedulers;
 
 @ConfigPersistent
 public class DashboardPresenter extends BasePresenter<DashboardMvpView> {
@@ -20,30 +18,24 @@ public class DashboardPresenter extends BasePresenter<DashboardMvpView> {
     }
 
     @Override
-    public void attachView(DashboardMvpView mvpView) {
-        super.attachView(mvpView);
-    }
-
-    @Override
     public void detachView() {
         super.detachView();
-        if (mSubscription != null) mSubscription.unsubscribe();
+        RxUtil.unsubscribe(mSubscription);
     }
 
-    public void checkSignedIn(Context context) {
-        super.isAlreadySignedIn(mDataManager, context);
-    }
-
-    public void showHomeworks() {
-        getMvpView().showOpenHomeworks(mDataManager.getOpenHomeworks());
+    public void showHomework() {
+        getMvpView().showOpenHomework(mDataManager.getOpenHomeworks());
     }
 
     public void showEvents() {
-        List<Event> events = mDataManager.getEventsForDay();
-        getMvpView().showEvents(events);
+        checkViewAttached();
+        RxUtil.unsubscribe(mSubscription);
+        mSubscription = mDataManager.getEventsForToday()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(events -> getMvpView().showEvents(events));
     }
 
-    public void showCourse(String courseId) {
-        getMvpView().showCourse(courseId);
+    public void showCourseDetails(String courseId) {
+        getMvpView().showCourseDetails(courseId);
     }
 }

@@ -1,4 +1,4 @@
-package org.schulcloud.mobile.ui.courses.detailed;
+package org.schulcloud.mobile.ui.courses.topic;
 
 import org.schulcloud.mobile.data.model.Contents;
 import org.schulcloud.mobile.ui.base.MvpView;
@@ -9,5 +9,4 @@ public interface TopicMvpView extends MvpView {
 
     void showContent(List<Contents> contents);
 
-    void showError();
 }

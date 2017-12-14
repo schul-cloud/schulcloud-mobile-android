@@ -6,6 +6,7 @@ import org.schulcloud.mobile.data.model.CurrentUser;
 import org.schulcloud.mobile.data.model.Device;
 import org.schulcloud.mobile.data.model.Event;
 import org.schulcloud.mobile.data.model.Homework;
+import org.schulcloud.mobile.data.model.News;
 import org.schulcloud.mobile.data.model.Submission;
 import org.schulcloud.mobile.data.model.Topic;
 import org.schulcloud.mobile.data.model.User;
@@ -107,4 +108,7 @@ public interface RestService {
 
     @POST("mails")
     Observable<FeedbackResponse> sendFeedback(@Header("Authorization") String accessToken, @Body FeedbackRequest feedbackRequest);
+
+    @GET("news?$sort=createdAt:1")
+    Observable<FeathersResponse<News>> getNews(@Header("Authorization") String accessToken);
 }

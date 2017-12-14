@@ -12,6 +12,7 @@ import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.model.Course;
 import org.schulcloud.mobile.util.AndroidComponentUtil;
 import org.schulcloud.mobile.util.NetworkUtil;
+import org.schulcloud.mobile.util.RxUtil;
 
 import javax.inject.Inject;
 
@@ -51,7 +52,7 @@ public class CourseSyncService extends Service {
             return START_NOT_STICKY;
         }
 
-        if (mSubscription != null && !mSubscription.isUnsubscribed()) mSubscription.unsubscribe();
+        RxUtil.unsubscribe(mSubscription);
         mSubscription = mDataManager.syncCourses()
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Course>() {
@@ -77,7 +78,7 @@ public class CourseSyncService extends Service {
 
     @Override
     public void onDestroy() {
-        if (mSubscription != null) mSubscription.unsubscribe();
+        RxUtil.unsubscribe(mSubscription);
         super.onDestroy();
     }
 

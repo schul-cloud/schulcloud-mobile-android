@@ -6,16 +6,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 
 import org.schulcloud.mobile.SchulCloudApplication;
 import org.schulcloud.mobile.data.DataManager;
-import org.schulcloud.mobile.data.model.Event;
 import org.schulcloud.mobile.util.AndroidComponentUtil;
 import org.schulcloud.mobile.util.NetworkUtil;
+import org.schulcloud.mobile.util.RxUtil;
 
 import javax.inject.Inject;
 
-import rx.Observer;
 import rx.Subscription;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -26,11 +26,11 @@ public class EventSyncService extends Service {
     DataManager mDataManager;
     private Subscription mSubscription;
 
-    public static Intent getStartIntent(Context context) {
+    public static Intent getStartIntent(@NonNull Context context) {
         return new Intent(context, EventSyncService.class);
     }
 
-    public static boolean isRunning(Context context) {
+    public static boolean isRunning(@NonNull Context context) {
         return AndroidComponentUtil.isServiceRunning(context, EventSyncService.class);
     }
 
@@ -51,33 +51,26 @@ public class EventSyncService extends Service {
             return START_NOT_STICKY;
         }
 
-        if (mSubscription != null && !mSubscription.isUnsubscribed()) mSubscription.unsubscribe();
-
+        RxUtil.unsubscribe(mSubscription);
         mSubscription = mDataManager.syncEvents()
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Event>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        System.err.print(e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(Event event) {
-
-                    }
-                });
+                .subscribe(
+                        event -> {},
+                        throwable -> {
+                            Timber.w(throwable, "Error syncing events.");
+                            stopSelf(startId);
+                        },
+                        () -> {
+                            Timber.i("Synced events successfully!");
+                            stopSelf(startId);
+                        });
 
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        if (mSubscription != null) mSubscription.unsubscribe();
+        RxUtil.unsubscribe(mSubscription);
         super.onDestroy();
     }
 
@@ -87,7 +80,6 @@ public class EventSyncService extends Service {
     }
 
     public static class SyncOnConnectionAvailable extends BroadcastReceiver {
-
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)
@@ -98,5 +90,4 @@ public class EventSyncService extends Service {
             }
         }
     }
-
 }

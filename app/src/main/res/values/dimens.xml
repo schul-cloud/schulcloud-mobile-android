@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="horizontal_margin">16dp</dimen>
@@ -17,7 +18,6 @@
     <dimen name="fa_icon_big">32sp</dimen>
     <dimen name="fa_icon_medium">24sp</dimen>
 
-    <dimen name="toolbar_spacer">70dp</dimen>
     <dimen name="form_elementSpacing">8dp</dimen>
     <dimen name="form_elementSpacingBig">32dp</dimen>
 
@@ -26,51 +26,18 @@
 
     <dimen name="settings_preference_padding">16dp</dimen>
 
-    <dimen name="md_baseline">16dp</dimen>
-    <dimen name="md_baseline_content">72dp</dimen>
 
-    <dimen name="md_app_bar_elevation">4dp</dimen>
-
-    <dimen name="md_drawer_max_width">400dp</dimen>
-
-    <dimen name="md_drawer_list_margin_vertical">8dp</dimen>
-
-    <dimen name="md_icon_size">24dp</dimen>
-    <dimen name="md_avatar_size">40dp</dimen>
-    <dimen name="md_big_avatar_size">64dp</dimen>
-
-    <dimen name="md_divider_height">1dp</dimen>
-    <dimen name="md_divider_margin">8dp</dimen>
-
-    <dimen name="md_list_item_height">48dp</dimen>
-    <dimen name="md_list_item_height_two_line">72dp</dimen>
-    <dimen name="md_list_item_margin">16dp</dimen>
-    <dimen name="md_list_item_text_secondary_margin">0dp</dimen>
-
-    <dimen name="md_fixed_list_shadow_height">4dp</dimen>
-
-    <!-- General margins for the drawer account header -->
-    <dimen name="material_drawer_account_header_height">148dp</dimen>
-    <dimen name="material_drawer_account_header_height_compact">72dp</dimen>
-    <dimen name="material_drawer_account_header_horizontal_top">16dp</dimen>
-    <dimen name="material_drawer_account_header_horizontal_bottom">4dp</dimen>
-    <dimen name="material_drawer_account_header_selected">64dp</dimen>
-    <dimen name="material_drawer_account_header_secondary">40dp</dimen>
-    <dimen name="material_drawer_account_header_compact">56dp</dimen>
-    <dimen name="material_drawer_account_header_text">14sp</dimen>
-    <dimen name="material_drawer_account_header_dropdown">22dp</dimen>
-    <dimen name="material_drawer_account_header_dropdown_padding">5dp</dimen>
-    <dimen name="material_drawer_account_header_dropdown_margin_bottom">14dp</dimen>
-
-    <!-- General vertical padding values / 24dp for tablets -->
-    <dimen name="material_drawer_vertical_padding">16dp</dimen>
-
-    <!-- General padding value -->
-    <dimen name="material_drawer_padding">8dp</dimen>
+    <dimen name="content_padding">8dp</dimen>
+    <dimen name="content_title_margin">8dp</dimen>
+    <dimen name="content_title_marginTop">16dp</dimen>
 
 
-    <!--Material Design-->
-    <!--List-->
+    <!-- Material Design -->
+    <!-- Buttons -->
+    <!--Floating Action Button-->
+    <dimen name="material_button_fab_margin">16dp</dimen>
+
+    <!-- List -->
     <dimen name="material_list_paddingTop">8dp</dimen>
     <!--ListItemLayout-->
     <dimen name="material_listItemLayout_height">48dp</dimen>
@@ -101,5 +68,13 @@
     <dimen name="material_listItemLayout_endText_marginVertical_withSecondary2">16dp</dimen>
     <dimen name="material_listItemLayout_endText_width">48dp</dimen>
     <dimen name="material_listItemLayout_endText_textSize">14sp</dimen>
+
+    <!-- Toolbar -->
+    <dimen name="material_toolbar_elevation">4dp</dimen>
+
+    <!-- Card -->
+    <dimen name="material_card_marginHorizontal">12dp</dimen>
+    <dimen name="material_card_marginVertical">6dp</dimen>
+    <dimen name="material_card_padding">10dp</dimen>
 
 </resources>

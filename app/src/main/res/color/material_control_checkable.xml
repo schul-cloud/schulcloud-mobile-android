@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:color="@color/material_control_disabled"
+        android:state_enabled="false" />
+
+    <item android:color="@color/material_control_activated"
+        android:state_focused="true" />
+    <item android:color="@color/material_control_activated"
+        android:state_pressed="true" />
+    <item android:color="@color/material_control_activated"
+        android:state_checked="true" />
+
+    <item android:color="@color/material_control_normal" />
+
+</selector>

@@ -1,6 +1,5 @@
 package org.schulcloud.mobile.data.model;
 
-
 import com.google.gson.annotations.SerializedName;
 
 import org.schulcloud.mobile.data.model.jsonApi.Included;

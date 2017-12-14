@@ -8,9 +8,10 @@ import java.util.List;
 
 public interface DashboardMvpView extends MvpView {
 
-    void showOpenHomeworks(Pair<String, String> openHomeworks);
+    void showOpenHomework(Pair<String, String> openHomework);
 
     void showEvents(List<Event> eventsForDay);
 
-    void showCourse(String xScCourseId);
+    void showCourseDetails(String xScCourseId);
+
 }

@@ -3,6 +3,7 @@ package org.schulcloud.mobile;
 import android.app.Application;
 import android.content.Context;
 
+import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.crashlytics.android.Crashlytics;
 
 import org.schulcloud.mobile.injection.component.ApplicationComponent;
@@ -30,6 +31,7 @@ public class SchulCloudApplication extends Application {
             Fabric.with(this, new Crashlytics());
         }
 
+        TypefaceProvider.registerDefaultIconSets();
         // override font
         TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/ptsans.ttf");
     }

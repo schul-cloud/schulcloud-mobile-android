@@ -23,18 +23,18 @@ import butterknife.ButterKnife;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
 
-    private List<Course> mCourse;
+    private List<Course> mCourses;
 
     @Inject
     CoursePresenter mCoursePresenter;
 
     @Inject
     public CourseAdapter() {
-        mCourse = new ArrayList<>();
+        mCourses = new ArrayList<>();
     }
 
     public void setCourses(List<Course> course) {
-        mCourse = course;
+        mCourses = course;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     @Override
     public void onBindViewHolder(CourseViewHolder holder, int position) {
-        Course course = mCourse.get(position);
+        Course course = mCourses.get(position);
 
         holder.nameTextView.setText(course.name);
         holder.descriptionTextView.setText(course.description);
@@ -58,7 +58,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     @Override
     public int getItemCount() {
-        return mCourse.size();
+        return mCourses.size();
     }
 
     class CourseViewHolder extends RecyclerView.ViewHolder {

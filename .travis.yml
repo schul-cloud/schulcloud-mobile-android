@@ -38,7 +38,8 @@ before_script:
 after_success:
 - "./.travis/upload-apk.sh"
 script:
-- "./gradlew assembleDebug testDebugUnitTest connectedDebugAndroidTest"
+- "./gradlew assembleDebug testDebugUnitTest"
+#- "./gradlew assembleDebug testDebugUnitTest connectedDebugAndroidTest"
 deploy:
   provider: releases
   api_key:

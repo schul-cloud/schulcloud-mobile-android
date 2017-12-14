@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                   android:id="@+id/toolbar"
-                                   android:layout_width="match_parent"
-                                   android:layout_height="?attr/actionBarSize"
-                                   android:background="@color/hpiRed"
-                                   android:elevation="4dp"
-                                   android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-                                   app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                                   app:theme="@style/ToolBarStyle">
-    <RelativeLayout
-        android:layout_width="75dp"
-        android:layout_height="match_parent">
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    style="@style/Material.Toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
     <TextView
+        android:id="@+id/offlineBadge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/offlineBadge"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
         android:text="@string/base_offline"
         android:textSize="@dimen/text_small_body"
-        android:layout_centerVertical="true"
-        android:visibility="invisible"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true" />
-    </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
+        android:visibility="invisible" />
+
+</android.support.v7.widget.Toolbar>

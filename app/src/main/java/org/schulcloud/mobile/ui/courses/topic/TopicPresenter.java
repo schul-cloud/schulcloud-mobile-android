@@ -1,4 +1,4 @@
-package org.schulcloud.mobile.ui.courses.detailed;
+package org.schulcloud.mobile.ui.courses.topic;
 
 import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.injection.ConfigPersistent;
@@ -12,17 +12,6 @@ public class TopicPresenter extends BasePresenter<TopicMvpView> {
     @Inject
     public TopicPresenter(DataManager dataManager) {
         mDataManager = dataManager;
-    }
-
-    @Override
-    public void attachView(TopicMvpView mvpView) {
-        super.attachView(mvpView);
-    }
-
-    @Override
-    public void detachView() {
-        super.detachView();
-        if (mSubscription != null) mSubscription.unsubscribe();
     }
 
     public void loadContents(String topicId) {

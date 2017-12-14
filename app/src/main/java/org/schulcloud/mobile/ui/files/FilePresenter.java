@@ -1,6 +1,5 @@
 package org.schulcloud.mobile.ui.files;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.ipaulpro.afilechooser.utils.FileUtils;
@@ -21,8 +20,6 @@ import timber.log.Timber;
 
 @ConfigPersistent
 public class FilePresenter extends BasePresenter<FileMvpView> {
-    private final String GET_OBJECT_ACTION = "getObject";
-    private final String PUT_OBJECT_ACTION = "putObject";
     private Subscription fileSubscription;
     private Subscription directorySubscription;
     private Subscription fileGetterSubscription;
@@ -45,15 +42,14 @@ public class FilePresenter extends BasePresenter<FileMvpView> {
     @Override
     public void detachView() {
         super.detachView();
-        if (fileSubscription != null) fileSubscription.unsubscribe();
-        if (directorySubscription != null) directorySubscription.unsubscribe();
-        if (fileGetterSubscription != null) fileGetterSubscription.unsubscribe();
-        if (fileDownloadSubscription != null) fileDownloadSubscription.unsubscribe();
-        if (fileUploadSubscription != null) fileUploadSubscription.unsubscribe();
-        if (fileStartUploadSubscription != null) fileStartUploadSubscription.unsubscribe();
-        if (fileDeleteSubscription != null) fileDeleteSubscription.unsubscribe();
-        if (directoryDeleteSubscription != null) directoryDeleteSubscription.unsubscribe();
-
+        RxUtil.unsubscribe(fileSubscription);
+        RxUtil.unsubscribe(directorySubscription);
+        RxUtil.unsubscribe(fileGetterSubscription);
+        RxUtil.unsubscribe(fileDownloadSubscription);
+        RxUtil.unsubscribe(fileUploadSubscription);
+        RxUtil.unsubscribe(fileStartUploadSubscription);
+        RxUtil.unsubscribe(fileDeleteSubscription);
+        RxUtil.unsubscribe(directoryDeleteSubscription);
     }
 
     public void loadFiles() {
@@ -63,18 +59,13 @@ public class FilePresenter extends BasePresenter<FileMvpView> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         // onNext
-                        files -> {
-                            getMvpView().showFiles(files);
-                        },
+                        files -> getMvpView().showFiles(files),
                         // onError
                         error -> {
                             Timber.e(error, "There was an error loading the files.");
                             getMvpView().showError();
-                        },
-                        () -> {
                         });
     }
-
     public void loadDirectories() {
         checkViewAttached();
         RxUtil.unsubscribe(directorySubscription);
@@ -82,32 +73,25 @@ public class FilePresenter extends BasePresenter<FileMvpView> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         // onNext
-                        directories -> {
-                            getMvpView().showDirectories(directories);
-                        },
+                        directories -> getMvpView().showDirectories(directories),
                         // onError
                         error -> {
                             Timber.e(error, "There was an error loading the directories.");
                             getMvpView().showError();
-                        },
-                        () -> {
                         });
     }
 
     /**
-     * loads a file from the schul-cloud server
+     * Loads a file from the Schul-Cloud server.
      *
      * @param file     {File} - the db-saved file
      * @param download {Boolean} - whether to download the file or not
      */
     public void loadFileFromServer(File file, Boolean download) {
         checkViewAttached();
-
-        if (fileGetterSubscription != null && !fileGetterSubscription.isUnsubscribed())
-            fileGetterSubscription.unsubscribe();
-
+        RxUtil.unsubscribe(fileGetterSubscription);
         fileGetterSubscription = mDataManager.getFileUrl(new SignedUrlRequest(
-                this.GET_OBJECT_ACTION, // action
+                SignedUrlRequest.ACTION_OBJECT_GET, // action
                 file.key, // path
                 file.type // fileType
         )).observeOn(AndroidSchedulers.mainThread())
@@ -115,53 +99,41 @@ public class FilePresenter extends BasePresenter<FileMvpView> {
                         (signedUrlResponse) -> {
                             Log.d("Fetched file url", signedUrlResponse.url);
 
-                            if (download) {
+                            if (download)
                                 downloadFile(signedUrlResponse.url, file.name);
-                            } else {
+                            else
                                 getMvpView().showFile(
                                         signedUrlResponse.url,
                                         signedUrlResponse.header.getContentType());
-                            }
                         },
                         error -> {
                             Timber.e(error, "There was an error loading file from Server.");
                             getMvpView().showLoadingFileFromServerError();
-                        },
-                        () -> {
-
                         });
     }
 
     /**
-     * Downloads a file from a given url
+     * Downloads a file from a given url.
      *
      * @param url      {String} - the remote url from which the file will be downloaded
      * @param fileName {String} - the name of the downloaded file
      */
     public void downloadFile(String url, String fileName) {
         checkViewAttached();
-
-        if (fileDownloadSubscription != null && !fileDownloadSubscription.isUnsubscribed())
-            fileDownloadSubscription.unsubscribe();
-
+        RxUtil.unsubscribe(fileDownloadSubscription);
         fileDownloadSubscription = mDataManager.downloadFile(url)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        (responseBody) -> {
-                            getMvpView().saveFile(responseBody, fileName);
-                        },
+                        responseBody -> getMvpView().saveFile(responseBody, fileName),
                         error -> {
                             Timber.e(error, "There was an error loading file from Server.");
                             getMvpView().showLoadingFileFromServerError();
-                        },
-                        () -> {
-
                         });
     }
 
 
     /**
-     * Opens a directory by fetching files for new storageContext
+     * Opens a directory by fetching files for new storageContext.
      *
      * @param dirName {String} - the directory's name for which the files will be fetched
      */
@@ -171,128 +143,94 @@ public class FilePresenter extends BasePresenter<FileMvpView> {
     }
 
     /**
-     * uploads a local file to server
+     * Uploads a local file to the server.
      *
      * @param fileToUpload {File} - the file which will be uploaded
      */
     public void uploadFileToServer(java.io.File fileToUpload) {
         checkViewAttached();
-
-        if (fileUploadSubscription != null && !fileUploadSubscription.isUnsubscribed())
-            fileUploadSubscription.unsubscribe();
+        RxUtil.unsubscribe(fileUploadSubscription);
 
         // todo: refactor later on when there are class and course folders
-        String uploadPath = new StringBuilder()
-                .append(mDataManager.getCurrentStorageContext())
-                .append(fileToUpload.getName())
-                .toString();
+        String uploadPath = mDataManager.getCurrentStorageContext() + fileToUpload.getName();
 
         SignedUrlRequest signedUrlRequest = new SignedUrlRequest(
-                this.PUT_OBJECT_ACTION,
+                SignedUrlRequest.ACTION_OBJECT_PUT, // action
                 uploadPath,
                 FileUtils.getMimeType(fileToUpload));
 
         fileUploadSubscription = mDataManager.getFileUrl(signedUrlRequest)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        (signedUrlResponse) -> {
-                            startUploading(fileToUpload, signedUrlResponse);
-                        },
+                        signedUrlResponse -> startUploading(fileToUpload, signedUrlResponse),
                         error -> {
                             Timber.e(error, "There was an error uploading file from Server.");
                             getMvpView().showUploadFileError();
-                        },
-                        () -> {
-
                         });
     }
 
     /**
-     * initiates a download task
+     * Initiates a download task.
      *
-     * @param file     {File} - the file which will be uploaded
+     * @param file     {File} - the file which will be downloaded
      * @param download {Boolean} - whether to download on hard disk
      */
-    public void startDownloading(File file, Boolean download) {
+    public void startDownloading(File file, boolean download) {
         getMvpView().startDownloading(file, download);
     }
-
     /**
-     * starts a upload progress to the given url
+     * Starts an upload progress to the given url.
      *
      * @param file              {File} - the file which will be uploaded
      * @param signedUrlResponse {SignedUrlResponse} - contains information about the uploaded file
      */
     public void startUploading(java.io.File file, SignedUrlResponse signedUrlResponse) {
         checkViewAttached();
-
-        if (fileStartUploadSubscription != null && !fileStartUploadSubscription.isUnsubscribed())
-            fileStartUploadSubscription.unsubscribe();
-
+        RxUtil.unsubscribe(fileStartUploadSubscription);
         fileStartUploadSubscription = mDataManager.uploadFile(file, signedUrlResponse)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        (responseBody) -> {
-                            getMvpView().reloadFiles();
-                        },
+                        responseBody -> getMvpView().reloadFiles(),
                         error -> {
                             Timber.e(error, "There was an error uploading file from Server.");
                             getMvpView().showUploadFileError();
-                        },
-                        () -> {
-
                         });
 
     }
 
     /**
-     * deletes a file from the server
+     * Deletes a file from the server.
+     *
      * @param path {String} - the key/path to the file
      */
     public void deleteFile(String path) {
         checkViewAttached();
-
-        if (fileDeleteSubscription != null && !fileDeleteSubscription.isUnsubscribed())
-            fileDeleteSubscription.unsubscribe();
-
+        RxUtil.unsubscribe(fileDeleteSubscription);
         fileDeleteSubscription = mDataManager.deleteFile(path)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        (responseBody) -> {
-                            getMvpView().showFileDeleteSuccess();
-                        },
+                        responseBody -> getMvpView().showFileDeleteSuccess(),
                         error -> {
                             Timber.e(error, "There was an error deleting file from Server.");
                             getMvpView().showFileDeleteError();
-                        },
-                        () -> {
-
                         });
 
     }
-
     /**
-     * deletes a directory from the server
+     * Deletes a directory from the server.
+     *
      * @param path {String} - the key/path to the directory
      */
     public void deleteDirectory(String path) {
         checkViewAttached();
-
-        if (directoryDeleteSubscription != null && !directoryDeleteSubscription.isUnsubscribed())
-            directoryDeleteSubscription.unsubscribe();
-
+        RxUtil.unsubscribe(directoryDeleteSubscription);
         directoryDeleteSubscription = mDataManager.deleteDirectory(path)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        (responseBody) -> {
-                            getMvpView().showDirectoryDeleteSuccess();
-                        },
+                        responseBody -> getMvpView().showDirectoryDeleteSuccess(),
                         error -> {
                             Timber.e(error, "There was an error deleting file from Server.");
                             getMvpView().showFileDeleteError();
-                        },
-                        () -> {
-
                         });
 
     }
@@ -300,32 +238,30 @@ public class FilePresenter extends BasePresenter<FileMvpView> {
     public void startDirectoryDeleting(String path, String dirName) {
         getMvpView().startDirectoryDeleting(path, dirName);
     }
-
     public void startFileDeleting(String path, String fileName) {
         getMvpView().startFileDeleting(path, fileName);
     }
 
-    public void checkSignedIn(Context context) {
-        super.isAlreadySignedIn(mDataManager, context);
-    }
-
     /**
-     * checks the current storage path and steps back if it's a root directory
+     * Checks the current storage path and steps back if it's not a root directory.
+     *
+     * @return True if stepping back was successful, false if we are already in the root directory.
      */
-    public void stepOneDirectoryBack() {
+    public boolean stepOneDirectoryBack() {
         String currentPath = mDataManager.getCurrentStorageContext();
 
         // remove last slash
-        if (currentPath.lastIndexOf(java.io.File.separator) == (currentPath.length() - 1)) {
+        if (currentPath.lastIndexOf(java.io.File.separator) == (currentPath.length() - 1))
             currentPath = currentPath.substring(0, currentPath.length() - 1);
-        }
 
-        // first to parts are meta
+        // first two parts are meta
         if (currentPath.split(java.io.File.separator).length > 2) {
             currentPath = currentPath.substring(0, currentPath.lastIndexOf(java.io.File.separator));
             mDataManager.setCurrentStorageContext(currentPath);
             getMvpView().reloadFiles();
+            return true;
         }
+        return false;
     }
 }
 

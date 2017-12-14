@@ -20,19 +20,18 @@ import butterknife.ButterKnife;
 
 public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsViewHolder> {
 
-    private List<Topic> mTopic;
-    private String mUserId;
+    private List<Topic> mTopics;
 
     @Inject
     DetailedCoursePresenter mDetailedCoursePresenter;
 
     @Inject
     public TopicsAdapter() {
-        mTopic = new ArrayList<>();
+        mTopics = new ArrayList<>();
     }
 
     public void setTopics(List<Topic> topics) {
-        mTopic = topics;
+        mTopics = topics;
     }
 
     @Override
@@ -44,16 +43,17 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.TopicsView
 
     @Override
     public void onBindViewHolder(TopicsViewHolder holder, int position) {
-        Topic topic = mTopic.get(position);
+        Topic topic = mTopics.get(position);
 
         holder.nameTextView.setText(topic.name);
 
-        holder.cardView.setOnClickListener(v -> mDetailedCoursePresenter.showTopicDetail(topic._id, topic.name));
+        holder.cardView.setOnClickListener(
+                v -> mDetailedCoursePresenter.showTopicDetail(topic._id, topic.name));
     }
 
     @Override
     public int getItemCount() {
-        return mTopic.size();
+        return mTopics.size();
     }
 
     class TopicsViewHolder extends RecyclerView.ViewHolder {

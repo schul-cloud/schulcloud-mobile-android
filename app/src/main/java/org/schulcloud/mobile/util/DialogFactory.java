@@ -3,7 +3,10 @@ package org.schulcloud.mobile.util;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 import android.widget.TextView;
@@ -11,7 +14,6 @@ import android.widget.TextView;
 import com.github.johnpersano.supertoasts.library.Style;
 import com.github.johnpersano.supertoasts.library.SuperActivityToast;
 import com.github.johnpersano.supertoasts.library.SuperToast;
-import com.github.johnpersano.supertoasts.library.utils.PaletteUtils;
 
 import org.schulcloud.mobile.R;
 
@@ -68,15 +70,16 @@ public final class DialogFactory {
         return createGenericErrorDialog(context, context.getString(messageResource));
     }
 
-    public static AlertDialog.Builder createSingleSelectDialog(Context context,
-                                                               CharSequence[] singleChoiceItems,
-                                                               @StringRes int messageResource) {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-        alertDialog.setSingleChoiceItems(singleChoiceItems, 0, null);
-        alertDialog.setNegativeButton(R.string.dialog_action_cancel, null);
-        alertDialog.setPositiveButton(R.string.dialog_action_ok, null);
-        alertDialog.setTitle(context.getString(messageResource));
-        return alertDialog;
+    public static AlertDialog.Builder createSingleSelectDialog(@NonNull Context context,
+            @NonNull CharSequence[] singleChoiceItems, int checkedItem,
+            @Nullable DialogInterface.OnClickListener selectionChangedListener,
+            @StringRes int messageResource) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setSingleChoiceItems(singleChoiceItems, checkedItem, selectionChangedListener);
+        builder.setNegativeButton(R.string.dialog_action_cancel, null);
+        builder.setPositiveButton(R.string.dialog_action_ok, null);
+        builder.setTitle(context.getString(messageResource));
+        return builder;
     }
 
     public static ProgressDialog createProgressDialog(Context context, String message) {

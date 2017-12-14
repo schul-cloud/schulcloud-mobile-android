@@ -3,9 +3,27 @@ package org.schulcloud.mobile.injection.component;
 import android.app.Application;
 import android.content.Context;
 
-import org.schulcloud.mobile.data.DataManager;
-import org.schulcloud.mobile.data.local.DatabaseHelper;
+import org.schulcloud.mobile.data.datamanagers.CourseDataManager;
+import org.schulcloud.mobile.data.datamanagers.EventDataManager;
+import org.schulcloud.mobile.data.datamanagers.FeedbackDataManager;
+import org.schulcloud.mobile.data.datamanagers.FileDataManager;
+import org.schulcloud.mobile.data.datamanagers.HomeworkDataManager;
+import org.schulcloud.mobile.data.datamanagers.NewsDataManager;
+import org.schulcloud.mobile.data.datamanagers.NotificationDataManager;
+import org.schulcloud.mobile.data.datamanagers.SubmissionDataManager;
+import org.schulcloud.mobile.data.datamanagers.TopicDataManager;
+import org.schulcloud.mobile.data.datamanagers.UserDataManager;
+import org.schulcloud.mobile.data.local.BaseDatabaseHelper;
+import org.schulcloud.mobile.data.local.CourseDatabaseHelper;
+import org.schulcloud.mobile.data.local.EventsDatabaseHelper;
+import org.schulcloud.mobile.data.local.FileStorageDatabasehelper;
+import org.schulcloud.mobile.data.local.HomeworkDatabaseHelper;
+import org.schulcloud.mobile.data.local.NewsDatabaseHelper;
+import org.schulcloud.mobile.data.local.NotificationsDatabaseHelper;
 import org.schulcloud.mobile.data.local.PreferencesHelper;
+import org.schulcloud.mobile.data.local.SubmissionDatabaseHelper;
+import org.schulcloud.mobile.data.local.TopicsDatabaseHelper;
+import org.schulcloud.mobile.data.local.UserDatabaseHelper;
 import org.schulcloud.mobile.data.remote.RestService;
 import org.schulcloud.mobile.data.sync.CourseSyncService;
 import org.schulcloud.mobile.data.sync.DeviceSyncService;
@@ -63,11 +81,47 @@ public interface ApplicationComponent {
 
     PreferencesHelper preferencesHelper();
 
-    DatabaseHelper databaseHelper();
+    BaseDatabaseHelper baseDatabaseHelper();
+
+    CourseDatabaseHelper courseDatabaseHelper();
+
+    EventsDatabaseHelper eventsDatabaseHelper();
+
+    FileStorageDatabasehelper fileStorageDatabaseHelper();
+
+    HomeworkDatabaseHelper homeworkDatabaseHelper();
+
+    NewsDatabaseHelper newsDatabaseHelper();
+
+    NotificationsDatabaseHelper notificationDatabaseHelper();
+
+    SubmissionDatabaseHelper submissionDatabaseHelper();
+
+    TopicsDatabaseHelper topicsDatabaseHelper();
+
+    UserDatabaseHelper userDataBaseHelper();
 
     Realm realm();
 
-    DataManager dataManager();
+    CourseDataManager courseDataManager();
+
+    EventDataManager eventDataManager();
+
+    FeedbackDataManager feedbackDataManager();
+
+    FileDataManager fileDataManager();
+
+    HomeworkDataManager homeworkdDataManager();
+
+    NewsDataManager newsDataManager();
+
+    NotificationDataManager notificationDataManager();
+
+    SubmissionDataManager submissionDataManager();
+
+    TopicDataManager topicDataManager();
+
+    UserDataManager userDataManager();
 
     RxEventBus eventBus();
 }

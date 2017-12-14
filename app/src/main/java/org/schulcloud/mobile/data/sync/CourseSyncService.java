@@ -8,7 +8,7 @@ import android.net.ConnectivityManager;
 import android.os.IBinder;
 
 import org.schulcloud.mobile.SchulCloudApplication;
-import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.CourseDataManager;
 import org.schulcloud.mobile.data.model.Course;
 import org.schulcloud.mobile.util.AndroidComponentUtil;
 import org.schulcloud.mobile.util.NetworkUtil;
@@ -24,7 +24,7 @@ import timber.log.Timber;
 public class CourseSyncService extends Service {
 
     @Inject
-    DataManager mDataManager;
+    CourseDataManager mDataManager;
     private Subscription mSubscription;
 
     public static Intent getStartIntent(Context context) {

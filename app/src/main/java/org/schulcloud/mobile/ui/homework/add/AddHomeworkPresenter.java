@@ -1,6 +1,8 @@
 package org.schulcloud.mobile.ui.homework.add;
 
-import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.CourseDataManager;
+import org.schulcloud.mobile.data.datamanagers.HomeworkDataManager;
+import org.schulcloud.mobile.data.datamanagers.UserDataManager;
 import org.schulcloud.mobile.data.local.PreferencesHelper;
 import org.schulcloud.mobile.data.model.Course;
 import org.schulcloud.mobile.data.model.CurrentUser;
@@ -33,10 +35,21 @@ public class AddHomeworkPresenter extends BasePresenter<AddHomeworkMvpView> {
     private DateFormat mDateFormat;
 
     @Inject
-    public AddHomeworkPresenter(DataManager dataManager, PreferencesHelper preferencesHelper) {
-        mDataManager = dataManager;
-        mPreferencesHelper = preferencesHelper;
+    CourseDataManager mCourseDataManager;
+    @Inject
+    HomeworkDataManager mHomeworkDataManager;
+    @Inject
+    UserDataManager mUserDataManager;
 
+    @Inject
+    public AddHomeworkPresenter(UserDataManager userDataManager,
+                                PreferencesHelper preferencesHelper,
+                                CourseDataManager courseDataManager,
+                                HomeworkDataManager homeworkDataManager) {
+        mUserDataManager = userDataManager;
+        mCourseDataManager = courseDataManager;
+        mHomeworkDataManager = homeworkDataManager;
+        mPreferencesHelper = preferencesHelper;
         mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     }
 
@@ -57,7 +70,7 @@ public class AddHomeworkPresenter extends BasePresenter<AddHomeworkMvpView> {
         names.add(null);
 
         RxUtil.unsubscribe(mCoursesSubscription);
-        mCoursesSubscription = mDataManager.getCourses()
+        mCoursesSubscription = mCourseDataManager.getCourses()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         courses ->
@@ -74,7 +87,7 @@ public class AddHomeworkPresenter extends BasePresenter<AddHomeworkMvpView> {
                             getMvpView().showCourseLoadingError();
                         });
 
-        mCurrentUserSubscription = mDataManager.getCurrentUser()
+        mCurrentUserSubscription = mUserDataManager.getCurrentUser()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         currentUser ->
@@ -110,7 +123,7 @@ public class AddHomeworkPresenter extends BasePresenter<AddHomeworkMvpView> {
 
             checkViewAttached();
             RxUtil.unsubscribe(mSubscription);
-            mSubscription = mDataManager.addHomework(addHomeworkRequest)
+            mSubscription = mHomeworkDataManager.addHomework(addHomeworkRequest)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             addHomeworkResponse -> getMvpView().reloadHomeworkList(),

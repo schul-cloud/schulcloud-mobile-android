@@ -1,6 +1,6 @@
 package org.schulcloud.mobile.ui.courses;
 
-import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.CourseDataManager;
 import org.schulcloud.mobile.injection.ConfigPersistent;
 import org.schulcloud.mobile.ui.base.BasePresenter;
 import org.schulcloud.mobile.util.RxUtil;
@@ -12,9 +12,11 @@ import timber.log.Timber;
 
 @ConfigPersistent
 public class CoursePresenter extends BasePresenter<CourseMvpView> {
+    @Inject
+    CourseDataManager mDataManager;
 
     @Inject
-    public CoursePresenter(DataManager dataManager) {
+    public CoursePresenter(CourseDataManager dataManager) {
         mDataManager = dataManager;
     }
 

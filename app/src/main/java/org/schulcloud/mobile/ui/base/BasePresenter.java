@@ -2,7 +2,7 @@ package org.schulcloud.mobile.ui.base;
 
 import android.content.Context;
 
-import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.UserDataManager;
 import org.schulcloud.mobile.util.NetworkUtil;
 import org.schulcloud.mobile.util.RxUtil;
 
@@ -17,7 +17,6 @@ import timber.log.Timber;
  */
 public class BasePresenter<T extends MvpView> implements Presenter<T> {
 
-    public DataManager mDataManager;
     public Subscription mSubscription;
     private T mMvpView;
 
@@ -47,7 +46,7 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
     /**
      * Checks whether there is already a logged-in user, if not so go to sign-in screen
      */
-    public void isAlreadySignedIn(DataManager dataManager, Context context) {
+    public void isAlreadySignedIn(UserDataManager dataManager, Context context) {
         // 1. try to get currentUser from prefs
         String currentUserId = dataManager.getCurrentUserId();
 

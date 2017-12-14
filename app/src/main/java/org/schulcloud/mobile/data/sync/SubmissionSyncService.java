@@ -8,7 +8,7 @@ import android.net.ConnectivityManager;
 import android.os.IBinder;
 
 import org.schulcloud.mobile.SchulCloudApplication;
-import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.SubmissionDataManager;
 import org.schulcloud.mobile.data.model.Submission;
 import org.schulcloud.mobile.util.AndroidComponentUtil;
 import org.schulcloud.mobile.util.NetworkUtil;
@@ -23,7 +23,7 @@ import timber.log.Timber;
 public class SubmissionSyncService extends Service {
 
     @Inject
-    DataManager mDataManager;
+    SubmissionDataManager mDataManager;
     private Subscription mSubscription;
 
     public static Intent getStartIntent(Context context) {

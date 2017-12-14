@@ -3,7 +3,7 @@ package org.schulcloud.mobile.ui.main;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import org.schulcloud.mobile.data.DataManager;
+import org.schulcloud.mobile.data.datamanagers.UserDataManager;
 import org.schulcloud.mobile.injection.ConfigPersistent;
 import org.schulcloud.mobile.ui.base.BasePresenter;
 
@@ -23,8 +23,11 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     private int mCurrentLevel;
 
     @Inject
-    public MainPresenter(DataManager dataManager) {
-        mDataManager = dataManager;
+    UserDataManager mUserDataManager;
+
+    @Inject
+    public MainPresenter(UserDataManager userDataManager) {
+        mUserDataManager = userDataManager;
     }
 
     @Override
@@ -46,7 +49,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
         }
     }
     public void checkSignedIn(@NonNull Context context) {
-        isAlreadySignedIn(mDataManager, context);
+        isAlreadySignedIn(mUserDataManager, context);
     }
 
     public void onTabSelected(int tabIndex) {

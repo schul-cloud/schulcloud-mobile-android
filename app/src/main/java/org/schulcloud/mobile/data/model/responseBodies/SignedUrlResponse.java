@@ -1,6 +1,5 @@
 package org.schulcloud.mobile.data.model.responseBodies;
 
-
 import com.google.gson.annotations.SerializedName;
 
 public class SignedUrlResponse {
@@ -18,6 +17,9 @@ public class SignedUrlResponse {
         @SerializedName("x-amz-meta-name")
         private String metaName;
 
+        @SerializedName("x-amz-meta-flat-name")
+        private String metaFlatName;
+
         @SerializedName("x-amz-meta-thumbnail")
         private String metaThumbnail;
 
@@ -28,7 +30,6 @@ public class SignedUrlResponse {
         public String getContentType() {
             return contentType;
         }
-
         public void setContentType(String contentType) {
             this.contentType = contentType;
         }
@@ -36,7 +37,6 @@ public class SignedUrlResponse {
         public String getMetaPath() {
             return metaPath;
         }
-
         public void setMetaPath(String metaPath) {
             this.metaPath = metaPath;
         }
@@ -44,15 +44,20 @@ public class SignedUrlResponse {
         public String getMetaName() {
             return metaName;
         }
-
         public void setMetaName(String metaName) {
             this.metaName = metaName;
+        }
+
+        public String getMetaFlatName() {
+            return metaFlatName;
+        }
+        public void setMetaFlatName(String metaFlatName) {
+            this.metaFlatName = metaFlatName;
         }
 
         public String getMetaThumbnail() {
             return metaThumbnail;
         }
-
         public void setMetaThumbnail(String metaThumbnail) {
             this.metaThumbnail = metaThumbnail;
         }

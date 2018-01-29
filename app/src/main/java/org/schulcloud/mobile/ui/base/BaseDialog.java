@@ -2,6 +2,7 @@ package org.schulcloud.mobile.ui.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.util.LongSparseArray;
 
@@ -47,9 +48,14 @@ public class BaseDialog extends DialogFragment {
             configPersistentComponent = sComponentsMap.get(mActivityId);
         }
         mActivityComponent = configPersistentComponent.activityComponent(
-            new ActivityModule(getActivity()));
+            new ActivityModule(getBaseActivity()));
     }
 
+    @NonNull
+    public BaseActivity getBaseActivity() {
+        return (BaseActivity) getActivity();
+    }
+    @NonNull
     public ActivityComponent activityComponent() {
         return mActivityComponent;
     }

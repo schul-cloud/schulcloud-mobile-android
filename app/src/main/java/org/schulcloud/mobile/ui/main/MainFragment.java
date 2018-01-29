@@ -53,13 +53,4 @@ public abstract class MainFragment extends BaseFragment implements MvpView {
     public void finish() {
         getMainActivity().removeFragment(this);
     }
-    public void startService(@NonNull Intent service) {
-        getMainActivity().startService(service);
-    }
-    public void stopService(@NonNull Intent name) {
-        getMainActivity().stopService(name);
-    }
-    public boolean checkPermissions(int callbackId, String... permissions) {
-        return PermissionsUtil.checkPermissions(callbackId, getMainActivity(), permissions);
-    }
 }

@@ -15,6 +15,7 @@ public class File implements RealmModel {
     public String size;
     public String type;
     public String thumbnail;
+    public String flatFileName;
 
     @Transient
     public String fullPath;

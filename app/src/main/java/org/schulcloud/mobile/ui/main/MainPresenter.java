@@ -168,7 +168,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
                 tabStack.pop();
             MainFragment fragment = tabStack.get(level);
 
-            getViewOrThrow().showFragment(fragment, mCurrentTabIndex, tabIndex);
+            sendToView(view -> view.showFragment(fragment, mCurrentTabIndex, tabIndex));
 
             mCurrentFragment = fragment;
             mCurrentTabIndex = tabIndex;

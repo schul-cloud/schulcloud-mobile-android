@@ -36,6 +36,11 @@
         <item name="android:layout_marginTop">@dimen/content_title_marginTop</item>
     </style>
 
+    <style name="Content_Text.Empty" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:padding">16dp</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
 
     <style name="Preference.Simple" parent="@style/TextAppearance.AppCompat.Subhead">
         <item name="android:padding">@dimen/settings_preference_padding</item>
@@ -58,8 +63,42 @@
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
+    <style name="FileOverview.Card" parent="Material.Card.Margin">
+        <item name="contentPadding">0dp</item>
+        <item name="contentPaddingBottom">4dp</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+    <style name="FileOverview.Card_Icon" parent="Material.Icon.Dense.Inverse">
+        <item name="android:width">40dp</item>
+    </style>
+    <style name="FileOverview.Card_Title" parent="TextAppearance.AppCompat.Title.Inverse" />
+    <style name="FileOverview.Card_FileCount" parent="TextAppearance.AppCompat.Subhead.Inverse" />
+    <style name="FileOverview.Card_Description" parent="TextAppearance.AppCompat.Medium" />
+    <style name="FileOverview.Card_Open" parent="Widget.AppCompat.Button.Borderless.Colored" />
+
     <!-- Material Design -->
     <style name="Material" />
+
+    <!-- Icon -->
+    <style name="Material.Icon">
+        <item name="android:width">48dp</item>
+        <item name="android:height">48dp</item>
+        <item name="android:textSize" tools:ignore="SpUsage">20dp</item>
+        <item name="android:color">?android:attr/textColorPrimary</item>
+    </style>
+    <style name="Material.Icon.Inverse">
+        <item name="android:color">?android:attr/textColorPrimaryInverse</item>
+        <item name="bootstrapBrand">secondary</item>
+    </style>
+    <style name="Material.Icon.Dense">
+        <item name="android:width">40dp</item>
+        <item name="android:height">40dp</item>
+        <item name="android:textSize" tools:ignore="SpUsage">18dp</item>
+    </style>
+    <style name="Material.Icon.Dense.Inverse">
+        <item name="android:color">?android:attr/textColorPrimaryInverse</item>
+        <item name="bootstrapBrand">secondary</item>
+    </style>
 
     <!-- Buttons -->
     <!--Floating Action Button-->
@@ -130,6 +169,15 @@
         <item name="android:layout_marginBottom">@dimen/material_card_marginVertical</item>
         <item name="android:layout_marginLeft">@dimen/material_card_marginHorizontal</item>
         <item name="android:layout_marginRight">@dimen/material_card_marginHorizontal</item>
+    </style>
+
+    <!-- Dialog -->
+    <style name="Material.Dialog_Content">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/material_dialog_content_paddingHorizontal</item>
+        <item name="android:paddingTop">@dimen/material_dialog_content_paddingTop</item>
+        <item name="android:paddingRight">@dimen/material_dialog_content_paddingHorizontal</item>
     </style>
 
 </resources>

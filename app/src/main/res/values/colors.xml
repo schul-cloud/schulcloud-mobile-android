@@ -7,18 +7,25 @@
 
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#E6E2E2</color>
+    <color name="gray_dark">#c3c1c1</color>
+
     <color name="hpiRed">#B10438</color>
     <color name="hpiOrange">#E2661D</color>
     <color name="hpiYellow">#F8A41B</color>
     <color name="backgroundStart">#f9e5e5</color>
 
-    <color name="homework_over">#c3c1c1</color>
+    <color name="blue_dark">#283E56</color>
+    <color name="blue_light">#1989AC</color>
+    <color name="turquoise">#00B8A9</color>
 
     <!--Material-->
     <color name="material_control_activated">#FFFFFFFF</color>
     <color name="material_control_normal">#B3FFFFFF</color>
     <color name="material_control_disabled">#80FFFFFF</color>
 
+    <color name="material_text_primary">#DE000000</color>
+    <color name="material_text_secondary">#8A000000</color>
+    <color name="material_text_hint">#61000000</color>
     <color name="material_divider">#1F000000</color>
 
 </resources>

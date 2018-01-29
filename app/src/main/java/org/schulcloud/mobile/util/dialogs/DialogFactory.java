@@ -1,14 +1,18 @@
-package org.schulcloud.mobile.util;
+package org.schulcloud.mobile.util.dialogs;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.johnpersano.supertoasts.library.Style;
@@ -16,6 +20,9 @@ import com.github.johnpersano.supertoasts.library.SuperActivityToast;
 import com.github.johnpersano.supertoasts.library.SuperToast;
 
 import org.schulcloud.mobile.R;
+
+import butterknife.ButterKnife;
+import rx.Single;
 
 public final class DialogFactory {
 
@@ -68,6 +75,26 @@ public final class DialogFactory {
 
     public static Dialog createGenericErrorDialog(Context context, @StringRes int messageResource) {
         return createGenericErrorDialog(context, context.getString(messageResource));
+    }
+
+    @CheckResult
+    @NonNull
+    public static Single<String> showSimpleTextInputDialog(@NonNull Context context,
+            @NonNull String title, @NonNull String positiveTitle, @NonNull String negativeTitle) {
+        return Single.create(e -> {
+            View view = LayoutInflater.from(context).inflate(R.layout.dialog_text, null);
+            EditText input = ButterKnife.findById(view, R.id.text_et_text);
+
+            new AlertDialog.Builder(context)
+                    .setTitle(title)
+                    .setView(view)
+                    .setPositiveButton(positiveTitle, (dialog, which) ->
+                            e.onSuccess(input.getText().toString()))
+                    .setNegativeButton(negativeTitle, (dialog, which) ->
+                            e.onError(new DialogCancelledException()))
+                    .setOnDismissListener(dialog -> e.onError(new DialogDismissedException()))
+                    .show();
+        });
     }
 
     public static AlertDialog.Builder createSingleSelectDialog(@NonNull Context context,

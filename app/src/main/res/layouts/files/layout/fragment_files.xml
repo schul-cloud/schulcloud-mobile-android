@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <HorizontalScrollView
+        android:id="@+id/files_hsv_breadcrumbs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_dark">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <View
+                android:id="@+id/files_breadcrumbs_v_color"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                tools:background="@color/hpiOrange" />
+
+            <TextView
+                android:id="@+id/files_breadcrumbs_tv_text"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                tools:text="12 Mathe / Analysis / Einführung" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/files_hsv_breadcrumbs">
 
         <ScrollView
             android:layout_width="fill_parent"
@@ -22,13 +55,20 @@
                 android:orientation="vertical"
                 android:paddingBottom="25dp">
 
+                <TextView
+                    android:id="@+id/files_tv_empty"
+                    style="@style/Content_Text.Empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/files_directoryEmpty"
+                    android:visibility="gone" />
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/directories_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
-                    android:paddingBottom="6dp"
                     android:paddingTop="6dp"
                     android:scrollbars="vertical"
                     tools:listitem="@layout/item_directory" />
@@ -37,9 +77,9 @@
                     android:id="@+id/files_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/material_button_fab_spacer"
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
-                    android:paddingBottom="6dp"
                     android:paddingTop="6dp"
                     android:scrollbars="vertical"
                     tools:listitem="@layout/item_file" />
@@ -55,9 +95,10 @@
         style="@style/Material.Fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_upload_light_24dp"
         tools:visibility="visible" />
 
-</FrameLayout>
+</android.support.constraint.ConstraintLayout>

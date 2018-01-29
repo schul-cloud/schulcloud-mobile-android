@@ -12,6 +12,7 @@ import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.model.File;
 import org.schulcloud.mobile.util.AndroidComponentUtil;
 import org.schulcloud.mobile.util.NetworkUtil;
+import org.schulcloud.mobile.util.RxUtil;
 
 import javax.inject.Inject;
 
@@ -51,13 +52,8 @@ public class FileSyncService extends Service {
             return START_NOT_STICKY;
         }
 
-        if (mSubscription != null && !mSubscription.isUnsubscribed()) mSubscription.unsubscribe();
-
-        // generate correct storageContext/path
-
-        String path = mDataManager.getCurrentStorageContext();
-
-        mSubscription = mDataManager.syncFiles(path)
+        RxUtil.unsubscribe(mSubscription);
+        mSubscription = mDataManager.syncFiles(mDataManager.getCurrentStorageContext())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<File>() {
                     @Override

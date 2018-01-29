@@ -15,7 +15,7 @@ import org.schulcloud.mobile.data.model.Course;
 import org.schulcloud.mobile.data.sync.CourseSyncService;
 import org.schulcloud.mobile.ui.courses.detailed.DetailedCourseFragment;
 import org.schulcloud.mobile.ui.main.MainFragment;
-import org.schulcloud.mobile.util.DialogFactory;
+import org.schulcloud.mobile.util.dialogs.DialogFactory;
 import org.schulcloud.mobile.util.ViewUtil;
 
 import java.util.Collections;
@@ -99,9 +99,9 @@ public class CourseFragment extends MainFragment implements CourseMvpView {
         return view;
     }
     @Override
-    public void onDestroy() {
+    public void onPause() {
         mCoursePresenter.detachView();
-        super.onDestroy();
+        super.onPause();
     }
 
     /***** MVP View methods implementation *****/

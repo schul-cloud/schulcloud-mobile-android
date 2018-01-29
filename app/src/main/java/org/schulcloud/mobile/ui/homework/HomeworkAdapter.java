@@ -77,7 +77,7 @@ public class HomeworkAdapter extends RecyclerView.Adapter<HomeworkAdapter.Homewo
             holder.dueDate
                     .setPaintFlags(holder.dueDate.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             holder.cardView.setCardBackgroundColor(
-                    ContextCompat.getColor(mContext, R.color.homework_over));
+                    ContextCompat.getColor(mContext, R.color.gray_dark));
         }
 
         if (homework.courseId != null && homework.courseId.name != null)

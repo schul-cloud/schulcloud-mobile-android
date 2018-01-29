@@ -19,7 +19,7 @@ import org.schulcloud.mobile.data.sync.SubmissionSyncService;
 import org.schulcloud.mobile.ui.homework.add.AddHomeworkFragment;
 import org.schulcloud.mobile.ui.homework.detailed.DetailedHomeworkFragment;
 import org.schulcloud.mobile.ui.main.MainFragment;
-import org.schulcloud.mobile.util.DialogFactory;
+import org.schulcloud.mobile.util.dialogs.DialogFactory;
 import org.schulcloud.mobile.util.ViewUtil;
 
 import java.util.Collections;
@@ -113,9 +113,9 @@ public class HomeworkFragment extends MainFragment implements HomeworkMvpView {
         return view;
     }
     @Override
-    public void onDestroy() {
+    public void onPause() {
         mHomeworkPresenter.detachView();
-        super.onDestroy();
+        super.onPause();
     }
 
     /***** MVP View methods implementation *****/

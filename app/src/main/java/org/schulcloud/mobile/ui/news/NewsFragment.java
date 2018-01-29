@@ -16,7 +16,7 @@ import org.schulcloud.mobile.data.model.News;
 import org.schulcloud.mobile.data.sync.NewsSyncService;
 import org.schulcloud.mobile.ui.main.MainFragment;
 import org.schulcloud.mobile.ui.news.detailed.DetailedNewsFragment;
-import org.schulcloud.mobile.util.DialogFactory;
+import org.schulcloud.mobile.util.dialogs.DialogFactory;
 import org.schulcloud.mobile.util.ViewUtil;
 
 import java.util.Collections;
@@ -97,9 +97,9 @@ public class NewsFragment extends MainFragment implements NewsMvpView {
         return view;
     }
     @Override
-    public void onDestroy() {
+    public void onPause() {
         mNewsPresenter.detachView();
-        super.onDestroy();
+        super.onPause();
     }
 
     @Override

@@ -17,7 +17,7 @@ import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.ui.base.BaseActivity;
 import org.schulcloud.mobile.ui.courses.CourseFragment;
 import org.schulcloud.mobile.ui.dashboard.DashboardFragment;
-import org.schulcloud.mobile.ui.files.FileFragment;
+import org.schulcloud.mobile.ui.files.overview.FileOverviewFragment;
 import org.schulcloud.mobile.ui.homework.HomeworkFragment;
 import org.schulcloud.mobile.ui.news.NewsFragment;
 import org.schulcloud.mobile.ui.settings.SettingsActivity;
@@ -45,9 +45,6 @@ public final class MainActivity extends BaseActivity implements MainMvpView {
     @Inject
     MainPresenter mMainPresenter;
 
-    @Inject
-    DataManager mDataManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,10 +68,11 @@ public final class MainActivity extends BaseActivity implements MainMvpView {
                 });
     }
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
         mMainPresenter.detachView();
-        super.onDestroy();
+        super.onPause();
     }
+
     private int getTabIndexById(@IdRes int tabId) {
         switch (tabId) {
             case TAB_DASHBOARD:
@@ -133,7 +131,7 @@ public final class MainActivity extends BaseActivity implements MainMvpView {
                 NewsFragment.newInstance(),
                 CourseFragment.newInstance(),
                 HomeworkFragment.newInstance(),
-                FileFragment.newInstance()};
+                FileOverviewFragment.newInstance()};
     }
     @Override
     public void showFragment(@NonNull MainFragment fragment, int oldTabIndex, int newTabIndex) {
@@ -143,6 +141,7 @@ public final class MainActivity extends BaseActivity implements MainMvpView {
         else if (newTabIndex < oldTabIndex)
             transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
         transaction.replace(R.id.content, fragment);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 }

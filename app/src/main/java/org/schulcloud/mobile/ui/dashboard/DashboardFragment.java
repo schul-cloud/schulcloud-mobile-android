@@ -118,9 +118,9 @@ public class DashboardFragment extends MainFragment implements DashboardMvpView 
         return view;
     }
     @Override
-    public void onDestroy() {
+    public void onPause() {
         mDashboardPresenter.detachView();
-        super.onDestroy();
+        super.onPause();
     }
 
     /***** MVP View methods implementation *****/

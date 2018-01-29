@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.schulcloud.mobile.ui.layouts.ListItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/directoryCourse_lil_wrapper"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground">
+
+    <View
+        android:id="@+id/directoryCourse_v_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_position="startIcon"
+        tools:background="@color/hpiOrange" />
+
+    <TextView
+        android:id="@+id/directoryCourse_tv_name"
+        style="@style/Material.ListItem_TextPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/hpiRed"
+        tools:text="12 Math" />
+
+</org.schulcloud.mobile.ui.layouts.ListItemLayout>

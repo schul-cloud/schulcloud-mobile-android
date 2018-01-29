@@ -57,24 +57,28 @@ public class StartActivity extends BaseActivity implements StartMvpView {
         anim = AnimationUtils.loadAnimation(this, R.anim.translate);
         anim.reset();
         anim.setAnimationListener(new Animation.AnimationListener() {
+            boolean fired = false;
+
             @Override
             public void onAnimationStart(Animation animation) {
-
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                if (fired)
+                    return;
+                fired = true;
+
                 Animation cloudAnim = AnimationUtils
                         .loadAnimation(getApplicationContext(), R.anim.pulse);
                 cloudAnim.reset();
                 cloudIcon.clearAnimation();
                 cloudIcon.startAnimation(cloudAnim);
-                StartActivity.this.goToMain();
+                goToMain();
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
             }
         });
 

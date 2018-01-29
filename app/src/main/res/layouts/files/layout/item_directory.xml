@@ -4,27 +4,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
+    style="@style/Material.Card.Margin"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="6dp"
-    android:layout_marginLeft="12dp"
-    android:layout_marginRight="12dp"
-    android:layout_marginTop="6dp"
-    android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="2dp"
-    app:contentPadding="0dp"
-    app:contentPaddingBottom="4dp"
-    app:contentPaddingTop="4dp">
+    app:contentPadding="0dp">
 
-    <org.schulcloud.mobile.ui.layouts.ListItemLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.beardedhen.androidbootstrap.AwesomeTextView
-            android:id="@+id/directory_item_icon"
+            android:id="@+id/directory_atv_icon"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:clickable="false"
             android:textColor="@color/hpiRed"
             android:textSize="@dimen/fa_icon_big"
             app:bootstrapBrand="danger"
@@ -32,27 +26,34 @@
             app:layout_position="avatar" />
 
         <TextView
-            android:id="@+id/text_name"
-            style="@style/Material.ListItem_TextPrimary"
-            android:layout_width="wrap_content"
+            android:id="@+id/directory_tv_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textColor="@color/hpiRed"
             android:textSize="@dimen/text_body"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/directory_iv_overflow"
+            app:layout_constraintStart_toEndOf="@+id/directory_atv_icon"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Directory" />
 
-        <com.beardedhen.androidbootstrap.AwesomeTextView
-            android:id="@+id/directory_delete_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+        <ImageView
+            android:id="@+id/directory_iv_overflow"
+            style="@style/Material.Icon.Dense"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
             android:background="?android:attr/selectableItemBackground"
-            android:textColor="@color/hpiRed"
-            android:textSize="@dimen/fa_icon_medium"
+            android:padding="8dp"
             android:visibility="gone"
-            app:bootstrapBrand="danger"
-            app:fontAwesomeIcon="fa_trash_o"
-            app:layout_position="endIcon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_more_vert_dark_24dp"
             tools:visibility="visible" />
 
-    </org.schulcloud.mobile.ui.layouts.ListItemLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

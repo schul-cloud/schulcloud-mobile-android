@@ -83,9 +83,9 @@ public class TopicFragment extends MainFragment implements TopicMvpView {
         return view;
     }
     @Override
-    public void onDestroy() {
+    public void onPause() {
         mTopicPresenter.detachView();
-        super.onDestroy();
+        super.onPause();
     }
 
     /***** MVP View methods implementation *****/

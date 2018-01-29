@@ -8,7 +8,7 @@ import android.widget.EditText;
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.ui.base.BaseActivity;
 import org.schulcloud.mobile.ui.main.MainActivity;
-import org.schulcloud.mobile.util.DialogFactory;
+import org.schulcloud.mobile.util.dialogs.DialogFactory;
 
 import javax.inject.Inject;
 
@@ -52,9 +52,9 @@ public class SignInActivity extends BaseActivity implements SignInMvpView {
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
         mSignInPresenter.detachView();
-        super.onDestroy();
+        super.onPause();
     }
 
     @Override

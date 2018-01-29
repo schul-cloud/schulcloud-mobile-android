@@ -19,7 +19,7 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import org.schulcloud.mobile.R;
 import org.schulcloud.mobile.data.sync.HomeworkSyncService;
 import org.schulcloud.mobile.ui.main.MainFragment;
-import org.schulcloud.mobile.util.DialogFactory;
+import org.schulcloud.mobile.util.dialogs.DialogFactory;
 
 import java.text.DateFormat;
 import java.text.ParseException;

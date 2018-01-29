@@ -4,66 +4,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
+    style="@style/Material.Card.Margin"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="6dp"
-    android:layout_marginLeft="12dp"
-    android:layout_marginRight="12dp"
-    android:layout_marginTop="6dp"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="2dp">
+    app:contentPadding="0dp">
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:layout_height="wrap_content">
 
-        <com.beardedhen.androidbootstrap.AwesomeTextView
-            android:id="@+id/file_item_icon"
+        <ImageView
+            android:id="@+id/file_iv_icon"
             android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_height="56dp"
+            android:clickable="false"
+            android:padding="8dp"
+            android:scaleType="centerInside"
             android:textSize="@dimen/fa_icon_big"
-            app:fontAwesomeIcon="fa_file" />
+            app:srcCompat="@drawable/thumb_default" />
 
         <TextView
-            android:id="@+id/text_name"
-            android:layout_width="wrap_content"
+            android:id="@+id/file_tv_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/file_item_icon"
-            android:layout_toRightOf="@id/file_item_icon"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textSize="@dimen/text_body"
-            tools:text="Datei" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/file_atv_download"
+            app:layout_constraintStart_toEndOf="@+id/file_iv_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Dateisdfgzuhijokpldxfcghjklödsfghujiokppdxfgchjkloösfsefsefsesegvsegsdgsdegvsdgvesedsegtest" />
 
         <com.beardedhen.androidbootstrap.AwesomeTextView
-            android:id="@+id/file_download_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="35dp"
+            android:id="@+id/file_atv_download"
+            style="@style/Material.Icon.Dense"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:background="?android:attr/selectableItemBackground"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/fa_icon_medium"
-            app:fontAwesomeIcon="fa_download" />
+            app:fontAwesomeIcon="fa_download"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/file_iv_overflow"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <com.beardedhen.androidbootstrap.AwesomeTextView
-            android:id="@+id/file_delete_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="@dimen/bootstrap_alert_paddings"
-            android:layout_marginRight="@dimen/bootstrap_alert_paddings"
-            android:layout_marginTop="35dp"
-            android:layout_toLeftOf="@id/file_download_icon"
-            android:layout_toStartOf="@id/file_download_icon"
+        <ImageView
+            android:id="@+id/file_iv_overflow"
+            style="@style/Material.Icon.Dense"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
             android:background="?android:attr/selectableItemBackground"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/fa_icon_medium"
+            android:padding="8dp"
             android:visibility="gone"
-            app:fontAwesomeIcon="fa_trash_o"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/file_atv_download"
+            app:srcCompat="@drawable/ic_more_vert_dark_24dp"
             tools:visibility="visible" />
 
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

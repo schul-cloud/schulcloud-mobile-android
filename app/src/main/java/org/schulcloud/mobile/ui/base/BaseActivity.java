@@ -1,10 +1,17 @@
 package org.schulcloud.mobile.ui.base;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.util.LongSparseArray;
 import android.support.v7.app.AppCompatActivity;
+import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -20,10 +27,17 @@ import org.schulcloud.mobile.injection.module.ActivityModule;
 import org.schulcloud.mobile.ui.feedback.FeedbackDialog;
 import org.schulcloud.mobile.ui.signin.SignInActivity;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import javax.inject.Inject;
 
+import rx.Observable;
+import rx.Single;
+import rx.SingleSubscriber;
+import rx.Subscriber;
 import timber.log.Timber;
 
 public abstract class BaseActivity extends AppCompatActivity implements MvpView {
@@ -38,6 +52,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
 
     private ActivityComponent mActivityComponent;
     private long mActivityId;
+    private List<SingleSubscriber<? super Intent>> mActivityRequests;
+    private List<SingleSubscriber<? super Boolean[]>> mPermissionRequests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +114,99 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
 
     public ActivityComponent activityComponent() {
         return mActivityComponent;
+    }
+
+    @NonNull
+    public Single<Boolean[]> requestPermissions(@NonNull String... permissions) {
+        if (permissions.length == 0)
+            throw new IllegalArgumentException("permissions.length must be > 0");
+
+        boolean allGranted = true;
+        for (String p : permissions)
+            if (ContextCompat.checkSelfPermission(this, p) != PackageManager.PERMISSION_GRANTED) {
+                allGranted = false;
+                break;
+            }
+        if (allGranted) {
+            Boolean[] results = new Boolean[permissions.length];
+            Arrays.fill(results, true);
+            return Single.just(results);
+        }
+
+        if (mPermissionRequests == null)
+            mPermissionRequests = new LinkedList<>();
+        return Single.create(subscriber -> {
+            mPermissionRequests.add(subscriber);
+            ActivityCompat.requestPermissions(this, permissions, mPermissionRequests.size() - 1);
+        });
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+            @NonNull int[] grantResults) {
+        // Request not from this class
+        if (requestCode >= mPermissionRequests.size()) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            return;
+        }
+
+        //The request was interrupted
+        if (permissions.length == 0) {
+            mPermissionRequests.get(requestCode).onError(new InterruptedException());
+            return;
+        }
+
+        Boolean[] results = new Boolean[permissions.length];
+        for (int i = 0; i < permissions.length; i++)
+            results[i] = grantResults[i] == PackageManager.PERMISSION_GRANTED;
+        mPermissionRequests.get(requestCode).onSuccess(results);
+    }
+    @NonNull
+    public Single<Boolean[]> permissionsDeniedToError(
+            @NonNull Single<Boolean[]> requestPermissionResults) {
+        return requestPermissionResults
+                .map(results -> {
+                    boolean allGranted = true;
+                    for (boolean result : results)
+                        if (!result) {
+                            allGranted = false;
+                            break;
+                        }
+
+                    if (!allGranted)
+                        throw new PermissionDeniedException("At least one permission was denied");
+                    return results;
+                });
+    }
+
+    public Single<Intent> startActivityForResult(@NonNull Intent intent) {
+        return startActivityForResult(intent, null);
+    }
+    public Single<Intent> startActivityForResult(@NonNull Intent intent, @Nullable Bundle options) {
+        if (mActivityRequests == null)
+            mActivityRequests = new LinkedList<>();
+        return Single.create(subscriber -> {
+            mActivityRequests.add(subscriber);
+            startActivityForResult(intent, mActivityRequests.size() - 1, options);
+        });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Request not from this class
+        if (requestCode >= mActivityRequests.size()) {
+            super.onActivityResult(requestCode, resultCode, data);
+            return;
+        }
+
+        if (resultCode == RESULT_OK)
+            mActivityRequests.get(requestCode).onSuccess(data);
+        else
+            mActivityRequests.get(requestCode)
+                    .onError(new Exception("Activity result is: " + resultCode));
+    }
+
+    public void restartService(@NonNull Intent service) {
+        stopService(service);
+        startService(service);
     }
 
     @Override

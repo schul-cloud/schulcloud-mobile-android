@@ -12,6 +12,7 @@ import org.schulcloud.mobile.data.DataManager;
 import org.schulcloud.mobile.data.model.Directory;
 import org.schulcloud.mobile.util.AndroidComponentUtil;
 import org.schulcloud.mobile.util.NetworkUtil;
+import org.schulcloud.mobile.util.RxUtil;
 
 import javax.inject.Inject;
 
@@ -51,14 +52,8 @@ public class DirectorySyncService extends Service {
             return START_NOT_STICKY;
         }
 
-        if (mSubscription != null && !mSubscription.isUnsubscribed()) mSubscription.unsubscribe();
-
-        // generate correct storageContext/path
-
-        // maybe refactor it when we also support course/class folders
-        String path = mDataManager.getCurrentStorageContext();
-
-        mSubscription = mDataManager.syncDirectories(path)
+        RxUtil.unsubscribe(mSubscription);
+        mSubscription = mDataManager.syncDirectories(mDataManager.getCurrentStorageContext())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Directory>() {
                     @Override

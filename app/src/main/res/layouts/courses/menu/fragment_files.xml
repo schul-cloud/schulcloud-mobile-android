@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/files_action_directoryCreate"
+        android:icon="@drawable/ic_create_new_folder_white_24dp"
+        android:orderInCategory="10"
+        android:title="@string/files_action_directoryCreate"
+        android:visible="false"
+        app:showAsAction="ifRoom"
+        tools:visible="true" />
+
+</menu>

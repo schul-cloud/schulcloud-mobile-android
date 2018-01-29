@@ -11,7 +11,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.LongSparseArray;
 
-import org.schulcloud.mobile.BuildConfig;
 import org.schulcloud.mobile.SchulCloudApplication;
 import org.schulcloud.mobile.injection.component.ActivityComponent;
 import org.schulcloud.mobile.injection.component.ConfigPersistentComponent;
@@ -21,6 +20,7 @@ import org.schulcloud.mobile.ui.signin.SignInActivity;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import rx.Single;
 import timber.log.Timber;
 
 public abstract class BaseFragment extends Fragment implements MvpView {
@@ -75,11 +75,55 @@ public abstract class BaseFragment extends Fragment implements MvpView {
             configPersistentComponent = sComponentsMap.get(mActivityId);
         }
         mActivityComponent = configPersistentComponent
-                .activityComponent(new ActivityModule(getActivity()));
+                .activityComponent(new ActivityModule(getBaseActivity()));
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong(KEY_ACTIVITY_ID, mActivityId);
+    }
+    @Override
+    public void onDestroy() {
+        sComponentsMap.remove(mActivityId);
+        super.onDestroy();
     }
 
+    @NonNull
+    public BaseActivity getBaseActivity() {
+        return (BaseActivity) getActivity();
+    }
+    @NonNull
     public ActivityComponent activityComponent() {
         return mActivityComponent;
+    }
+
+    @NonNull
+    public Single<Boolean[]> requestPermissions(@NonNull String... permissions) {
+        return getBaseActivity().requestPermissions(permissions);
+    }
+    @NonNull
+    public Single<Boolean[]> permissionsDeniedToError(
+            @NonNull Single<Boolean[]> requestPermissionResults) {
+        return getBaseActivity().permissionsDeniedToError(requestPermissionResults);
+    }
+
+    @NonNull
+    public Single<Intent> startActivityForResult(@NonNull Intent intent) {
+        return getBaseActivity().startActivityForResult(intent);
+    }
+    @NonNull
+    public Single<Intent> startActivityForResult(@NonNull Intent intent, @Nullable Bundle options) {
+        return getBaseActivity().startActivityForResult(intent, options);
+    }
+
+    public void startService(@NonNull Intent service) {
+        getActivity().startService(service);
+    }
+    public void stopService(@NonNull Intent service) {
+        getActivity().stopService(service);
+    }
+    public void restartService(@NonNull Intent service) {
+        getBaseActivity().restartService(service);
     }
 
     @Override

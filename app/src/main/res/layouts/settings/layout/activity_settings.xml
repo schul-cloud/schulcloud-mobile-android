@@ -170,6 +170,26 @@
 
             </org.schulcloud.mobile.ui.layouts.ListItemLayout>
 
+            <org.schulcloud.mobile.ui.layouts.ListItemLayout
+                android:id="@+id/about_privacyPolicy"
+                style="@style/ListItemPreference"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/Material.ListItem_TextPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_about_privacyPolicy" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_position="endIcon"
+                    app:srcCompat="@drawable/ic_open_in_new_dark_24dp" />
+
+            </org.schulcloud.mobile.ui.layouts.ListItemLayout>
+
         </LinearLayout>
 
     </ScrollView>

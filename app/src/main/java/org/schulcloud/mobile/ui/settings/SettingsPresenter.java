@@ -202,6 +202,10 @@ public class SettingsPresenter extends BasePresenter<SettingsMvpView> {
         getViewOrThrow().showExternalContent(
                 Uri.parse(resources.getString(R.string.settings_about_imprint_website)));
     }
+    public void showPrivacyPolicy(@NonNull Resources resources) {
+        getViewOrThrow().showExternalContent(
+                Uri.parse(resources.getString(R.string.settings_about_privacyPolicy_website)));
+    }
     public void showGitHub(@NonNull Resources resources) {
         getViewOrThrow().showExternalContent(
                 Uri.parse(resources.getString(R.string.settings_about_openSource_website)));

@@ -122,6 +122,8 @@ public class SettingsActivity extends BaseActivity implements SettingsMvpView {
                         getString(R.string.settings_about_contact_mail_subject)));
         findViewById(R.id.about_imprint).setOnClickListener(v ->
                 mSettingsPresenter.showImprint(getResources()));
+        findViewById(R.id.about_privacyPolicy).setOnClickListener(v ->
+                mSettingsPresenter.showPrivacyPolicy(getResources()));
 
         // Presenter
         mSettingsPresenter.attachView(this);

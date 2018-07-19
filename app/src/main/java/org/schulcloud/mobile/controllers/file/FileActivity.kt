@@ -14,7 +14,6 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.base.BaseActivity
-import org.schulcloud.mobile.controllers.base.OnItemSelectedCallback
 import org.schulcloud.mobile.databinding.ActivityFileBinding
 import org.schulcloud.mobile.models.course.CourseRepository
 import org.schulcloud.mobile.models.file.File
@@ -42,13 +41,13 @@ class FileActivity : BaseActivity() {
     private lateinit var binding: ActivityFileBinding
     private lateinit var viewModel: FileViewModel
     private val directoryAdapter: DirectoryAdapter by lazy {
-        DirectoryAdapter(OnItemSelectedCallback { name ->
+        DirectoryAdapter { name ->
             startActivity(newIntent(this, combinePath(viewModel.path, name)))
-        })
+        }
     }
     private val fileAdapter: FileAdapter by lazy {
-        FileAdapter(OnItemSelectedCallback { loadFile(it, false) },
-                OnItemSelectedCallback { loadFile(it, true) })
+        FileAdapter({ loadFile(it, false) },
+                { loadFile(it, true) })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

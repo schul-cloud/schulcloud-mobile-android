@@ -8,7 +8,6 @@ import android.view.*
 import kotlinx.android.synthetic.main.fragment_course_list.*
 import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.base.BaseFragment
-import org.schulcloud.mobile.controllers.base.OnItemSelectedCallback
 import org.schulcloud.mobile.controllers.course.CourseActivity
 import org.schulcloud.mobile.models.course.CourseRepository
 import org.schulcloud.mobile.utils.HOST
@@ -24,9 +23,9 @@ class CourseListFragment : BaseFragment() {
 
     private lateinit var viewModel: CourseListViewModel
     private val coursesAdapter: CourseListAdapter by lazy {
-        CourseListAdapter(OnItemSelectedCallback {
+        CourseListAdapter {
             startActivity(CourseActivity.newIntent(context!!, it))
-        }).apply {
+        }.apply {
             emptyIndicator = empty
         }
     }

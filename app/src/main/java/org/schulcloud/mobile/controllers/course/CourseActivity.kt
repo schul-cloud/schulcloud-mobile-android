@@ -11,7 +11,6 @@ import android.view.Menu
 import kotlinx.android.synthetic.main.activity_course.*
 import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.base.BaseActivity
-import org.schulcloud.mobile.controllers.base.OnItemSelectedCallback
 import org.schulcloud.mobile.controllers.topic.TopicActivity
 import org.schulcloud.mobile.databinding.ActivityCourseBinding
 import org.schulcloud.mobile.models.course.CourseRepository
@@ -38,9 +37,9 @@ class CourseActivity : BaseActivity() {
 
     private lateinit var viewModel: CourseViewModel
     private val topicsAdapter: TopicListAdapter by lazy {
-        TopicListAdapter(OnItemSelectedCallback { id ->
+        TopicListAdapter { id ->
             startActivity(TopicActivity.newIntent(this@CourseActivity, id))
-        }).apply {
+        }.apply {
             emptyIndicator = empty
         }
     }

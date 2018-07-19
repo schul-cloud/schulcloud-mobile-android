@@ -4,12 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import org.schulcloud.mobile.controllers.base.BaseAdapter
 import org.schulcloud.mobile.controllers.base.BaseViewHolder
-import org.schulcloud.mobile.controllers.base.OnItemSelectedCallback
 import org.schulcloud.mobile.databinding.ItemCourseBinding
 import org.schulcloud.mobile.models.course.Course
 import org.schulcloud.mobile.models.user.User
 
-class CourseListAdapter(private val selectedCallback: OnItemSelectedCallback<String>)
+class CourseListAdapter(private val onSelected: (String) -> Unit)
     : BaseAdapter<Course, CourseListAdapter.CourseViewHolder, ItemCourseBinding>() {
 
     fun update(courseList: List<Course>) {
@@ -18,7 +17,7 @@ class CourseListAdapter(private val selectedCallback: OnItemSelectedCallback<Str
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseListAdapter.CourseViewHolder {
         val binding = ItemCourseBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        binding.selectedCallback = selectedCallback
+        binding.onSelected = onSelected
         return CourseViewHolder(binding)
     }
 

@@ -8,8 +8,8 @@
             name="directory"
             type="org.schulcloud.mobile.models.file.Directory" />
         <variable
-            name="selectedCallback"
-            type="org.schulcloud.mobile.controllers.base.OnItemSelectedCallback" />
+            name="onSelected"
+            type="kotlin.jvm.functions.Function1" />
     </data>
 
     <LinearLayout
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
-        android:onClick="@{() -> selectedCallback.onItemSelected(directory.name)}"
+        android:onClick="@{() -> onSelected.invoke(directory.name)}"
         tools:ignore="UseCompoundDrawables">
 
         <ImageView

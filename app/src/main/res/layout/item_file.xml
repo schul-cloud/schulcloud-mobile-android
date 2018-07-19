@@ -13,18 +13,18 @@
             name="iconDrawable"
             type="android.graphics.drawable.Drawable" />
         <variable
-            name="selectedCallback"
-            type="org.schulcloud.mobile.controllers.base.OnItemSelectedCallback" />
+            name="onSelected"
+            type="kotlin.jvm.functions.Function1" />
         <variable
-            name="downloadCallback"
-            type="org.schulcloud.mobile.controllers.base.OnItemSelectedCallback" />
+            name="onDownload"
+            type="kotlin.jvm.functions.Function1" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         style="@style/Material.ListItem.TwoLine"
         android:layout_width="match_parent"
         android:foreground="?android:attr/selectableItemBackground"
-        android:onClick="@{() -> selectedCallback.onItemSelected(file)}">
+        android:onClick="@{() -> onSelected.invoke(file)}">
 
         <ImageView
             android:id="@+id/icon"
@@ -70,7 +70,7 @@
             style="@style/Material.ListItem_Icon"
             android:layout_height="match_parent"
             android:background="?android:attr/selectableItemBackground"
-            android:onClick="@{() -> downloadCallback.onItemSelected(file)}"
+            android:onClick="@{() -> onDownload.invoke(file)}"
             android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

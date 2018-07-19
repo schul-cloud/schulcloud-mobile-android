@@ -7,14 +7,13 @@ import android.view.ViewGroup
 import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.base.BaseAdapter
 import org.schulcloud.mobile.controllers.base.BaseViewHolder
-import org.schulcloud.mobile.controllers.base.OnItemSelectedCallback
 import org.schulcloud.mobile.databinding.ItemFileBinding
 import org.schulcloud.mobile.models.file.File
 import org.schulcloud.mobile.utils.fileExtension
 
 
-class FileAdapter(private val selectedCallback: OnItemSelectedCallback<File>,
-                  private val downloadCallback: OnItemSelectedCallback<File>)
+class FileAdapter(private val onSelected: (File) -> Unit,
+                  private val onDownload: (File) -> Unit)
     : BaseAdapter<File, FileAdapter.FileViewHolder, ItemFileBinding>() {
 
     fun update(fileList: List<File>) {
@@ -27,8 +26,8 @@ class FileAdapter(private val selectedCallback: OnItemSelectedCallback<File>,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FileViewHolder {
         val binding = ItemFileBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        binding.selectedCallback = selectedCallback
-        binding.downloadCallback = downloadCallback
+        binding.onSelected = onSelected
+        binding.onDownload = onDownload
         return FileViewHolder(binding)
     }
 

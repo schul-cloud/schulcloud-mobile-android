@@ -9,15 +9,15 @@
             name="course"
             type="org.schulcloud.mobile.models.course.Course" />
         <variable
-            name="selectedCallback"
-            type="org.schulcloud.mobile.controllers.base.OnItemSelectedCallback" />
+            name="onSelected"
+            type="kotlin.jvm.functions.Function1" />
     </data>
 
     <LinearLayout
         style="@style/Material.ListItem"
         android:layout_width="match_parent"
         android:background="?android:attr/selectableItemBackground"
-        android:onClick="@{() -> selectedCallback.onItemSelected(course.id)}">
+        android:onClick="@{() -> onSelected.invoke(course.id)}">
 
         <View
             style="@style/Material.ListItem_Icon"

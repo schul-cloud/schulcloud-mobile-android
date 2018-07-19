@@ -8,7 +8,6 @@ import android.view.*
 import kotlinx.android.synthetic.main.fragment_file_overview.*
 import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.base.BaseFragment
-import org.schulcloud.mobile.controllers.base.OnItemSelectedCallback
 import org.schulcloud.mobile.controllers.file.FileActivity
 import org.schulcloud.mobile.models.course.CourseRepository
 import org.schulcloud.mobile.models.file.FileRepository
@@ -24,9 +23,9 @@ class FileOverviewFragment : BaseFragment() {
 
     private lateinit var viewModel: FileOverviewViewModel
     private val coursesAdapter: FileOverviewCourseAdapter by lazy {
-        FileOverviewCourseAdapter(OnItemSelectedCallback {
+        FileOverviewCourseAdapter {
             startActivity(FileActivity.newIntent(context!!, FileRepository.pathCourse(it)))
-        }).apply {
+        }.apply {
             emptyIndicator = empty
         }
     }

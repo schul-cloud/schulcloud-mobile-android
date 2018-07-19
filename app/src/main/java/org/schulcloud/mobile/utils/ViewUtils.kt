@@ -23,3 +23,9 @@ fun String?.toVisible(): Int = this.isNullOrEmpty().not().asVisibility()
 fun SwipeRefreshLayout.setup() {
     setColorSchemeColors(*context.getColorArray(R.array.brand_swipeRefreshColors))
 }
+
+var View.visibilityBool: Boolean
+    get() = visibility == View.VISIBLE
+    set(value) {
+        visibility = if (value) View.VISIBLE else View.GONE
+    }

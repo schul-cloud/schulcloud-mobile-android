@@ -10,8 +10,8 @@
     <!-- 30% white overlay -->
     <color name="button_gray_light">#8c9094</color>
 
-
-    <!-- Material -->
-    <color name="material_divider">#1F000000</color>
+    <color name="blue_dark">#283E56</color>
+    <color name="blue_light">#1989AC</color>
+    <color name="turquoise">#00B8A9</color>
 
 </resources>

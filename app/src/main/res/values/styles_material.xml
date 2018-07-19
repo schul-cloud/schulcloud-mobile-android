@@ -1,0 +1,86 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Material" />
+
+    <!-- Icon -->
+    <style name="Material.Icon">
+        <item name="android:width">48dp</item>
+        <item name="android:height">48dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textSize" tools:ignore="SpUsage">20dp</item>
+        <item name="android:color">?android:attr/textColorPrimary</item>
+    </style>
+    <style name="Material.Icon.Inverse">
+        <item name="android:color">?android:attr/textColorPrimaryInverse</item>
+    </style>
+    <style name="Material.Icon.Dense">
+        <item name="android:width">40dp</item>
+        <item name="android:height">40dp</item>
+        <item name="android:textSize" tools:ignore="SpUsage">18dp</item>
+    </style>
+    <style name="Material.Icon.Dense.Inverse">
+        <item name="android:color">?android:attr/textColorPrimaryInverse</item>
+    </style>
+
+    <!-- Buttons -->
+    <style name="Material.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:minWidth">88dp</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/button_main</item>
+    </style>
+
+    <!-- List -->
+    <style name="Material.ListItem">
+        <item name="android:layout_height">@dimen/material_listItem_height</item>
+    </style>
+    <style name="Material.ListItem.TwoLine">
+        <item name="android:layout_height">@dimen/material_listItem_height_twoLine</item>
+    </style>
+    <style name="Material.ListItem.Simple" parent="@style/TextAppearance.AppCompat.Subhead">
+        <item name="android:height">@dimen/material_listItem_height</item>
+        <item name="android:paddingLeft">@dimen/material_listItem_paddingHorizontal</item>
+        <item name="android:paddingRight">@dimen/material_listItem_paddingHorizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/material_listItem_textPrimary_textSize</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="Material.ListItem_TextPrimary" parent="@style/TextAppearance.AppCompat.Subhead">
+        <item name="android:layout_marginLeft">@dimen/material_listItem_icon_textSpacing</item>
+        <item name="android:layout_marginRight">@dimen/material_listItem_icon_textSpacing</item>
+        <item name="android:textSize">@dimen/material_listItem_textPrimary_textSize</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="Material.ListItem_TextSecondary" parent="@style/TextAppearance.AppCompat.Body1">
+        <item name="android:layout_marginLeft">@dimen/material_listItem_icon_textSpacing</item>
+        <item name="android:layout_marginRight">@dimen/material_listItem_icon_textSpacing</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="Material.ListItem_Icon" parent="Material.Icon">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
+    <!-- Card -->
+    <style name="Material.Card">
+        <item name="contentPadding">@dimen/material_card_padding</item>
+    </style>
+    <style name="Material.Card.MarginVertical">
+        <item name="android:layout_marginTop">@dimen/material_card_marginVertical</item>
+        <item name="android:layout_marginBottom">@dimen/material_card_marginVertical</item>
+    </style>
+    <style name="Material.Card.Margin" parent="Material.Card.MarginVertical">
+        <item name="android:layout_marginLeft">@dimen/material_card_marginHorizontal</item>
+        <item name="android:layout_marginRight">@dimen/material_card_marginHorizontal</item>
+    </style>
+
+</resources>

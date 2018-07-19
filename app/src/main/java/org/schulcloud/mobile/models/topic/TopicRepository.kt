@@ -1,11 +1,10 @@
 package org.schulcloud.mobile.models.topic
 
+import android.arch.lifecycle.LiveData
 import io.realm.Realm
 import org.schulcloud.mobile.jobs.GetTopicJob
 import org.schulcloud.mobile.jobs.ListCourseTopicsJob
 import org.schulcloud.mobile.jobs.base.RequestJobCallback
-import org.schulcloud.mobile.models.base.LiveRealmData
-import org.schulcloud.mobile.models.base.RealmObjectLiveData
 import org.schulcloud.mobile.utils.topicDao
 
 /**
@@ -13,11 +12,11 @@ import org.schulcloud.mobile.utils.topicDao
  */
 object TopicRepository {
 
-    fun topicsForCourse(realm: Realm, courseId: String): LiveRealmData<Topic> {
+    fun topicsForCourse(realm: Realm, courseId: String): LiveData<List<Topic>> {
         return realm.topicDao().topicsForCourse(courseId)
     }
 
-    fun topic(realm: Realm, id: String): RealmObjectLiveData<Topic> {
+    fun topic(realm: Realm, id: String): LiveData<Topic?> {
         return realm.topicDao().topic(id)
     }
 

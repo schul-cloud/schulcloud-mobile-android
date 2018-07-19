@@ -10,18 +10,6 @@
         <item name="colorControlNormal">@color/text_main</item>
         <item name="colorControlActivated">@color/brand_primary</item>
     </style>
-
-    <style name="Button">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingRight">16dp</item>
-        <item name="android:minWidth">88dp</item>
-        <item name="android:minHeight">36dp</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:background">@drawable/button_main</item>
-    </style>
-
     <style name="Animation.Activity" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
         <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
@@ -65,14 +53,18 @@
         <item name="android:scrollbars">none</item>
     </style>
 
-    <style name="Material.ListItem.Simple" parent="@style/TextAppearance.AppCompat.Subhead">
-        <item name="android:height">@dimen/material_listItem_height</item>
-        <item name="android:paddingLeft">@dimen/material_listItem_paddingHorizontal</item>
-        <item name="android:paddingRight">@dimen/material_listItem_paddingHorizontal</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:textSize">@dimen/material_listItem_textPrimary_textSize</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">1</item>
+
+    <style name="FileOverview.Card" parent="Material.Card.Margin">
+        <item name="contentPadding">0dp</item>
+        <item name="contentPaddingBottom">4dp</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
+    <style name="FileOverview.Card_Icon" parent="Material.Icon.Dense.Inverse">
+        <item name="android:width">40dp</item>
+    </style>
+    <style name="FileOverview.Card_Title" parent="TextAppearance.AppCompat.Title.Inverse" />
+    <style name="FileOverview.Card_FileCount" parent="TextAppearance.AppCompat.Subhead.Inverse" />
+    <style name="FileOverview.Card_Description" parent="TextAppearance.AppCompat.Medium" />
+    <style name="FileOverview.Card_Open" parent="Widget.AppCompat.Button.Borderless.Colored" />
 
 </resources>

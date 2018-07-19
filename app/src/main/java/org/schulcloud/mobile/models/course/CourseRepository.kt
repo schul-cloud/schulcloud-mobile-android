@@ -1,12 +1,11 @@
 package org.schulcloud.mobile.models.course
 
+import android.arch.lifecycle.LiveData
 import io.realm.Realm
 import kotlinx.coroutines.experimental.async
 import org.schulcloud.mobile.jobs.GetCourseJob
 import org.schulcloud.mobile.jobs.ListUserCoursesJob
 import org.schulcloud.mobile.jobs.base.RequestJobCallback
-import org.schulcloud.mobile.models.base.LiveRealmData
-import org.schulcloud.mobile.models.base.RealmObjectLiveData
 import org.schulcloud.mobile.utils.courseDao
 
 object CourseRepository {
@@ -16,11 +15,11 @@ object CourseRepository {
         }
     }
 
-    fun courses(realm: Realm): LiveRealmData<Course> {
+    fun courses(realm: Realm): LiveData<List<Course>> {
         return realm.courseDao().courses()
     }
 
-    fun course(realm: Realm, id: String): RealmObjectLiveData<Course> {
+    fun course(realm: Realm, id: String): LiveData<Course?> {
         return realm.courseDao().course(id)
     }
 

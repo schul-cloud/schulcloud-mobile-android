@@ -34,7 +34,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-        if(isFirstRun) {
+        if (isFirstRun) {
             nav_view.setCheckedItem(R.id.nav_dashboard)
             addFragment(DashboardFragment(), DashboardFragment.TAG)
         }
@@ -51,12 +51,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.nav_dashboard -> {
+            R.id.nav_dashboard ->
                 replaceFragment(DashboardFragment(), DashboardFragment.TAG)
-            }
-            R.id.nav_courses -> {
+            R.id.nav_courses ->
                 replaceFragment(CourseListFragment(), CourseListFragment.TAG)
-            }
+            R.id.nav_files ->
+                replaceFragment(FileOverviewFragment(), FileOverviewFragment.TAG)
             R.id.nav_logout -> {
                 UserRepository.logout()
                 showLoginActivity()

@@ -10,6 +10,9 @@
     <string name="share_subject_general">Schul-Cloud</string>
     <string name="share_title">Link teilen</string>
 
+    <!-- Dialogs -->
+    <string name="dialog_error_format">Fehler: %1$s</string>
+
 
     <!-- Login -->
     <string name="login_email_hint">E-Mail</string>
@@ -52,5 +55,22 @@
     <string name="content_resource_client">via %1$s</string>
     <string name="content_etherpad_openInBrowser">Etherpads können in der App leider noch nicht angezeigt werden. Nutze dafür bitte die Webseite.</string>
     <string name="contents_error_empty">Es wurden keine Inhalte gefunden.</string>
+
+    <!-- File -->
+    <string name="file_title">Dateien</string>
+    <string name="fileOverview_my">Persönliche Dateien</string>
+    <string name="fileOverview_my_description">Hier findest du alle deine persönlichen Dateien. Auf diese Dateien hast nur du Zugriff, du kannst sie aber auch mit anderen Nutzern teilen.</string>
+    <string name="fileOverview_courses">Kurs-Dateien</string>
+    <string name="fileOverview_courses_description">Hier findest du alle Dateien, die in den jeweiligen Kursen im Unterricht verwendet werden. Alle Teilnehmer des Kurses, also der Lehrer und die Schüler, haben auf diese Dateien Zugriff.</string>
+    <string name="fileOverview_courses_error">Die Kurse konnten nicht geladen werden</string>
+    <string name="file_directory_my">Meine Dateien</string>
+    <string name="file_directory_course_unknown">Unbekannter Kurs</string>
+    <string name="file_directoryEmpty">Der Ordner ist leer</string>
+    <string name="file_fileOpen_error_404">Die Datei wurde nicht gefunden</string>
+    <string name="file_fileOpen_error_cantResolve">Es ist keine App installiert, die den Dateityp \'%1$s\' öffnen kann</string>
+    <string name="file_fileDownload_progress">Die Datei wird geladen&#8230;</string>
+    <string name="file_fileDownload_success">Datei \'%1$s\' wurde erfolgreich in Downloads gespeichert!</string>
+    <string name="file_fileDownload_error_save">Die Datei konnte nicht gespeichert werden</string>
+    <string name="file_fileDownload_error_savePermissionDenied">Ohne die Berechtigung kann die Datei nicht gespeichert werden</string>
 
 </resources>

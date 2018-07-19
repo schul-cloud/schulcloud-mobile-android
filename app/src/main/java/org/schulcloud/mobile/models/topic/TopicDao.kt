@@ -1,8 +1,7 @@
 package org.schulcloud.mobile.models.topic
 
+import android.arch.lifecycle.LiveData
 import io.realm.Realm
-import org.schulcloud.mobile.models.base.LiveRealmData
-import org.schulcloud.mobile.models.base.RealmObjectLiveData
 import org.schulcloud.mobile.utils.asLiveData
 
 /**
@@ -10,7 +9,7 @@ import org.schulcloud.mobile.utils.asLiveData
  */
 class TopicDao(private val realm: Realm) {
 
-    fun topicsForCourse(courseId: String): LiveRealmData<Topic> {
+    fun topicsForCourse(courseId: String): LiveData<List<Topic>> {
         return realm.where(Topic::class.java)
                 .equalTo("courseId", courseId)
                 .sort("position")
@@ -18,7 +17,7 @@ class TopicDao(private val realm: Realm) {
                 .asLiveData()
     }
 
-    fun topic(id: String): RealmObjectLiveData<Topic> {
+    fun topic(id: String): LiveData<Topic?> {
         return realm.where(Topic::class.java)
                 .equalTo("id", id)
                 .findFirstAsync()

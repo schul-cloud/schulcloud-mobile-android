@@ -7,8 +7,6 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.*
 import kotlinx.android.synthetic.main.fragment_course_list.*
 import org.schulcloud.mobile.R
-import org.schulcloud.mobile.R.id.recyclerView
-import org.schulcloud.mobile.R.id.swipeRefresh
 import org.schulcloud.mobile.controllers.base.BaseFragment
 import org.schulcloud.mobile.controllers.course.CourseActivity
 import org.schulcloud.mobile.models.course.CourseRepository
@@ -47,7 +45,7 @@ class CourseListFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         swipeRefreshLayout = swipeRefresh
 
-        viewModel.getCourses().observe(this, Observer { courses ->
+        viewModel.courses.observe(this, Observer { courses ->
             coursesAdapter.update(courses!!)
         })
 
@@ -59,7 +57,7 @@ class CourseListFragment : BaseFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.fragment_course_list, menu)
+        inflater?.inflate(R.menu.fragment_default, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 

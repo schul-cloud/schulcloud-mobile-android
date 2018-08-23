@@ -101,21 +101,15 @@
                 app:layout_constraintTop_toBottomOf="@id/title"
                 tools:text="@sample/homework.json/data/description" />
 
-            <com.google.android.material.chip.Chip
+            <org.schulcloud.mobile.views.CourseChip
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:onClick="@{() -> onCourseSelected.invoke(homework.course.id)}"
-                android:text="@{homework.course.name}"
-                android:textColor="@android:color/white"
                 android:visibility="@{ViewUtilsKt.toVisible(homework.course.name)}"
-                app:chipBackgroundColor="@{homework.course.color}"
-                app:chipIcon="@drawable/ic_brand_course_black"
-                app:chipIconTint="@android:color/white"
-                app:iconStartPadding="8dp"
+                app:homeworkCourse="@{homework.course}"
                 app:layout_constraintTop_toBottomOf="@id/description"
-                tools:chipBackgroundColor="@sample/homework.json/data/course/color"
-                tools:text="@sample/homework.json/data/course/name" />
+                tools:course="@sample/homework.json/data/course" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

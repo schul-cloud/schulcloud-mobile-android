@@ -18,6 +18,5 @@ class MainViewModel : ViewModel() {
 data class ToolbarColors(
     @ColorInt val color: Int,
     @ColorInt val textColor: Int,
-    val isLight: Boolean,
     @ColorInt val statusBarColor: Int
 )

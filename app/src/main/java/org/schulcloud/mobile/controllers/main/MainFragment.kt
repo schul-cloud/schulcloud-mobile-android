@@ -21,7 +21,6 @@ import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.base.BaseFragment
 import org.schulcloud.mobile.utils.*
 import org.schulcloud.mobile.viewmodels.MainViewModel
-import java.io.File
 import kotlin.properties.Delegates
 
 abstract class MainFragment : BaseFragment() {
@@ -97,10 +96,10 @@ abstract class MainFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.base_action_share -> {
-                var link = url!!
-                if (link.startsWith(File.pathSeparatorChar))
+                var link = url ?: return true
+                if (link.startsWith('/'))
                     link = combinePath(HOST, link)
-                context?.shareLink(link, activity?.title)
+                context?.shareLink(link, mainViewModel.config.value?.title)
             }
             R.id.base_action_refresh -> performRefresh()
         // TODO: Remove when deep linking is readded
@@ -127,6 +126,7 @@ data class MainFragmentConfig(
     val fragmentType: FragmentType = FragmentType.SECONDARY,
 
     val title: String?,
+    val showTitle: Boolean = true,
     val subtitle: String? = null,
     @ColorInt
     val toolbarColor: Int? = null,

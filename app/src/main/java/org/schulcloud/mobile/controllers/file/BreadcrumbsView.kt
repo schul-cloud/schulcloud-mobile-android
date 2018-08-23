@@ -52,7 +52,7 @@ open class BreadcrumbsView @JvmOverloads constructor(
 
         val parts = path.getPathParts()
 
-        val title = when (parts[0]) {
+        val title = when (parts.first()) {
             FileRepository.CONTEXT_MY_API -> context.getString(R.string.file_directory_my)
             FileRepository.CONTEXT_COURSES ->
                 course?.name ?: context.getString(R.string.file_directory_course_unknown)

@@ -82,5 +82,8 @@
     <style name="Widget.App.BreadcrumbsView" parent="TextAppearance.AppCompat.Body1">
         <item name="android:textSize">16sp</item>
     </style>
+    <style name="Widget.App.CourseChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="iconStartPadding">8dp</item>
+    </style>
 
 </resources>

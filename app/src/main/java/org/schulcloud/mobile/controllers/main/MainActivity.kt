@@ -2,7 +2,6 @@ package org.schulcloud.mobile.controllers.main
 
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Color.*
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Build
@@ -29,9 +28,10 @@ import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.base.BaseActivity
 import org.schulcloud.mobile.controllers.login.LoginActivity
 import org.schulcloud.mobile.models.user.UserRepository
+import org.schulcloud.mobile.storages.Onboarding
+import org.schulcloud.mobile.utils.getTextColorForBackground
 import org.schulcloud.mobile.utils.setTintCompat
 import org.schulcloud.mobile.utils.visibilityBool
-import org.schulcloud.mobile.storages.Onboarding
 import org.schulcloud.mobile.viewmodels.MainViewModel
 import org.schulcloud.mobile.viewmodels.ToolbarColors
 
@@ -39,10 +39,6 @@ class MainActivity : BaseActivity() {
     companion object {
         val TAG: String = MainActivity::class.java.simpleName
 
-        private const val LIGHTNESS_PART_RED = 0.2126
-        private const val LIGHTNESS_PART_GREEN = 0.7152
-        private const val LIGHTNESS_PART_BLUE = 0.0722
-        private const val LIGHTNESS_THRESHOLD = 127 // values in 0..255
         private const val DARKEN_FACTOR = 0.2f
     }
 
@@ -55,7 +51,7 @@ class MainActivity : BaseActivity() {
     private var optionsMenu: Menu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (!UserRepository.isAuthorized){
+        if (!UserRepository.isAuthorized) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
@@ -66,7 +62,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         viewModel.config.observe(this, Observer { config ->
-            title = config.title
+            title = config.title.takeIf { config.showTitle }
             supportActionBar?.subtitle = config.subtitle
             recalculateToolbarColors()
 
@@ -175,19 +171,8 @@ class MainActivity : BaseActivity() {
     private fun recalculateToolbarColors() {
         val color = viewModel.config.value?.toolbarColor
                 ?: ContextCompat.getColor(this, R.color.toolbar_background_default)
-
-        // Formula from [Color#luminance()]
-        val isLight = LIGHTNESS_PART_RED * red(color) +
-                LIGHTNESS_PART_GREEN * green(color) +
-                LIGHTNESS_PART_BLUE * blue(color) > LIGHTNESS_THRESHOLD
-
-        val textColor = ContextCompat.getColor(this,
-                if (isLight) R.color.material_text_primary_dark
-                else R.color.material_text_primary_light)
-
         val statusBarColor = ColorUtils.blendARGB(color, Color.BLACK, DARKEN_FACTOR)
-
-        viewModel.toolbarColors.value = ToolbarColors(color, textColor, isLight, statusBarColor)
+        viewModel.toolbarColors.value = ToolbarColors(color, getTextColorForBackground(color), statusBarColor)
     }
 
     private fun updateToolbarColors() {

@@ -11,6 +11,7 @@
 
         <item name="contentTextViewStyle">@style/Widget.App.ContentTextView</item>
         <item name="breadcrumbsViewStyle">@style/Widget.App.BreadcrumbsView</item>
+        <item name="courseChipStyle">@style/Widget.App.CourseChip</item>
         <item name="materialCardViewStyle">@style/Widget.App.MaterialCardStyle</item>
         <item name="bottomSheetDialogTheme">@style/AppTheme.BottomSheetDialog</item>
     </style>

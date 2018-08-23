@@ -54,14 +54,37 @@ class FileFragment : MainFragment() {
                 { loadFile(it, true) })
     }
 
+
+    override var url: String? = null
+        get() {
+            val parts = args.path.getPathParts()
+            val path = if (parts.size <= 2) ""
+            else "?dir=${parts.takeLast(parts.size - 2).combinePath().ensureSlashes()}"
+
+            return when (parts.first()) {
+                FileRepository.CONTEXT_MY_API -> "/files/my/$path"
+                FileRepository.CONTEXT_COURSES -> "/files/courses/${parts[1]}$path"
+                else -> null
+            }
+        }
+
     override fun provideConfig() = (getCourseFromFolder()?.let {
         CourseRepository.course(viewModel.realm, it)
     } ?: null.asLiveData<Course>())
             .map { course ->
                 breadcrumbs.setPath(args.path, course)
+                val parts = args.path.getPathParts()
 
                 MainFragmentConfig(
-                        title = null,
+                        title = when {
+                            parts.size > 2 -> parts.last()
+                            parts.first() == FileRepository.CONTEXT_MY_API ->
+                                context?.getString(R.string.file_directory_my)
+                            parts.first() == FileRepository.CONTEXT_COURSES ->
+                                course?.name ?: context?.getString(R.string.file_directory_course_unknown)
+                            else -> context?.getString(R.string.file_directory_unknown)
+                        },
+                        showTitle = false,
                         toolbarColor = course?.color?.let { Color.parseColor(it) },
                         menuBottomRes = R.menu.fragment_file_bottom,
                         menuBottomHiddenIds = listOf(
@@ -156,10 +179,10 @@ class FileFragment : MainFragment() {
 
 
     private fun getCourseFromFolder(): String? {
-        val parts = args.path.getPathParts()
         if (!args.path.startsWith(FileRepository.CONTEXT_COURSES))
             return null
-        return parts[1]
+
+        return args.path.getPathParts()[1]
     }
 
     @Suppress("ComplexMethod")

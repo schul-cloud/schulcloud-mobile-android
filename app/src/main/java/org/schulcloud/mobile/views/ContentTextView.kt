@@ -6,7 +6,6 @@ import androidx.annotation.AttrRes
 import org.jsoup.Jsoup
 import org.schulcloud.mobile.R
 
-// TODO: Update architecture
 open class ContentTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

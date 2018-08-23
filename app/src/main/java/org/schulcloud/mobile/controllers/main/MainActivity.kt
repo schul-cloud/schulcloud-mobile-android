@@ -35,6 +35,11 @@ import org.schulcloud.mobile.viewmodels.ToolbarColors
 class MainActivity : BaseActivity() {
     companion object {
         val TAG: String = MainActivity::class.java.simpleName
+
+        private const val LIGHTNESS_PART_RED = 0.2126
+        private const val LIGHTNESS_PART_GREEN = 0.7152
+        private const val LIGHTNESS_PART_BLUE = 0.0722
+        private const val LIGHTNESS_THRESHOLD = 127 // values in 0..255
         private const val DARKEN_FACTOR = 0.2f
     }
 
@@ -144,7 +149,9 @@ class MainActivity : BaseActivity() {
                 ?: ContextCompat.getColor(this, R.color.toolbar_background_default)
 
         // Formula from [Color#luminance()]
-        val isLight = 0.2126 * red(color) + 0.7152 * green(color) + 0.0722 * blue(color) > 0.5 * 255
+        val isLight = LIGHTNESS_PART_RED * red(color) +
+                LIGHTNESS_PART_GREEN * green(color) +
+                LIGHTNESS_PART_BLUE * blue(color) > LIGHTNESS_THRESHOLD
 
         val textColor = ContextCompat.getColor(this,
                 if (isLight) R.color.material_text_primary_dark

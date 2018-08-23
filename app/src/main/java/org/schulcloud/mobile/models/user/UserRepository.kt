@@ -22,15 +22,15 @@ object UserRepository {
 
     @JvmStatic
     val token: String?
-        get() = UserStorage().accessToken
+        get() = UserStorage.accessToken
 
     @JvmStatic
     val userId: String?
-        get() = UserStorage().userId
+        get() = UserStorage.userId
 
     @JvmStatic
     val isAuthorized: Boolean
-        get() = UserStorage().accessToken != null
+        get() = UserStorage.accessToken != null
 
     fun currentUser(realm: Realm): LiveData<User?> {
         return realm.userDao().user(userId ?: "")
@@ -53,7 +53,7 @@ object UserRepository {
     }
 
     fun logout() {
-        UserStorage().delete()
+        UserStorage.clear()
 
         val realm = Realm.getDefaultInstance()
         realm.executeTransaction { it.deleteAll() }
@@ -61,7 +61,7 @@ object UserRepository {
     }
 
     suspend fun syncCurrentUser() {
-        UserStorage().userId?.also {
+        UserStorage.userId?.also {
             GetUserJob(it, RequestJobCallback()).run()
         } ?: Log.w(TAG, "Request to sync current user while not signed in")
     }

@@ -33,6 +33,9 @@ dependencies {
     // date and time
     implementation 'net.danlew:android.joda:2.9.9.4'
 
+    // onboarding
+    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.12.0'
+
     // AndroidX
     // architecture
     implementation "androidx.multidex:multidex:2.0.0"

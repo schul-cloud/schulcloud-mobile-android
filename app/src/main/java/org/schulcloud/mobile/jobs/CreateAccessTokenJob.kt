@@ -22,9 +22,8 @@ class CreateAccessTokenJob(private val credentials: Credentials, callback: Reque
         if (response.isSuccessful && token != null) {
             if (BuildConfig.DEBUG) Log.i(TAG, "AccessToken created")
 
-            val userStorage = UserStorage()
-            userStorage.accessToken = token.accessToken!!
-            userStorage.userId = JWTUtil().decodeToCurrentUser(token.accessToken!!)!!
+            UserStorage.accessToken = token.accessToken!!
+            UserStorage.userId = JWTUtil().decodeToCurrentUser(token.accessToken!!)!!
 
             callback?.success()
         } else {

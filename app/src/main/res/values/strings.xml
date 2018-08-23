@@ -45,6 +45,7 @@
     <string name="main_drawer_files">Meine Dateien</string>
     <string name="main_drawer_learnstore">Materialien</string>
     <string name="main_drawer_logout">Abmelden</string>
+    <string name="main_navigation_onboarding_1">Tippe hier für die Navigation</string>
 
     <!-- Dashboard -->
     <string name="dashboard_title">Übersicht</string>

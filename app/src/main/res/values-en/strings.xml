@@ -41,6 +41,7 @@
     <string name="main_drawer_files">Files</string>
     <string name="main_drawer_learnstore">Resources</string>
     <string name="main_drawer_logout">Logout</string>
+    <string name="main_navigation_onboarding_1">Tap here for navigation</string>
 
     <!-- Dashboard -->
     <string name="dashboard_title">Dashboard</string>

@@ -21,6 +21,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetView
 import com.google.android.material.bottomappbar.BottomAppBar
 import kotlinx.android.synthetic.main.activity_main.*
 import org.schulcloud.mobile.R
@@ -29,6 +31,7 @@ import org.schulcloud.mobile.controllers.login.LoginActivity
 import org.schulcloud.mobile.models.user.UserRepository
 import org.schulcloud.mobile.utils.setTintCompat
 import org.schulcloud.mobile.utils.visibilityBool
+import org.schulcloud.mobile.storages.Onboarding
 import org.schulcloud.mobile.viewmodels.MainViewModel
 import org.schulcloud.mobile.viewmodels.ToolbarColors
 
@@ -84,21 +87,46 @@ class MainActivity : BaseActivity() {
             }
             fab.setImageResource(config.fabIconRes)
         })
-
         viewModel.toolbarColors.observe(this, Observer {
             updateToolbarColors()
         })
 
-        bottomAppBar.setNavigationOnClickListener {
-            val navDrawer = org.schulcloud.mobile.controllers.main.NavigationDrawerFragment()
-            navDrawer.show(supportFragmentManager, navDrawer.tag)
-        }
+        bottomAppBar.setNavigationOnClickListener { showDrawer() }
         bottomAppBar.setOnMenuItemClickListener {
             viewModel.onOptionsItemSelected.value = it
             return@setOnMenuItemClickListener true
         }
 
         fab.setOnClickListener { viewModel.onFabClicked.call() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        Onboarding.navigation.getUpdates()?.forEach { version ->
+            when (version) {
+                Onboarding.NAVIGATION_1 -> TapTargetView.showFor(this,
+                        TapTarget.forToolbarNavigationIcon(bottomAppBar,
+                                getString(R.string.main_navigation_onboarding_1))
+                                .drawShadow(true),
+                        object : TapTargetView.Listener() {
+                            override fun onTargetClick(view: TapTargetView?) {
+                                showDrawer()
+                                super.onTargetClick(view)
+                            }
+
+                            override fun onTargetDismissed(view: TapTargetView?, userInitiated: Boolean) {
+                                if (userInitiated)
+                                    Onboarding.navigation.update(Onboarding.NAVIGATION_1)
+                            }
+                        })
+            }
+        }
+    }
+
+    private fun showDrawer() {
+        val drawer = NavigationDrawerFragment()
+        drawer.show(supportFragmentManager, drawer.tag)
     }
 
     override fun setSupportActionBar(toolbar: Toolbar?) {

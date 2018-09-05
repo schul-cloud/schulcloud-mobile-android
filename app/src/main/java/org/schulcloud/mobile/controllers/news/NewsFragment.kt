@@ -23,7 +23,7 @@ class NewsFragment : MainFragment() {
 
 
     override var url: String? = null
-        get() = "news/${viewModel.news.value?.id}"
+        get() = "/news/${viewModel.news.value?.id}"
 
     override fun provideConfig() = viewModel.news
             .map { news ->

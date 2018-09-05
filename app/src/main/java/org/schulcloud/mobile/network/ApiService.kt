@@ -18,7 +18,7 @@ object ApiService {
     fun getInstance(): ApiServiceInterface {
 
         val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
 
         val client = OkHttpClient.Builder()
                 .addInterceptor { chain ->

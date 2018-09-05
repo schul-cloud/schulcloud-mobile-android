@@ -26,7 +26,7 @@ class HomeworkFragment : MainFragment() {
 
 
     override var url: String? = null
-        get() = "homework/${viewModel.homework.value?.id}"
+        get() = "/homework/${viewModel.homework.value?.id}"
 
     override fun provideConfig() = viewModel.homework
             .map { homework ->

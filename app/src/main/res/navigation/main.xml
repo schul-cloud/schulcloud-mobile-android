@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/fragment_dashboard">
+    app:startDestination="@id/fragment_dashboard"
+    tools:ignore="UnusedAttribute">
 
     <fragment
         android:id="@+id/fragment_dashboard"
@@ -25,13 +26,29 @@
         <action
             android:id="@+id/action_dashboardFragment_to_fileOverviewFragment"
             app:destination="@id/fragment_fileOverview" />
+
+        <deepLink
+            android:autoVerify="true"
+            app:uri="schul-cloud.org/dashboard" />
+        <deepLink
+            android:autoVerify="true"
+            app:uri="schul-cloud.org/dashboard/" />
     </fragment>
+
 
     <!-- News -->
     <fragment
         android:id="@+id/fragment_newsList"
         android:name="org.schulcloud.mobile.controllers.news.NewsListFragment"
-        tools:layout="@layout/fragment_news_list" />
+        tools:layout="@layout/fragment_news_list">
+        <deepLink
+            android:autoVerify="true"
+            app:uri="schul-cloud.org/news" />
+        <deepLink
+            android:autoVerify="true"
+            app:uri="schul-cloud.org/news/" />
+    </fragment>
+
     <fragment
         android:id="@+id/fragment_news"
         android:name="org.schulcloud.mobile.controllers.news.NewsFragment"
@@ -39,16 +56,29 @@
         <argument
             android:name="id"
             app:argType="string" />
+
+        <deepLink
+            android:autoVerify="true"
+            app:uri="schul-cloud.org/news/{id}" />
     </fragment>
     <action
         android:id="@+id/action_global_fragment_news"
         app:destination="@id/fragment_news" />
 
+
     <!-- Course -->
     <fragment
         android:id="@+id/fragment_courseList"
         android:name="org.schulcloud.mobile.controllers.course.CourseListFragment"
-        tools:layout="@layout/fragment_course_list" />
+        tools:layout="@layout/fragment_course_list">
+        <deepLink
+            android:autoVerify="true"
+            app:uri="schul-cloud.org/courses" />
+        <deepLink
+            android:autoVerify="true"
+            app:uri="schul-cloud.org/courses/" />
+    </fragment>
+
     <fragment
         android:id="@+id/fragment_course"
         android:name="org.schulcloud.mobile.controllers.course.CourseFragment"
@@ -60,6 +90,7 @@
     <action
         android:id="@+id/action_global_fragment_course"
         app:destination="@id/fragment_course" />
+
     <fragment
         android:id="@+id/fragment_topic"
         android:name="org.schulcloud.mobile.controllers.topic.TopicFragment"
@@ -67,10 +98,16 @@
         <argument
             android:name="id"
             app:argType="string" />
+
+        <!-- Disabled because some types of content are not supported yet. That way, you can still open it externally. -->
+        <!--<deepLink
+            android:autoVerify="true"
+            app:uri="schul-cloud.org/courses/{courseId}/topics/{id}" />-->
     </fragment>
     <action
         android:id="@+id/action_global_fragment_topic"
         app:destination="@id/fragment_topic" />
+
 
     <!-- Calendar -->
     <!--<fragment
@@ -78,11 +115,20 @@
         android:name="org.schulcloud.mobile.controllers.main.CalendarFragment"
         tools:layout="@layout/fragment_calendar" />-->
 
+
     <!-- Task -->
     <fragment
         android:id="@+id/fragment_homeworkList"
         android:name="org.schulcloud.mobile.controllers.homework.HomeworkListFragment"
-        tools:layout="@layout/fragment_homework_list" />
+        tools:layout="@layout/fragment_homework_list">
+        <deepLink
+            android:autoVerify="true"
+            app:uri="schul-cloud.org/homework" />
+        <deepLink
+            android:autoVerify="true"
+            app:uri="schul-cloud.org/homework/" />
+    </fragment>
+
     <fragment
         android:id="@+id/fragment_homework"
         android:name="org.schulcloud.mobile.controllers.homework.HomeworkFragment"
@@ -90,6 +136,10 @@
         <argument
             android:name="id"
             app:argType="string" />
+
+        <deepLink
+            android:autoVerify="true"
+            app:uri="schul-cloud.org/homework/{id}" />
     </fragment>
     <action
         android:id="@+id/action_global_fragment_homework"
@@ -99,7 +149,15 @@
     <fragment
         android:id="@+id/fragment_fileOverview"
         android:name="org.schulcloud.mobile.controllers.file.FileOverviewFragment"
-        tools:layout="@layout/fragment_file_overview" />
+        tools:layout="@layout/fragment_file_overview">
+        <deepLink
+            android:autoVerify="true"
+            app:uri="schul-cloud.org/files" />
+        <deepLink
+            android:autoVerify="true"
+            app:uri="schul-cloud.org/files/" />
+    </fragment>
+
     <fragment
         android:id="@+id/fragment_file"
         android:name="org.schulcloud.mobile.controllers.file.FileFragment"

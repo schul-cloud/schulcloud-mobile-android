@@ -37,7 +37,9 @@
             android:name=".controllers.main.MainActivity"
             android:label="@string/brand_name"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.TranslucentStatus" />
+            android:theme="@style/AppTheme.TranslucentStatus">
+            <nav-graph android:value="@navigation/main" />
+        </activity>
 
         <activity android:name=".controllers.login.LoginActivity" />
 

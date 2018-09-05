@@ -5,6 +5,7 @@ import io.realm.Realm
 import org.schulcloud.mobile.jobs.base.RequestJob
 import org.schulcloud.mobile.utils.courseDao
 
+
 object CourseRepository {
     fun courses(realm: Realm): LiveData<List<Course>> {
         return realm.courseDao().courses()

@@ -5,6 +5,7 @@ import io.realm.Realm
 import org.schulcloud.mobile.jobs.base.RequestJob
 import org.schulcloud.mobile.utils.newsDao
 
+
 object NewsRepository {
     fun newsList(realm: Realm): LiveData<List<News>> {
         return realm.newsDao().listNews()

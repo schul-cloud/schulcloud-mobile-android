@@ -17,6 +17,7 @@ import org.schulcloud.mobile.models.news.NewsRepository
 import org.schulcloud.mobile.storages.UserStorage
 import org.schulcloud.mobile.utils.userDao
 
+
 object UserRepository {
     val TAG: String = UserRepository::class.java.simpleName
 

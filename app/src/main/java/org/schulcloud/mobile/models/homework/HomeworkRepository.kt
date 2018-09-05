@@ -5,6 +5,7 @@ import io.realm.Realm
 import org.schulcloud.mobile.jobs.base.RequestJob
 import org.schulcloud.mobile.utils.homeworkDao
 
+
 object HomeworkRepository {
     fun homeworkList(realm: Realm): LiveData<List<Homework>> {
         return realm.homeworkDao().homeworkList()

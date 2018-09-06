@@ -20,6 +20,11 @@
 
     <style name="AppTheme.TranslucentStatus" />
 
+    <style name="AppTheme.Main" parent="AppTheme.TranslucentStatus" />
+    <style name="AppTheme.Main.Launcher">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+    </style>
+
     <style name="AppTheme.LightActionBar">
         <item name="colorPrimary">@android:color/white</item>
         <item name="colorPrimaryDark">@android:color/white</item>

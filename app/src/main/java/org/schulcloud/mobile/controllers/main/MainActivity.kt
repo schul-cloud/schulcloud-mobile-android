@@ -1,5 +1,6 @@
 package org.schulcloud.mobile.controllers.main
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
@@ -25,6 +26,8 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import kotlinx.android.synthetic.main.activity_main.*
 import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.base.BaseActivity
+import org.schulcloud.mobile.controllers.login.LoginActivity
+import org.schulcloud.mobile.models.user.UserRepository
 import org.schulcloud.mobile.storages.Onboarding
 import org.schulcloud.mobile.utils.getTextColorForBackground
 import org.schulcloud.mobile.utils.setTintCompat
@@ -48,7 +51,14 @@ class MainActivity : BaseActivity() {
     private var optionsMenu: Menu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (!UserRepository.isAuthorized) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
+        setTheme(R.style.AppTheme_Main)
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
 
         viewModel.config.observe(this, Observer { config ->

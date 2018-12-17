@@ -3,9 +3,6 @@ package org.schulcloud.mobile.models.file
 import com.google.gson.annotations.SerializedName
 
 
-/**
- * Date: 7/5/2018
- */
 class SignedUrlResponse {
     var url: String? = null
     var header: SignedUrlResponseHeader? = null

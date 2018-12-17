@@ -130,4 +130,43 @@ abstract class RequestJob(
             }
         }
     }
+
+
+    @Suppress("SpreadOperator")
+    class UpdateSingleData<T>(
+        private val clazz: Class<T>,
+        private val item: T,
+        private val call: ApiServiceInterface.() -> Call<T>,
+        callback: RequestJobCallback? = null,
+        preconditions: Array<out Precondition>
+    ) : RequestJob(callback, *preconditions) where T : RealmModel, T : HasId {
+        companion object {
+            private val TAG: String = SingleData::class.java.simpleName
+
+            inline fun <reified T> with(
+                item: T,
+                noinline call: ApiServiceInterface.() -> Call<T>,
+                callback: RequestJobCallback? = null,
+                vararg preconditions: Precondition
+            ): UpdateSingleData<T> where T : RealmModel, T : HasId {
+                return UpdateSingleData(T::class.java, item, call, callback, preconditions)
+            }
+        }
+
+        override suspend fun onRun() {
+            val response = call(ApiService.getInstance()).awaitResponse()
+
+            if (response.isSuccessful) {
+                if (BuildConfig.DEBUG)
+                    Log.i(TAG, "${clazz.simpleName} ${item.id} updated")
+
+                // Sync
+                Sync.SingleData.with(clazz, response.body(), item.id).run()
+            } else {
+                if (BuildConfig.DEBUG)
+                    Log.e(TAG, "Error while updating ${clazz.simpleName}s")
+                callback?.error(RequestJobCallback.ErrorCode.ERROR)
+            }
+        }
+    }
 }

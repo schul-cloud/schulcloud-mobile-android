@@ -56,14 +56,16 @@
             android:background="@android:color/white"
             android:foreground="?android:attr/selectableItemBackground"
             android:onClick="@{() -> onSelected.invoke(homework.id)}"
-            android:padding="@dimen/homework_item_margin">
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp">
 
             <TextView
                 android:id="@+id/title"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:gravity="start"
                 android:maxLines="2"
                 android:text="@{homework.title}"

@@ -17,7 +17,8 @@ import org.schulcloud.mobile.models.news.NewsRepository
 import org.schulcloud.mobile.utils.asLiveData
 import org.schulcloud.mobile.viewmodels.NewsListViewModel
 
-class NewsListFragment : MainFragment<NewsListViewModel>() {
+
+class NewsListFragment : MainFragment<NewsListFragment, NewsListViewModel>() {
     companion object {
         val TAG: String = NewsListFragment::class.java.simpleName
     }
@@ -31,7 +32,7 @@ class NewsListFragment : MainFragment<NewsListViewModel>() {
 
 
     override var url: String? = "/news"
-    override fun provideConfig() = MainFragmentConfig(
+    override fun provideSelfConfig() = MainFragmentConfig(
             fragmentType = FragmentType.PRIMARY,
             title = getString(R.string.news_title)
     ).asLiveData()

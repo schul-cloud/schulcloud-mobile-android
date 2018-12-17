@@ -1,15 +1,11 @@
 package org.schulcloud.mobile.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import io.realm.Realm
 import org.schulcloud.mobile.models.news.News
 import org.schulcloud.mobile.models.news.NewsRepository
+import org.schulcloud.mobile.viewmodels.base.BaseViewModel
 
-class NewsListViewModel : ViewModel() {
-    private val realm: Realm by lazy {
-        Realm.getDefaultInstance()
-    }
 
+class NewsListViewModel : BaseViewModel() {
     val news: LiveData<List<News>> = NewsRepository.newsList(realm)
 }

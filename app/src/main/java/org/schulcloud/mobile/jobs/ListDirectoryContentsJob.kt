@@ -17,13 +17,18 @@ class ListDirectoryContentsJob(private val path: String, callback: RequestJobCal
 
     override suspend fun onRun() {
         val response = ApiService.getInstance().listDirectoryContents(path).awaitResponse()
+        val body = response.body()
 
-        if (response.isSuccessful) {
+        if (response.isSuccessful && body != null) {
             if (BuildConfig.DEBUG) Log.i(TAG, "Contents for path $path received")
 
             // Sync
-            Sync.Data.with(File::class.java, response.body()!!.files!!).run()
-            Sync.Data.with(Directory::class.java, response.body()!!.directories!!).run()
+            Sync.Data.with(File::class.java, body.files ?: emptyList()) {
+                equalTo("path", path)
+            }.run()
+            Sync.Data.with(Directory::class.java, body.directories ?: emptyList()) {
+                equalTo("path", path)
+            }.run()
 
         } else {
             if (BuildConfig.DEBUG) Log.e(TAG, "Error while fetching contents for path $path")

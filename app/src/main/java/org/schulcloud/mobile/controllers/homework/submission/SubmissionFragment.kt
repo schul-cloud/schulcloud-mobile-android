@@ -6,16 +6,17 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_homework_submission.*
 import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.course.CourseFragmentArgs
 import org.schulcloud.mobile.controllers.homework.detailed.HomeworkFragmentArgs
-import org.schulcloud.mobile.controllers.main.MainFragment
 import org.schulcloud.mobile.controllers.main.MainFragmentConfig
-import org.schulcloud.mobile.controllers.main.ParentFragment
-import org.schulcloud.mobile.controllers.main.TabFragment
+import org.schulcloud.mobile.controllers.main.Tab
+import org.schulcloud.mobile.controllers.main.TabbedMainFragment
+import org.schulcloud.mobile.controllers.main.toPagerAdapter
 import org.schulcloud.mobile.databinding.FragmentHomeworkSubmissionBinding
 import org.schulcloud.mobile.models.homework.HomeworkRepository
 import org.schulcloud.mobile.models.homework.submission.SubmissionRepository
@@ -24,22 +25,28 @@ import org.schulcloud.mobile.viewmodels.IdViewModelFactory
 import org.schulcloud.mobile.viewmodels.SubmissionViewModel
 
 
-class SubmissionFragment : MainFragment<SubmissionViewModel>(), ParentFragment {
-
-    private val pagerAdapter by lazy { SubmissionPagerAdapter(context!!, childFragmentManager) }
+class SubmissionFragment : TabbedMainFragment<SubmissionFragment, SubmissionViewModel>() {
+    override val pagerAdapter by lazy {
+        listOf(
+                Tab(getString(R.string.homework_submission_overview)) { OverviewFragment() },
+                Tab(getString(R.string.homework_submission_feedback)) { FeedbackFragment() }
+        ).toPagerAdapter(this)
+    }
 
     override var url: String? = null
-        get() = "homework/${viewModel.homework.value?.id}"
+        get() = "/homework/${viewModel.homework.value?.id}"
 
-    override fun provideConfig() = viewModel.homework
-            .map { homework ->
-                MainFragmentConfig(
-                        title = homework?.title ?: getString(R.string.general_error_notFound),
-                        subtitle = homework?.course?.name,
-                        toolbarColor = homework?.course?.color?.let { Color.parseColor(it) },
-                        menuBottomRes = R.menu.fragment_homework_submission_bottom
-                )
-            }
+    override fun provideSelfConfig(): LiveData<MainFragmentConfig> {
+        return viewModel.homework
+                .map { homework ->
+                    MainFragmentConfig(
+                            title = homework?.title ?: getString(R.string.general_error_notFound),
+                            subtitle = homework?.course?.name,
+                            toolbarColor = homework?.course?.color?.let { Color.parseColor(it) },
+                            menuBottomRes = listOf(R.menu.fragment_homework_submission_bottom)
+                    )
+                }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val args = HomeworkFragmentArgs.fromBundle(arguments)
@@ -56,12 +63,9 @@ class SubmissionFragment : MainFragment<SubmissionViewModel>(), ParentFragment {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewPager.adapter = pagerAdapter
-        tabLayout.setupWithViewPager(viewPager)
-        mainViewModel.toolbarColors.observe(this, Observer {
-            tabLayout.setTabTextColors(it.textColorSecondary, it.textColor)
-            tabLayout.setSelectedTabIndicatorColor(it.textColor)
+        super.onViewCreated(view, savedInstanceState)
 
+        mainViewModel.toolbarColors.observe(this, Observer {
             selectedStudent.setTextColor(it.textColor)
         })
     }
@@ -82,14 +86,7 @@ class SubmissionFragment : MainFragment<SubmissionViewModel>(), ParentFragment {
     }
 
     override suspend fun refresh() {
-        refreshWithChild(false)
-    }
-
-    override suspend fun refreshWithChild(fromChild: Boolean) {
-        if (fromChild) {
-            SubmissionRepository.syncSubmission(viewModel.id)
-            viewModel.homework.value?.id?.also { HomeworkRepository.syncHomework(it) }
-        } else if (viewPager != null)
-            (pagerAdapter.getItem(viewPager.currentItem) as? TabFragment<*, *>)?.performRefresh()
+        SubmissionRepository.syncSubmission(viewModel.id)
+        viewModel.homework.value?.id?.also { HomeworkRepository.syncHomework(it) }
     }
 }

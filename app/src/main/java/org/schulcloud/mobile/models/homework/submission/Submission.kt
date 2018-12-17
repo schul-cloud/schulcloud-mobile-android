@@ -17,6 +17,8 @@ open class Submission : RealmObject(), HasId {
     var comment: String? = null
     var createdAt: String? = null
 
+    var fileIds: RealmList<String>? = null
+
     var grade: Int? = null
     var gradeComment: String? = null
 

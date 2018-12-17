@@ -37,7 +37,7 @@ fun List<String?>.combinePath(): String {
 val String.parentDirectory: String
     get() = trimTrailingSlash().substringBeforeLast(File.separatorChar).ensureTrailingSlash()
 val String.fileExtension: String
-    get() = substringAfterLast('.')
+    get() = substringAfterLast('.', "")
 
 fun String.trimLeadingSlash(): String = if (length > 0 && this[0] == File.separatorChar) substring(1) else this
 fun String.trimTrailingSlash(): String = if (length > 1 && this[length - 1] == File.separatorChar) substring(0, length - 1) else this

@@ -11,7 +11,8 @@ import org.schulcloud.mobile.controllers.main.MainFragment
 import org.schulcloud.mobile.controllers.main.MainFragmentConfig
 import org.schulcloud.mobile.utils.asLiveData
 
-class DashboardFragment : MainFragment<ViewModel>() {
+
+class DashboardFragment : MainFragment<DashboardFragment, ViewModel>() {
     companion object {
         val TAG: String = DashboardFragment::class.java.simpleName
     }
@@ -20,7 +21,7 @@ class DashboardFragment : MainFragment<ViewModel>() {
 
 
     override var url: String? = "/dashboard"
-    override fun provideConfig() = MainFragmentConfig(
+    override fun provideSelfConfig() = MainFragmentConfig(
             fragmentType = FragmentType.PRIMARY,
             title = getString(R.string.dashboard_title)
     ).asLiveData()

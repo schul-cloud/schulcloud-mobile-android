@@ -25,4 +25,11 @@ class SubmissionDao(private val realm: Realm) {
                 .equalTo("studentId", studentId)
                 .firstAsLiveData()
     }
+
+
+    fun updateSubmission(value: Submission) {
+        realm.executeTransaction {
+            it.copyToRealmOrUpdate(value)
+        }
+    }
 }

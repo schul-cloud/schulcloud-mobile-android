@@ -42,4 +42,9 @@ class HomeworkDao(private val realm: Realm) {
                 .equalTo("id", id)
                 .firstAsLiveData()
     }
+    fun homeworkBlocking(id: String): Homework? {
+        return realm.where(Homework::class.java)
+                .equalTo("id", id)
+                .findFirst()
+    }
 }

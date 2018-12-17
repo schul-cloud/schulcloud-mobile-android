@@ -16,6 +16,9 @@
         <attr name="drawableTopVisible" format="reference" />
         <attr name="drawableBottom" format="reference" />
         <attr name="drawableBottomVisible" format="reference" />
+        <attr name="drawableTint" format="color" />
+        <attr name="drawableWidth" format="dimension" />
+        <attr name="drawableHeight" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="BreadcrumbsView">

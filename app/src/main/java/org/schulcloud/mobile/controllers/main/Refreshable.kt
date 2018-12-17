@@ -26,7 +26,6 @@ class RefreshableImpl : Refreshable {
     override var isRefreshing: Boolean by Delegates.observable(false) { _, _, new ->
         swipeRefreshLayout?.isRefreshing = new
     }
-        private set
 
 
     override fun performRefresh() {

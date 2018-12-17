@@ -2,6 +2,7 @@
 
 package org.schulcloud.mobile.utils
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
@@ -15,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.bottomappbar.BottomAppBar
 import org.schulcloud.mobile.R
 
 private const val COLOR_BLACK_STRING = "#00000000"
@@ -85,4 +87,9 @@ fun Context.getTextColorForBackground(color: Int): Int {
 fun Context.getTextColorSecondaryForBackground(color: Int): Int {
     return ContextCompat.getColor(this, if (color.isLightColor) R.color.material_text_secondary_dark
     else R.color.material_text_secondary_light)
+}
+
+
+fun BottomAppBar.slideIntoView() {
+    ObjectAnimator.ofFloat(this, "translationY", 0f).start()
 }

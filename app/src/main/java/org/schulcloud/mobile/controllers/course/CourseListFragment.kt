@@ -17,7 +17,8 @@ import org.schulcloud.mobile.utils.asLiveData
 import org.schulcloud.mobile.viewmodels.CourseListViewModel
 import org.schulcloud.mobile.views.ItemOffsetDecoration
 
-class CourseListFragment : MainFragment<CourseListViewModel>() {
+
+class CourseListFragment : MainFragment<CourseListFragment, CourseListViewModel>() {
     companion object {
         val TAG: String = CourseListFragment::class.java.simpleName
     }
@@ -31,7 +32,7 @@ class CourseListFragment : MainFragment<CourseListViewModel>() {
 
 
     override var url: String? = "/courses"
-    override fun provideConfig() = MainFragmentConfig(
+    override fun provideSelfConfig() = MainFragmentConfig(
             fragmentType = FragmentType.PRIMARY,
             title = getString(R.string.course_title)
     ).asLiveData()

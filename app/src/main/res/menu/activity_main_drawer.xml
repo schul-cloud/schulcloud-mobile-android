@@ -28,7 +28,7 @@
     <item
         android:id="@+id/fragment_homeworkList"
         android:checkable="true"
-        android:icon="@drawable/ic_brand_homework"
+        android:icon="@drawable/ic_brand_homework_black"
         android:title="@string/main_drawer_homework" />
     <item
         android:id="@+id/fragment_fileOverview"

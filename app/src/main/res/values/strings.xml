@@ -113,12 +113,17 @@
     <string name="homework_submissions_error_courseEmpty">Der Kurs enthält keine Schüler/innen</string>
     <string name="homework_submissions_error_selectedEmpty">Es liegt noch keine Abgabe von diesem Schüler vor</string>
     <string name="homework_submission_overview">Abgabe</string>
+    <string name="homework_submission_action_addAttachment">Anhang hinzufügen</string>
     <string name="homework_submission_hint">Abgabe von %1$s</string>
     <string name="homework_submission_error_notFound">Keine Abgabe vorhanden</string>
+    <string name="homework_submission_attachments">Anhänge</string>
     <string name="homework_submission_grade">%1$d%%</string>
     <string name="homework_submission_feedback">Feedback</string>
     <string name="homework_submission_feedback_grade">Du hast <b>%1$d%%</b> richtig gelöst</string>
     <string name="homework_submission_feedback_error_empty">Kein Bewertungstext vorhanden</string>
+    <string name="homework_attach_attach">Anhängen</string>
+    <string name="homework_attach_attach_file">Datei</string>
+    <string name="homework_attach_attach_takePhoto">Foto aufnehmen</string>
 
     <!-- File -->
     <string name="file_title">Dateien</string>
@@ -133,11 +138,19 @@
     <string name="file_directoryEmpty">Der Ordner ist leer</string>
     <string name="file_directories">Ordner</string>
     <string name="file_files">Dateien</string>
+    <string name="file_fileOpen_error">Die Datei konnte nicht geöffnet werden</string>
     <string name="file_fileOpen_error_404">Die Datei wurde nicht gefunden</string>
     <string name="file_fileOpen_error_cantResolve">Es ist keine App installiert, die den Dateityp \'%1$s\' öffnen kann</string>
     <string name="file_fileDownload_progress">Die Datei wird geladen&#8230;</string>
     <string name="file_fileDownload_success">Datei \'%1$s\' wurde erfolgreich in Downloads gespeichert!</string>
     <string name="file_fileDownload_error_save">Die Datei konnte nicht gespeichert werden</string>
     <string name="file_fileDownload_error_savePermissionDenied">Ohne die Berechtigung kann die Datei nicht gespeichert werden</string>
+    <string name="file_fileUpload_progress">Datei wird hochgeladen…</string>
+    <string name="file_fileUpload_success">Die Datei wurde hochgeladen!</string>
+    <string name="file_fileUpload_error_upload">Die Datei konnte nicht hochgeladen werden</string>
+    <string name="file_pick_error_readPermissionDenied">Ohne die Berechtigung kann keine Datei zum Upload ausgewählt werden</string>
+    <string name="file_pick_error_read">Die Datei konnte nicht geöffnet werden</string>
+    <string name="file_pick_error_createTempFile">Es konnte keine temporäre Datei erstellt werden</string>
+    <string name="file_pick_error_noCamera">Es wurde keine Kamera gefunden</string>
 
 </resources>

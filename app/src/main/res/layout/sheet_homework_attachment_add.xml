@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="onAttachFile"
+            type="kotlin.jvm.functions.Function0" />
+        <variable
+            name="onAttachTakePhoto"
+            type="kotlin.jvm.functions.Function0" />
+
+        <!--
+        <variable
+            name="onCreateDrawing"
+            type="kotlin.jvm.functions.Function0" />
+            -->
+    </data>
+
+    <LinearLayout
+        style="@style/Material.List"
+        android:paddingTop="0dp"
+        android:showDividers="none">
+
+        <TextView
+            style="@style/Material.ListHeader"
+            android:text="@string/homework_attach_attach" />
+
+        <org.schulcloud.mobile.views.CompatTextView
+            style="@style/Material.ListItem.Simple"
+            android:onClick="@{() -> onAttachFile.invoke()}"
+            android:text="@string/homework_attach_attach_file"
+            app:drawableStart="@drawable/ic_file_upload_white_24dp" />
+
+        <org.schulcloud.mobile.views.CompatTextView
+            style="@style/Material.ListItem.Simple"
+            android:onClick="@{() -> onAttachTakePhoto.invoke()}"
+            android:text="@string/homework_attach_attach_takePhoto"
+            app:drawableStart="@drawable/ic_photo_camera_white_24dp" />
+
+
+        <!--
+        <TextView
+            style="@style/Material.ListHeader"
+            android:text="Create" />
+
+        <org.schulcloud.mobile.views.CompatTextView
+            style="@style/Material.ListItem.Simple"
+            android:onClick="@{() -> onCreateDrawing.invoke()}"
+            android:text="Drawing"
+            app:drawableStart="@drawable/ic_gesture_white_24dp" />
+        -->
+
+    </LinearLayout>
+</layout>

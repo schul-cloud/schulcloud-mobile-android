@@ -73,7 +73,7 @@
         app:destination="@id/fragment_topic" />
 
     <!-- Calendar -->
-    <!--<fragment
+    <!--<parent
         android:id="@+id/fragment_calendar"
         android:name="org.schulcloud.mobile.controllers.main.CalendarFragment"
         tools:layout="@layout/fragment_calendar" />-->

@@ -3,12 +3,12 @@ package org.schulcloud.mobile.viewmodels
 import android.view.MenuItem
 import androidx.annotation.ColorInt
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import org.schulcloud.mobile.controllers.main.MainFragmentConfig
 import org.schulcloud.mobile.utils.SingleLiveEvent
+import org.schulcloud.mobile.viewmodels.base.BaseViewModel
 
 
-class MainViewModel : ViewModel() {
+class MainViewModel : BaseViewModel() {
     val config: MutableLiveData<MainFragmentConfig> = MutableLiveData()
     val title: MutableLiveData<String> = MutableLiveData()
     val toolbarColors: MutableLiveData<ToolbarColors> = MutableLiveData()

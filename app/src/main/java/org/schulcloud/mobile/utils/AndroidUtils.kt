@@ -4,6 +4,7 @@ package org.schulcloud.mobile.utils
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.TypedArray
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
@@ -11,6 +12,8 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.annotation.ArrayRes
 import androidx.annotation.ColorInt
+import androidx.annotation.Dimension
+import androidx.annotation.StyleableRes
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.text.TextUtilsCompat
@@ -60,6 +63,18 @@ fun Context.getColorArray(@ArrayRes id: Int, @ColorInt fallback: Int? = null): I
     ta.recycle()
     return colors
 }
+
+
+@ColorInt
+fun TypedArray.getColorOrNull(@StyleableRes index: Int): Int? {
+    return if (hasValue(index)) getColor(index, 0) else null
+}
+
+@Dimension
+fun TypedArray.getDimensionOrNull(@StyleableRes index: Int): Float? {
+    return if (hasValue(index)) getDimension(index, 0f) else null
+}
+
 
 fun Drawable.setTintCompat(@ColorInt tint: Int) {
     DrawableCompat.setTint(this, tint)

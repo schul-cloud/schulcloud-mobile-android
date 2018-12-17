@@ -1,13 +1,14 @@
 package org.schulcloud.mobile.viewmodels
 
 import android.util.Patterns
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import org.schulcloud.mobile.jobs.base.RequestJobCallback
 import org.schulcloud.mobile.models.user.UserRepository
+import org.schulcloud.mobile.utils.mutableLiveDataOf
+import org.schulcloud.mobile.viewmodels.base.BaseViewModel
 
-class LoginViewModel : ViewModel() {
-    val loginState = MutableLiveData<LoginStatus>()
+
+class LoginViewModel : BaseViewModel() {
+    val loginState = mutableLiveDataOf<LoginStatus>()
 
     fun login(email: String, password: String) {
         val invalidInputs = mutableListOf<LoginInput>()

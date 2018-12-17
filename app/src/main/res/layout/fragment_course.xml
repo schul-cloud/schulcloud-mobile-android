@@ -37,8 +37,6 @@
 
                 <TextView
                     style="@style/Material.ListHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:text="@string/course_topics" />
 
                 <TextView

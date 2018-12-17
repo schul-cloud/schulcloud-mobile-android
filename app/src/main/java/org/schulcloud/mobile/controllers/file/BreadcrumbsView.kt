@@ -1,13 +1,13 @@
 package org.schulcloud.mobile.controllers.file
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.TextView
 import androidx.annotation.AttrRes
-import androidx.annotation.ColorInt
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.res.getDimensionOrThrow
@@ -20,6 +20,7 @@ import org.schulcloud.mobile.utils.combinePath
 import org.schulcloud.mobile.utils.getPathParts
 import org.schulcloud.mobile.utils.limit
 import org.schulcloud.mobile.views.CompatTextView
+import kotlin.properties.Delegates
 
 open class BreadcrumbsView @JvmOverloads constructor(
     context: Context,
@@ -31,6 +32,12 @@ open class BreadcrumbsView @JvmOverloads constructor(
     }
 
     var onPathSelected: ((String) -> Unit)? = null
+
+    var textColor: Int by Delegates.observable(Color.WHITE) { _, _, new ->
+        for (child in children)
+            (child as? TextView)?.setTextColor(new)
+        dividerDrawable.setColorFilter(new, PorterDuff.Mode.SRC_ATOP)
+    }
 
     private var textSize: Float = 0f
 
@@ -64,16 +71,11 @@ open class BreadcrumbsView @JvmOverloads constructor(
             addPartView(parts.limit(i + 1).combinePath(), parts[i])
     }
 
-    fun setTextColor(@ColorInt color: Int) {
-        for (child in children)
-            (child as? TextView)?.setTextColor(color)
-        dividerDrawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
-    }
-
     private fun addPartView(path: String, title: String) {
         addView(CompatTextView(context).also {
-            it.textSize = textSize
+            it.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
             it.text = title
+            it.setTextColor(textColor)
             it.setOnClickListener { onPathSelected?.invoke(path) }
 
             with(TypedValue()) {

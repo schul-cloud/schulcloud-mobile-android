@@ -1,16 +1,11 @@
 package org.schulcloud.mobile.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import io.realm.Realm
 import org.schulcloud.mobile.models.homework.Homework
 import org.schulcloud.mobile.models.homework.HomeworkRepository
+import org.schulcloud.mobile.viewmodels.base.BaseViewModel
 
-class HomeworkListViewModel : ViewModel() {
 
-    private val realm: Realm by lazy {
-        Realm.getDefaultInstance()
-    }
-
+class HomeworkListViewModel : BaseViewModel() {
     val homework: LiveData<List<Homework>> = HomeworkRepository.homeworkList(realm)
 }

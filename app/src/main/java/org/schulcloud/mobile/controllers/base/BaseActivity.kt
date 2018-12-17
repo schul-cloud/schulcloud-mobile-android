@@ -1,10 +1,14 @@
 package org.schulcloud.mobile.controllers.base
 
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProviders
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
@@ -14,37 +18,34 @@ import org.schulcloud.mobile.utils.asUri
 import org.schulcloud.mobile.utils.openUrl
 import org.schulcloud.mobile.utils.setup
 import org.schulcloud.mobile.utils.shareLink
-import java.util.*
-import kotlin.coroutines.experimental.Continuation
+import org.schulcloud.mobile.viewmodels.BaseActivityViewModel
 import kotlin.coroutines.experimental.suspendCoroutine
 import kotlin.properties.Delegates
 
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity(), ContextAware {
+    override val baseActivity: BaseActivity? get() = this
+    override val currentContext: Context get() = this
+
     open var url: String? = null
     var swipeRefreshLayout by Delegates.observable<SwipeRefreshLayout?>(null) { _, _, new ->
         new?.setup()
         new?.setOnRefreshListener { performRefresh() }
     }
 
-    private val permissionRequests: MutableList<Continuation<Boolean>>
-            by lazy { LinkedList<Continuation<Boolean>>() }
+    private val viewModel: BaseActivityViewModel by lazy {
+        ViewModelProviders.of(this).get(BaseActivityViewModel::class.java)
+    }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.base_action_share -> shareLink(url!!, supportActionBar?.title)
             R.id.base_action_refresh -> performRefresh()
-        // TODO: Remove when deep linking is readded
+            // TODO: Remove when deep linking is readded
             R.id.base_action_openInBrowser -> openUrl(url.asUri())
             else -> return super.onOptionsItemSelected(item)
         }
         return true
-    }
-
-    protected fun setupActionBar() {
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-        }
     }
 
     protected open suspend fun refresh() {}
@@ -56,29 +57,36 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    suspend fun requestPermission(permission: String): Boolean = suspendCoroutine { cont ->
+
+    override suspend fun requestPermission(permission: String): Boolean = suspendCoroutine { cont ->
         if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
             cont.resume(true)
             return@suspendCoroutine
         }
 
-        permissionRequests.add(cont)
-        ActivityCompat.requestPermissions(this, arrayOf(permission), permissionRequests.size - 1)
+        ActivityCompat.requestPermissions(this, arrayOf(permission), viewModel.addPermissionRequest(cont))
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         // Request not from this class
-        if (requestCode >= permissionRequests.size) {
+        if (!viewModel.onPermissionResult(requestCode, permissions, grantResults)) {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults)
             return
         }
+    }
 
-        //The request was interrupted
-        if (permissions.isEmpty()) {
-            permissionRequests[requestCode].resume(false)
+
+    override suspend fun startActivityForResult(intent: Intent, options: Bundle?): StartActivityResult {
+        return suspendCoroutine { cont ->
+            startActivityForResult(intent, viewModel.addActivityRequest(cont), options)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        // Request not from this class
+        if (!viewModel.onActivityResult(requestCode, resultCode, data)) {
+            super.onActivityResult(requestCode, resultCode, data)
             return
         }
-
-        permissionRequests[requestCode].resume(grantResults[0] == PackageManager.PERMISSION_GRANTED)
     }
 }

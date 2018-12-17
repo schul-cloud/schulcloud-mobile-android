@@ -24,7 +24,7 @@ import org.schulcloud.mobile.viewmodels.CourseViewModel
 import org.schulcloud.mobile.viewmodels.IdViewModelFactory
 import org.schulcloud.mobile.views.DividerItemDecoration
 
-class CourseFragment : MainFragment<CourseViewModel>() {
+class CourseFragment : MainFragment<CourseFragment, CourseViewModel>() {
     companion object {
         val TAG: String = CourseFragment::class.java.simpleName
     }
@@ -40,11 +40,11 @@ class CourseFragment : MainFragment<CourseViewModel>() {
     override var url: String? = null
         get() = "/courses/${viewModel.course.value?.id}"
 
-    override fun provideConfig() = viewModel.course.map { course ->
+    override fun provideSelfConfig() = viewModel.course.map { course ->
         MainFragmentConfig(
                 title = course?.name ?: getString(R.string.general_error_notFound),
                 toolbarColor = if (course != null) Color.parseColor(course.color) else null,
-                menuBottomRes = R.menu.fragment_course_bottom
+                menuBottomRes = listOf(R.menu.fragment_course_bottom)
         )
     }
 

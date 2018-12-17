@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.children
 import androidx.core.view.forEach
+import androidx.core.view.iterator
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
@@ -22,17 +23,13 @@ import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetView
-import com.google.android.material.bottomappbar.BottomAppBar
 import kotlinx.android.synthetic.main.activity_main.*
 import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.base.BaseActivity
 import org.schulcloud.mobile.controllers.login.LoginActivity
 import org.schulcloud.mobile.models.user.UserRepository
 import org.schulcloud.mobile.storages.Onboarding
-import org.schulcloud.mobile.utils.getTextColorForBackground
-import org.schulcloud.mobile.utils.getTextColorSecondaryForBackground
-import org.schulcloud.mobile.utils.setTintCompat
-import org.schulcloud.mobile.utils.visibilityBool
+import org.schulcloud.mobile.utils.*
 import org.schulcloud.mobile.viewmodels.MainViewModel
 import org.schulcloud.mobile.viewmodels.ToolbarColors
 
@@ -51,6 +48,8 @@ class MainActivity : BaseActivity() {
     private var toolbarWrapper: ViewGroup? = null
     private var optionsMenu: Menu? = null
 
+    private var lastConfig: MainFragmentConfig? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         if (!UserRepository.isAuthorized) {
             startActivity(Intent(this, LoginActivity::class.java))
@@ -63,26 +62,42 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         viewModel.config.observe(this, Observer { config ->
-            title = config.title.takeIf { config.showTitle }
-            supportActionBar?.subtitle = config.subtitle
+            if (config == null || config == lastConfig) return@Observer
+
+            if (lastConfig?.title != config.title)
+                title = config.title.takeIf { config.showTitle }
+            if (lastConfig?.subtitle != config.subtitle)
+                supportActionBar?.subtitle = config.subtitle
             recalculateToolbarColors()
 
             bottomAppBar.apply {
-                menu.clear()
-                if (config.menuBottomRes != 0) {
-                    inflateMenu(config.menuBottomRes)
-                    for (id in config.menuBottomHiddenIds)
-                        if (id != 0)
-                            menu?.findItem(id)?.isVisible = false
+                val menuChanged = lastConfig?.menuBottomRes != config.menuBottomRes
+                if (menuChanged) {
+                    menu.clear()
+                    for (menuRes in config.menuBottomRes.filterNotNull())
+                        inflateMenu(menuRes)
+                }
+
+                if (menuChanged
+                        || lastConfig?.menuBottomHiddenIds != config.menuBottomHiddenIds) {
+                    for (item in menu)
+                        item.isVisible = !config.menuBottomHiddenIds.contains(item.itemId)
                 }
             }
 
-            fab.visibilityBool = config.fabVisible && config.fabIconRes != 0
-            bottomAppBar.fabAlignmentMode = when (config.fragmentType) {
-                FragmentType.PRIMARY -> BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                FragmentType.SECONDARY -> BottomAppBar.FAB_ALIGNMENT_MODE_END
-            }
-            fab.setImageResource(config.fabIconRes)
+            // Enables animation
+            val fabShouldBeVisible = config.fabVisible && config.fabIconRes != 0
+            if (fab.visibilityBool && !fabShouldBeVisible)
+                fab.hide()
+            else if (!fab.visibilityBool && fabShouldBeVisible)
+                fab.show()
+            if (lastConfig?.fabIconRes != config.fabIconRes)
+                fab.setImageResource(config.fabIconRes)
+
+            if (lastConfig?.innerFragmentIndex != config.innerFragmentIndex)
+                bottomAppBar.slideIntoView()
+
+            lastConfig = config
         })
         viewModel.toolbarColors.observe(this, Observer {
             updateToolbarColors()
@@ -122,8 +137,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun showDrawer() {
-        val drawer = NavigationDrawerFragment()
-        drawer.show(supportFragmentManager, drawer.tag)
+        NavigationDrawerFragment().show(supportFragmentManager)
     }
 
     override fun setSupportActionBar(toolbar: Toolbar?) {

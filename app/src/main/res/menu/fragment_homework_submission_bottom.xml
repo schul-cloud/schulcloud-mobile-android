@@ -4,6 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/submission_action_addAttachment"
+        android:icon="@drawable/ic_attachment_24dp"
+        android:title="@string/homework_submission_action_addAttachment"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/submission_action_gotoHomework"
         android:icon="@drawable/ic_brand_homework"
         android:title="@string/general_action_gotoHomework"

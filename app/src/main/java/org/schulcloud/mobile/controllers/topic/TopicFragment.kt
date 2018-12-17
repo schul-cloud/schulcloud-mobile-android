@@ -15,15 +15,18 @@ import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.main.MainFragment
 import org.schulcloud.mobile.controllers.main.MainFragmentConfig
 import org.schulcloud.mobile.databinding.FragmentTopicBinding
-import org.schulcloud.mobile.models.course.Course
 import org.schulcloud.mobile.models.topic.TopicRepository
-import org.schulcloud.mobile.utils.*
+import org.schulcloud.mobile.utils.combineLatestBothNullable
+import org.schulcloud.mobile.utils.dpToPx
+import org.schulcloud.mobile.utils.map
+import org.schulcloud.mobile.utils.switchMapNullable
 import org.schulcloud.mobile.viewmodels.IdViewModelFactory
 import org.schulcloud.mobile.viewmodels.TopicViewModel
 import org.schulcloud.mobile.views.DividerItemDecoration
 import org.schulcloud.mobile.views.ItemOffsetDecoration
 
-class TopicFragment : MainFragment<TopicViewModel>() {
+
+class TopicFragment : MainFragment<TopicFragment, TopicViewModel>() {
     companion object {
         val TAG: String = TopicFragment::class.java.simpleName
 
@@ -33,16 +36,17 @@ class TopicFragment : MainFragment<TopicViewModel>() {
     override var url: String? = null
         get() = viewModel.topic.value?.url
 
-    override fun provideConfig() = viewModel.topic
-            .combineLatest(viewModel.topic.switchMap {
-                it?.courseId?.let { viewModel.course(it) } ?: null.asLiveData<Course?>()
-            })
+    override fun provideSelfConfig() = viewModel.topic
+            .combineLatestBothNullable(
+                    viewModel.topic.switchMapNullable { topic ->
+                        topic?.courseId?.let { viewModel.course(it) }
+                    })
             .map { (topic, course) ->
                 MainFragmentConfig(
                         title = topic?.name ?: getString(R.string.general_error_notFound),
                         subtitle = course?.name,
                         toolbarColor = course?.color?.let { Color.parseColor(it) },
-                        menuBottomRes = R.menu.fragment_topic_bottom
+                        menuBottomRes = listOf(R.menu.fragment_topic_bottom)
                 )
             }
 

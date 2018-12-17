@@ -6,6 +6,8 @@ import io.realm.annotations.RealmClass
 
 @RealmClass
 open class RealmString @JvmOverloads constructor(var value: String = "") : RealmModel {
+
+    override fun toString() = value
     override fun equals(other: Any?): Boolean {
         return when (other) {
             this === other -> true

@@ -106,14 +106,19 @@
     <string name="homework_overview_error_empty">No description available</string>
     <string name="homework_submissions">Submissions</string>
     <string name="homework_submissions_error_courseEmpty">This course does not contain any students</string>
-    <string name="homework_submission_overview">Submission</string>
-    <string name="homework_submission_hint">Submission of %1$s</string>
     <string name="homework_submissions_error_selectedEmpty">This student has not submitted anything yet</string>
+    <string name="homework_submission_overview">Submission</string>
+    <string name="homework_submission_action_addAttachment">Add attachment</string>
+    <string name="homework_submission_hint">Submission of %1$s</string>
     <string name="homework_submission_error_notFound">No submission available</string>
+    <string name="homework_submission_attachments">Attachments</string>
     <string name="homework_submission_grade">%1$d%%</string>
     <string name="homework_submission_feedback">Feedback</string>
     <string name="homework_submission_feedback_grade">You solved <b>%1$d%%</b> correctly</string>
     <string name="homework_submission_feedback_error_empty">No review text available</string>
+    <string name="homework_attach_attach">Attach</string>
+    <string name="homework_attach_attach_file">File</string>
+    <string name="homework_attach_attach_takePhoto">Take photo</string>
 
     <!-- File -->
     <string name="file_title">Files</string>
@@ -128,11 +133,19 @@
     <string name="file_directoryEmpty">This folder is empty</string>
     <string name="file_directories">Directories</string>
     <string name="file_files">Files</string>
+    <string name="file_fileOpen_error">The file couldn\'t be opened</string>
     <string name="file_fileOpen_error_404">The file was not found</string>
     <string name="file_fileOpen_error_cantResolve">No app is available for opening a file of type \'%1$s\'</string>
     <string name="file_fileDownload_progress">File is being downloaded&#8230;</string>
     <string name="file_fileDownload_success">File \'%1$s\' was successfully saved in downloads!</string>
     <string name="file_fileDownload_error_save">The file could not be saved</string>
     <string name="file_fileDownload_error_savePermissionDenied">The file cannot be saved without permission</string>
+    <string name="file_fileUpload_progress">Uploading file…</string>
+    <string name="file_fileUpload_success">Upload completed!</string>
+    <string name="file_fileUpload_error_upload">The file couldn\'t be uploaded</string>
+    <string name="file_pick_error_readPermissionDenied">No file can be selected for upload without permission</string>
+    <string name="file_pick_error_read">Couldn\'t open file</string>
+    <string name="file_pick_error_createTempFile">Error creating a temporary file</string>
+    <string name="file_pick_error_noCamera">No camera was found</string>
 
 </resources>

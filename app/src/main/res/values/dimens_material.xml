@@ -17,6 +17,15 @@
     <dimen name="material_divider_size">1dp</dimen>
     <dimen name="material_dividerMiddle_inset">24dp</dimen>
 
+    <!-- Icon grid -->
+
+    <!-- Icon grid -->
+    <dimen name="material_iconGrid_paddingVertical">12dp</dimen>
+    <dimen name="material_iconGrid_paddingHorizontal">24dp</dimen>
+    <dimen name="material_iconGridItem_paddingVertical">12dp</dimen>
+    <dimen name="material_iconGridItem_icon_size">48dp</dimen>
+    <dimen name="material_iconGridItem_icon_textSize">16sp</dimen>
+
     <!-- Card -->
     <dimen name="material_card_marginHorizontal">16dp</dimen>
     <dimen name="material_card_marginVertical">8dp</dimen>

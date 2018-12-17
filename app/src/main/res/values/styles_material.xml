@@ -24,8 +24,11 @@
 
     <!-- List -->
     <style name="Material.List">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">@dimen/material_list_paddingVertical</item>
         <item name="android:paddingBottom">@dimen/material_list_paddingVertical</item>
+        <item name="android:orientation">vertical</item>
         <item name="android:clipToPadding">false</item>
         <item name="android:showDividers">beginning|middle|end</item>
         <item name="android:divider">@android:drawable/divider_horizontal_dark</item>
@@ -39,26 +42,33 @@
     </style>
     <style name="Material.ListItem">
         <item name="android:layout_marginBottom">1dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/material_listItem_height</item>
         <item name="android:background">@android:color/white</item>
+        <item name="android:orientation">horizontal</item>
     </style>
     <style name="Material.ListItem.TwoLine">
         <item name="android:layout_height">@dimen/material_listItem_height_twoLine</item>
     </style>
     <style name="Material.ListItem.Simple" parent="@style/TextAppearance.MaterialComponents.Subtitle1">
-        <item name="android:height">@dimen/material_listItem_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/material_listItem_height</item>
         <item name="android:paddingLeft">@dimen/material_listItem_paddingHorizontal</item>
         <item name="android:paddingRight">@dimen/material_listItem_paddingHorizontal</item>
         <item name="android:background">@android:color/white</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">@dimen/material_listItem_textPrimary_textSize</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
+        <item name="android:drawablePadding">16dp</item>
+        <item name="drawableTint">?android:attr/textColorSecondary</item>
     </style>
     <style name="Material.ListItem_TextPrimary" parent="@style/TextAppearance.AppCompat.Subhead">
         <item name="android:layout_marginLeft">@dimen/material_listItem_icon_textSpacing</item>
         <item name="android:layout_marginRight">@dimen/material_listItem_icon_textSpacing</item>
         <item name="android:textSize">@dimen/material_listItem_textPrimary_textSize</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
@@ -66,6 +76,7 @@
     <style name="Material.ListItem_TextSecondary" parent="@style/TextAppearance.AppCompat.Body1">
         <item name="android:layout_marginLeft">@dimen/material_listItem_icon_textSpacing</item>
         <item name="android:layout_marginRight">@dimen/material_listItem_icon_textSpacing</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
@@ -73,6 +84,34 @@
     <style name="Material.ListItem_Icon" parent="Material.Icon">
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
+    </style>
+
+    <!-- Icon grid -->
+    <style name="Material.IconGrid">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/material_iconGrid_paddingVertical</item>
+        <item name="android:paddingBottom">@dimen/material_iconGrid_paddingVertical</item>
+        <item name="android:paddingLeft">@dimen/material_iconGrid_paddingHorizontal</item>
+        <item name="android:paddingRight">@dimen/material_iconGrid_paddingHorizontal</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:columnCount">3</item>
+    </style>
+    <style name="Material.IconGrid.WithHeader">
+        <item name="android:paddingTop">0dp</item>
+    </style>
+    <style name="Material.IconGridItem">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/material_iconGridItem_paddingVertical</item>
+        <item name="android:paddingBottom">@dimen/material_iconGridItem_paddingVertical</item>
+        <item name="android:layout_gravity">fill_horizontal</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">@dimen/material_iconGridItem_icon_textSize</item>
+        <item name="drawableTint">?android:attr/textColorSecondary</item>
+        <item name="drawableWidth">@dimen/material_iconGridItem_icon_size</item>
+        <item name="drawableHeight">@dimen/material_iconGridItem_icon_size</item>
     </style>
 
     <!-- Card -->

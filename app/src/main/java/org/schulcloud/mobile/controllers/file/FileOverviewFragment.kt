@@ -18,7 +18,7 @@ import org.schulcloud.mobile.models.file.FileRepository
 import org.schulcloud.mobile.utils.asLiveData
 import org.schulcloud.mobile.viewmodels.FileOverviewViewModel
 
-class FileOverviewFragment : MainFragment<FileOverviewViewModel>() {
+class FileOverviewFragment : MainFragment<FileOverviewFragment, FileOverviewViewModel>() {
     companion object {
         val TAG: String = FileOverviewFragment::class.java.simpleName
     }
@@ -32,7 +32,7 @@ class FileOverviewFragment : MainFragment<FileOverviewViewModel>() {
 
 
     override var url: String? = "/files"
-    override fun provideConfig() = MainFragmentConfig(
+    override fun provideSelfConfig() = MainFragmentConfig(
             fragmentType = FragmentType.PRIMARY,
             title = getString(R.string.file_title)
     ).asLiveData()

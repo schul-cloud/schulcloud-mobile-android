@@ -18,6 +18,9 @@ object HomeworkRepository {
     fun homework(realm: Realm, id: String): LiveData<Homework?> {
         return realm.homeworkDao().homework(id)
     }
+    fun homeworkBlocking(realm: Realm, id: String): Homework? {
+        return realm.homeworkDao().homeworkBlocking(id)
+    }
 
 
     suspend fun syncHomeworkList() {

@@ -14,11 +14,12 @@
 
         <LinearLayout
             android:id="@+id/contentList"
-            style="@style/Material.List"
+            style="@style/Widget.Material.List"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:nestedScrollingEnabled="false"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:showDividers="none" />
 
     </androidx.core.widget.NestedScrollView>
 

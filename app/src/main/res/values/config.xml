@@ -3,4 +3,6 @@
 
     <integer name="config_animTime_short">200</integer>
 
+    <integer name="main_bottomAppBar_appearDuration">150</integer>
+
 </resources>

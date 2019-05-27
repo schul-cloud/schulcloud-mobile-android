@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/Content_Header"
+            style="@style/Content.Header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/content_title_margin"
@@ -28,9 +28,7 @@
             tools:text="Content name" />
 
         <TextView
-            style="@style/Content_Text.Empty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/Content.Text.Empty"
             android:text="@{@string/content_unsupported_message(wrapper.component)}"
             tools:text="@string/content_unsupported_message" />
 

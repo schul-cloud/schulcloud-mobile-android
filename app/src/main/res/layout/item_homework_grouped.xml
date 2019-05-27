@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="org.schulcloud.mobile.controllers.dashboard.HomeworkAdapter.HomeworkViewHolder"/>
+        <import type="org.schulcloud.mobile.utils.ThemeConfigUtilsKt" />
+
         <variable
             name="course"
             type="org.schulcloud.mobile.models.homework.HomeworkCourse" />
@@ -16,41 +19,41 @@
     </data>
 
     <LinearLayout
-        style="@style/Material.ListItem"
+        style="@style/Widget.Material.ListItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foreground="?android:attr/selectableItemBackground"
-        android:onClick="@{() -> onSelected.invoke(course.id)}">
+        android:onClick="@{() -> onSelected.invoke(HomeworkViewHolder.courseIdOrNull(course))}">
 
         <ImageView
             android:id="@+id/course_color"
-            style="@style/Material.ListItem_Icon"
+            style="@style/Widget.Material.ListItem_Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:src="@drawable/circle_course_color"
-            app:colorFilter="@{course.color}" />
+            app:themeAwareColorFilter="@{course.color}" />
 
         <TextView
             android:id="@+id/title"
-            style="@style/Material.ListItem_TextPrimary"
+            style="@style/Widget.Material.ListItem.TextPrimary"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_weight="1"
-            android:text="@{course.name}"
+            android:text="@{course.name ?? @string/dashboard_homework_noCourse}"
             tools:text="Course name" />
 
         <TextView
-            style="@style/Material.ListItem_Icon"
+            style="@style/Widget.Material.ListItem_Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{Integer.toString(homeworkCount)}"
-            android:textColor="@color/brand_primary"
+            android:textColor="?colorOnBackgroundPrimary"
             tools:text="3" />
 
     </LinearLayout>

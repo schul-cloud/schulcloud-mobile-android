@@ -2,8 +2,8 @@ package org.schulcloud.mobile.controllers.topic
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.schulcloud.mobile.controllers.base.BaseAdapter
 import org.schulcloud.mobile.controllers.base.BaseViewHolder
 import org.schulcloud.mobile.databinding.ItemResourceBinding
@@ -30,7 +30,7 @@ class ResourceListAdapter
         }
 
         fun openExternal() {
-            async(UI) {
+            launch(Dispatchers.Main) {
                 resolveRedirect(item.url!!)?.also { this@ResourceViewHolder.context.openUrl(it) }
             }
         }

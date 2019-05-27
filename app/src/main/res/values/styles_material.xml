@@ -1,91 +1,91 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Material" />
+    <style name="Widget" />
+    <style name="Widget.Material" />
+
+    <style name="Widget.Material.Button.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/material_text_btn_text</item>
+    </style>
+
+    <!-- Card -->
+    <style name="Widget.Material.Card">
+        <item name="contentPadding">@dimen/material_card_padding</item>
+    </style>
+    <style name="Widget.Material.Card.MarginVertical">
+        <item name="android:layout_marginTop">@dimen/material_card_marginVertical</item>
+        <item name="android:layout_marginBottom">@dimen/material_card_marginVertical</item>
+    </style>
+    <style name="Widget.Material.Card.Margin" parent="Widget.Material.Card.MarginVertical">
+        <item name="android:layout_marginLeft">@dimen/material_card_marginHorizontal</item>
+        <item name="android:layout_marginRight">@dimen/material_card_marginHorizontal</item>
+    </style>
 
     <!-- Icon -->
-    <style name="Material.Icon">
+    <style name="Widget.Material.Icon">
         <item name="android:width">48dp</item>
         <item name="android:height">48dp</item>
         <item name="android:padding">8dp</item>
         <item name="android:textSize" tools:ignore="SpUsage">20dp</item>
-        <item name="android:color">?android:attr/textColorPrimary</item>
+        <item name="android:color">?colorOnBackgroundMediumEmphasis</item>
     </style>
-    <style name="Material.Icon.Inverse">
-        <item name="android:color">?android:attr/textColorPrimaryInverse</item>
+    <style name="Widget.Material.Icon.Inverse">
+        <item name="android:color">?colorOnPrimaryMediumEmphasis</item>
     </style>
-    <style name="Material.Icon.Dense">
+    <style name="Widget.Material.Icon.Dense">
         <item name="android:width">40dp</item>
         <item name="android:height">40dp</item>
         <item name="android:textSize" tools:ignore="SpUsage">18dp</item>
     </style>
-    <style name="Material.Icon.Dense.Inverse">
-        <item name="android:color">?android:attr/textColorPrimaryInverse</item>
+    <style name="Widget.Material.Icon.Dense.Inverse">
+        <item name="android:color">?colorOnPrimaryMediumEmphasis</item>
     </style>
 
     <!-- List -->
-    <style name="Material.List">
+    <style name="Widget.Material.List">
         <item name="android:paddingTop">@dimen/material_list_paddingVertical</item>
         <item name="android:paddingBottom">@dimen/material_list_paddingVertical</item>
         <item name="android:clipToPadding">false</item>
         <item name="android:showDividers">beginning|middle|end</item>
-        <item name="android:divider">@android:drawable/divider_horizontal_dark</item>
+        <item name="android:divider">@drawable/divider</item>
     </style>
-    <style name="Material.ListHeader" parent="Material.ListItem.Simple">
+    <style name="Widget.Material.ListHeader" parent="Widget.Material.ListItem.Simple">
         <item name="android:background">@null</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?android:textColorSecondary</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAllCaps">true</item>
+        <item name="android:textAppearance">?textAppearanceSubtitle2</item>
     </style>
-    <style name="Material.ListItem">
-        <item name="android:layout_marginBottom">1dp</item>
-        <item name="android:layout_height">@dimen/material_listItem_height</item>
-        <item name="android:background">@android:color/white</item>
+    <style name="Widget.Material.ListItem">
+        <item name="android:height">@dimen/material_listItem_height</item>
+        <item name="android:background">?colorSurface</item>
     </style>
-    <style name="Material.ListItem.TwoLine">
+    <style name="Widget.Material.ListItem.TwoLine">
         <item name="android:layout_height">@dimen/material_listItem_height_twoLine</item>
     </style>
-    <style name="Material.ListItem.Simple" parent="@style/TextAppearance.MaterialComponents.Subtitle1">
-        <item name="android:height">@dimen/material_listItem_height</item>
+    <style name="Widget.Material.ListItem.Simple">
         <item name="android:paddingLeft">@dimen/material_listItem_paddingHorizontal</item>
         <item name="android:paddingRight">@dimen/material_listItem_paddingHorizontal</item>
-        <item name="android:background">@android:color/white</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textSize">@dimen/material_listItem_textPrimary_textSize</item>
+        <item name="android:textAppearance">?textAppearanceSubtitle1</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>
-    <style name="Material.ListItem_TextPrimary" parent="@style/TextAppearance.AppCompat.Subhead">
-        <item name="android:layout_marginLeft">@dimen/material_listItem_icon_textSpacing</item>
-        <item name="android:layout_marginRight">@dimen/material_listItem_icon_textSpacing</item>
-        <item name="android:textSize">@dimen/material_listItem_textPrimary_textSize</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">1</item>
-    </style>
-    <style name="Material.ListItem_TextSecondary" parent="@style/TextAppearance.AppCompat.Body1">
+    <style name="Widget.Material.ListItem.TextPrimary" parent="">
         <item name="android:layout_marginLeft">@dimen/material_listItem_icon_textSpacing</item>
         <item name="android:layout_marginRight">@dimen/material_listItem_icon_textSpacing</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:textAppearance">?textAppearanceSubtitle1</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>
-    <style name="Material.ListItem_Icon" parent="Material.Icon">
+    <style name="Widget.Material.ListItem.TextSecondary" parent="">
+        <item name="android:layout_marginLeft">@dimen/material_listItem_icon_textSpacing</item>
+        <item name="android:layout_marginRight">@dimen/material_listItem_icon_textSpacing</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textAppearance">?textAppearanceBody1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="Widget.Material.ListItem_Icon" parent="Widget.Material.Icon">
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
-    </style>
-
-    <!-- Card -->
-    <style name="Material.Card">
-        <item name="contentPadding">@dimen/material_card_padding</item>
-    </style>
-    <style name="Material.Card.MarginVertical">
-        <item name="android:layout_marginTop">@dimen/material_card_marginVertical</item>
-        <item name="android:layout_marginBottom">@dimen/material_card_marginVertical</item>
-    </style>
-    <style name="Material.Card.Margin" parent="Material.Card.MarginVertical">
-        <item name="android:layout_marginLeft">@dimen/material_card_marginHorizontal</item>
-        <item name="android:layout_marginRight">@dimen/material_card_marginHorizontal</item>
     </style>
 
 </resources>

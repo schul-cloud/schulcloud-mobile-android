@@ -12,6 +12,16 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- Required for automatic dark mode -->
+    <uses-feature
+        android:name="android.hardware.sensor.light"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:name=".SchulCloudApp"
         android:allowBackup="true"
@@ -21,18 +31,32 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".controllers.login.LoginActivity" />
+        <!-- Link autofill with website -->
+        <meta-data
+            android:name="asset_statements"
+            android:resource="@string/login_asset_statements" />
+
         <activity
             android:name=".controllers.main.MainActivity"
             android:label="@string/brand_name"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.Main.Launcher">
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".controllers.login.LoginActivity" />
+        <activity
+            android:name=".controllers.settings.SettingsActivity"
+            android:label="@string/settings_title"
+            android:parentActivityName=".controllers.main.MainActivity" />
+
+        <!-- Crashlytics is being enabled in SchulCloudApp based on user preferences -->
+        <meta-data
+            android:name="firebase_crashlytics_collection_enabled"
+            android:value="false" />
 
     </application>
 

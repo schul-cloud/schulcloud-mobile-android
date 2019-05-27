@@ -8,16 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_course.*
 import org.schulcloud.mobile.R
-import org.schulcloud.mobile.controllers.file.FileFragmentArgs
 import org.schulcloud.mobile.controllers.main.MainFragment
 import org.schulcloud.mobile.controllers.main.MainFragmentConfig
 import org.schulcloud.mobile.controllers.topic.TopicFragmentArgs
 import org.schulcloud.mobile.databinding.FragmentCourseBinding
 import org.schulcloud.mobile.models.course.CourseRepository
-import org.schulcloud.mobile.models.file.FileRepository
 import org.schulcloud.mobile.models.topic.TopicRepository
 import org.schulcloud.mobile.utils.map
 import org.schulcloud.mobile.viewmodels.CourseViewModel
@@ -49,7 +48,7 @@ class CourseFragment : MainFragment<CourseViewModel>() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val args = CourseFragmentArgs.fromBundle(arguments)
+        val args: CourseFragmentArgs by navArgs()
         viewModel = ViewModelProviders.of(this, IdViewModelFactory(args.id))
                 .get(CourseViewModel::class.java)
         super.onCreate(savedInstanceState)
@@ -77,13 +76,13 @@ class CourseFragment : MainFragment<CourseViewModel>() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.course_action_gotoFiles -> viewModel.course.value?.id?.also { id ->
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            /*R.id.course_action_gotoFiles -> viewModel.course.value?.id?.also { id ->
                 navController.navigate(R.id.action_global_fragment_file,
                         FileFragmentArgs.Builder(FileRepository.pathCourse(id))
                                 .build().toBundle())
-            }
+            }*/
             else -> return super.onOptionsItemSelected(item)
         }
         return true

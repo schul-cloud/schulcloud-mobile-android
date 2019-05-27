@@ -1,11 +1,5 @@
 <resources>
 
-    <style name="ThemeOverlay.App.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar" />
-    <style name="ThemeOverlay.App.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
-    <style name="ThemeOverlay.App.Dark.ActionBar" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
-        <item name="popupTheme">@style/ThemeOverlay.App.PopupOverlay</item>
-    </style>
-
     <style name="Animation.Activity" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
         <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
@@ -14,24 +8,27 @@
     </style>
 
 
-    <style name="Content_Text.Empty" parent="TextAppearance.AppCompat.Subhead">
+    <style name="Content.Text.Empty" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">16dp</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textAppearance">?textAppearanceBody1</item>
+        <item name="android:textColor">?colorOnBackgroundMediumEmphasis</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
 
-    <style name="Content_Header" parent="TextAppearance.AppCompat.Headline">
-        <item name="android:textSize">20sp</item>
+    <style name="Content.Header" parent="">
+        <item name="android:textAppearance">?textAppearanceHeadline5</item>
     </style>
-    <style name="Content_Header.WithLink">
+    <style name="Content.Header.WithLink">
         <item name="android:minHeight">40dp</item>
-        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:background">?android:selectableItemBackground</item>
         <item name="android:drawablePadding">16dp</item>
         <item name="android:paddingRight">16dp</item>
         <item name="android:gravity">start|center_vertical</item>
         <item name="drawableEnd">@drawable/ic_open_in_new_24dp</item>
     </style>
-    <style name="Content_LinkExternal">
+    <style name="Content.LinkExternal" parent="">
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
         <item name="android:paddingTop">8dp</item>
@@ -46,40 +43,43 @@
 
 
     <style name="Dashboard" />
-    <style name="Dashboard.Widget" parent="Material.Card.Margin">
+    <style name="Dashboard.Widget" parent="Widget.Material.Card.Margin">
         <item name="contentPadding">0dp</item>
         <item name="android:paddingTop">@dimen/material_list_paddingVertical</item>
         <item name="android:paddingBottom">@dimen/material_list_paddingVertical</item>
     </style>
-    <style name="Dashboard.Widget.Title" parent="Material.ListHeader">
-        <!--<item name="android:layout_margin">16dp</item>-->
-    </style>
-    <style name="Dashboard.Widget.ButtonMore" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="Dashboard.Widget.Title" parent="Widget.Material.ListHeader" />
+    <style name="Dashboard.Widget.ButtonMore" parent="Widget.Material.Button.OutlinedButton">
         <item name="android:layout_margin">8dp</item>
         <item name="android:layout_gravity">end</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
     </style>
 
-    <style name="FileOverview.Card" parent="Material.Card.Margin">
+    <style name="FileOverview.Card" parent="Widget.Material.Card.Margin">
         <item name="contentPadding">0dp</item>
         <item name="contentPaddingBottom">4dp</item>
-        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:background">?android:selectableItemBackground</item>
     </style>
-    <style name="FileOverview.Card_Icon" parent="Material.Icon.Dense.Inverse">
+    <style name="FileOverview.Card_Icon" parent="Widget.Material.Icon.Dense.Inverse">
         <item name="android:width">40dp</item>
     </style>
-    <style name="FileOverview.Card_Title" parent="TextAppearance.AppCompat.Title.Inverse" />
-    <style name="FileOverview.Card_FileCount" parent="TextAppearance.AppCompat.Subhead.Inverse" />
-    <style name="FileOverview.Card_Description" parent="TextAppearance.AppCompat.Medium" />
-    <style name="FileOverview.Card_Open" parent="Widget.AppCompat.Button.Borderless.Colored" />
+    <style name="FileOverview.Card_Title" parent="">
+        <item name="android:textAppearance">?textAppearanceHeadline6</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="FileOverview.Card_Description" parent="">
+        <item name="android:textAppearance">?textAppearanceBody1</item>
+    </style>
 
     <!-- Custom Views -->
-    <style name="Widget.App.ContentTextView" parent="TextAppearance.AppCompat.Body1">
+    <style name="Widget.App.ContentTextView" parent="">
+        <item name="android:textAppearance">?textAppearanceBody1</item>
         <item name="android:maxLines">4</item>
         <item name="android:ellipsize">end</item>
     </style>
-    <style name="Widget.App.BreadcrumbsView" parent="TextAppearance.AppCompat.Body1">
+    <style name="Widget.App.BreadcrumbsView" parent="">
+        <item name="android:textAppearance">?textAppearanceBody1</item>
         <item name="android:textSize">16sp</item>
     </style>
     <style name="Widget.App.CourseChip" parent="Widget.MaterialComponents.Chip.Action">

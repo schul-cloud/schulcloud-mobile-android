@@ -1,18 +1,17 @@
 @file:Suppress("TooManyFunctions")
+
 package org.schulcloud.mobile.utils
 
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
-import android.util.Log
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.Response
 import org.schulcloud.mobile.BuildConfig.API_URL
 import org.schulcloud.mobile.R
 import org.schulcloud.mobile.models.user.UserRepository
@@ -28,7 +27,8 @@ const val MIME_APPLICATION_JSON = "application/json"
 
 const val ENCODING_UTF_8 = "utf-8"
 
-val HOST = API_URL.substringBeforeLast(":")
+val HOST_API = API_URL.substringAfter("://").substringBefore(':')
+val HOST = HOST_API.substringAfter('.')
 
 val HTTP_CLIENT: OkHttpClient by lazy {
     OkHttpClient.Builder().addInterceptor { chain ->
@@ -63,17 +63,14 @@ fun Context.openUrl(url: Uri) {
     prepareCustomTab().launchUrl(this, url)
 }
 
-suspend fun resolveRedirect(url: String): Uri? {
+suspend fun resolveRedirect(url: String): Uri? = withContext(Dispatchers.IO) {
     if (url[0] != '/')
-        return url.asUri()
+        return@withContext url.asUri()
 
-    return try {
-        val response: Deferred<Response>
-        response = async(CommonPool) {
-            val request = Request.Builder().url(combinePath(API_URL, url)).build()
-            HTTP_CLIENT.newCall(request).execute()
-        }
-        response.await().request().url().toString().asUri()
+    return@withContext try {
+        val request = Request.Builder().url(combinePath(API_URL, url)).build()
+        HTTP_CLIENT.newCall(request).execute()
+                .request().url().toString().asUri()
     } catch (e: IOException) {
         Log.w(TAG, "Error resolving internal redirect", e)
         null

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog>
+
+    <release
+        date="22.03.2019"
+        versionCode="3000"
+        versionName="Version 0.3.0">
+        <intro type="summary">Es ist soweit - die neue HPI Schul-Cloud App für Android ist da!</intro>
+        <feature>Komplett neues Design für bessere Bedienbarkeit</feature>
+        <feature>Dunkles Design - einfach über die Navigationsleiste zu den Einstellungen und ausprobieren!</feature>
+        <feature>Abgaben von Hausaufgaben werden angezeigt</feature>
+        <feature>Englisch wird komplett unterstützt</feature>
+        <fix>Verbesserte Stabilität</fix>
+        <note>Der Zugriff auf Dateien funktioniert zur Zeit leider nicht, wird jedoch schnellstmöglich wieder
+            hinzugefügt.
+        </note>
+    </release>
+
+</changelog>

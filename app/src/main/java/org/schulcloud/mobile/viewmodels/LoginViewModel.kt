@@ -15,32 +15,27 @@ class LoginViewModel : ViewModel() {
             invalidInputs.add(LoginInput.EMAIL)
         if (password.isEmpty())
             invalidInputs.add(LoginInput.PASSWORD)
-
         loginState.value = if (invalidInputs.isNotEmpty())
             LoginStatus.InvalidInputs(invalidInputs)
         else {
-            UserRepository.login(email, password, loginCallback())
-            LoginStatus.Pending()
-        }
-    }
+            UserRepository.login(email, password, object : RequestJobCallback() {
+                override fun onSuccess() {
+                    loginState.value = LoginStatus.LoggedIn
+                }
 
-    private fun loginCallback(): RequestJobCallback {
-        return object : RequestJobCallback() {
-            override fun onSuccess() {
-                loginState.value = LoginStatus.LoggedIn()
-            }
-
-            override fun onError(code: ErrorCode) {
-                loginState.value = LoginStatus.Error(code.toString())
-            }
+                override fun onError(code: ErrorCode) {
+                    loginState.value = LoginStatus.Error(code)
+                }
+            })
+            LoginStatus.Pending
         }
     }
 
     sealed class LoginStatus {
-        class Pending : LoginStatus()
-        class LoggedIn : LoginStatus()
+        object Pending : LoginStatus()
+        object LoggedIn : LoginStatus()
         class InvalidInputs(val invalidInputs: MutableList<LoginInput>) : LoginStatus()
-        class Error(val error: String) : LoginStatus()
+        class Error(val error: RequestJobCallback.ErrorCode) : LoginStatus()
     }
 
     enum class LoginInput { EMAIL, PASSWORD }

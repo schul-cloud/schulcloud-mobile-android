@@ -5,7 +5,7 @@ android:
   - tools
   - platform-tools
   - tools
-  - build-tools-28.0.2
+  - build-tools-28.0.3
   - android-28
   - android-16
   - extra-android-m2repository
@@ -23,6 +23,7 @@ before_install:
 - export JAVA8_HOME=/usr/lib/jvm/java-8-oracle
 - export JAVA_HOME=$JAVA8_HOME
 - chmod +x .travis/upload-apk.sh
+- openssl aes-256-cbc -K $GOOGLE_SERVICES_KEY -iv $GOOGLE_SERVICES_IV -in ./.travis/google-services.json.enc -out ./app/google-services.json -d
 install:
 - chmod a+x .travis/install-git-crypt
 - "./.travis/install-git-crypt"

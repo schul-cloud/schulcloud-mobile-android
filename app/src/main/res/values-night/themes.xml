@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.Base.DayNight" parent="Theme.MaterialComponents.NoActionBar" />
+
+    <style name="AppTheme.Default" parent="AppTheme.Base.Default">
+        <item name="colorBackground">@color/theme_background</item>
+        <item name="colorOnBackground">@color/material_text_primary_light</item>
+        <item name="colorOnBackgroundMediumEmphasis">@color/material_text_secondary_light</item>
+        <item name="colorSurface">@color/theme_surface</item>
+        <item name="colorOnSurface">@color/material_text_primary_light</item>
+        <item name="colorOnSurfaceMediumEmphasis">@color/material_text_secondary_light</item>
+        <item name="colorOnSurfaceDivider">@color/material_divider_light</item>
+
+        <item name="bottomSheetDialogTheme">@style/AppTheme.BottomSheetDialog</item>
+    </style>
+
+
+    <style name="ThemeOverlay.App.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Dark" />
+
+</resources>

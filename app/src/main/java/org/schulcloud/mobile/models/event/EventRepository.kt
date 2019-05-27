@@ -3,10 +3,11 @@ package org.schulcloud.mobile.models.event
 import androidx.lifecycle.LiveData
 import io.realm.Realm
 import org.schulcloud.mobile.jobs.base.RequestJob
+import org.schulcloud.mobile.models.base.Repository
 import org.schulcloud.mobile.utils.eventDao
 import org.schulcloud.mobile.utils.toFeatherResponse
 
-object EventRepository {
+object EventRepository : Repository() {
 
     fun events(realm: Realm): LiveData<List<Event>> {
         return realm.eventDao().events()

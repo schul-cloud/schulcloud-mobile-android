@@ -117,6 +117,14 @@ inline fun <reified T> LiveData<T>.filter(crossinline predicate: (T) -> Boolean)
     }
     return result
 }
+inline fun <reified T> LiveData<T?>.filterNotNull(): LiveData<T> {
+    val result = MediatorLiveData<T>()
+    result.addSource(this) {
+        if (it != null)
+            result.value = it
+    }
+    return result
+}
 
 fun <T> LiveData<T>.toMutableLiveData(count: Int = 1): MutableLiveData<T> {
     val result = MediatorLiveData<T>()

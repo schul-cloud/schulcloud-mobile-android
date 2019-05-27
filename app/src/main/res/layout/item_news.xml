@@ -15,8 +15,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:background="?colorSurface"
+        android:foreground="?android:selectableItemBackground"
         android:onClick="@{() -> onSelected.invoke(news.id)}"
         android:paddingLeft="@dimen/news_item_padding_horizontal"
         android:paddingTop="@dimen/news_item_padding_vertical"
@@ -25,12 +25,10 @@
 
         <TextView
             android:id="@+id/title"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{news.title}"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
+            android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintEnd_toStartOf="@+id/date"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,14 +37,13 @@
 
         <TextView
             android:id="@+id/date"
-            style="@style/TextAppearance.MaterialComponents.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:layout_weight="1"
-            android:textSize="14sp"
+            android:textAppearance="?textAppearanceCaption"
             app:displayDate="@{news.createdAt}"
             app:layout_constraintBottom_toTopOf="@id/content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +58,6 @@
             android:layout_marginTop="8dp"
             android:text="@{news.content}"
             app:layout_constraintTop_toBottomOf="@id/title"
-            tools:ignore="WebViewLayout"
             tools:text="@tools:sample/lorem" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

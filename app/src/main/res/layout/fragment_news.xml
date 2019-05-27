@@ -28,14 +28,13 @@
 
                 <TextView
                     android:id="@+id/date"
-                    style="@style/TextAppearance.MaterialComponents.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
-                    android:textSize="14sp"
+                    android:textAppearance="?textAppearanceCaption"
                     app:displayDate="@{viewModel.news.createdAt}"
                     tools:text="July 24" />
 

@@ -13,22 +13,22 @@
     </data>
 
     <LinearLayout
-        style="@style/Material.ListItem"
+        style="@style/Widget.Material.ListItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:foreground="?android:selectableItemBackground"
         android:onClick="@{() -> onSelected.invoke(directory.name)}"
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
-            style="@style/Material.ListItem_Icon"
-            android:layout_marginLeft="4dp"
+            style="@style/Widget.Material.ListItem_Icon"
             android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
             app:srcCompat="@drawable/ic_folder" />
 
         <TextView
             android:id="@+id/name"
-            style="@style/Material.ListItem_TextPrimary"
+            style="@style/Widget.Material.ListItem.TextPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -42,7 +42,7 @@
         <ImageView
             android:id="@+id/overflow"
             style="@style/Material.ListItem_Icon"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="?attr/selectableItemBackground"
             android:visibility="gone"
             app:srcCompat="@drawable/ic_more_vert_dark_24dp"
             tools:visibility="visible" />

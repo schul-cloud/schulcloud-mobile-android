@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kotlinx.android.synthetic.main.fragment_topic.*
 import org.schulcloud.mobile.R
@@ -51,7 +52,7 @@ class TopicFragment : MainFragment<TopicViewModel>() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val args = TopicFragmentArgs.fromBundle(arguments)
+        val args: TopicFragmentArgs by navArgs()
         viewModel = ViewModelProviders.of(this, IdViewModelFactory(args.id))
                 .get(TopicViewModel::class.java)
         super.onCreate(savedInstanceState)

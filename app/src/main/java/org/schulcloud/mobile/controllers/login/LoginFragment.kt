@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
 import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.base.BaseFragment
 import org.schulcloud.mobile.controllers.main.MainActivity
+import org.schulcloud.mobile.jobs.base.RequestJobCallback
 import org.schulcloud.mobile.viewmodels.LoginViewModel
 
 class LoginFragment : BaseFragment() {
@@ -69,21 +70,31 @@ class LoginFragment : BaseFragment() {
             when (loginState) {
                 is LoginViewModel.LoginStatus.Pending -> {
                     Log.d(TAG, "PENDING LOGIN")
+                    errorText.visibility = View.GONE
                     progress.visibility = View.VISIBLE
                     loginBtn.isEnabled = false
                 }
                 is LoginViewModel.LoginStatus.LoggedIn -> {
                     Log.d(TAG, "LOGGED IN")
                     startMainActivity()
+                    errorText.visibility = View.GONE
                 }
                 is LoginViewModel.LoginStatus.InvalidInputs -> {
                     Log.d(TAG, "INVALID FIELDS")
+                    errorText.visibility = View.GONE
                     progress.visibility = View.GONE
                     loginBtn.isEnabled = true
                     handleInvalidFields(loginState.invalidInputs)
                 }
                 is LoginViewModel.LoginStatus.Error -> {
                     Log.d(TAG, "ERROR: " + loginState.error)
+                    errorText.visibility = View.VISIBLE
+                    errorText.text = getString(when (loginState.error) {
+                        RequestJobCallback.ErrorCode.TIMEOUT -> R.string.login_error_server
+                        RequestJobCallback.ErrorCode.ERROR -> R.string.login_error_passwordWrong
+                        RequestJobCallback.ErrorCode.NO_NETWORK -> R.string.login_error_noConnection
+                        else -> R.string.login_error
+                    })
                     progress.visibility = View.GONE
                     loginBtn.isEnabled = true
                 }
@@ -91,7 +102,7 @@ class LoginFragment : BaseFragment() {
         })
     }
 
-    private fun handleInvalidFields(invalidInputs: MutableList<LoginViewModel.LoginInput>) {
+    private fun handleInvalidFields(invalidInputs: List<LoginViewModel.LoginInput>) {
         invalidInputs.forEach { input ->
             when (input) {
                 LoginViewModel.LoginInput.EMAIL ->

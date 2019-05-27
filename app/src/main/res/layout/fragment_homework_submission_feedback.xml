@@ -27,11 +27,11 @@
                 android:padding="16dp">
 
                 <TextView
-                    style="@style/TextAppearance.MaterialComponents.Headline6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:text="@{@string/homework_submission_feedback_grade(viewModel.submission.grade)}"
+                    android:textAppearance="?textAppearanceHeadline6"
                     android:visibility="@{viewModel.submission.grade != null}" />
 
                 <org.schulcloud.mobile.views.ContentWebView

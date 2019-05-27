@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_homework_submission.*
 import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.course.CourseFragmentArgs
@@ -42,7 +43,7 @@ class SubmissionFragment : MainFragment<SubmissionViewModel>(), ParentFragment {
             }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val args = HomeworkFragmentArgs.fromBundle(arguments)
+        val args by navArgs<HomeworkFragmentArgs>()
         viewModel = ViewModelProviders.of(this, IdViewModelFactory(args.id))
                 .get(SubmissionViewModel::class.java)
         super.onCreate(savedInstanceState)
@@ -66,8 +67,8 @@ class SubmissionFragment : MainFragment<SubmissionViewModel>(), ParentFragment {
         })
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.submission_action_gotoHomework -> viewModel.homework.value?.id?.also { id ->
                 navController.navigate(R.id.action_global_fragment_homework,
                         HomeworkFragmentArgs.Builder(id).build().toBundle())

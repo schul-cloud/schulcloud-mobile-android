@@ -20,12 +20,16 @@
 
 
     <!-- Login -->
-    <string name="login_email_hint">E-mail</string>
+    <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="login_forgotPassword">Forgot password?</string>
     <string name="login_login">Login</string>
-    <string name="login_error_emailInvalid">The E-mail address is invalid</string>
+    <string name="login_error">An error occurred while trying to sign in</string>
+    <string name="login_error_emailInvalid">The email address is invalid</string>
     <string name="login_error_passwordEmpty">Please enter your password!</string>
+    <string name="login_error_passwordWrong">The password is incorrect</string>
+    <string name="login_error_server">Can\'t connect to the server</string>
+    <string name="login_error_noConnection">No internet connection</string>
 
     <string name="login_demo">Don\'t have an account yet? Try it out!</string>
     <string name="login_demo_student">Demo as a student</string>
@@ -64,6 +68,7 @@
     </plurals>
     <string name="dashboard_homework_weekLabel">in the next week</string>
     <string name="dashboard_homework_more">All assignments</string>
+    <string name="dashboard_homework_noCourse">no course</string>
     <!-- News -->
     <string name="dashboard_news">@string/news_title</string>
     <string name="dashboard_news_none">There are no news at the moment</string>
@@ -134,5 +139,38 @@
     <string name="file_fileDownload_success">File \'%1$s\' was successfully saved in downloads!</string>
     <string name="file_fileDownload_error_save">The file could not be saved</string>
     <string name="file_fileDownload_error_savePermissionDenied">The file cannot be saved without permission</string>
+
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_restartRequired">The app must be restarted for the settings to take effect</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_theme_darkMode">Dark mode</string>
+    <string name="settings_theme_darkMode_summary_always">Always active</string>
+    <string name="settings_theme_darkMode_summary_container">Active when %1$s</string>
+    <string name="settings_theme_darkMode_summary_separator">&#160;or&#160;</string>
+    <string name="settings_theme_darkMode_summary_ambientLight">it\'s dark</string>
+    <string name="settings_theme_darkMode_summary_night">it\'s night-time</string>
+    <string name="settings_theme_darkMode_summary_powerSaver">power saver is active</string>
+    <string name="settings_theme_darkMode_ambientLight">Activate when ambient light is low</string>
+    <string name="settings_theme_darkMode_night">Activate at night</string>
+    <string name="settings_theme_darkMode_powerSaver">Activate when power saver is active</string>
+    <string name="settings_theme_darkMode_night_summary_noLocationPermission">Without permission the times of sunrise and sunset can only be estimated</string>
+    <string name="settings_privacy">Privacy</string>
+    <string name="settings_privacy_crashlytics">Send crash reports</string>
+    <string name="settings_privacy_crashlytics_summary">After every crash, an anonymous report will be uploaded to improve the user experience</string>
+    <string name="settings_about">About</string>
+    <string name="settings_about_version">Version</string>
+    <string name="settings_about_contributors">Contributors</string>
+    <string name="settings_about_openSource">This app is open source</string>
+    <string name="settings_about_contact">Contact</string>
+    <string name="settings_about_contact_data">mailto:info@schul-cloud.org?subject=Contact via Android-App</string>
+    <string name="settings_about_imprint">Imprint</string>
+    <string name="settings_about_privacyPolicy">Privacy Policy</string>
+
+    <string name="changelog_title">Changelog %1$s</string>
+    <string name="changelog_tag_feature_format">[font color="%1$s"][b]New:[/b][/font] %2$s</string>
+    <string name="changelog_tag_fix_format">[font color="%1$s"][b]Fix:[/b][/font] %2$s</string>
+    <string name="changelog_tag_note_format">Note: %1$s</string>
 
 </resources>

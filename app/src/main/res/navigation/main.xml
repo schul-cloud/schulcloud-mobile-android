@@ -22,9 +22,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_homeworkListFragment"
             app:destination="@id/fragment_homeworkList" />
-        <action
+        <!--<action
             android:id="@+id/action_dashboardFragment_to_fileOverviewFragment"
-            app:destination="@id/fragment_fileOverview" />
+            app:destination="@id/fragment_fileOverview" />-->
     </fragment>
 
     <!-- News -->

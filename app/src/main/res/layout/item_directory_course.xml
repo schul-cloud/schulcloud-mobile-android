@@ -13,13 +13,14 @@
     </data>
 
     <LinearLayout
-        style="@style/Material.ListItem"
+        style="@style/Widget.Material.ListItem"
         android:layout_width="match_parent"
-        android:background="?android:attr/selectableItemBackground"
+        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
         android:onClick="@{() -> onSelected.invoke(course.id)}">
 
         <ImageView
-            style="@style/Material.ListItem_Icon"
+            style="@style/Widget.Material.ListItem_Icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_margin="12dp"
@@ -29,7 +30,7 @@
             tools:colorFilter="@{@color/brand_primary}" />
 
         <TextView
-            style="@style/Material.ListItem_TextPrimary"
+            style="@style/Widget.Material.ListItem.TextPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.main.MainFragment
 import org.schulcloud.mobile.controllers.main.MainFragmentConfig
@@ -31,7 +32,7 @@ class NewsFragment : MainFragment<NewsViewModel>() {
             }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val args = NewsFragmentArgs.fromBundle(arguments)
+        val args: NewsFragmentArgs by navArgs()
         viewModel = ViewModelProviders.of(this, IdViewModelFactory(args.id))
                 .get(NewsViewModel::class.java)
         super.onCreate(savedInstanceState)

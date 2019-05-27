@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="@string/settings_theme">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:icon="@drawable/ic_brightness_low_dark_24dp"
+            app:key="theme_darkMode"
+            app:title="@string/settings_theme_darkMode"
+            app:useSimpleSummaryProvider="true" />
+
+        <CheckBoxPreference
+            app:defaultValue="false"
+            app:dependency="theme_darkMode"
+            app:isPreferenceVisible="false"
+            app:key="theme_darkMode_ambientLight"
+            app:title="@string/settings_theme_darkMode_ambientLight" />
+
+        <CheckBoxPreference
+            app:defaultValue="false"
+            app:dependency="theme_darkMode"
+            app:isPreferenceVisible="false"
+            app:key="theme_darkMode_night"
+            app:title="@string/settings_theme_darkMode_night" />
+
+        <CheckBoxPreference
+            app:defaultValue="false"
+            app:dependency="theme_darkMode"
+            app:isPreferenceVisible="false"
+            app:key="theme_darkMode_powerSaver"
+            app:title="@string/settings_theme_darkMode_powerSaver" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="privacy"
+        app:title="@string/settings_privacy">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:key="privacy_crashlytics"
+            app:summary="@string/settings_privacy_crashlytics_summary"
+            app:title="@string/settings_privacy_crashlytics" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="about"
+        app:title="@string/settings_about">
+
+        <Preference
+            app:icon="@drawable/ic_update_dark_24dp"
+            app:key="about_version"
+            app:title="@string/settings_about_version" />
+
+        <Preference
+            app:icon="@drawable/ic_people_dark_24dp"
+            app:key="about_contributors"
+            app:summary="@string/settings_about_contributors_summary"
+            app:title="@string/settings_about_contributors" />
+
+        <Preference
+            app:icon="@drawable/ic_code_dark_24dp"
+            app:key="about_openSource"
+            app:title="@string/settings_about_openSource">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/schul-cloud/schulcloud-mobile-android" />
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/ic_email_dark_24dp"
+            app:key="about_contact"
+            app:title="@string/settings_about_contact">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/settings_about_contact_data" />
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/ic_person_dark_24dp"
+            app:key="about_imprint"
+            app:title="@string/settings_about_imprint">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://schul-cloud.org/impressum" />
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/ic_notes_dark_24dp"
+            app:key="about_privacyPolicy"
+            app:title="@string/settings_about_privacyPolicy">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://schul-cloud.org/impressum#data_security" />
+        </Preference>
+
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

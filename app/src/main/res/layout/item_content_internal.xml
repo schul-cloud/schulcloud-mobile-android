@@ -23,7 +23,7 @@
         android:orientation="vertical">
 
         <org.schulcloud.mobile.views.CompatTextView
-            style="@style/Content_Header.WithLink"
+            style="@style/Content.Header.WithLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/content_title_margin"

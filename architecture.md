@@ -38,7 +38,7 @@ Data is managed by so-called *repository*. They exist as singletons (Kotlin-`obj
 *For an example of Repository + DAO, see the implementation of [`.models.course.CourseRepository`][CourseRepository]*  
 *For an example of Repository + Storage, see the implementation of [`.models.user.UserRepository`][UserRepository]*
 
-Syncing of data (e.g. to the Schul-Cloud server) is done via sync-methods in the repository. They call a [`Job`][RequestJob] (inside [`.jobs`][.jobs]), which itself calls a method of [`.network.ApiServiceInterface`][ApiServiceInterface]. The retrieved data is then stored in Realm using [`Sync`][Sync].
+Syncing of data (e.g. to the HPI Schul-Cloud server) is done via sync-methods in the repository. They call a [`Job`][RequestJob] (inside [`.jobs`][.jobs]), which itself calls a method of [`.network.ApiServiceInterface`][ApiServiceInterface]. The retrieved data is then stored in Realm using [`Sync`][Sync].
 
 *For an example of Job + Sync, see the implementation of [`.jobs.ListUserCoursesJob`][ListUserCoursesJob]*
 

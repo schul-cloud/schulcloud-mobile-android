@@ -2,6 +2,14 @@
 <resources>
 
     <declare-styleable name="AppTheme">
+        <attr name="colorPrimaryLight" format="color" />
+        <attr name="colorOnPrimaryMediumEmphasis" format="color" />
+        <attr name="colorBackground" format="color" />
+        <attr name="colorOnBackgroundPrimary" format="color" />
+        <attr name="colorOnBackgroundMediumEmphasis" format="color" />
+        <attr name="colorOnSurfaceMediumEmphasis" format="color" />
+        <attr name="colorOnSurfaceDivider" format="color" />
+
         <attr name="contentTextViewStyle" format="reference" />
         <attr name="breadcrumbsViewStyle" format="reference" />
         <attr name="courseChipStyle" format="reference" />

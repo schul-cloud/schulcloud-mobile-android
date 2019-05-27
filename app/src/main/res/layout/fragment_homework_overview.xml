@@ -36,7 +36,6 @@
                     android:layout_marginBottom="8dp"
                     android:text="@{HomeworkUtilsKt.getDueText(context, viewModel.homework)}"
                     android:textColor="@{HomeworkUtilsKt.getDueColor(context, viewModel.homework)}"
-                    android:textSize="@dimen/text_smaller_size"
                     android:visibility="@{HomeworkUtilsKt.dueLabelRequired(viewModel.homework)}"
                     app:drawableStart="@drawable/baseline_outlined_flag_16dp"
                     app:drawableStartVisible="@{HomeworkUtilsKt.dueLabelFlagRequired(viewModel.homework)}"

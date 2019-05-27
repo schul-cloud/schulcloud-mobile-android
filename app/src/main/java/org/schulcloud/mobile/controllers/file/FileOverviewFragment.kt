@@ -13,6 +13,7 @@ import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.main.FragmentType
 import org.schulcloud.mobile.controllers.main.MainFragment
 import org.schulcloud.mobile.controllers.main.MainFragmentConfig
+import org.schulcloud.mobile.databinding.FragmentFileOverviewBinding
 import org.schulcloud.mobile.models.course.CourseRepository
 import org.schulcloud.mobile.models.file.FileRepository
 import org.schulcloud.mobile.utils.asLiveData
@@ -44,7 +45,7 @@ class FileOverviewFragment : MainFragment<FileOverviewViewModel>() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_file_overview, container, false)
+        return FragmentFileOverviewBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

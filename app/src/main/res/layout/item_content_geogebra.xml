@@ -19,13 +19,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:foreground="?android:selectableItemBackground"
         android:onClick="@{() -> viewHolder.openExternal()}"
         android:orientation="vertical">
 
         <org.schulcloud.mobile.views.CompatTextView
             android:id="@+id/title"
-            style="@style/Content_Header.WithLink"
+            style="@style/Content.Header.WithLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"

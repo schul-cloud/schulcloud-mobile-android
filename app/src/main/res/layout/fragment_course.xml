@@ -27,7 +27,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Body1"
+                    style="?textAppearanceBody2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
@@ -36,16 +36,14 @@
                     tools:text="Course Description\n\n..." />
 
                 <TextView
-                    style="@style/Material.ListHeader"
+                    style="@style/Widget.Material.ListHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/course_topics" />
 
                 <TextView
                     android:id="@android:id/empty"
-                    style="@style/Content_Text.Empty"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Content.Text.Empty"
                     android:text="@string/topics_error_empty" />
 
                 <androidx.recyclerview.widget.RecyclerView

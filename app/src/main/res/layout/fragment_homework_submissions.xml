@@ -20,14 +20,12 @@
 
             <TextView
                 android:id="@+id/empty"
-                style="@style/Content_Text.Empty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/Content.Text.Empty"
                 android:text="@string/homework_submissions_error_courseEmpty" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
-                style="@style/Material.List"
+                style="@style/Widget.Material.List"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"

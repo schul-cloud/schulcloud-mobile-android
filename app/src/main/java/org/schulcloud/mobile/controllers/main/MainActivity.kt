@@ -11,7 +11,6 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.children
 import androidx.core.view.forEach
@@ -26,13 +25,11 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import kotlinx.android.synthetic.main.activity_main.*
 import org.schulcloud.mobile.R
 import org.schulcloud.mobile.controllers.base.BaseActivity
+import org.schulcloud.mobile.controllers.changelog.Changelog
 import org.schulcloud.mobile.controllers.login.LoginActivity
 import org.schulcloud.mobile.models.user.UserRepository
 import org.schulcloud.mobile.storages.Onboarding
-import org.schulcloud.mobile.utils.getTextColorForBackground
-import org.schulcloud.mobile.utils.getTextColorSecondaryForBackground
-import org.schulcloud.mobile.utils.setTintCompat
-import org.schulcloud.mobile.utils.visibilityBool
+import org.schulcloud.mobile.utils.*
 import org.schulcloud.mobile.viewmodels.MainViewModel
 import org.schulcloud.mobile.viewmodels.ToolbarColors
 
@@ -57,7 +54,7 @@ class MainActivity : BaseActivity() {
             finish()
         }
 
-        setTheme(R.style.AppTheme_Main)
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
@@ -95,6 +92,10 @@ class MainActivity : BaseActivity() {
         }
 
         fab.setOnClickListener { viewModel.onFabClicked.call() }
+
+        navController.addOnDestinationChangedListener { _, _, _ ->
+            bottomAppBar.slideIntoView()
+        }
     }
 
     override fun onResume() {
@@ -119,6 +120,8 @@ class MainActivity : BaseActivity() {
                         })
             }
         }
+
+        Changelog.showDialog(this)
     }
 
     private fun showDrawer() {
@@ -147,11 +150,6 @@ class MainActivity : BaseActivity() {
             super.onBackPressed()
     }
 
-    override fun openOptionsMenu() {
-        super.openOptionsMenu()
-        updateToolbarColors()
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         optionsMenu = menu
         updateToolbarColors()
@@ -163,7 +161,7 @@ class MainActivity : BaseActivity() {
         updateToolbarColors()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         viewModel.onOptionsItemSelected.value = item
         return true
     }
@@ -171,14 +169,15 @@ class MainActivity : BaseActivity() {
 
     private fun recalculateToolbarColors() {
         val color = viewModel.config.value?.toolbarColor
-                ?: ContextCompat.getColor(this, R.color.toolbar_background_default)
+                ?.let { fitColorToTheme(it) }
+                ?: getColorFromAttr(R.attr.colorSurface)
 
         viewModel.toolbarColors.value = ToolbarColors(color,
                 getTextColorForBackground(color), getTextColorSecondaryForBackground(color),
                 ColorUtils.blendARGB(color, Color.BLACK, DARKEN_FACTOR))
     }
 
-    private fun updateToolbarColors() {
+    fun updateToolbarColors() {
         val colors = viewModel.toolbarColors.value ?: return
         val toolbar = toolbar
 

@@ -21,14 +21,14 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        style="@style/Material.ListItem.TwoLine"
+        style="@style/Widget.Material.ListItem.TwoLine"
         android:layout_width="match_parent"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:foreground="?android:selectableItemBackground"
         android:onClick="@{() -> onSelected.invoke(file)}">
 
         <ImageView
             android:id="@+id/icon"
-            style="@style/Material.ListItem_Icon"
+            style="@style/Widget.Material.ListItem_Icon"
             android:layout_width="42dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
@@ -40,7 +40,7 @@
 
         <TextView
             android:id="@+id/name"
-            style="@style/Material.ListItem_TextPrimary"
+            style="@style/Widget.Material.ListItem.TextPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLines="2"
@@ -55,7 +55,7 @@
 
         <TextView
             android:id="@+id/size"
-            style="@style/Material.ListItem_TextSecondary"
+            style="@style/Widget.Material.ListItem.TextSecondary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{FormatUtilsKt.formatFileSize(file.size)}"
@@ -67,9 +67,9 @@
 
         <ImageView
             android:id="@+id/download"
-            style="@style/Material.ListItem_Icon"
+            style="@style/Widget.Material.ListItem_Icon"
             android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="?android:selectableItemBackground"
             android:onClick="@{() -> onDownload.invoke(file)}"
             android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -81,7 +81,7 @@
         <ImageView
             android:id="@+id/overflow"
             style="@style/Material.ListItem_Icon"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="?android:selectableItemBackground"
             android:visibility="gone"
             app:srcCompat="@drawable/ic_more_vert_dark_24dp"
             tools:visibility="visible" />

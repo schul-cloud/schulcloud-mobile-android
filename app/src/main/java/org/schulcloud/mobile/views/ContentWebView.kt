@@ -13,9 +13,9 @@ import android.webkit.WebViewClient
 import androidx.annotation.AttrRes
 import okhttp3.Request
 import org.schulcloud.mobile.BuildConfig
+import org.schulcloud.mobile.R
 import org.schulcloud.mobile.utils.*
 import java.io.IOException
-import java.lang.IllegalArgumentException
 import kotlin.properties.Delegates
 
 open class ContentWebView @JvmOverloads constructor(
@@ -28,7 +28,7 @@ open class ContentWebView @JvmOverloads constructor(
         val TAG: String = ContentWebView::class.java.simpleName
 
         // language=HTML
-        const val CONTENT_TEXT_PREFIX = """
+        const val CONTENT_TEXT_FORMAT = """
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,11 +36,17 @@ open class ContentWebView @JvmOverloads constructor(
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         * {
-            max-width: 100%;
+            max-width: 100%%;
             word-wrap: break-word;
         }
         body {
             margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: %2${"$"}s;
+        }
+        body a {
+            color: %3${"$"}s;
+            text-decoration: none;
         }
         body > :first-child {
             margin-top: 0;
@@ -50,16 +56,15 @@ open class ContentWebView @JvmOverloads constructor(
         }
         table {
             table-layout: fixed;
-            width: 100%;
+            width: 100%%;
         }
         ul {
             -webkit-padding-start: 25px;
         }
     </style>
 </head>
-<body>"""
-        // language=HTML
-        const val CONTENT_TEXT_SUFFIX = """
+<body>
+    %1${"$"}s
     <script>
     for (tag of document.body.getElementsByTagName('*')) {
         tag.style.width = '';
@@ -173,7 +178,11 @@ open class ContentWebView @JvmOverloads constructor(
 
     private fun onContentUpdated() {
         val content = content.takeUnless { content.isNullOrBlank() } ?: contentFallback ?: ""
-        loadDataWithBaseURL(HOST, CONTENT_TEXT_PREFIX + content + CONTENT_TEXT_SUFFIX,
+        loadDataWithBaseURL(HOST,
+                CONTENT_TEXT_FORMAT.format(
+                        content,
+                        context.getColorFromAttr(R.attr.colorOnBackground).cssColor,
+                        context.getColorFromAttr(R.attr.colorOnBackgroundPrimary).cssColor),
                 MIME_TEXT_HTML, ENCODING_UTF_8, null)
     }
 }

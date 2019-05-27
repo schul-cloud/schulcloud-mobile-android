@@ -46,6 +46,7 @@ abstract class MainFragment<VM : ViewModel>(refreshableImpl: RefreshableImpl = R
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        isFirstInit = savedInstanceState == null
 
         mainViewModel.onOptionsItemSelected.observe(this, Observer {
             onOptionsItemSelected(it)
@@ -75,23 +76,25 @@ abstract class MainFragment<VM : ViewModel>(refreshableImpl: RefreshableImpl = R
         isFirstInit = false
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         val menuTopRes = config.value?.menuTopRes
         if (menuTopRes != null && menuTopRes != 0)
-            inflater?.inflate(menuTopRes, menu)
+            inflater.inflate(menuTopRes, menu)
 
-        inflater?.inflate(R.menu.fragment_main_top, menu)
+        inflater.inflate(R.menu.fragment_main_top, menu)
         if (config.value?.supportsRefresh == false)
-            menu?.findItem(R.id.base_action_refresh)?.isVisible = false
+            menu.findItem(R.id.base_action_refresh)?.isVisible = false
         for (id in config.value?.menuTopHiddenIds.orEmpty())
             if (id != 0)
-                menu?.findItem(id)?.isVisible = false
+                menu.findItem(id)?.isVisible = false
+
+        mainActivity.updateToolbarColors()
 
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.base_action_share -> {
                 var link = url ?: return true
                 if (link.startsWith('/'))

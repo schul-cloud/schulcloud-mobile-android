@@ -19,13 +19,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
+        android:background="?android:selectableItemBackground"
         android:onClick="@{() -> viewHolder.openExternal()}"
         android:orientation="vertical">
 
         <org.schulcloud.mobile.views.CompatTextView
             android:id="@+id/title"
-            style="@style/Content_Header.WithLink"
+            style="@style/Content.Header.WithLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/content_title_margin"
@@ -35,18 +35,16 @@
 
         <TextView
             android:id="@+id/description"
-            style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@{content.description}"
+            android:textAppearance="?textAppearanceBody1"
             android:visibility="@{ViewUtilsKt.toVisible(content.description)}"
             tools:text="Description...\n\n\nspanning\nmultiple\nlines" />
 
         <TextView
-            style="@style/Content_Text.Empty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/Content.Text.Empty"
             android:text="@string/content_etherpad_openInBrowser" />
 
     </LinearLayout>

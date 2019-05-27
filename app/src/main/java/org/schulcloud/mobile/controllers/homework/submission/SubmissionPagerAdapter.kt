@@ -20,13 +20,13 @@ class SubmissionPagerAdapter(private val context: Context, fm: FragmentManager) 
         annotation class Tab
     }
 
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         return when (getTabType(position)) {
             TAB_OVERVIEW -> OverviewFragment()
             TAB_FEEDBACK -> FeedbackFragment()
 
-            TAB_INVALID -> null
-            else -> null
+            // Shouldn't occur but we have to return something
+            else -> OverviewFragment()
         }
     }
 

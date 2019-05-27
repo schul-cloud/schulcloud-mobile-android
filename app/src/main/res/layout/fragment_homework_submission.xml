@@ -18,7 +18,8 @@
             android:id="@+id/toolbarWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.App.Dark.ActionBar">
+            android:theme="@style/ThemeOverlay.App.Dark.ActionBar"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -27,7 +28,6 @@
 
             <TextView
                 android:id="@+id/selectedStudent"
-                style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="72dp"
@@ -35,6 +35,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:text="@{@string/homework_submission_hint(viewModel.student.name)}"
+                android:textAppearance="?textAppearanceBody1"
                 tools:text="Submission of Clara Fall" />
 
             <com.google.android.material.tabs.TabLayout

@@ -12,9 +12,7 @@
 
         <TextView
             android:id="@+id/empty"
-            style="@style/Content_Text.Empty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/Content.Text.Empty"
             android:text="@string/homework_error_empty" />
 
         <androidx.recyclerview.widget.RecyclerView

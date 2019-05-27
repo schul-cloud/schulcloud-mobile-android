@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="theme_background">#000000</color>
+    <color name="theme_surface">#212121</color>
+    <color name="theme_background_light">#F5F5F5</color>
+    <color name="theme_surface_light">#FFFFFF</color>
+    <color name="theme_error">#fd002f</color>
+
+</resources>

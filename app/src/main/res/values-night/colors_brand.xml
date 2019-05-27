@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="brand_primary">#800328</color>
+    <color name="brand_primary12">#1F800328</color>
+    <color name="brand_primaryDark">#4D0218</color>
+    <color name="brand_onBackgroundPrimary">@color/brand_hpiRed</color>
+    <color name="brand_secondary">@color/brand_primary</color>
+
+    <array name="brand_swipeRefreshColors">
+        <item>@color/brand_hpiRed</item>
+        <item>@color/brand_hpiOrange</item>
+        <item>@color/brand_hpiYellow</item>
+    </array>
+
+</resources>

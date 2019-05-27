@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <import type="org.schulcloud.mobile.controllers.course.CourseAdapter.CourseViewHolder" />
@@ -16,7 +17,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:foreground="?android:selectableItemBackground"
         android:onClick="@{() -> onSelected.invoke(course.id)}">
 
         <LinearLayout
@@ -27,34 +28,34 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@{course.color}"
+                app:themeAwareBackground="@{course.color}"
                 tools:background="@color/brand_primary" />
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="25dp"
+                android:layout_marginEnd="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="2"
                 android:text="@{course.name}"
+                android:textAppearance="?textAppearanceHeadline6"
                 tools:text="Course Title" />
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Caption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="2"
                 android:text="@{CourseViewHolder.teachersToShort(course.teachers)}"
+                android:textAppearance="?textAppearanceCaption"
                 tools:text="Course Teacher" />
 
         </LinearLayout>

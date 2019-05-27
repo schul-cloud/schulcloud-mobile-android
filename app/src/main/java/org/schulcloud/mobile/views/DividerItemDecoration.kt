@@ -48,7 +48,7 @@ class DividerItemDecoration(
 //    @Retention(AnnotationRetention.SOURCE)
 //    annotation class DividerMode
 
-    private var divider = ResourcesCompat.getDrawable(context.resources, R.drawable.divider_dark, context.theme)!!
+    private var divider = ResourcesCompat.getDrawable(context.resources, R.drawable.divider, context.theme)!!
     private val bounds = Rect()
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {

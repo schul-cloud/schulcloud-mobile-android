@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <import type="org.schulcloud.mobile.controllers.homework.HomeworkAdapter.HomeworkViewHolder" />
-        <import type="org.schulcloud.mobile.utils.ViewUtilsKt" />
         <import type="org.schulcloud.mobile.utils.HomeworkUtilsKt" />
+        <import type="org.schulcloud.mobile.utils.ViewUtilsKt" />
 
         <variable
             name="homework"
@@ -39,8 +39,8 @@
             android:paddingRight="@dimen/homework_item_margin"
             android:paddingBottom="10dp"
             android:text="@{headerText}"
-            android:textColor="@color/material_text_secondary_dark"
-            android:textSize="20sp"
+            android:textAppearance="?textAppearanceSubtitle1"
+            android:textColor="?colorOnBackgroundMediumEmphasis"
             android:visibility="@{headerRequired}"
             tools:text="@sample/homework.json/data/header/date"
             tools:visibility="@sample/homework.json/data/header/visibility" />
@@ -48,30 +48,29 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/divider_dark" />
+            android:background="@drawable/divider" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:foreground="?android:attr/selectableItemBackground"
+            android:background="?colorSurface"
+            android:foreground="?android:selectableItemBackground"
             android:onClick="@{() -> onSelected.invoke(homework.id)}"
             android:padding="@dimen/homework_item_margin">
 
             <TextView
                 android:id="@+id/title"
-                style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="start"
                 android:maxLines="2"
                 android:text="@{homework.title}"
-                android:textColor="@color/material_text_secondary_dark"
-                android:textStyle="bold"
+                android:textAppearance="?textAppearanceHeadline6"
                 app:layout_constraintEnd_toStartOf="@id/dueLabel"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="@sample/homework.json/data/title" />
 
             <org.schulcloud.mobile.views.CompatTextView
@@ -79,12 +78,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{HomeworkUtilsKt.getDueText(context, homework)}"
+                android:textAppearance="?textAppearanceCaption"
                 android:textColor="@{HomeworkUtilsKt.getDueColor(context, homework)}"
-                android:textSize="@dimen/text_smaller_size"
                 app:drawableStart="@drawable/baseline_outlined_flag_16dp"
                 app:drawableStartVisible="@{HomeworkUtilsKt.dueLabelFlagRequired(homework)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/title"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:drawableStartVisible="@sample/homework.json/data/due/visibility"
                 tools:text="@sample/homework.json/data/due/text"
                 tools:textColor="@sample/homework.json/data/due/color" />
@@ -95,6 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@{homework.description}"
+                android:textAppearance="?textAppearanceBody1"
                 android:visibility="@{ViewUtilsKt.toVisible(homework.description)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -106,8 +107,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:onClick="@{() -> onCourseSelected.invoke(homework.course.id)}"
+                android:paddingTop="0dp"
                 android:visibility="@{ViewUtilsKt.toVisible(homework.course.name)}"
                 app:homeworkCourse="@{homework.course}"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/description"
                 tools:course="@sample/homework.json/data/course" />
 

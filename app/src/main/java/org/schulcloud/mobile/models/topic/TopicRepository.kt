@@ -3,9 +3,10 @@ package org.schulcloud.mobile.models.topic
 import androidx.lifecycle.LiveData
 import io.realm.Realm
 import org.schulcloud.mobile.jobs.base.RequestJob
+import org.schulcloud.mobile.models.base.Repository
 import org.schulcloud.mobile.utils.topicDao
 
-object TopicRepository {
+object TopicRepository : Repository() {
 
     fun topicsForCourse(realm: Realm, courseId: String): LiveData<List<Topic>> {
         return realm.topicDao().topicsForCourse(courseId)

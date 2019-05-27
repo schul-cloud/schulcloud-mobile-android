@@ -4,13 +4,17 @@ package org.schulcloud.mobile.utils
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.annotation.ArrayRes
+import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.text.TextUtilsCompat
@@ -51,10 +55,20 @@ fun Context.shareLink(url: String, titleContent: CharSequence? = null) {
     startActivity(Intent.createChooser(intent, getString(R.string.share_title)))
 }
 
+
 fun isLtr() = TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_LTR
 
+fun Context.getColorFromAttr(
+    @AttrRes id: Int,
+    typedValue: TypedValue = TypedValue(),
+    resolveRefs: Boolean = true
+): Int {
+    theme.resolveAttribute(id, typedValue, resolveRefs)
+    return typedValue.data
+}
+
 fun Context.getColorArray(@ArrayRes id: Int, @ColorInt fallback: Int? = null): IntArray {
-    val fallbackColor = fallback ?: ResourcesCompat.getColor(resources, R.color.brand_accent, theme)
+    val fallbackColor = fallback ?: ResourcesCompat.getColor(resources, R.color.brand_secondary, theme)
     val ta = resources.obtainTypedArray(id)
     val colors = IntArray(ta.length()) { i -> ta.getColor(i, fallbackColor) }
     ta.recycle()
@@ -63,4 +77,9 @@ fun Context.getColorArray(@ArrayRes id: Int, @ColorInt fallback: Int? = null): I
 
 fun Drawable.setTintCompat(@ColorInt tint: Int) {
     DrawableCompat.setTint(this, tint)
+}
+
+
+fun Context.hasPermission(permission: String): Boolean {
+    return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
 }

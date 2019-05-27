@@ -12,10 +12,10 @@
     </data>
 
     <TextView
-        style="@style/Material.ListItem.Simple"
+        style="@style/Widget.Material.ListItem.Simple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:foreground="?android:selectableItemBackground"
         android:onClick="@{() -> onSelected.invoke(topic.id)}"
         android:text="@{topic.name}"
         tools:text="Topic Name" />

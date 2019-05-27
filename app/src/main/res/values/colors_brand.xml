@@ -3,11 +3,9 @@
 
     <color name="brand_primary">@color/brand_hpiRed</color>
     <color name="brand_primary12">#1FB10438</color>
-    <!-- 30% white overlay -->
-    <color name="brand_primaryLight">#e8915a</color>
-    <!-- 40% black overlay -->
-    <color name="brand_primaryDark">#853b0b</color>
-    <color name="brand_accent">@color/brand_hpiRed</color>
+    <color name="brand_primaryDark">#690221</color>
+    <color name="brand_onBackgroundPrimary">@color/brand_primary</color>
+    <color name="brand_secondary">@color/brand_primary</color>
 
     <color name="ic_launcher_background">@android:color/white</color>
 

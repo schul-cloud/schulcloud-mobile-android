@@ -40,16 +40,18 @@
                     android:paddingEnd="16sp"
                     android:paddingRight="16sp"
                     android:text="@{Integer.toString(count)}"
+                    android:textAppearance="?textAppearanceHeadline1"
                     android:textSize="70sp"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="RtlSymmetry"
                     tools:text="11" />
 
                 <TextView
                     android:id="@+id/openText"
-                    style="@style/TextAppearance.AppCompat.Headline"
+                    style="?textAppearanceHeadline5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{@plurals/dashboard_homework_openLabel(count)}"
@@ -61,7 +63,7 @@
 
                 <TextView
                     android:id="@+id/weekText"
-                    style="@style/TextAppearance.AppCompat.Subhead"
+                    style="?textAppearanceSubtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dashboard_homework_weekLabel"
@@ -71,7 +73,7 @@
 
                 <TextView
                     android:id="@+id/next"
-                    style="@style/TextAppearance.AppCompat.Subhead"
+                    style="?textAppearanceSubtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{timeToNext}"

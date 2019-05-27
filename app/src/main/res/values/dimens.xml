@@ -12,8 +12,9 @@
     <dimen name="news_item_padding_vertical">12dp</dimen>
 
     <dimen name="circle_course_color_diameter">20dp</dimen>
-    <dimen name="text_medium_size">18sp</dimen>
-    <dimen name="text_smaller_size">16sp</dimen>
     <dimen name="homework_item_margin">20dp</dimen>
+
+    <dimen name="changelog_tag_padding">0dp</dimen>
+    <dimen name="changelog_intro_padding">8dp</dimen>
 
 </resources>

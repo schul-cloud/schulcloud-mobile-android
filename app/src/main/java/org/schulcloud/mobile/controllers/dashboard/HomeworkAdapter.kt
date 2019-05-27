@@ -7,14 +7,12 @@ import org.schulcloud.mobile.controllers.base.BaseViewHolder
 import org.schulcloud.mobile.databinding.ItemHomeworkGroupedBinding
 import org.schulcloud.mobile.models.homework.Homework
 import org.schulcloud.mobile.models.homework.HomeworkCourse
-import org.schulcloud.mobile.utils.filterKeysNotNull
 
-class HomeworkAdapter(private val onSelected: (String) -> Unit)
-    : BaseAdapter<Pair<HomeworkCourse, Int>, HomeworkAdapter.HomeworkViewHolder, ItemHomeworkGroupedBinding>() {
+class HomeworkAdapter(private val onSelected: (String?) -> Unit)
+    : BaseAdapter<Pair<HomeworkCourse?, Int>, HomeworkAdapter.HomeworkViewHolder, ItemHomeworkGroupedBinding>() {
 
     fun update(homework: List<Homework>) {
         items = homework.groupBy { it.course }
-                .filterKeysNotNull()
                 .mapValues { it.value.size }
                 .toList()
     }
@@ -26,7 +24,12 @@ class HomeworkAdapter(private val onSelected: (String) -> Unit)
     }
 
     class HomeworkViewHolder(binding: ItemHomeworkGroupedBinding)
-        : BaseViewHolder<Pair<HomeworkCourse, Int>, ItemHomeworkGroupedBinding>(binding) {
+        : BaseViewHolder<Pair<HomeworkCourse?, Int>, ItemHomeworkGroupedBinding>(binding) {
+        companion object {
+            @JvmStatic
+            fun courseIdOrNull(course: HomeworkCourse?): String? = course?.id
+        }
+
         override fun onItemSet() {
             binding.course = item.first
             binding.homeworkCount = item.second

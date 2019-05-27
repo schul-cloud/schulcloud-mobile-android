@@ -4,7 +4,7 @@ import android.content.Context
 import org.schulcloud.mobile.storages.base.BaseStorage
 
 @Suppress("MagicNumber")
-object Onboarding : BaseStorage("pref_onboarding", Context.MODE_PRIVATE) {
+object Onboarding : BaseStorage("pref_onboarding") {
     class VersionPreference(val key: String, val currentVersion: Int) {
         private val previousVersion: Int get() = getInt(key)
 

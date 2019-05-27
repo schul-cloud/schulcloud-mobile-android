@@ -3,10 +3,11 @@ package org.schulcloud.mobile.models.file
 import androidx.lifecycle.LiveData
 import io.realm.Realm
 import org.schulcloud.mobile.jobs.ListDirectoryContentsJob
+import org.schulcloud.mobile.models.base.Repository
 import org.schulcloud.mobile.models.user.UserRepository
 import org.schulcloud.mobile.utils.*
 
-object FileRepository {
+object FileRepository : Repository() {
     const val CONTEXT_MY = "my"
     const val CONTEXT_MY_API = "users"
     const val CONTEXT_COURSES = "courses"

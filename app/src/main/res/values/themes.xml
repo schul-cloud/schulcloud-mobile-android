@@ -1,38 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme.Base" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/brand_primary</item>
-        <item name="colorPrimaryDark">@color/brand_primaryDark</item>
-        <item name="colorAccent">@color/brand_accent</item>
-        <item name="android:windowBackground">@color/background</item>
+    <style name="AppTheme.Base.DayNight" parent="Theme.MaterialComponents.Light.NoActionBar" />
 
+    <style name="AppTheme.Base" parent="AppTheme.Base.DayNight">
+        <item name="android:windowBackground">?colorBackground</item>
         <item name="android:windowAnimationStyle">@style/Animation.Activity</item>
+
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.App.Subtitle2</item>
+        <item name="textAppearanceBody1">?textAppearanceBody2</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>
+
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.App.LargeComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
 
         <item name="contentTextViewStyle">@style/Widget.App.ContentTextView</item>
         <item name="breadcrumbsViewStyle">@style/Widget.App.BreadcrumbsView</item>
         <item name="courseChipStyle">@style/Widget.App.CourseChip</item>
-        <item name="materialCardViewStyle">@style/Widget.App.MaterialCardStyle</item>
-        <item name="bottomSheetDialogTheme">@style/AppTheme.BottomSheetDialog</item>
+        <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
+        <item name="bottomSheetDialogTheme">@style/AppTheme.Light.BottomSheetDialog</item>
     </style>
 
-    <style name="AppTheme" parent="AppTheme.Base" />
+    <style name="AppTheme.Base.V21" />
 
-    <style name="AppTheme.TranslucentStatus" />
 
-    <style name="AppTheme.Main" parent="AppTheme.TranslucentStatus" />
-    <style name="AppTheme.Main.Launcher">
+    <style name="AppTheme.Base.Default" parent="AppTheme.Base.V21">
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorPrimaryDark">@color/brand_primaryDark</item>
+        <item name="colorPrimaryVariant">?colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/design_default_color_on_primary</item>
+        <item name="colorOnPrimaryMediumEmphasis">@color/material_text_secondary_light</item>
+        <item name="colorSecondary">@color/brand_secondary</item>
+        <item name="colorAccent">?colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/design_default_color_secondary_variant</item>
+        <item name="colorOnSecondary">@color/design_default_color_on_secondary</item>
+
+        <item name="colorBackground">@color/theme_background_light</item>
+        <item name="android:colorBackground">?colorBackground</item>
+        <item name="colorOnBackground">@color/material_text_primary_dark</item>
+        <item name="android:textColorPrimary">?colorOnBackground</item>
+        <item name="android:textColorSecondary">?colorOnBackgroundMediumEmphasis</item>
+        <item name="colorOnBackgroundPrimary">@color/brand_onBackgroundPrimary</item>
+        <item name="colorOnBackgroundMediumEmphasis">@color/material_text_secondary_dark</item>
+        <item name="colorSurface">@color/theme_surface_light</item>
+        <item name="colorOnSurface">@color/material_text_primary_dark</item>
+        <item name="colorOnSurfaceMediumEmphasis">@color/material_text_secondary_dark</item>
+        <item name="colorOnSurfaceDivider">@color/material_divider_dark</item>
+        <item name="colorError">@color/theme_error</item>
+        <item name="colorOnError">@color/material_text_primary_light</item>
+    </style>
+    <style name="AppTheme.Default" parent="AppTheme.Base.Default" />
+
+    <style name="AppTheme" parent="AppTheme.Default" />
+    <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/bg_splash</item>
     </style>
 
-    <style name="AppTheme.LightActionBar">
-        <item name="colorPrimary">@android:color/white</item>
-        <item name="colorPrimaryDark">@android:color/white</item>
+
+    <style name="ThemeOverlay.App.Dark.ActionBar" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="popupTheme">@style/ThemeOverlay.App.PopupOverlay</item>
     </style>
+    <style name="ThemeOverlay.App.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
 
-    <style name="AppTheme.BottomSheetDialog" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/Widget.App.BottomSheetStyle</item>
+    <style name="AppTheme.BottomSheetDialog" parent="Theme.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.App.BottomSheet.Modal</item>
+    </style>
+    <style name="AppTheme.Light.BottomSheetDialog" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.App.BottomSheet.Modal</item>
     </style>
 
 </resources>

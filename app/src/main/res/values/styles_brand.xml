@@ -1,12 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Widget.App.MaterialCardStyle" parent="Widget.MaterialComponents.CardView">
-        <item name="cardCornerRadius">@dimen/brand_cornerRadius_medium</item>
+    <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerSize">@dimen/brand_cornerRadius_big</item>
+    </style>
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">@dimen/brand_cornerRadius_medium</item>
     </style>
 
-    <style name="Widget.App.BottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet.Modal">
-        <item name="android:background">@drawable/bg_bottom_sheet</item>
+
+    <style name="ShapeAppearanceOverlay.App.BottomSheet.Modal"
+        parent="ShapeAppearanceOverlay.MaterialComponents.BottomSheet.Modal">
+        <item name="cornerSize">0dp</item>
+        <item name="cornerSizeTopLeft">@dimen/brand_cornerRadius_big</item>
+        <item name="cornerSizeTopRight">@dimen/brand_cornerRadius_big</item>
+    </style>
+
+
+    <style name="TextAppearance.App.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">?colorOnBackgroundMediumEmphasis</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    <style name="TextAppearance.App.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?colorOnBackgroundMediumEmphasis</item>
+    </style>
+    <style name="TextAppearance.App.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="Widget.App.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.App.BottomSheet.Modal</item>
+    </style>
+    <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">@dimen/brand_cornerRadius_medium</item>
     </style>
 
 </resources>

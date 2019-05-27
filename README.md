@@ -1,4 +1,4 @@
-# Schul-Cloud for Android
+# HPI Schul-Cloud for Android
 
 [![Build Status](https://travis-ci.org/schul-cloud/schulcloud-mobile-android.svg?branch=dev)](https://travis-ci.org/schul-cloud/schulcloud-mobile-android)
 [![GitHub version](https://img.shields.io/github/release/schul-cloud/schulcloud-mobile-android.svg?colorB=4c1)](https://github.com/schul-cloud/schulcloud-mobile-android/releases)
@@ -12,7 +12,7 @@
 [![Awesome Badges](https://img.shields.io/badge/badges-awesome-green.svg?colorB=4c1)](https://github.com/Naereen/badges)
 
 
-Native Android application for [Schul-Cloud][homepage].
+Native Android application for [HPI Schul-Cloud][homepage].
 
 
 ## How to get started
@@ -22,7 +22,7 @@ Thanks for your interest in contributing! There are many ways to contribute to t
 
 ## Issues
 
-The [issues for this project][issues] are managed in the global ticket system for Schul-Cloud.
+The [issues for this project][issues] are managed in the global ticket system for HPI Schul-Cloud.
 
 
 [homepage]: https://schul-cloud.org

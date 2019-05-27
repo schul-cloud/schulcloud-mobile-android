@@ -3,7 +3,9 @@ package org.schulcloud.mobile.jobs.base
 import android.util.Log
 import io.realm.RealmModel
 import io.realm.RealmQuery
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.schulcloud.mobile.BuildConfig
 import org.schulcloud.mobile.models.Sync
 import org.schulcloud.mobile.models.base.HasId
@@ -30,23 +32,25 @@ abstract class RequestJob(
     }
 
     @Suppress("TooGenericExceptionCaught")
-    suspend fun run() {
+    suspend fun run() = withContext(Dispatchers.IO) {
         if (preconditions.contains(Precondition.AUTH) && !UserRepository.isAuthorized) {
             callback?.error(RequestJobCallback.ErrorCode.NO_AUTH)
-            return
+            return@withContext
         }
 
         if (!NetworkUtil.isOnline()) {
             callback?.error(RequestJobCallback.ErrorCode.NO_NETWORK)
-            return
+            return@withContext
         }
 
-        launch {
+        launch(Dispatchers.IO) {
             try {
                 onRun()
             } catch (e: Throwable) {
                 Log.w(TAG, "Error running job", e)
-                callback?.error(RequestJobCallback.ErrorCode.ERROR)
+                callback?.error(
+                        if (e.message == "connect timed out") RequestJobCallback.ErrorCode.TIMEOUT
+                        else RequestJobCallback.ErrorCode.ERROR)
             }
         }
     }

@@ -3,13 +3,14 @@ package org.schulcloud.mobile.models.user
 import android.util.Log
 import androidx.lifecycle.LiveData
 import io.realm.Realm
-import kotlinx.coroutines.experimental.DefaultDispatcher
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.withContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.schulcloud.mobile.jobs.CreateAccessTokenJob
 import org.schulcloud.mobile.jobs.base.RequestJob
 import org.schulcloud.mobile.jobs.base.RequestJobCallback
 import org.schulcloud.mobile.models.Credentials
+import org.schulcloud.mobile.models.base.Repository
 import org.schulcloud.mobile.models.course.CourseRepository
 import org.schulcloud.mobile.models.event.EventRepository
 import org.schulcloud.mobile.models.homework.HomeworkRepository
@@ -18,7 +19,7 @@ import org.schulcloud.mobile.storages.UserStorage
 import org.schulcloud.mobile.utils.userDao
 
 
-object UserRepository {
+object UserRepository : Repository() {
     val TAG: String = UserRepository::class.java.simpleName
 
     @JvmStatic
@@ -44,9 +45,9 @@ object UserRepository {
 
 
     fun login(email: String, password: String, callback: RequestJobCallback) {
-        launch {
+        launch(Dispatchers.Default) {
             // Login
-            withContext(DefaultDispatcher) {
+            withContext(Dispatchers.Default) {
                 CreateAccessTokenJob(Credentials(email, password), callback).run()
             }
 

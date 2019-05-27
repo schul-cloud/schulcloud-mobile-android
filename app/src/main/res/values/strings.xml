@@ -24,8 +24,17 @@
     <string name="login_password_hint">Passwort</string>
     <string name="login_forgotPassword">Passwort vergessen?</string>
     <string name="login_login">Anmelden</string>
+    <string name="login_error">Es gab einen Fehler beim Anmelden</string>
     <string name="login_error_emailInvalid">Die E-Mail-Adresse ist ungültig</string>
     <string name="login_error_passwordEmpty">Bitte gib dein Passwort ein!</string>
+    <string name="login_error_passwordWrong">Das Passwort ist falsch</string>
+    <string name="login_error_server">Es konnte keine Verbindung zum Server aufgebaut werden</string>
+    <string name="login_error_noConnection">Keine Internetverbindung</string>
+    <string name="login_asset_statements" translatable="false">
+      [{
+        \"include\": \"https://schul-cloud.org/.well-known/assetlinks.json\"
+      }]
+    </string>
 
     <string name="login_demo">Du hast noch keinen Account? Jetzt testen!</string>
     <string name="login_demo_student">Demo als Schüler</string>
@@ -68,6 +77,7 @@
     </plurals>
     <string name="dashboard_homework_weekLabel">in der nächsten Woche</string>
     <string name="dashboard_homework_more">Alle Hausaufgaben</string>
+    <string name="dashboard_homework_noCourse">ohne Kurs</string>
     <!-- News -->
     <string name="dashboard_news">@string/news_title</string>
     <string name="dashboard_news_none">Es gibt aktuell keine Neuigkeiten</string>
@@ -134,10 +144,45 @@
     <string name="file_directories">Ordner</string>
     <string name="file_files">Dateien</string>
     <string name="file_fileOpen_error_404">Die Datei wurde nicht gefunden</string>
-    <string name="file_fileOpen_error_cantResolve">Es ist keine App installiert, die den Dateityp \'%1$s\' öffnen kann</string>
+    <string
+        name="file_fileOpen_error_cantResolve">Es ist keine App installiert, die den Dateityp \'%1$s\' öffnen kann</string>
     <string name="file_fileDownload_progress">Die Datei wird geladen&#8230;</string>
     <string name="file_fileDownload_success">Datei \'%1$s\' wurde erfolgreich in Downloads gespeichert!</string>
     <string name="file_fileDownload_error_save">Die Datei konnte nicht gespeichert werden</string>
     <string name="file_fileDownload_error_savePermissionDenied">Ohne die Berechtigung kann die Datei nicht gespeichert werden</string>
+
+
+    <!-- Settings -->
+    <string name="settings_title">Einstellungen</string>
+    <string name="settings_restartRequired">Die App muss neugestartet werden, damit die Einstellungen wirksam werden</string>
+    <string name="settings_theme">Design</string>
+    <string name="settings_theme_darkMode">Dunkles Design</string>
+    <string name="settings_theme_darkMode_summary_always">Immer aktiv</string>
+    <string name="settings_theme_darkMode_summary_container">Aktiv wenn %1$s</string>
+    <string name="settings_theme_darkMode_summary_separator">&#160;oder&#160;</string>
+    <string name="settings_theme_darkMode_summary_ambientLight">es dunkel ist</string>
+    <string name="settings_theme_darkMode_summary_night">es Nacht ist</string>
+    <string name="settings_theme_darkMode_summary_powerSaver">der Energiesparmodus aktiv ist</string>
+    <string name="settings_theme_darkMode_ambientLight">Bei dunkler Umgebung aktivieren</string>
+    <string name="settings_theme_darkMode_night">Bei Nacht aktivieren</string>
+    <string name="settings_theme_darkMode_powerSaver">Beim Energiesparmodus aktivieren</string>
+    <string name="settings_theme_darkMode_night_summary_noLocationPermission">Ohne die Berechtigung kann der Sonnenauf- und -untergang nur geschätzt werden</string>
+    <string name="settings_privacy">Datenschutz</string>
+    <string name="settings_privacy_crashlytics">Absturzberichte senden</string>
+    <string name="settings_privacy_crashlytics_summary">Nach jedem Absturz wird ein anonymer Bericht hochgeladen, um die Benutzererfahrung zu verbessern</string>
+    <string name="settings_about">Über</string>
+    <string name="settings_about_version">Version</string>
+    <string name="settings_about_contributors">Mitwirkende</string>
+    <string name="settings_about_contributors_summary" translatable="false">Marvin Fischer, Niklas Kiefer, Lars Lange, Elias Lehnert, Andrea Nathansen, Jonas Wanke</string>
+    <string name="settings_about_openSource">Diese App ist Open Source</string>
+    <string name="settings_about_contact">Kontakt</string>
+    <string name="settings_about_contact_data">mailto:info@schul-cloud.org?subject=Kontakt via Android-App</string>
+    <string name="settings_about_imprint">Impressum</string>
+    <string name="settings_about_privacyPolicy">Datenschutzerklärung</string>
+
+    <string name="changelog_title">Änderungen %1$s</string>
+    <string name="changelog_tag_feature_format">[font color="%1$s"][b]Neu:[/b][/font] %2$s</string>
+    <string name="changelog_tag_fix_format">[font color="%1$s"][b]Fix:[/b][/font] %2$s</string>
+    <string name="changelog_tag_note_format">Hinweis: %1$s</string>
 
 </resources>

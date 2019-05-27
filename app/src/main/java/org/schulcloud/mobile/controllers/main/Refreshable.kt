@@ -1,9 +1,10 @@
 package org.schulcloud.mobile.controllers.main
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.withContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.schulcloud.mobile.utils.setup
 import kotlin.properties.Delegates
 
@@ -31,9 +32,9 @@ class RefreshableImpl : Refreshable {
 
     override fun performRefresh() {
         isRefreshing = true
-        launch {
-            withContext(UI) { refresh.invoke() }
-            withContext(UI) { isRefreshing = false }
+        GlobalScope.launch(Dispatchers.Default) {
+            withContext(Dispatchers.Main) { refresh.invoke() }
+            withContext(Dispatchers.Main) { isRefreshing = false }
         }
     }
 }

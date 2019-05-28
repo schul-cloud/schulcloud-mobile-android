@@ -14,6 +14,7 @@ import org.schulcloud.mobile.models.event.EventDao
 import org.schulcloud.mobile.models.file.FileDao
 import org.schulcloud.mobile.models.homework.HomeworkDao
 import org.schulcloud.mobile.models.homework.submission.SubmissionDao
+import org.schulcloud.mobile.models.material.MaterialDao
 import org.schulcloud.mobile.models.news.NewsDao
 import org.schulcloud.mobile.models.topic.TopicDao
 import org.schulcloud.mobile.models.user.UserDao
@@ -40,3 +41,5 @@ fun Realm.homeworkDao(): HomeworkDao = HomeworkDao(this)
 fun Realm.submissionDao(): SubmissionDao = SubmissionDao(this)
 
 fun Realm.fileDao(): FileDao = FileDao(this)
+
+fun Realm.materialDao(): MaterialDao = MaterialDao(this)

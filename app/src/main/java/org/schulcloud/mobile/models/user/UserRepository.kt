@@ -14,6 +14,7 @@ import org.schulcloud.mobile.models.base.Repository
 import org.schulcloud.mobile.models.course.CourseRepository
 import org.schulcloud.mobile.models.event.EventRepository
 import org.schulcloud.mobile.models.homework.HomeworkRepository
+import org.schulcloud.mobile.models.material.MaterialRepository
 import org.schulcloud.mobile.models.news.NewsRepository
 import org.schulcloud.mobile.storages.UserStorage
 import org.schulcloud.mobile.utils.userDao
@@ -57,6 +58,7 @@ object UserRepository : Repository() {
             HomeworkRepository.syncHomeworkList()
             CourseRepository.syncCourses()
             NewsRepository.syncNews()
+            MaterialRepository.syncMaterials()
         }
     }
 

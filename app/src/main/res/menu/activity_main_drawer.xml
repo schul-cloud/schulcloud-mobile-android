@@ -35,10 +35,10 @@
         android:checkable="true"
         android:icon="@drawable/ic_brand_files_black"
         android:title="@string/main_drawer_files" />-->
-    <!--<item
+    <item
         android:id="@+id/fragment_learnstore"
-        android:checkable="true
+        android:checkable="true"
         android:icon="@drawable/ic_search"
-        android:title="@string/main_drawer_learnstore" />-->
+        android:title="@string/main_drawer_learnstore" />
 
 </menu>

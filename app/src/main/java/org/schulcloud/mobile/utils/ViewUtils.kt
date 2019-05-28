@@ -7,15 +7,20 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
+import android.text.TextUtils
 import android.text.format.DateUtils
 import android.view.View
+import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.squareup.picasso.Picasso
 import com.google.android.material.bottomappbar.BottomAppBar
 import org.schulcloud.mobile.R
 
@@ -48,6 +53,17 @@ fun showDate(view: TextView, date: String?) {
     view.text = date?.parseDate()?.let {
         DateUtils.formatDateTime(view.context, it.timeInMillis, DateUtils.FORMAT_SHOW_DATE)
     } ?: ""
+}
+
+@BindingAdapter("fromUrl")
+fun getImageFromUrl(view: ImageView, url: String?) {
+    if (!TextUtils.isEmpty(url)) {
+        val wm: WindowManager = view.context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val size = Point()
+        wm.defaultDisplay.getSize(size)
+        val width = size.x
+        Picasso.get().load(url).resize(width, 0).centerInside().into(view)
+    }
 }
 
 fun Int.dpToPx(): Int = Math.round(this * Resources.getSystem().displayMetrics.density)

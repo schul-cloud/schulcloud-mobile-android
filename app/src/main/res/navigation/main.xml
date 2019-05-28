@@ -123,4 +123,10 @@
         android:id="@+id/action_global_fragment_file"
         app:destination="@id/fragment_file" />
 
+    <!-- Learnstore -->
+    <fragment
+        android:id="@+id/fragment_learnstore"
+        android:name="org.schulcloud.mobile.controllers.learnstore.LearnstoreFragment"
+        tools:layout="@layout/fragment_learnstore"/>
+
 </navigation>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="tagText"
+            type="String" />
+    </data>
+
+    <com.google.android.material.chip.Chip
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp"
+        android:clickable="false"
+        android:ellipsize="end"
+        android:text="@{tagText}"
+        android:textAppearance="@style/Learnstore.Tag_Text"
+        android:textColor="@color/material_text_primary_light"
+        app:chipBackgroundColor="@color/gray_dark"
+        app:chipCornerRadius="4dp"
+        app:textEndPadding="2dp"
+        app:textStartPadding="2dp" />
+
+</layout>

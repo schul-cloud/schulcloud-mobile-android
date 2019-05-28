@@ -44,7 +44,7 @@
     <string name="main_drawer_calendar">Calendar</string>
     <string name="main_drawer_homework">Assignments</string>
     <string name="main_drawer_files">Files</string>
-    <string name="main_drawer_learnstore">Resources</string>
+    <string name="main_drawer_learnstore">Learnstore</string>
     <string name="main_drawer_logout">Logout</string>
     <string name="main_navigation_onboarding_1">Tap here for navigation</string>
 
@@ -140,6 +140,12 @@
     <string name="file_fileDownload_error_save">The file could not be saved</string>
     <string name="file_fileDownload_error_savePermissionDenied">The file cannot be saved without permission</string>
 
+    <!-- Learnstore -->
+    <string name="learnstore_title">Learnstore</string>
+    <string name="material_error_empty">No materials were found</string>
+    <string name="material_provider">via %1$s</string>
+    <string name="material_current">Current materials</string>
+    <string name="material_popular">Popular materials</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>

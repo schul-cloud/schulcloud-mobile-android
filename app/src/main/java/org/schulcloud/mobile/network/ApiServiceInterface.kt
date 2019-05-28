@@ -10,6 +10,7 @@ import org.schulcloud.mobile.models.file.SignedUrlRequest
 import org.schulcloud.mobile.models.file.SignedUrlResponse
 import org.schulcloud.mobile.models.homework.Homework
 import org.schulcloud.mobile.models.homework.submission.Submission
+import org.schulcloud.mobile.models.material.Material
 import org.schulcloud.mobile.models.news.News
 import org.schulcloud.mobile.models.topic.Topic
 import org.schulcloud.mobile.models.user.User
@@ -67,4 +68,10 @@ interface ApiServiceInterface {
     fun generateSignedUrl(@Body signedUrlRequest: SignedUrlRequest): Call<SignedUrlResponse>
     @GET
     fun downloadFile(@Url fileUrl: String): Call<ResponseBody>
+
+    // Material
+    @GET("content/resources?\$sort[clickCount]=-1")
+    fun listPopularMaterials(@Query("\$limit") limitPopular: Int): Call<FeathersResponse<List<Material>>>
+    @GET("content/resources")
+    fun listCurrentMaterials(@Query("featuredUntil[\$gte]={date}") date: String): Call<FeathersResponse<List<Material>>>
 }

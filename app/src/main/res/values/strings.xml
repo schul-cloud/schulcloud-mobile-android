@@ -53,7 +53,7 @@
     <string name="main_drawer_calendar">Termine</string>
     <string name="main_drawer_homework">Aufgaben</string>
     <string name="main_drawer_files">Meine Dateien</string>
-    <string name="main_drawer_learnstore">Materialien</string>
+    <string name="main_drawer_learnstore">Lern-Store</string>
     <string name="main_drawer_logout">Abmelden</string>
     <string name="main_navigation_onboarding_1">Tippe hier für die Navigation</string>
 
@@ -151,6 +151,12 @@
     <string name="file_fileDownload_error_save">Die Datei konnte nicht gespeichert werden</string>
     <string name="file_fileDownload_error_savePermissionDenied">Ohne die Berechtigung kann die Datei nicht gespeichert werden</string>
 
+    <!-- Learnstore -->
+    <string name="learnstore_title">Lern-Store</string>
+    <string name="material_error_empty">Es wurden keine Lehrmaterialien gefunden</string>
+    <string name="material_provider">via %1$s</string>
+    <string name="material_current">Aktuelle Inhalte</string>
+    <string name="material_popular">Beliebte Inhalte</string>
 
     <!-- Settings -->
     <string name="settings_title">Einstellungen</string>
